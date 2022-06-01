@@ -8,7 +8,14 @@
   font-family: "Noto Sans TC", "Noto Sans";
 }
 
-// -----------Course
-.course-top-banner {
+// -----------components
+.top-banner {
   height: 400px;
+}
+
+.user-aside {
+  width: 250px;
+  img {
+    width: 90px;
+  }
 }
