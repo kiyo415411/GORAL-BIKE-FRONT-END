@@ -4,13 +4,13 @@ import { BsPersonCircle, BsCart3, BsHeart } from 'react-icons/bs';
 function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container-fluid row justify-content-around">
+      <div className="container-fluid row justify-content-between">
         {/* --------------- LOGO----------------- */}
-        <a className="navbar-brand col-2 p-0 text-center" href="#/">
+        <a className="navbar-brand col-5 col-md-2 p-0 text-center" href="#/">
           <img id="Logo" src={Logo} alt="Logo" />
         </a>
         {/* ----------------LIST----------------- */}
-        <div className="collapse navbar-collapse col-8" id="navbarNavDropdown">
+        <div className="collapse navbar-collapse col-md-8">
           <ul className="navbar-nav mx-auto gap-4">
             <li className="nav-item">
               <a className="nav-link active" aria-current="page" href="#/">
@@ -45,21 +45,21 @@ function Navbar() {
           </ul>
         </div>
         {/* ----------------ICONS---------------- */}
-        <div className="col-2 text-white">
-          <ul className="navbar-nav d-flex justify-content-center align-items-center gap-2">
-            <li className="nav-item">
-              <a className="nav-link" aria-current="page" href="#/">
+        <div className="col-4 col-md-2">
+          <ul className="list-unstyled row my-auto justify-content-end gap-2">
+            <li className="col-2 text-center">
+              <a className="text-muted" href="#/">
                 <BsPersonCircle />
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#/">
+            <li className="col-2 text-center">
+              <a className="text-muted" href="#/">
                 <BsCart3 />
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#/">
-                <BsHeart size={14.5} />
+            <li className="col-2 text-center">
+              <a className="text-muted" href="#/">
+                <BsHeart />
               </a>
             </li>
           </ul>
