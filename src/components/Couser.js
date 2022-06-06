@@ -5,7 +5,10 @@ function Couser() {
   return (
     <>
       <TopSection />
-      <UserAside />
+      <div className="row my-5">
+        <div className="col-1" />
+        <UserAside />
+      </div>
     </>
   );
 }

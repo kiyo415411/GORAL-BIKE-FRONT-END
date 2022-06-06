@@ -19,3 +19,16 @@
     width: 90px;
   }
 }
+
+.user-aside-title {
+  font-size: 0.8rem;
+}
+
+.user-aside-data {
+  font-size: 0.9rem;
+}
+
+.navbar-dark .navbar-nav .show > .nav-link,
+.navbar-dark .navbar-nav .nav-link.active {
+  color: $warning;
+}

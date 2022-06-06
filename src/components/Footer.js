@@ -22,7 +22,7 @@ function Footer() {
         <section className="col-8 mx-auto row justify-content-center fs-6 lh-sm text-center font-monospace">
           {item.map((value, index) => {
             return (
-              <ul key={index} className="col-6 col-md-3 ">
+              <ul key={index} className="col-6 col-md-3 list-unstyled">
                 {item[index].map((value, index) => {
                   return (
                     <li key={index}>

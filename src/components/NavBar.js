@@ -3,7 +3,7 @@ import { BsPersonCircle, BsCart3, BsHeart } from 'react-icons/bs';
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid row justify-content-between">
         {/* --------------- LOGO----------------- */}
         <a className="navbar-brand col-5 col-md-2 p-0 text-center" href="#/">
