@@ -1,13 +1,13 @@
 import './App.css';
 import Navbar from './components/NavBar';
 import Footer from './components/Footer';
-import Couser from './components/Couser';
+import LikeList from './components/LikeList';
 
 function App() {
   return (
     <>
       <Navbar />
-      <Couser />
+      <LikeList />
       <Footer />
     </>
   );
