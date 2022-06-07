@@ -1,16 +1,16 @@
-// 收藏頁面
+// 商品頁面
 import TopSection from './TopSection';
-import UserAside from './UserAside';
+import ProductAside from './ProductAside';
 import RowList from './RowList';
 import Pagination from './Pagination';
 
-function LikeList() {
+function ProductList() {
   return (
     <>
       <TopSection />
       <div className="row gx-5 justify-content-center my-5 flex-nowrap">
         <div className="col-auto">
-          <UserAside />
+          <ProductAside />
         </div>
         <div className="col-auto">
           <RowList />
@@ -21,4 +21,4 @@ function LikeList() {
   );
 }
 
-export default LikeList;
+export default ProductList;

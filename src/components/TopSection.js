@@ -1,3 +1,4 @@
+// Banner
 import Background from '../images/CourseBanner.jpg';
 
 const banner = {

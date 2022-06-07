@@ -1,3 +1,4 @@
+// 標籤元件
 function BadgeTag({ text, bg }) {
   return (
     <>

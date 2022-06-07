@@ -1,3 +1,4 @@
+// 商品卡片(橫向)
 import Image from '../images/CourseImg1.jpg';
 import { BsStarFill, BsStar, BsHeart, BsHeartFill } from 'react-icons/bs';
 import BadgeTag from './BadgeTag';

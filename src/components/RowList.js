@@ -1,3 +1,4 @@
+// 商品列表(橫向)
 import RowCard from './RowCard';
 const object = () => {
   const objectGroup = [];
