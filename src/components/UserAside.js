@@ -11,10 +11,10 @@ function UserAside() {
     email: 'goralbike3000@gmail.com',
   };
   return (
-    <div className="user-aside shadow text-center text-content p-0">
+    <div className="user-aside shadow text-center text-content pb-2">
       <header className="text-white bg-primary d-flex justify-content-center align-items-center py-1">
         <FaUser size={14} />
-        <p className="user-aside-title m-0 ms-2 fw-light">用戶資訊</p>
+        <h5 className="m-0 ms-2 fw-light">用戶資訊</h5>
       </header>
       <section className="user-data mt-3">
         <ul className="list-unstyled d-grid gap-3 mt-3">
@@ -25,19 +25,19 @@ function UserAside() {
               alt="頭像"
             />
           </li>
-          <li className="fw-bold text-primary">{user.fullname}</li>
-          <g className="user-aside-data d-grid gap-3 text-dark fw-light">
+          <li className="fw-bold text-primary h3">{user.fullname}</li>
+          <div className="user-aside-data d-grid gap-3 text-dark fw-light h4">
             <li>{user.phone}</li>
             <li>{user.email}</li>
-          </g>
+          </div>
         </ul>
       </section>
       <hr className="w-75 mx-auto"></hr>
       <section className="user-menu">
-        <ul className="list-unstyled d-grid gap-3 fw-bold">
+        <ul className="list-unstyled d-grid gap-3 fw-bold h3">
           {menu.map((value, index) => {
             return (
-              <li>
+              <li key={index}>
                 {value}
                 <RiArrowDownSFill size={24} className="mb-1" />
               </li>
