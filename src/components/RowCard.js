@@ -54,30 +54,30 @@ function RowCard({ height }) {
           </div>
           <div className="d-flex justify-content-between align-items-center">
             {/* 名稱 */}
-            <h2 className="card-title text-primary">{card.title}</h2>
+            <h3 className="card-title text-primary">{card.title}</h3>
             {/* 價格 */}
             <h4 className="text-content">{card.price}</h4>
           </div>
           <div className="d-flex gap-2 align-items-center">
             {/* 時間 */}
-            <h4 className="text-primary">{card.time}</h4>
+            <h5 className="text-primary">{card.time}</h5>
             {/* 地點 */}
-            <BadgeTag text={card.location} bg="var(--secondary)" />
-            <BadgeTag text={card.statu} bg="var(--secondary)" />
+            <BadgeTag text={card.location} bg="var(--bs-secondary)" />
+            <BadgeTag text={card.statu} bg="var(--bs-secondary)" />
           </div>
           {/* 說明 */}
-          <p className="card-text h5 text-subcontent fw-lighter">{card.text}</p>
+          <p className="card-text text-subcontent">{card.text}</p>
           {/* 購買按鈕 */}
           <div className="d-flex gap-2 align-items-center">
             <a
               href="#/"
-              className="btn btn-primary fs-4 rounded-pill px-4 py-1 fw-light"
+              className="btn btn-primary fs-6 rounded-pill px-4 py-1"
             >
               直接購買
             </a>
             <a
               href="#/"
-              className="btn btn-outline-primary border-2 fs-4 rounded-pill px-3 py-1"
+              className="btn btn-outline-primary border-2 fs-6 rounded-pill px-3 py-1"
             >
               加入購物車
             </a>

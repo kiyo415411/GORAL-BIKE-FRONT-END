@@ -14,7 +14,7 @@ function ProductAside() {
       </section>
       {/* 報名狀態篩選 */}
       <section>
-        <header>報名狀態</header>
+        <header className="fs-4">報名狀態</header>
         <hr />
         <ul className="list-unstyled">
           {status.map((v, i) => {

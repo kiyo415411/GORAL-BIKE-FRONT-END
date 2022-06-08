@@ -2,12 +2,12 @@
 function BadgeTag({ text, bg }) {
   return (
     <>
-      <h4
-        className="badge rounded-pill px-3 fs-6 fw-light"
+      <p
+        className="badge rounded-pill px-3 fw-light"
         style={{ background: bg }}
       >
         {text}
-      </h4>
+      </p>
     </>
   );
 }
