@@ -1,4 +1,4 @@
-import Logo_m from '../images/Logo-m.png';
+import Logo_m from '../../images/Logo-m.png';
 import {
   BsFacebook,
   BsGoogle,
@@ -34,15 +34,10 @@ function Footer() {
   ];
   return (
     <footer className="container-fluid p-0">
-      <section className="bg-dark">
+      <section className="bg-dark pt-5">
         <main className="w-75 row mx-auto">
           <section className="col-1 text-end">
-            <img
-              id="Logo-m"
-              src={Logo_m}
-              className="img-fluid rounded-top"
-              alt=""
-            />
+            <img id="Logo-m" src={Logo_m} className=" rounded-top" alt="" />
           </section>
           <section className="col-6 mx-auto row justify-content-center fs-6 lh-sm text-center font-monospace">
             {item_main.map((value, index) => {
