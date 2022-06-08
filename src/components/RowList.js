@@ -5,7 +5,7 @@ const object = () => {
   const objectCount = 7;
   for (let i = 0; i < objectCount; i++) {
     const index = 'o' + i;
-    objectGroup.push(<RowCard key={index} height={210} />);
+    objectGroup.push(<RowCard key={index} height={230} />);
   }
   return objectGroup;
 };

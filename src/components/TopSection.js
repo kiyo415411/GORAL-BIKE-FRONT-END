@@ -17,7 +17,9 @@ function TopSection() {
       <div className="card-img-overlay row align-items-center m-0 p-0">
         <div className="col-1" />
         <div className="col-3">
-          <h1 className="card-title text-center fw-bolder">{banner.title}</h1>
+          <h1 className="top-banner-title card-title text-center fw-bolder">
+            {banner.title}
+          </h1>
         </div>
       </div>
     </div>
