@@ -15,7 +15,7 @@ function UserAside() {
     <div className="user-aside shadow text-center text-content pb-2">
       <header className="text-white bg-primary d-flex justify-content-center align-items-center py-1">
         <FaUser size={14} />
-        <h5 className="m-0 ms-2 fw-light">用戶資訊</h5>
+        <h5 className="m-0 ms-2">用戶資訊</h5>
       </header>
       <section className="user-data mt-3">
         <ul className="list-unstyled d-grid gap-3 mt-3">
@@ -26,8 +26,8 @@ function UserAside() {
               alt="頭像"
             />
           </li>
-          <li className="fw-bold text-primary h3">{user.fullname}</li>
-          <div className="user-aside-data d-grid gap-3 text-dark fw-light h4">
+          <li className="text-primary h3 fw-bold">{user.fullname}</li>
+          <div className="user-aside-data d-grid gap-3 text-content h4 fw-normal">
             <li>{user.phone}</li>
             <li>{user.email}</li>
           </div>
@@ -35,7 +35,7 @@ function UserAside() {
       </section>
       <hr className="w-75 mx-auto"></hr>
       <section className="user-menu">
-        <ul className="list-unstyled d-grid gap-3 fw-bold h3">
+        <ul className="list-unstyled d-grid gap-3 h3 fw-bold">
           {menu.map((value, index) => {
             return (
               <li key={index}>

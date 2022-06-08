@@ -27,31 +27,44 @@ function ProductAside() {
         <header>報名費用</header>
         <hr />
         <div>
-          <div className="border position-relative w-75">
-            <div className="border position-absolute border-dark w-25"></div>
-            <div
-              className="position-absolute bg-dark rounded-circle"
-              style={{
-                width: '10px',
-                height: '10px',
-                left: '45px',
-                top: '-4px',
-              }}
-            ></div>
-            <p>$0-$23,000</p>
-            <a
-              href="#/"
-              className="btn btn-primary fs-4 rounded-pill px-4 py-1 fw-lighter"
-            >
-              篩選
-            </a>
-          </div>
+          <input
+            type="range"
+            class="form-range"
+            min="0"
+            max="5"
+            step="0.5"
+            id="customRange3"
+          />
+          <p>$0 - $23,000</p>
+          <a
+            href="#/"
+            className="btn btn-primary fs-4 rounded-pill px-4 py-1 fw-lighter"
+          >
+            篩選
+          </a>
         </div>
       </section>
       {/* 報名人數篩選 */}
       <section>
         <header>報名人數</header>
         <hr />
+        <input
+          type="range"
+          class="form-range"
+          min="0"
+          max="5"
+          step="0.5"
+          id="customRange3"
+        />
+        <div className="d-flex align-items-center">
+          <p className="m-0">0 人 - 100 人</p>
+          <a
+            href="#/"
+            className="btn btn-primary fs-4 rounded-pill px-4 py-1 fw-lighter"
+          >
+            篩選
+          </a>
+        </div>
       </section>
       {/* 活動地點 */}
       <section>

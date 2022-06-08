@@ -44,21 +44,21 @@ function RowCard({ height }) {
           <img src={card.image} className="object-fit" alt={card.title} />
         </div>
         <div className="card-body px-4 d-grid gap-1">
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-between align-items-center">
             {/* 評分 */}
-            <div className="text-yellow d-flex gap-1">{star()}</div>
+            <div className="text-icon-star d-flex gap-1">{star()}</div>
             {/* 收藏 */}
-            <div className="text-warning">
+            <div className="text-hightlight">
               {card.like === 1 ? <BsHeartFill /> : <BsHeart />}
             </div>
           </div>
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-between align-items-center">
             {/* 名稱 */}
             <h2 className="card-title text-primary">{card.title}</h2>
             {/* 價格 */}
             <h4 className="text-content">{card.price}</h4>
           </div>
-          <div className="d-flex gap-2">
+          <div className="d-flex gap-2 align-items-center">
             {/* 時間 */}
             <h4 className="text-primary">{card.time}</h4>
             {/* 地點 */}
@@ -66,9 +66,9 @@ function RowCard({ height }) {
             <BadgeTag text={card.statu} />
           </div>
           {/* 說明 */}
-          <p className="card-text h5 text-hint fw-lighter">{card.text}</p>
+          <p className="card-text h5 text-line fw-lighter">{card.text}</p>
           {/* 購買按鈕 */}
-          <div className="d-flex gap-2">
+          <div className="d-flex gap-2 align-items-center">
             <a
               href="#/"
               className="btn btn-primary fs-4 rounded-pill px-4 py-1 fw-lighter"
