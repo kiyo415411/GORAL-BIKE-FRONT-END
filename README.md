@@ -20,7 +20,7 @@ MFEE25 第六組大專 Goral
 - scss 統一放在 stylesheet
 - `/stylesheet/helper/_variables` 是放置 bootstrap 變數，如有修改請增加註解
 - `/stylesheet/_global` 是放置全域的 css 設定
-- class 命名原則：
+- class 命名原則：BEM 規範思維
 
 ## 關於頁面
 
