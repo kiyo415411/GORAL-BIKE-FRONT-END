@@ -10,8 +10,9 @@ MFEE25 第六組大專 Goral
 
 ## 關於切版分支
 
-- 切版分支這樣開: `feature/layout/自訂的Component or Page名稱`
-- 切版完成後 merge 回: `feature/layouts`
+- 分支這樣開: 功能名稱 `ex. course`
+- 完成後 merge 回: `develope`
+  - 先切換到 develope 再輸入 git merge "你的分支名稱"
 
 ## 關於 style
 
@@ -27,8 +28,8 @@ MFEE25 第六組大專 Goral
 - 放在 pages 資料夾
 - 命名原則：大駝峰式命名 ex.ResetPassword.js
 
+## 關於 font-size
 
-## 關於font-size
 - 分頁標題：H1
 - 卡片標題：H3
 - 活動/課程日期：H5
@@ -36,3 +37,9 @@ MFEE25 第六組大專 Goral
 - 內文：P
 - 篩選標題：H4
 
+## 關於 commit message
+
+- `[ADD]:` 新增檔案
+- `[FIX]:` 修正 BUG
+- `[DELETE]:` 刪除檔案
+- `[UPDATE]:` 修改既有檔案
