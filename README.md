@@ -26,3 +26,13 @@ MFEE25 第六組大專 Goral
 
 - 放在 pages 資料夾
 - 命名原則：大駝峰式命名 ex.ResetPassword.js
+
+
+## 關於font-size
+- 分頁標題：H1
+- 卡片標題：H3
+- 活動/課程日期：H5
+- 按鈕文字：H6
+- 內文：P
+- 篩選標題：H4
+
