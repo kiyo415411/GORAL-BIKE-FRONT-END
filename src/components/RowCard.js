@@ -62,22 +62,22 @@ function RowCard({ height }) {
             {/* 時間 */}
             <h4 className="text-primary">{card.time}</h4>
             {/* 地點 */}
-            <BadgeTag text={card.location} />
-            <BadgeTag text={card.statu} />
+            <BadgeTag text={card.location} bg="var(--secondary)" />
+            <BadgeTag text={card.statu} bg="var(--secondary)" />
           </div>
           {/* 說明 */}
-          <p className="card-text h5 text-line fw-lighter">{card.text}</p>
+          <p className="card-text h5 text-subcontent fw-lighter">{card.text}</p>
           {/* 購買按鈕 */}
           <div className="d-flex gap-2 align-items-center">
             <a
               href="#/"
-              className="btn btn-primary fs-4 rounded-pill px-4 py-1 fw-lighter"
+              className="btn btn-primary fs-4 rounded-pill px-4 py-1 fw-light"
             >
               直接購買
             </a>
             <a
               href="#/"
-              className="btn btn-outline-primary  fs-4 rounded-pill px-3 py-1"
+              className="btn btn-outline-primary border-2 fs-4 rounded-pill px-3 py-1"
             >
               加入購物車
             </a>

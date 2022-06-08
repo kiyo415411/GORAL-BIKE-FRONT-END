@@ -4,6 +4,20 @@
   font-family: "Noto Sans TC", "Noto Sans";
 }
 
+:root {
+  --primary: #2b4948;
+  --secondary: #afc58b;
+  --content: #535353;
+  --line: #c4c4c4;
+  --hightlight: #ff7e55;
+  --subcontent: #a9a9a9;
+  --location: #f04765;
+  --badge-yellow: #ffc107;
+  --badge-red: #dc3545;
+  --badge-lightblue: #0dcaf0;
+  --icon-star: #f6e498;
+}
+
 a {
   text-decoration: none;
 }

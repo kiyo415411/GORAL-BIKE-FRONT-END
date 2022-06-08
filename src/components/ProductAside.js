@@ -6,7 +6,7 @@ function ProductAside() {
       {/* 關鍵字篩選 */}
       <section>
         <input
-          class="form-control me-2"
+          className="form-control me-2"
           type="search"
           placeholder="輸入關鍵字"
           aria-label="Search"
@@ -29,19 +29,21 @@ function ProductAside() {
         <div>
           <input
             type="range"
-            class="form-range"
+            className="form-range"
             min="0"
             max="5"
             step="0.5"
             id="customRange3"
-          />
-          <p>$0 - $23,000</p>
-          <a
-            href="#/"
-            className="btn btn-primary fs-4 rounded-pill px-4 py-1 fw-lighter"
-          >
-            篩選
-          </a>
+          />{' '}
+          <div className="d-flex align-items-center justify-content-between">
+            <p className="m-0 h5">$0 - $23,000</p>
+            <a
+              href="#/"
+              className="btn btn-primary fs-4 rounded-pill px-4 py-1 fw-lighter"
+            >
+              篩選
+            </a>
+          </div>
         </div>
       </section>
       {/* 報名人數篩選 */}
@@ -50,17 +52,17 @@ function ProductAside() {
         <hr />
         <input
           type="range"
-          class="form-range"
+          className="form-range"
           min="0"
           max="5"
           step="0.5"
           id="customRange3"
         />
-        <div className="d-flex align-items-center">
-          <p className="m-0">0 人 - 100 人</p>
+        <div className="d-flex align-items-center justify-content-between">
+          <p className="m-0 h5">0 人 - 100 人</p>
           <a
             href="#/"
-            className="btn btn-primary fs-4 rounded-pill px-4 py-1 fw-lighter"
+            className="btn btn-primary fs-4 rounded-pill px-4 py-1 fw-lighter "
           >
             篩選
           </a>
@@ -68,13 +70,38 @@ function ProductAside() {
       </section>
       {/* 活動地點 */}
       <section>
-        <header>報名地點</header>
+        <header>課程難度</header>
         <hr />
+        <div className="d-flex gap-5">
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="easy-checkbox"
+            />
+            <label className="form-check-label" for="easy-checkbox">
+              入門
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="advance-checkbox"
+            />
+            <label className="form-check-label" for="advance-checkbox">
+              進階
+            </label>
+          </div>
+        </div>
       </section>
       {/* 活動日期 */}
       <section>
         <header>報名日期</header>
         <hr />
+        <input type="date" />
+        -
+        <input type="date" />
       </section>
     </div>
   );
