@@ -10,7 +10,7 @@ MFEE25 第六組大專 Goral
 
 ## 關於切版分支
 
-- 分支這樣開: 功能名稱 `ex. course`
+- 分支這樣開: 功能名稱 `ex. course`, 功能名稱用`-`連接
 - 完成後 merge 回: `develope`
   - 先切換到 develope 再輸入 git merge "你的分支名稱"
 
