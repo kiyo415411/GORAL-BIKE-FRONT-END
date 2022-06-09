@@ -1,4 +1,4 @@
-import Logo from '../images/Logo.png';
+import Logo from '../../images/Logo.png';
 import { BsPersonCircle, BsCart3, BsHeart } from 'react-icons/bs';
 
 function Navbar() {
