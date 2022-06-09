@@ -1,4 +1,4 @@
-import Hero from '../../images/hero.jpg';
+import VIDEO from '../../videos/index-heros.webm';
 import BIKE from '../../images/bike.svg';
 import CUSTOM from '../../images/custom.png';
 import EVENT from '../../images/event.png';
@@ -13,15 +13,15 @@ function Index() {
           {/* HERO */}
           <section
             className="bg-info overflow-hidden position-relative"
-            style={{ height: '960px' }}
+            style={{ height: '804px' }}
           >
-            <img className="w-100 img-fluid" src={Hero} alt="" />
+            <video src={VIDEO} autoplay="true" loop="true" muted></video>
 
             <article
-              className="position-absolute translate-middle lh-lg"
+              className="position-absolute translate-middle lh-lg text-white"
               style={{
-                left: '35%',
-                top: '35%',
+                left: '25%',
+                top: '45%',
                 width: '620px',
               }}
             >
@@ -115,7 +115,7 @@ function Index() {
             <img src={LOCATION} alt="" />
           </section>
           {/* ACTIVTY */}
-          <section className="m-5 p-5 overflow-hidden">
+          <section className="my-5 p-5 overflow-hidden">
             <h1 className="display-6 fw-bolder text-center">
               2022年，你絕不能錯過的登山車活動
             </h1>
