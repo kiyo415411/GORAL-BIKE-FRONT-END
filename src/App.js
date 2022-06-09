@@ -1,15 +1,15 @@
 import './App.css';
 import Navbar from './components/NavBar';
 import Footer from './components/Footer';
-import ProductList from './components/ProductList';
-// import LikeList from './components/LikeList';
+// import CourseLike from './pages/LikeList';
+import ActivityLike from './pages/ActivityLike';
 
 function App() {
   return (
     <>
       <Navbar />
-      <ProductList />
-      {/* <LikeList /> */}
+      {/* <CourseLike /> */}
+      <ActivityLike />
       <Footer />
     </>
   );

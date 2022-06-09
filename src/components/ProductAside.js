@@ -16,7 +16,7 @@ function ProductAside() {
           href="#/"
           className="position-absolute top-0 end-0 pe-4 pt-1 text-line"
         >
-          <FiSearch size={26} stroke-width={3} />
+          <FiSearch size={26} strokeWidth={3} />
         </a>
       </section>
       {/* 報名狀態篩選 */}
