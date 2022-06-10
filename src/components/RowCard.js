@@ -1,7 +1,5 @@
 // 商品卡片(橫向)
 import { BsStarFill, BsStar, BsHeart, BsHeartFill } from 'react-icons/bs';
-import Badge from '../components/Badge';
-import Button from '../components/Button';
 
 // 評分計算
 function star({ score }) {
@@ -60,18 +58,23 @@ function RowCard({
             {/* 時間 */}
             <h5 className="text-primary">{time}</h5>
             {/* 地點 */}
-            <Badge text={location} className="bg-secondary" />
-            <Badge text={statu} className="bg-secondary" />
+            <p className="bg-secondary badge rounded-pill px-3 fw-light">
+              {location}
+            </p>
+            <p className="bg-secondary badge rounded-pill px-3 fw-light">
+              {statu}
+            </p>
           </div>
           {/* 說明 */}
           <p className="row-card-text card-text text-subcontent">{text}</p>
           {/* 購買按鈕 */}
           <div className="d-flex gap-2 align-items-center">
-            <Button text="直接購買" className="btn-primary rounded-pill" />
-            <Button
-              text="加入購物車"
-              className="btn-outline-primary rounded-pill"
-            />
+            <button className="btn fs-6 border-2 px-4 py-1 rounded-0 btn-primary rounded-pill">
+              直接購買
+            </button>
+            <button className="btn fs-6 border-2 px-4 py-1 rounded-0 btn-outline-primary rounded-pill">
+              加入購物車
+            </button>
           </div>
         </div>
       </div>

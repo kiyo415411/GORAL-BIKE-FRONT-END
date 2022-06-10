@@ -1,11 +1,9 @@
 // 使用者邊攔
 import { FaUser } from 'react-icons/fa'; // User icon
-import Avator from '../images/UserPicture.webp'; // avator
-
 function UserAside() {
   const menu = ['帳戶資訊', '訂單紀錄', '最愛收藏', '優惠券'];
   const user = {
-    avator: Avator,
+    avator: require('../images/UserPicture.webp'),
     fullname: '羊百克',
     phone: '0912345678',
     email: 'goralbike3000@gmail.com',

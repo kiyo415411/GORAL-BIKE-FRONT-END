@@ -1,7 +1,7 @@
 // 課程收藏頁面
 // 元件引入
 import TopSection from '../components/TopSection';
-import UserAside from '../components/UserAside';
+import CourseAside from '../components/CourseAside';
 import Pagination from '../components/Pagination';
 import RowCard from '../components/RowCard';
 
@@ -42,18 +42,18 @@ courses.map((v, i) => {
   return 0;
 });
 
-function CourseLike() {
+export default function CourseList() {
   return (
     <>
       <TopSection
-        title="課程收藏"
+        title="課程"
         bg={require('../images/course/CourseBanner.jpg')}
       />
       <div className="row gx-5 justify-content-center my-5 flex-nowrap">
         {/* -----------------------------左區塊 */}
         <div className="col-auto">
           {/* 邊攔 */}
-          <UserAside />
+          <CourseAside />
         </div>
         {/* -----------------------------右區塊 */}
         <div className="col-auto">
@@ -66,5 +66,3 @@ function CourseLike() {
     </>
   );
 }
-
-export default CourseLike;

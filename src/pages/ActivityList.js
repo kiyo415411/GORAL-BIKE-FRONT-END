@@ -1,7 +1,7 @@
-// 活動收藏頁面
+// 課程收藏頁面
 // 元件引入
 import TopSection from '../components/TopSection';
-import UserAside from '../components/UserAside';
+import ActivityAside from '../components/ActivityAside';
 import Pagination from '../components/Pagination';
 import RowCard from '../components/RowCard';
 
@@ -42,31 +42,27 @@ activitys.map((v, i) => {
   return 0;
 });
 
-function ActivityLike() {
+export default function ActivityList() {
   return (
     <>
       <TopSection
-        title="活動收藏"
+        title="活動"
         bg={require('../images/activity/ActivityBanner.jpg')}
       />
-      <div className="container">
-        <div className="row gx-5 justify-content-center my-5 flex-nowrap">
-          {/* -----------------------------左區塊 */}
-          <div className="col-auto">
-            {/* 邊攔 */}
-            <UserAside />
-          </div>
-          {/* -----------------------------右區塊 */}
-          <div className="col-auto">
-            {/* 卡片清單 */}
-            {courseItems}
-            {/* 分頁 */}
-            <Pagination />
-          </div>
+      <div className="row gx-5 justify-content-center my-5 flex-nowrap">
+        {/* -----------------------------左區塊 */}
+        <div className="col-auto">
+          {/* 邊攔 */}
+          <ActivityAside />
+        </div>
+        {/* -----------------------------右區塊 */}
+        <div className="col-auto">
+          {/* 卡片清單 */}
+          {courseItems}
+          {/* 分頁 */}
+          <Pagination />
         </div>
       </div>
     </>
   );
 }
-
-export default ActivityLike;
