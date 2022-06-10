@@ -7,7 +7,7 @@ function star({ score }) {
   for (let i = 0; i < score; i++) {
     starGroup.push(<BsStarFill key={i} />);
   }
-  for (let i = 0; i < starCount - score; i++) {
+  for (let i = score; i < starCount; i++) {
     starGroup.push(<BsStar key={i} />);
   }
   return starGroup;

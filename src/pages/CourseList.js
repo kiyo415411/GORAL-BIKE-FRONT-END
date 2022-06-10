@@ -1,15 +1,18 @@
+// 課程收藏頁面
+// 元件引入
 import TopSection from '../components/TopSection';
 import CourseAside from '../components/CourseAside';
 import Pagination from '../components/Pagination';
 import RowCard from '../components/RowCard';
-
+import ColCard from '../components/ColCard';
+const cardStyle = 'col';
 const courses = [];
 
 const count = 7;
 for (let i = 0; i < count; i++) {
   courses.push({
     image: require('../images/course/CourseImg1.jpg'),
-    score: 3,
+    score: 4,
     like: 1,
     title: '台中市-越野小學堂',
     price: '$22,000.00',
@@ -22,21 +25,38 @@ for (let i = 0; i < count; i++) {
 
 const courseItems = [];
 courses.map((v, i) => {
-  courseItems.push(
-    <RowCard
-      key={i}
-      height={250}
-      image={courses[i].image}
-      score={courses[i].score}
-      like={courses[i].like}
-      title={courses[i].title}
-      price={courses[i].price}
-      time={courses[i].time}
-      location={courses[i].location}
-      statu={courses[i].statu}
-      text={courses[i].text}
-    />
-  );
+  if (cardStyle === 'row') {
+    courseItems.push(
+      <RowCard
+        key={i}
+        height={250}
+        image={courses[i].image}
+        score={courses[i].score}
+        like={courses[i].like}
+        title={courses[i].title}
+        price={courses[i].price}
+        time={courses[i].time}
+        location={courses[i].location}
+        statu={courses[i].statu}
+        text={courses[i].text}
+      />
+    );
+  } else {
+    courseItems.push(
+      <ColCard
+        key={i}
+        width={18}
+        image={courses[i].image}
+        like={courses[i].like}
+        title={courses[i].title}
+        price={courses[i].price}
+        time={courses[i].time}
+        location={courses[i].location}
+        statu={courses[i].statu}
+        text={courses[i].text}
+      />
+    );
+  }
   return 0;
 });
 
