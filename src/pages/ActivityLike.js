@@ -1,5 +1,3 @@
-// 活動收藏頁面
-// 元件引入
 import TopSection from '../components/TopSection';
 import UserAside from '../components/UserAside';
 import Pagination from '../components/Pagination';

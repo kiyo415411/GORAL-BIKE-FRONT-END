@@ -1,5 +1,3 @@
-// 課程收藏頁面
-// 元件引入
 import TopSection from '../components/TopSection';
 import CourseAside from '../components/CourseAside';
 import Pagination from '../components/Pagination';
