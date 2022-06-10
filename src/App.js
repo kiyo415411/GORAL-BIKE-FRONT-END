@@ -1,11 +1,13 @@
 import './App.css';
-import Navbar from './components/Home/NavBar';
-import Footer from './components/Home/Footer';
+import Navbar from './layout/Public/NavBar';
+import Index from './layout/Home';
+import Footer from './layout/Public/Footer';
 
 function App() {
   return (
     <>
       <Navbar />
+      <Index />
       <Footer />
     </>
   );
