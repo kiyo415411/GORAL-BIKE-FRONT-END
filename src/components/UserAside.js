@@ -1,12 +1,9 @@
 // 使用者邊攔
-import { RiArrowDownSFill } from 'react-icons/ri'; // 摺疊 icon
 import { FaUser } from 'react-icons/fa'; // User icon
-import Avator from '../images/UserPicture.webp'; // avator
-
 function UserAside() {
   const menu = ['帳戶資訊', '訂單紀錄', '最愛收藏', '優惠券'];
   const user = {
-    avator: Avator,
+    avator: require('../images/UserPicture.webp'),
     fullname: '羊百克',
     phone: '0912345678',
     email: 'goralbike3000@gmail.com',
@@ -37,12 +34,7 @@ function UserAside() {
       <section className="user-menu">
         <ul className="list-unstyled d-grid gap-3 fw-bold">
           {menu.map((value, index) => {
-            return (
-              <li key={index}>
-                {value}
-                <RiArrowDownSFill size={24} className="mb-1" />
-              </li>
-            );
+            return <li key={index}>{value}</li>;
           })}
         </ul>
       </section>

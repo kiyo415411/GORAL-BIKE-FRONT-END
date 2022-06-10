@@ -59,32 +59,32 @@ function Footer() {
           <section className="col-2 text-muted fs-6">
             <nav>
               <ul className="list-unstyled row row-cols-6">
-                <li>
+                <li key="t1">
                   <a className="text-muted" href="#/">
                     <BsFacebook />
                   </a>
                 </li>
-                <li>
+                <li key="t2">
                   <a className="text-muted" href="#/">
                     <BsGoogle />
                   </a>
                 </li>
-                <li>
+                <li key="t3">
                   <a className="text-muted" href="#/">
                     <BsYoutube />
                   </a>
                 </li>
-                <li>
+                <li key="t4">
                   <a className="text-muted" href="#/">
                     <BsTwitter />
                   </a>
                 </li>
-                <li>
+                <li key="t5">
                   <a className="text-muted" href="#/">
                     <BsInstagram />
                   </a>
                 </li>
-                <li>
+                <li key="t6">
                   <a className="text-muted" href="#/">
                     <BsGithub />
                   </a>
@@ -105,7 +105,7 @@ function Footer() {
           <ul className="list-unstyled d-flex mx-auto mb-0 w-50 justify-content-center p-3">
             {item_footer.map((value, index) => {
               return (
-                <li key={'c' + index}>
+                <li key={index}>
                   <a className="nav-link text-white" href="#/">
                     {value}
                   </a>
