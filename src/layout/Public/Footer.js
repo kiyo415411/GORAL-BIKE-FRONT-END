@@ -105,13 +105,11 @@ function Footer() {
           <ul className="list-unstyled d-flex mx-auto mb-0 w-50 justify-content-center p-3">
             {item_footer.map((value, index) => {
               return (
-                <>
-                  <li key={index}>
-                    <a className="nav-link text-white" href="#/">
-                      {value}
-                    </a>
-                  </li>
-                </>
+                <li key={index}>
+                  <a className="nav-link text-white" href="#/">
+                    {value}
+                  </a>
+                </li>
               );
             })}
           </ul>
