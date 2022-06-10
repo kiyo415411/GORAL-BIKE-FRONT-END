@@ -1,11 +1,10 @@
-// 課程收藏頁面
-// 元件引入
 import TopSection from '../components/TopSection';
 import CourseAside from '../components/CourseAside';
 import Pagination from '../components/Pagination';
 import RowCard from '../components/RowCard';
 import ColCard from '../components/ColCard';
-const cardStyle = 'col';
+import TopSort from '../components/TopSort';
+const cardStyle = 'col'; // 切換排版 | row/col
 const courses = [];
 
 const count = 7;
@@ -29,7 +28,7 @@ courses.map((v, i) => {
     courseItems.push(
       <RowCard
         key={i}
-        height={250}
+        height={15.625}
         image={courses[i].image}
         score={courses[i].score}
         like={courses[i].like}
@@ -45,7 +44,7 @@ courses.map((v, i) => {
     courseItems.push(
       <ColCard
         key={i}
-        width={18}
+        width={20}
         image={courses[i].image}
         like={courses[i].like}
         title={courses[i].title}
@@ -75,10 +74,19 @@ export default function CourseList() {
         </div>
         {/* -----------------------------右區塊 */}
         <div className="col-auto">
+          {/* 排序 */}
+          <TopSort />
           {/* 卡片清單 */}
-          {courseItems}
+          <div
+            className={cardStyle === 'col' ? 'd-flex flex-wrap' : ''}
+            style={{ width: '63rem' }}
+          >
+            {courseItems}
+          </div>
           {/* 分頁 */}
-          <Pagination />
+          <div>
+            <Pagination />
+          </div>
         </div>
       </div>
     </>

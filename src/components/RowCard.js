@@ -29,7 +29,7 @@ function RowCard({
   return (
     <div
       className="project-row-card card mb-3 shadow border-0 rounded-0 px-0"
-      style={{ height: height }}
+      style={{ height: height + 'rem' }}
     >
       <div className="overflow-hidden d-flex">
         <div className="product-img">
@@ -63,6 +63,7 @@ function RowCard({
             <p className="bg-secondary badge rounded-pill px-3 fw-light">
               {statu}
             </p>
+            {/* 人數 */}
             <p className="badge text-content">報名人數 : 30</p>
           </div>
           {/* 說明 */}

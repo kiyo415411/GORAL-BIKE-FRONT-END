@@ -2,7 +2,9 @@ import TopSection from '../components/TopSection';
 import ActivityAside from '../components/ActivityAside';
 import Pagination from '../components/Pagination';
 import RowCard from '../components/RowCard';
-
+import ColCard from '../components/ColCard';
+import TopSort from '../components/TopSort';
+const cardStyle = 'col'; // 切換排版 | row/col
 const activitys = [];
 
 const count = 7;
@@ -20,23 +22,40 @@ for (let i = 0; i < count; i++) {
   });
 }
 
-const courseItems = [];
+const activityItems = [];
 activitys.map((v, i) => {
-  courseItems.push(
-    <RowCard
-      key={i}
-      height={250}
-      image={activitys[i].image}
-      score={activitys[i].score}
-      like={activitys[i].like}
-      title={activitys[i].title}
-      price={activitys[i].price}
-      time={activitys[i].time}
-      location={activitys[i].location}
-      statu={activitys[i].statu}
-      text={activitys[i].text}
-    />
-  );
+  if (cardStyle === 'row') {
+    activityItems.push(
+      <RowCard
+        key={i}
+        height={15.625}
+        image={activitys[i].image}
+        score={activitys[i].score}
+        like={activitys[i].like}
+        title={activitys[i].title}
+        price={activitys[i].price}
+        time={activitys[i].time}
+        location={activitys[i].location}
+        statu={activitys[i].statu}
+        text={activitys[i].text}
+      />
+    );
+  } else {
+    activityItems.push(
+      <ColCard
+        key={i}
+        width={20}
+        image={activitys[i].image}
+        like={activitys[i].like}
+        title={activitys[i].title}
+        price={activitys[i].price}
+        time={activitys[i].time}
+        location={activitys[i].location}
+        statu={activitys[i].statu}
+        text={activitys[i].text}
+      />
+    );
+  }
   return 0;
 });
 
@@ -55,10 +74,19 @@ export default function ActivityList() {
         </div>
         {/* -----------------------------右區塊 */}
         <div className="col-auto">
+          {/* 排序 */}
+          <TopSort />
           {/* 卡片清單 */}
-          {courseItems}
+          <div
+            className={cardStyle === 'col' ? 'd-flex flex-wrap' : ''}
+            style={{ width: '63rem' }}
+          >
+            {activityItems}
+          </div>
           {/* 分頁 */}
-          <Pagination />
+          <div>
+            <Pagination />
+          </div>
         </div>
       </div>
     </>

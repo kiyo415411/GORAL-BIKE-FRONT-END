@@ -2,7 +2,9 @@ import TopSection from '../components/TopSection';
 import UserAside from '../components/UserAside';
 import Pagination from '../components/Pagination';
 import RowCard from '../components/RowCard';
-
+import ColCard from '../components/ColCard';
+import TopSort from '../components/TopSort';
+const cardStyle = 'col'; // 切換排版 | row/col
 const courses = [];
 
 const count = 7;
@@ -22,21 +24,38 @@ for (let i = 0; i < count; i++) {
 
 const courseItems = [];
 courses.map((v, i) => {
-  courseItems.push(
-    <RowCard
-      key={i}
-      height={250}
-      image={courses[i].image}
-      score={courses[i].score}
-      like={courses[i].like}
-      title={courses[i].title}
-      price={courses[i].price}
-      time={courses[i].time}
-      location={courses[i].location}
-      statu={courses[i].statu}
-      text={courses[i].text}
-    />
-  );
+  if (cardStyle === 'row') {
+    courseItems.push(
+      <RowCard
+        key={i}
+        height={15.625}
+        image={courses[i].image}
+        score={courses[i].score}
+        like={courses[i].like}
+        title={courses[i].title}
+        price={courses[i].price}
+        time={courses[i].time}
+        location={courses[i].location}
+        statu={courses[i].statu}
+        text={courses[i].text}
+      />
+    );
+  } else {
+    courseItems.push(
+      <ColCard
+        key={i}
+        width={20}
+        image={courses[i].image}
+        like={courses[i].like}
+        title={courses[i].title}
+        price={courses[i].price}
+        time={courses[i].time}
+        location={courses[i].location}
+        statu={courses[i].statu}
+        text={courses[i].text}
+      />
+    );
+  }
   return 0;
 });
 
@@ -55,10 +74,19 @@ function CourseLike() {
         </div>
         {/* -----------------------------右區塊 */}
         <div className="col-auto">
+          {/* 排序 */}
+          <TopSort />
           {/* 卡片清單 */}
-          {courseItems}
+          <div
+            className={cardStyle === 'col' ? 'd-flex flex-wrap' : ''}
+            style={{ width: '63rem' }}
+          >
+            {courseItems}
+          </div>
           {/* 分頁 */}
-          <Pagination />
+          <div>
+            <Pagination />
+          </div>
         </div>
       </div>
     </>
