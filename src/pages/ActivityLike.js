@@ -4,6 +4,7 @@ import Pagination from '../components/Pagination';
 import RowCard from '../components/RowCard';
 import ColCard from '../components/ColCard';
 import TopSort from '../components/TopSort';
+
 const cardStyle = 'col'; // 切換排版 | row/col
 const activitys = [];
 
