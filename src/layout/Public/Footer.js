@@ -42,10 +42,10 @@ function Footer() {
           <section className="col-6 mx-auto row justify-content-center fs-6 lh-sm text-center font-monospace">
             {item_main.map((value, index) => {
               return (
-                <ul key={index} className="col-6 col-md-3 ">
+                <ul key={'a' + index} className="col-6 col-md-3 ">
                   {item_main[index].map((value, index) => {
                     return (
-                      <li key={index}>
+                      <li key={'b' + index}>
                         <a className="nav-link text-muted" href="#/">
                           {value}
                         </a>
@@ -105,13 +105,11 @@ function Footer() {
           <ul className="list-unstyled d-flex mx-auto mb-0 w-50 justify-content-center p-3">
             {item_footer.map((value, index) => {
               return (
-                <>
-                  <li key={index}>
-                    <a className="nav-link text-white" href="#/">
-                      {value}
-                    </a>
-                  </li>
-                </>
+                <li key={'c' + index}>
+                  <a className="nav-link text-white" href="#/">
+                    {value}
+                  </a>
+                </li>
               );
             })}
           </ul>
