@@ -67,8 +67,11 @@ function RowCard({
           <p className="row-card-text card-text text-subcontent">{text}</p>
           {/* 購買按鈕 */}
           <div className="d-flex gap-2 align-items-center">
-            <Button text="直接購買" className="btn-primary" />
-            <Button text="加入購物車" className="btn-outline-primary" />
+            <Button text="直接購買" className="btn-primary rounded-pill" />
+            <Button
+              text="加入購物車"
+              className="btn-outline-primary rounded-pill"
+            />
           </div>
         </div>
       </div>

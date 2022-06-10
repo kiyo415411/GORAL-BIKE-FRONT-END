@@ -21,7 +21,7 @@ for (let i = 0; i < count; i++) {
     time: '2022-07-16',
     location: '東部',
     statu: '報名開放中',
-    text: '鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano Deore 1x10零組件搭配，Suntour避震前叉。 ',
+    text: '鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano Deore 1x10零組件搭配，Suntour避震前叉。 鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano Deore 1x10零組件搭配，Suntour避震前叉。',
   });
 }
 
