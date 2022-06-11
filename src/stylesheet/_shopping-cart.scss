@@ -1,0 +1,16 @@
+.shopping-cart {
+  &__btn {
+    border: none;
+    background: none;
+  }
+  .figure {
+    width: 20rem;
+  }
+  table {
+    th,
+    td {
+      text-align: center;
+      word-wrap: break-word;
+    }
+  }
+}
