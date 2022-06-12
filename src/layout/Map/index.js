@@ -7,6 +7,7 @@ import {
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import MapData from './MapData.json';
+import Mark from './Marks';
 
 function Index() {
   const center = [24, 121];
@@ -23,9 +24,8 @@ function Index() {
       />
       {MapData.features.map((value, index) => {
         return (
-          <>
+          <div key={value.properties.COUNTYCODE}>
             <GeoJSON
-              key={value.properties.COUNTYCODE}
               data={value}
               style={() => ({
                 color: 'white',
@@ -63,9 +63,10 @@ function Index() {
               <Popup>{value.properties.COUNTYNAME}</Popup>
               <Tooltip>{value.properties.COUNTYENG}</Tooltip>
             </GeoJSON>
-          </>
+          </div>
         );
       })}
+      <Mark />;
     </MapContainer>
   );
 }
