@@ -1,7 +1,15 @@
 import proj4 from 'proj4';
 import axios from 'axios';
-import { Marker, Popup } from 'react-leaflet';
+import { Marker, Popup, Tooltip } from 'react-leaflet';
 import { useState, useEffect } from 'react';
+import L from 'leaflet';
+
+function GetIcon(_iconSize) {
+  return L.icon({
+    iconUrl: require('../../images/Logo.png'),
+    iconSize: [_iconSize * 4.5, _iconSize],
+  });
+}
 
 function Mark() {
   //defs
@@ -41,9 +49,9 @@ function Mark() {
         ]);
         return (
           <div key={value['編號']}>
-            {console.log(dataAxis[1], dataAxis[0])}
-            <Marker position={[dataAxis[1], dataAxis[0]]}>
+            <Marker position={[dataAxis[1], dataAxis[0]]} icon={GetIcon(30)}>
               <Popup>{value['林道名稱']}</Popup>
+              <Tooltip>{value['林道名稱']}</Tooltip>
             </Marker>
           </div>
         );
