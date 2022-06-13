@@ -8,34 +8,30 @@ export default function CourseDetail() {
         bg={require('../images/course/CourseBanner.jpg')}
       />
       <div className="container my-5">
-        {/*---------------------------------- 標籤 */}
-        <div className="d-flex justify-content-between align-items-center mb-5">
-          <ul className="list-unstyled d-flex gap-4 m-0">
-            <li>
-              <div className="badge bg-badge-red rounded-pill px-3">
-                報名開放中
-              </div>
-            </li>
-            <li>
-              <div className="badge bg-badge-lightblue rounded-pill px-3">
-                入門
-              </div>
-            </li>
-            <li>
-              <div className="text-hightlight">
-                <BsHeart />
-              </div>
-            </li>
-          </ul>
-          <a href="#/" className="text-hightlight d-flex align-items-center">
-            返回課程列表
-            <BsFillCaretRightFill />
-          </a>
-        </div>
         {/*---------------------------------- 課程介紹 */}
         <div className="row justify-content-between">
           {/*---------------------------------- 介紹 */}
           <div className="col-8">
+            {/*---------------------------------- 標籤 */}
+            <div className="d-flex justify-content-between align-items-center mb-5">
+              <ul className="list-unstyled d-flex gap-4 m-0">
+                <li>
+                  <div className="badge bg-badge-red rounded-pill px-3">
+                    報名開放中
+                  </div>
+                </li>
+                <li>
+                  <div className="badge bg-badge-lightblue rounded-pill px-3">
+                    入門
+                  </div>
+                </li>
+                <li>
+                  <div className="text-hightlight">
+                    <BsHeart />
+                  </div>
+                </li>
+              </ul>
+            </div>
             {/*---------------------------------- 標題 */}
             <h3 className="card-title text-primary m-0 ms-3">越野小學堂</h3>
             <div className="card p-3 my-4 shadow border-0">
@@ -99,29 +95,42 @@ export default function CourseDetail() {
           </div>
           {/*---------------------------------- 報名箱 */}
           <div className="col-3">
-            <div className="card p-3 shadow border-0 rounded-0">
-              <p className="fs-5 m-0 text-primary">越野小學堂</p>
-              <ul className="list-unstyled d-flex gap-2 m-0">
-                <li>
-                  <div className="badge bg-badge-lightblue rounded-pill px-3">
-                    入門
-                  </div>
-                </li>
-                <li>
-                  <div className="badge bg-badge-red rounded-pill px-3">
-                    報名開放中
-                  </div>
-                </li>
-              </ul>
-              <div className="text-content d-grid gap-1 my-3">
-                <p className="m-0">2022-07-16</p>
-                <p className="m-0">$22,000</p>
-                <p className="m-0">報名人數：30</p>
+            <div className="sticky-top d-grid">
+              <a
+                href="#/"
+                className="text-hightlight mb-5 d-flex align-items-center justify-content-end"
+              >
+                返回課程列表
+                <BsFillCaretRightFill />
+              </a>
+              <div className="card p-3 shadow border-0 rounded-0 ">
+                <p className="fs-5 m-0 text-primary">越野小學堂</p>
+                <ul className="list-unstyled d-flex gap-2 m-0">
+                  <li>
+                    <div className="badge bg-badge-lightblue rounded-pill px-3">
+                      入門
+                    </div>
+                  </li>
+                  <li>
+                    <div className="badge bg-badge-red rounded-pill px-3">
+                      報名開放中
+                    </div>
+                  </li>
+                </ul>
+                <div className="text-content d-grid gap-1 my-3">
+                  <p className="m-0">2022-07-16</p>
+                  <p className="m-0">$22,000</p>
+                  <p className="m-0">報名人數：30</p>
+                </div>
+                <button className="btn btn-primary rounded-0">立即報名</button>
               </div>
-              <button className="btn btn-primary rounded-0">立即報名</button>
             </div>
           </div>
         </div>
+      </div>
+      {/*---------------------------------- 推薦課程 */}
+      <div className="container-fluid bg-graybg">
+        <h5>推薦課程</h5>
       </div>
     </>
   );
