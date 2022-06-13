@@ -1,38 +1,31 @@
-// 商品卡片(橫向)
-import Image from '../images/CourseImg1.jpg';
 import { BsStarFill, BsStar, BsHeart, BsHeartFill } from 'react-icons/bs';
-import BadgeTag from './BadgeTag';
-
-// 卡片資訊
-const card = {
-  image: Image,
-  score: 3,
-  like: 1,
-  title: '台中市-越野小學堂',
-  price: '$22,000.00',
-  time: '2022-07-16',
-  location: '東部',
-  statu: '報名開放中',
-  text: '鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano Deore 1x10零組件搭配，Suntour避震前叉。 ',
-};
 
 // 評分計算
-const star = () => {
+function star({ score }) {
   const starGroup = [];
   const starCount = 5;
-  for (let i = 0; i < card.score; i++) {
-    const index = 'sf' + i;
-    starGroup.push(<BsStarFill key={index} />);
+  for (let i = 0; i < score; i++) {
+    starGroup.push(<BsStarFill key={i} />);
   }
-  for (let i = 0; i < starCount - card.score; i++) {
-    const index = 's' + i;
-    starGroup.push(<BsStar key={index} />);
+  for (let i = score; i < starCount; i++) {
+    starGroup.push(<BsStar key={i} />);
   }
   return starGroup;
-};
+}
 
 // 排版
-function RowCard({ height }) {
+function RowCard({
+  height,
+  image,
+  score,
+  like,
+  title,
+  price,
+  time,
+  location,
+  statu,
+  text,
+}) {
   return (
     <div
       className="project-row-card card mb-3 shadow border-0 rounded-0 px-0"
@@ -41,46 +34,47 @@ function RowCard({ height }) {
       <div className="overflow-hidden d-flex">
         <div className="product-img">
           {/* 圖片 */}
-          <img src={card.image} className="object-fit" alt={card.title} />
+          <img src={image} className="object-fit" alt={title} />
         </div>
         <div className="card-body px-4 d-grid gap-1">
           <div className="d-flex justify-content-between align-items-center">
             {/* 評分 */}
-            <div className="text-icon-star d-flex gap-1">{star()}</div>
+            <div className="text-icon-star d-flex gap-1">{star({ score })}</div>
             {/* 收藏 */}
             <div className="text-hightlight">
-              {card.like === 1 ? <BsHeartFill /> : <BsHeart />}
+              {like === 1 ? <BsHeartFill /> : <BsHeart />}
             </div>
           </div>
           <div className="d-flex justify-content-between align-items-center">
-            {/* 名稱 */}
-            <h3 className="card-title text-primary">{card.title}</h3>
+            <div className="d-flex align-items-center gap-2">
+              {/* 時間 */}
+              <p className="text-primary fs-3 fw-bold m-0">{time}</p>
+              {/* 名稱 */}
+              <h3 className="card-title text-primary m-0">{title}</h3>
+            </div>
             {/* 價格 */}
-            <h4 className="text-content">{card.price}</h4>
+            <h4 className="text-content">{price}</h4>
           </div>
           <div className="d-flex gap-2 align-items-center">
-            {/* 時間 */}
-            <h5 className="text-primary">{card.time}</h5>
             {/* 地點 */}
-            <BadgeTag text={card.location} bg="var(--bs-secondary)" />
-            <BadgeTag text={card.statu} bg="var(--bs-secondary)" />
+            <p className="bg-secondary badge rounded-pill px-3 fw-light">
+              {location}
+            </p>
+            <p className="bg-secondary badge rounded-pill px-3 fw-light">
+              {statu}
+            </p>
+            <p className="badge text-content">報名人數 : 30</p>
           </div>
           {/* 說明 */}
-          <p className="card-text text-subcontent">{card.text}</p>
+          <p className="row-card-text card-text text-subcontent">{text}</p>
           {/* 購買按鈕 */}
           <div className="d-flex gap-2 align-items-center">
-            <a
-              href="#/"
-              className="btn btn-primary fs-6 rounded-pill px-4 py-1"
-            >
+            <button className="btn fs-6 border-2 px-4 py-1 rounded-0 btn-primary rounded-pill">
               直接購買
-            </a>
-            <a
-              href="#/"
-              className="btn btn-outline-primary border-2 fs-6 rounded-pill px-3 py-1"
-            >
+            </button>
+            <button className="btn fs-6 border-2 px-4 py-1 rounded-0 btn-outline-primary rounded-pill">
               加入購物車
-            </a>
+            </button>
           </div>
         </div>
       </div>
