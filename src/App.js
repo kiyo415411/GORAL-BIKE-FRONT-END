@@ -6,9 +6,9 @@ import ShoppingCart from './pages/ShoppingCart';
 function App() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <ShoppingCart />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

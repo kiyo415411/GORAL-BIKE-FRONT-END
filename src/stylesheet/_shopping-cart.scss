@@ -1,16 +1,34 @@
 .shopping-cart {
+  margin: 1rem auto 3rem;
+  .figure-img {
+    margin: 0;
+  }
+  &__tri-btn {
+    border: none;
+    margin-right: 1rem;
+    background-color: white;
+    color: $goral-primary;
+    @media (max-width: 768px) {
+      margin-right: 0;
+      padding-top: 0;
+      padding-bottom: 6;
+    }
+  }
   &__btn {
     border: none;
-    background: none;
+    background-color: #fff;
+    width: 100%;
   }
-  .figure {
-    width: 20rem;
+  h2 {
+    @media (max-width: 768px) {
+      margin-bottom: 0;
+    }
   }
-  table {
-    th,
-    td {
-      text-align: center;
-      word-wrap: break-word;
+  &__detail {
+    @media (max-width: 768px) {
+      div {
+        padding: 0;
+      }
     }
   }
 }
