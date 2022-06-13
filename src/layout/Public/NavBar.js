@@ -25,8 +25,11 @@ function Navbar() {
             <Link to="map" className="nav-link text-white">
               地圖
             </Link>
-            <Link to="course" className="nav-link text-white">
+            <Link to="courselist" className="nav-link text-white">
               課程
+            </Link>
+            <Link to="activitylist" className="nav-link text-white">
+              活動
             </Link>
           </ul>
         </div>

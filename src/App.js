@@ -20,11 +20,11 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="/map" element={<Map />} />
         <Route path="/" element={<App />} />
-        <Route path="courselist" element={<CourseList />} />
-        <Route path="courselike" element={<CourseLike />} />
-        <Route path="coursedetail" element={<CourseDetail />} />
-        <Route path="activitylist" element={<ActivityList />} />
-        <Route path="activitylike" element={<ActivityLike />} />
+        <Route path="/courselist" element={<CourseList />} />
+        <Route path="/courselike" element={<CourseLike />} />
+        <Route path="/coursedetail" element={<CourseDetail />} />
+        <Route path="/activitylist" element={<ActivityList />} />
+        <Route path="/activitylike" element={<ActivityLike />} />
       </Routes>
       <Footer />
     </>
