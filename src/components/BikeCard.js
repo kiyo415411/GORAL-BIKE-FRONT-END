@@ -1,24 +1,54 @@
+import { BsHeartFill, BsHeart } from 'react-icons/bs';
+import { useState, useEffect } from 'react';
+import Like from './Aside/Like.js';
+function separator(num) {
+  let str = num.toString().split('.');
+  str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return str.join('.');
+}
+
 function BikeCard(props) {
-  {
-    // const [bikes] = props;
-    // console.log('llll' + props);
-    console.log('d' + props.bikes);
-  }
+  // const [liked, setLiked] = useState(props.like);
+  // function like(l) {
+  //   if (l === false) {
+  //     return (
+  //       <BsHeart
+  //         color="red"
+  //         onClick={() => {
+  //           setLiked(!liked);
+  //         }}
+  //       />
+  //     );
+  //   } else if (l === true) {
+  //     return (
+  //       <BsHeartFill
+  //         color="red"
+  //         onClick={() => {
+  //           setLiked(!liked);
+  //         }}
+  //       />
+  //     );
+  //   }
+  // }
+  console.log(props.like);
+  // function handleLike() {
+  //   this.setLike((prevState) => !prevState);
+  // }
   return (
     <>
       <div
-        className="card mb-3 shadow p-3 mb-5 bg-body rounded"
-        style={{ maxWidth: '1049px' }}
+        className="card shadow p-2 mb-5 bg-body rounded"
+        style={{ maxWidth: '1049px', maxHeight: '256px' }}
       >
         <div className="row g-0">
-          <div className="col-md-4 h-75 my-auto w-25">
+          <div className="col-md-4 h-75 my-auto" style={{ width: 328 }}>
             <img
-              src={require('../images/bikes/' + props.bikes + '.png')}
+              src={require('../images/bikes/' + props.bike + '.png')}
               className="img-fluid rounded-start my-auto"
               alt="..."
             />
           </div>
-          <div className="col-md-8">
+          <div className="col-md-8 m-auto">
             <div className="text-warning ms-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -113,26 +143,15 @@ function BikeCard(props) {
             </div>
             <div className="card-body">
               <div className="w-100 d-flex justify-content-between">
-                <div className="d-flex">
-                  <h5 className="card-title">BIG.NINE 200</h5>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-heart ms-2 mt-1 text-danger"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                  </svg>
+                <div className="d-flex align-items-center gap-2 mb-3">
+                  <h5 className="card-title m-0">{props.name}</h5>
+                  {/* <{like(liked)}> */}
+                  <Like like={false}/>
                 </div>
-                <h5 className="text-content ">$20,000.00</h5>
+                <h5 className="text-content">${separator(props.price)}</h5>
               </div>
               <p className="card-text text-subcontent">
-                <small>
-                  鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano Deore
-                  1x10零 組件搭配，Suntour避震前叉。
-                </small>
+                <small>{props.text}</small>
               </p>
               <div className="flex">
                 <button className="btn btn-primary rounded-pill px-4 me-2">
