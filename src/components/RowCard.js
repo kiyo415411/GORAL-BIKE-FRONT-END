@@ -1,4 +1,3 @@
-// 商品卡片(橫向)
 import { BsStarFill, BsStar, BsHeart, BsHeartFill } from 'react-icons/bs';
 
 // 評分計算
@@ -6,12 +5,10 @@ function star({ score }) {
   const starGroup = [];
   const starCount = 5;
   for (let i = 0; i < score; i++) {
-    const index = 'sf' + i;
-    starGroup.push(<BsStarFill key={index} />);
+    starGroup.push(<BsStarFill key={i} />);
   }
-  for (let i = 0; i < starCount - score; i++) {
-    const index = 's' + i;
-    starGroup.push(<BsStar key={index} />);
+  for (let i = score; i < starCount; i++) {
+    starGroup.push(<BsStar key={i} />);
   }
   return starGroup;
 }
@@ -49,14 +46,16 @@ function RowCard({
             </div>
           </div>
           <div className="d-flex justify-content-between align-items-center">
-            {/* 名稱 */}
-            <h3 className="card-title text-primary">{title}</h3>
+            <div className="d-flex align-items-center gap-2">
+              {/* 時間 */}
+              <p className="text-primary fs-3 fw-bold m-0">{time}</p>
+              {/* 名稱 */}
+              <h3 className="card-title text-primary m-0">{title}</h3>
+            </div>
             {/* 價格 */}
             <h4 className="text-content">{price}</h4>
           </div>
           <div className="d-flex gap-2 align-items-center">
-            {/* 時間 */}
-            <h5 className="text-primary">{time}</h5>
             {/* 地點 */}
             <p className="bg-secondary badge rounded-pill px-3 fw-light">
               {location}
@@ -64,6 +63,7 @@ function RowCard({
             <p className="bg-secondary badge rounded-pill px-3 fw-light">
               {statu}
             </p>
+            <p className="badge text-content">報名人數 : 30</p>
           </div>
           {/* 說明 */}
           <p className="row-card-text card-text text-subcontent">{text}</p>
