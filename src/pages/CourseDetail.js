@@ -130,7 +130,7 @@ export default function CourseDetail() {
         </div>
       </div>
       {/*---------------------------------- 推薦課程 */}
-      <HotSection />
+      <HotSection title="推薦課程" />
     </>
   );
 }

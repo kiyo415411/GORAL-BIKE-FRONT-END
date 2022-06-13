@@ -6,6 +6,7 @@ import Footer from './layout/Public/Footer';
 // ----------------------活動
 import ActivityList from './pages/ActivityList';
 import ActivityLike from './pages/ActivityLike';
+import ActivityDetail from './pages/ActivityDetail';
 // ----------------------課程
 import CourseList from './pages/CourseList';
 import CourseLike from './pages/CourseLike';
@@ -20,11 +21,12 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="/map" element={<Map />} />
         <Route path="/" element={<App />} />
-        <Route path="/courselist" element={<CourseList />} />
-        <Route path="/courselike" element={<CourseLike />} />
-        <Route path="/coursedetail" element={<CourseDetail />} />
-        <Route path="/activitylist" element={<ActivityList />} />
-        <Route path="/activitylike" element={<ActivityLike />} />
+        <Route path="/course" element={<CourseList />} />
+        <Route path="/course/like" element={<CourseLike />} />
+        <Route path="/course/detail" element={<CourseDetail />} />
+        <Route path="/activity" element={<ActivityList />} />
+        <Route path="/activity/like" element={<ActivityLike />} />
+        <Route path="/activity/detail" element={<ActivityDetail />} />
       </Routes>
       <Footer />
     </>
