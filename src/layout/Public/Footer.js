@@ -1,4 +1,4 @@
-import Logo_m from '../images/Logo-m.png';
+import Logo_m from '../../images/Logo-m.png';
 import {
   BsFacebook,
   BsGoogle,
@@ -34,15 +34,10 @@ function Footer() {
   ];
   return (
     <footer className="container-fluid p-0">
-      <section className="bg-dark">
-        <main className="w-75 row mx-auto">
+      <section className="bg-dark pt-5">
+        <main className="w-75 row mx-auto mt-3 mb-5">
           <section className="col-1 text-end">
-            <img
-              id="Logo-m"
-              src={Logo_m}
-              className="img-fluid rounded-top"
-              alt=""
-            />
+            <img id="Logo-m" src={Logo_m} className=" rounded-top" alt="" />
           </section>
           <section className="col-6 mx-auto row justify-content-center fs-6 lh-sm text-center font-monospace">
             {item_main.map((value, index) => {
@@ -96,7 +91,7 @@ function Footer() {
                 </li>
               </ul>
             </nav>
-            <article className="mt-5">
+            <article className="">
               <p className="text-justify">GORAL BIKER. MORE BIKE.</p>
               <p className="text-justify">©2022GORALBIKE登山車版權所有</p>
               <p className="text-justify">
@@ -106,17 +101,15 @@ function Footer() {
             </article>
           </section>
         </main>
-        <footer className="footer-footer bg-success fs-6 lh-sm">
-          <ul className="list-unstyled d-flex mx-auto w-50 justify-content-center p-5">
+        <footer className="footer-footer bg-primary fs-6 lh-sm">
+          <ul className="list-unstyled d-flex mx-auto mb-0 w-50 justify-content-center p-3">
             {item_footer.map((value, index) => {
               return (
-                <>
-                  <li key={index}>
-                    <a className="nav-link text-white" href="#/">
-                      {value}
-                    </a>
-                  </li>
-                </>
+                <li key={index}>
+                  <a className="nav-link text-white" href="#/">
+                    {value}
+                  </a>
+                </li>
               );
             })}
           </ul>

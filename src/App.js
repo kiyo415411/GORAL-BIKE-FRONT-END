@@ -1,15 +1,22 @@
 import './App.css';
-import Navbar from './components/NavBar';
-import Footer from './components/Footer';
-// import ProductList from './components/ProductList';
-import LikeList from './components/LikeList';
+import Navbar from './layout/Public/NavBar';
+// import Index from './layout/Home';
+import Map from './layout/Map';
+import Index from './layout/Home/index';
+import Footer from './layout/Public/Footer';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <>
+      {/* <Navbar />
+      <Map />
+      <Footer /> */}
       <Navbar />
-      {/* <ProductList /> */}
-      <LikeList />
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/map" element={<Map />} />
+      </Routes>
       <Footer />
     </>
   );
