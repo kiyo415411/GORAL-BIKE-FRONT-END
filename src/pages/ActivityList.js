@@ -1,8 +1,8 @@
 import TopSection from '../components/TopSection';
 import ActivityAside from '../components/ActivityAside';
 import Pagination from '../components/Pagination';
-import RowCard from '../components/RowCard';
-import ColCard from '../components/ColCard';
+import RowCard from '../components/Cards/RowCard';
+import ColCard from '../components/Cards/ColCard';
 import TopSort from '../components/TopSort';
 
 const cardStyle = 'col'; // 切換排版 | row/col

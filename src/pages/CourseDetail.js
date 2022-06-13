@@ -1,5 +1,6 @@
 import { BsHeart, BsFillCaretRightFill } from 'react-icons/bs';
 import TopSection from '../components/TopSection';
+import HotSection from '../components/HotSection';
 export default function CourseDetail() {
   return (
     <>
@@ -129,9 +130,7 @@ export default function CourseDetail() {
         </div>
       </div>
       {/*---------------------------------- 推薦課程 */}
-      <div className="container-fluid bg-graybg">
-        <h5>推薦課程</h5>
-      </div>
+      <HotSection />
     </>
   );
 }
