@@ -4,63 +4,61 @@ import Pagination from '../components/Pagination';
 import RowCard from '../components/Cards/RowCard';
 import ColCard from '../components/Cards/ColCard';
 import TopSort from '../components/TopSort';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { API_URL } from '../utils/config';
 
 const cardStyle = 'col'; // 切換排版 | row/col
-const courses = [];
-
-const count = 7;
-for (let i = 0; i < count; i++) {
-  courses.push({
-    image: require('../images/course/CourseImg1.jpg'),
-    score: 4,
-    like: 1,
-    title: '台中市-越野小學堂',
-    price: '$22,000.00',
-    time: '2022-07-16',
-    location: '東部',
-    statu: '報名開放中',
-    text: '鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano Deore 1x10零組件搭配，Suntour避震前叉。 鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano Deore 1x10零組件搭配，Suntour避震前叉。',
-  });
-}
-
-const courseItems = [];
-courses.map((v, i) => {
-  if (cardStyle === 'row') {
-    courseItems.push(
-      <RowCard
-        key={i}
-        height={15.625}
-        image={courses[i].image}
-        score={courses[i].score}
-        like={courses[i].like}
-        title={courses[i].title}
-        price={courses[i].price}
-        time={courses[i].time}
-        location={courses[i].location}
-        statu={courses[i].statu}
-        text={courses[i].text}
-      />
-    );
-  } else {
-    courseItems.push(
-      <ColCard
-        key={i}
-        width={20}
-        image={courses[i].image}
-        like={courses[i].like}
-        title={courses[i].title}
-        price={courses[i].price}
-        time={courses[i].time}
-        location={courses[i].location}
-        statu={courses[i].statu}
-        text={courses[i].text}
-      />
-    );
-  }
-  return 0;
-});
 
 export default function CourseList() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    let getData = async () => {
+      let response = await axios.get(`${API_URL}/course/`);
+      setData(response.data);
+    };
+    getData();
+  });
+  const courseItems = [];
+  data.map((v, i) => {
+    const newDate = data[i].course_date.split('T').shift();
+
+    if (cardStyle === 'row') {
+      courseItems.push(
+        <RowCard
+          key={i}
+          height={15.625}
+          image={require('../images/course/' + data[i].course_pictures)}
+          score={5}
+          like={1}
+          title={data[i].course_title}
+          price={data[i].course_price}
+          time={newDate}
+          location={data[i].course_location_id}
+          statu={data[i].course_status_id}
+          text={data[i].course_content}
+        />
+      );
+    } else {
+      courseItems.push(
+        <ColCard
+          key={i}
+          width={20}
+          image={require('../images/course/' + data[i].course_pictures)}
+          score={5}
+          like={1}
+          title={data[i].course_title}
+          price={data[i].course_price}
+          time={newDate}
+          location={data[i].course_location_id}
+          statu={data[i].course_status_id}
+          text={data[i].course_content}
+        />
+      );
+    }
+    return 0;
+  });
+
   return (
     <>
       <TopSection

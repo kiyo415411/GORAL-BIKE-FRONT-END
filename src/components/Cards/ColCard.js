@@ -17,7 +17,13 @@ export default function ColCard({
       className="card shadow rounded-0 border-0 mb-5 mx-2"
       style={{ width: width + 'rem' }}
     >
-      <img src={image} className="card-img-top rounded-0" alt={title} />
+      <div className="col-card-img-box overflow-hidden">
+        <img
+          src={image}
+          className="card-img-top rounded-0 object-fit"
+          alt={title}
+        />
+      </div>
       <div className="card-body d-grid gap-2 px-4">
         <div className="d-flex justify-content-between align-items-center">
           <h3 className="card-title m-0">{title}</h3>
