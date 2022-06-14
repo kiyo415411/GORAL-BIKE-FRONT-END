@@ -25,6 +25,13 @@ function Index() {
     console.log(Map);
   }, [position, zoom]);
 
+  // 全部區域製圖
+  const fillMapData = MapData.features.map((value) => value);
+  // 特定區域製圖
+  // const filterMapData = MapData.features.filter(
+  //   (value) => value.properties.POSTION === '北部'
+  // );
+
   return (
     // 世界地圖渲染
     <MapContainer
@@ -35,7 +42,7 @@ function Index() {
       // 地圖樣式
       style={{ width: '100%', height: '960px' }}
       // 滑鼠滾輪捲動設定
-      scrollWheelZoom={true}
+      scrollWheelZoom={false}
     >
       {/* 地圖樣式覆蓋 */}
       <TileLayer
@@ -43,7 +50,7 @@ function Index() {
         attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
       />
       {/* 繪製地區界線 */}
-      {MapData.features.map((value, index) => {
+      {fillMapData.map((value, index) => {
         return (
           <div key={value.properties.COUNTYCODE}>
             {/* 引用GeoJSON繪製 */}

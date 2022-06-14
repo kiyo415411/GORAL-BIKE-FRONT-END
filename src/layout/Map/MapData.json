@@ -46,7 +46,7 @@
         "COUNTYID": "G",
         "COUNTYCODE": "10002",
         "COUNTYNAME": "宜蘭縣",
-        "POSTION":"北部",
+        "POSTION": "北部",
         "COUNTYENG": "Yilan County"
       }
     },
@@ -83,6 +83,7 @@
         "COUNTYID": "N",
         "COUNTYCODE": "10007",
         "COUNTYNAME": "彰化縣",
+        "POSTION": "中部",
         "COUNTYENG": "Changhua County"
       }
     },
@@ -135,6 +136,7 @@
         "COUNTYID": "M",
         "COUNTYCODE": "10008",
         "COUNTYNAME": "南投縣",
+        "POSTION": "中部",
         "COUNTYENG": "Nantou County"
       }
     },
@@ -175,6 +177,7 @@
         "COUNTYID": "P",
         "COUNTYCODE": "10009",
         "COUNTYNAME": "雲林縣",
+        "POSTION": "中部",
         "COUNTYENG": "Yunlin County"
       }
     },
@@ -230,6 +233,7 @@
         "COUNTYID": "T",
         "COUNTYCODE": "10013",
         "COUNTYNAME": "屏東縣",
+        "POSTION": "南部",
         "COUNTYENG": "Pingtung County"
       }
     },
@@ -253,6 +257,7 @@
         "COUNTYID": "C",
         "COUNTYCODE": "10017",
         "COUNTYNAME": "基隆市",
+        "POSTION": "北部",
         "COUNTYENG": "Keelung City"
       }
     },
@@ -275,6 +280,7 @@
         "COUNTYID": "O",
         "COUNTYCODE": "10018",
         "COUNTYNAME": "新竹市",
+        "POSTION": "北部",
         "COUNTYENG": "Hsinchu City"
       }
     },
@@ -301,6 +307,7 @@
         "COUNTYID": "A",
         "COUNTYCODE": "63000",
         "COUNTYNAME": "臺北市",
+        "POSTION": "北部",
         "COUNTYENG": "Taipei City"
       }
     },
@@ -362,6 +369,7 @@
         "COUNTYID": "F",
         "COUNTYCODE": "65000",
         "COUNTYNAME": "新北市",
+        "POSTION": "北部",
         "COUNTYENG": "New Taipei City"
       }
     },
@@ -412,6 +420,7 @@
         "COUNTYID": "B",
         "COUNTYCODE": "66000",
         "COUNTYNAME": "臺中市",
+        "POSTION": "中部",
         "COUNTYENG": "Taichung City"
       }
     },
@@ -451,6 +460,7 @@
         "COUNTYID": "D",
         "COUNTYCODE": "67000",
         "COUNTYNAME": "臺南市",
+        "POSTION": "南部",
         "COUNTYENG": "Tainan City"
       }
     },
@@ -496,6 +506,7 @@
         "COUNTYID": "H",
         "COUNTYCODE": "68000",
         "COUNTYNAME": "桃園市",
+        "POSTION": "北部",
         "COUNTYENG": "Taoyuan City"
       }
     },
@@ -535,6 +546,7 @@
         "COUNTYID": "K",
         "COUNTYCODE": "10005",
         "COUNTYNAME": "苗栗縣",
+        "POSTION": "中部",
         "COUNTYENG": "Miaoli County"
       }
     },
@@ -576,6 +588,7 @@
         "COUNTYID": "J",
         "COUNTYCODE": "10004",
         "COUNTYNAME": "新竹縣",
+        "POSTION": "北部",
         "COUNTYENG": "Hsinchu County"
       }
     },
@@ -597,6 +610,7 @@
         "COUNTYID": "I",
         "COUNTYCODE": "10020",
         "COUNTYNAME": "嘉義市",
+        "POSTION": "南部",
         "COUNTYENG": "Chiayi City"
       }
     },
@@ -651,6 +665,7 @@
         "COUNTYID": "Q",
         "COUNTYCODE": "10010",
         "COUNTYNAME": "嘉義縣",
+        "POSTION": "南部",
         "COUNTYENG": "Chiayi County"
       }
     },
@@ -709,6 +724,7 @@
         "COUNTYID": "E",
         "COUNTYCODE": "64000",
         "COUNTYNAME": "高雄市",
+        "POSTION": "南部",
         "COUNTYENG": "Kaohsiung City"
       }
     },
@@ -785,6 +801,7 @@
         "COUNTYID": "V",
         "COUNTYCODE": "10014",
         "COUNTYNAME": "臺東縣",
+        "POSTION": "東部",
         "COUNTYENG": "Taitung County"
       }
     },
@@ -848,6 +865,7 @@
         "COUNTYID": "U",
         "COUNTYCODE": "10015",
         "COUNTYNAME": "花蓮縣",
+        "POSTION": "東部",
         "COUNTYENG": "Hualien County"
       }
     }
