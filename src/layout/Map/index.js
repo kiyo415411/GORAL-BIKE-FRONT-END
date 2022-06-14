@@ -10,33 +10,43 @@ import MapData from './MapData.json';
 import Mark from './Marks';
 import LocationMarker from './LocationMarker';
 import { useState, useEffect } from 'react';
+import { Map } from 'leaflet';
 
 function Index() {
+  // 設定起始座標
   const [position, setPosition] = useState([24, 121]);
+  // 設定地圖縮放大小
   const [zoom, setZoom] = useState(8);
-  const [Map, setMap] = useState(null);
 
   useEffect(() => {
+    // 檢查傳遞參數
     console.log(position);
     console.log(zoom);
     console.log(Map);
-  }, [position, zoom, Map]);
+  }, [position, zoom]);
 
   return (
+    // 世界地圖渲染
     <MapContainer
+      // 座標中心點
       center={position}
+      // 縮放大小
       zoom={zoom}
+      // 地圖樣式
       style={{ width: '100%', height: '960px' }}
+      // 滑鼠滾輪捲動設定
       scrollWheelZoom={true}
-      whenCreated={setMap}
     >
+      {/* 地圖樣式覆蓋 */}
       <TileLayer
         url="https://api.maptiler.com/maps/hybrid/256/{z}/{x}/{y}.jpg?key=YdAyuapGGLNDoknjhGzG"
         attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
       />
+      {/* 繪製地區界線 */}
       {MapData.features.map((value, index) => {
         return (
           <div key={value.properties.COUNTYCODE}>
+            {/* 引用GeoJSON繪製 */}
             <GeoJSON
               data={value}
               style={() => ({
@@ -47,6 +57,7 @@ function Index() {
                 fillOpacity: 0.5,
                 dashArray: 3,
               })}
+              // 事件監聽
               // eventHandlers={{
               //   mouseover: (e) => {
               //     const layer = e.target;
@@ -78,11 +89,13 @@ function Index() {
           </div>
         );
       })}
+      {/* 點擊地圖FlyTO觸發事件 */}
       <LocationMarker
         position={position}
         zoom={zoom}
         setZoom={setZoom}
       ></LocationMarker>
+      {/* 連接政府API渲染81條MARK座標 */}
       <Mark setPosition={setPosition} setZoom={setZoom} zoom={zoom} />;
     </MapContainer>
   );
