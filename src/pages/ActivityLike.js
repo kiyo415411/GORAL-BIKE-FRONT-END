@@ -62,13 +62,13 @@ activitys.map((v, i) => {
 
 function ActivityLike() {
   return (
-    <>
+    <div className="bg-graybg">
       <TopSection
         title="活動收藏"
         bg={require('../images/activity/ActivityBanner.jpg')}
       />
       <div className="container">
-        <div className="row gx-5 justify-content-center my-5 flex-nowrap">
+        <div className="row gx-5 justify-content-center py-5 flex-nowrap">
           {/* -----------------------------左區塊 */}
           <div className="col-auto">
             {/* 邊攔 */}
@@ -80,7 +80,7 @@ function ActivityLike() {
             <TopSort />
             {/* 卡片清單 */}
             <div
-              className={cardStyle === 'col' ? 'd-flex flex-wrap' : ''}
+              className={cardStyle === 'col' ? 'd-flex flex-wrap mt-2' : 'mt-2'}
               style={{ width: '63rem' }}
             >
               {activityItems}
@@ -92,7 +92,7 @@ function ActivityLike() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

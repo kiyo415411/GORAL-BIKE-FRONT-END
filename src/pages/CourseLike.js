@@ -79,7 +79,7 @@ function CourseLike() {
           <TopSort />
           {/* 卡片清單 */}
           <div
-            className={cardStyle === 'col' ? 'd-flex flex-wrap' : ''}
+            className={cardStyle === 'col' ? 'd-flex flex-wrap mt-2' : 'mt-2'}
             style={{ width: '63rem' }}
           >
             {courseItems}
