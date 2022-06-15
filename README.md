@@ -11,8 +11,32 @@ MFEE25 第六組大專 Goral
 ## 關於切版分支
 
 - 分支這樣開: 功能名稱 `ex. course`, 功能名稱用`-`連接
-- 完成後 merge 回: `develope`
-  - 先切換到 develope 再輸入 git merge "你的分支名稱"
+- 請在完成"切版"或完成"功能"後 merge 回 `develop` 分支
+- merge 前請先將自己的功能分支所有的變更 push 到遠端
+
+- merge 步驟 :
+  1. 先切換至 `develope` 做 `git pull` 將遠端版本跟本地同步
+  2. 在自己的功能分支 `git merge develope`
+
+```bash=
+  #範例
+  ~/Documents/GORAL-BIKE-FRONT-END (shoppingcart)
+  git merge develope
+```
+
+3. 如果有衝突需先解決衝突
+4. 有解決衝突請再做一次
+
+```bash=
+  #範例
+  git add .
+  git commit -m "[UPDATE]Merge develop into shoppingcart"
+  git push
+
+```
+
+5. 切換到 `develope` 分支再輸入 `git merge "你的分支名稱"`
+6. 在 `develope` 分支做 `git push` 將 merge 完成的結果推回遠端
 
 ## 關於 style
 
