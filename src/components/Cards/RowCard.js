@@ -17,14 +17,16 @@ function star({ score }) {
 function RowCard({
   height,
   image,
-  score,
   like,
   title,
   price,
+  score,
   time,
   location,
   statu,
   text,
+  count,
+  category,
 }) {
   return (
     <div
@@ -42,7 +44,7 @@ function RowCard({
             <div className="text-icon-star d-flex gap-1">{star({ score })}</div>
             {/* 收藏 */}
             <div className="text-hightlight">
-              {like === 1 ? <BsHeartFill /> : <BsHeart />}
+              {like === true ? <BsHeartFill /> : <BsHeart />}
             </div>
           </div>
           <div className="d-flex justify-content-between align-items-center">
@@ -56,6 +58,14 @@ function RowCard({
             <h4 className="text-content">{price}</h4>
           </div>
           <div className="d-flex gap-2 align-items-center">
+            {/* 難度 */}
+            {category === '' ? (
+              ''
+            ) : (
+              <p className="bg-secondary badge rounded-pill px-3 fw-light m-0">
+                {category}
+              </p>
+            )}
             {/* 地點 */}
             <p className="bg-secondary badge rounded-pill px-3 fw-light">
               {location}

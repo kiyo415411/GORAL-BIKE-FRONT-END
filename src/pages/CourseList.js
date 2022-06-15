@@ -30,13 +30,16 @@ export default function CourseList() {
           height={15.625}
           image={`${IMAGE_URL}/course/${data[i].course_pictures}`}
           score={5}
-          like={1}
+          like={false}
           title={data[i].course_title}
           price={data[i].course_price}
           time={newDate}
-          location={data[i].course_location_id}
-          statu={data[i].course_status_id}
+          count={data[i].course_inventory}
+          location={data[i].course_location_name}
+          statu={data[i].course_status_name}
           text={data[i].course_content}
+          category={data[i].course_category_name}
+          venue={data[i].venue_name}
         />
       );
     } else {
@@ -44,15 +47,17 @@ export default function CourseList() {
         <ColCard
           key={i}
           width={20}
-          image={require('../images/course/' + data[i].course_pictures)}
-          score={5}
-          like={1}
+          image={`${IMAGE_URL}/course/${data[i].course_pictures}`}
+          like={false}
           title={data[i].course_title}
           price={data[i].course_price}
           time={newDate}
+          count={data[i].course_inventory}
           location={data[i].course_location_name}
           statu={data[i].course_status_name}
           text={data[i].course_content}
+          category={data[i].course_category_name}
+          venue={data[i].venue_name}
         />
       );
     }
