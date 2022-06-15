@@ -1,6 +1,6 @@
 import proj4 from 'proj4';
 import axios from 'axios';
-import { Marker, Popup, Tooltip, useMap } from 'react-leaflet';
+import { Marker, Popup, Tooltip } from 'react-leaflet';
 import { useState, useEffect } from 'react';
 import L from 'leaflet';
 
@@ -29,7 +29,6 @@ function Mark(props) {
   const EPSG3826 = new proj4.Proj('EPSG:3826'); //TWD97 TM2(121分帶)
   const EPSG4326 = new proj4.Proj('EPSG:4326'); //WGS84
   const [response, setResponse] = useState([]);
-  const Maps = useMap();
 
   useEffect(() => {
     const data = async () => {
@@ -42,6 +41,11 @@ function Mark(props) {
     };
     data();
   }, []);
+
+  useEffect(() => {
+    // console.log(props.position);
+    // Maps.flyTo(props.position, props.zoom);
+  }, [props.position, props.zoom]);
 
   return (
     <>
@@ -60,13 +64,10 @@ function Mark(props) {
               eventHandlers={{
                 click(e) {
                   // 轉換座標值賦予
-                  const position = [e.target._latlng.lat, e.target._latlng.lng];
+                  const position = [dataAxis[1], dataAxis[0]];
                   // 父層回傳值設定
                   props.setPosition(position);
                   props.setZoom(12);
-                  // 前往指定座標位置
-                  // Maps.flyTo([lat,lng],zoom)
-                  Maps.flyTo(position, props.zoom);
                 },
               }}
             >
