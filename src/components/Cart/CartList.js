@@ -17,7 +17,7 @@ import Summary from './Summary';
 // ];
 
 function CartList(props) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const { products } = props;
 
   return (
@@ -37,21 +37,23 @@ function CartList(props) {
         </div>
         <Collapse in={open}>
           <div id="example-collapse-text">
-            {/* details */}
-            <div className="d-md-flex row border-bottom text-center d-none">
-              <div className="col-lg-1">
-                <input type="checkbox" name="" id="" />
+            <div className="d-md-block border-bottom text-center d-none">
+              <div className="row">
+                <div className="col-lg-1">
+                  <input type="checkbox" name="" id="" />
+                </div>
+                <div className="col-lg-2">圖片</div>
+                <div className="row col-lg-7 mx-0">
+                  <div className="col">名稱</div>
+                  <div className="col">單價</div>
+                  <div className="col">數量</div>
+                  <div className="col">總價</div>
+                </div>
+                <div className="col-lg-1">收藏</div>
+                <div className="col-lg-1">移除</div>
               </div>
-              <div className="col-lg-2">圖片</div>
-              <div className="row col-lg-7 mx-0">
-                <div className="col">名稱</div>
-                <div className="col">單價</div>
-                <div className="col">數量</div>
-                <div className="col">總價</div>
-              </div>
-              <div className="col-lg-1">收藏</div>
-              <div className="col-lg-1">移除</div>
             </div>
+            {/* details */}
             {products.map((product, i) => {
               return (
                 <CartItem
@@ -66,8 +68,8 @@ function CartList(props) {
             {/* details-end */}
             {/* summary */}
             <Summary />
+            {/* summary-end */}
           </div>
-          {/* summary-end */}
         </Collapse>
       </section>
     </>
