@@ -35,9 +35,9 @@ function Index() {
 
   return (
     // 世界地圖渲染
-    <main className="container-fluid p-0 m-0 ">
+    <main className="container-fluid m-0 p-0 ">
       <section className="row p-0 m-0 ">
-        <map className="col-9 p-0 m-0">
+        <map className="col-8 p-0 m-0">
           <MapContainer
             // 座標中心點
 
@@ -84,7 +84,7 @@ function Index() {
           </MapContainer>
         </map>
         <article
-          className="bg-primary text-dark col-3 m-0 p-0 overflow-auto"
+          className="bg-primary text-dark col-4 m-0 p-0 overflow-auto"
           style={{ height: '960px' }}
         >
           <MapImformation

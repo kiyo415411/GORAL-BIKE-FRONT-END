@@ -42,39 +42,69 @@ function MapImformation(props) {
         return (
           <div key={value['編號']} className="card m-0 p-0 rounded-0">
             <div className="row g-0">
-              <div className="col-md-4">
-                <img src={logo} className="img-fluid" alt="..." />
+              <div className="col-md-4 overflow-hidden">
+                <img
+                  src={logo}
+                  className=""
+                  style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+                  alt="..."
+                />
               </div>
               <div className="col-md-8">
-                <div className="card-body">
+                <div className="d-flex gap-3 mx-3 my-2">
                   <h5 className="card-title">{value['林道名稱']}</h5>
-                  <p className="card-text">{value['縣市']}</p>
-                  <p className="card-text">
-                    <small className="text-muted">{value['林區']}</small>
-                  </p>
-                  <p className="card-text">{value['總長度'] + '公里'}</p>
-                  <p className="card-text">
-                    {'碎石面或土石鋪面 ：' +
-                      value['碎石面或土石鋪面'] +
-                      ' 公里'}
-                  </p>
-                  <p className="card-text">
-                    {'瀝青混凝土鋪面 ：' + value['A.C鋪面'] + ' 公里'}
-                  </p>
-                  <p className="card-text">
-                    {'水泥混凝土鋪面 ：' + value['P.C鋪面'] + ' 公里'}
-                  </p>
+                  <span className="card-text">{value['縣市']}</span>
+                  <span className="card-text">{value['林區']}</span>
                 </div>
-                <button
-                  className="btn btn-outline-primary text-primary fs-6 rounded-pill"
-                  onClick={(e) => {
-                    const position = [dataAxis[1], dataAxis[0]];
-                    props.setPosition(position);
-                    props.setZoom(12);
-                  }}
-                >
-                  前往指定座標
-                </button>
+                <div className="row justify-content-between align-items-center my-2">
+                  <p className="col-4 card-text mx-3">
+                    {value['總長度'] + '公里'}
+                  </p>
+                  <div className="col-6 my-2 d-flex justify-content-around">
+                    <button
+                      className="btn btn-outline-primary text-primary rounded-pill border-2"
+                      onClick={(e) => {
+                        const position = [dataAxis[1], dataAxis[0]];
+                        props.setPosition(position);
+                        props.setZoom(12);
+                      }}
+                    >
+                      前往座標
+                    </button>
+                    <button
+                      className="btn btn-primary text-white rounded-pill border-2"
+                      onClick={(e) => {}}
+                    >
+                      詳細資訊
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <div className="card-body fs-6 gap-3 d-flex py-0">
+                    {Number(value['碎石面或土石鋪面']) === 0 ? (
+                      ''
+                    ) : (
+                      <span className="badge bg-warning  rounded-pill">
+                        {'碎石 ' + value['碎石面或土石鋪面'] + ' 公里'}
+                      </span>
+                    )}
+
+                    {Number(value['A.C鋪面']) === 0 ? (
+                      ''
+                    ) : (
+                      <span className="badge bg-danger  rounded-pill">
+                        {'柏油 ' + value['A.C鋪面'] + ' 公里'}
+                      </span>
+                    )}
+                    {Number(value['P.C鋪面']) === 0 ? (
+                      ''
+                    ) : (
+                      <span className="badge bg-success  rounded-pill">
+                        {'水泥 ' + value['P.C鋪面'] + ' 公里'}
+                      </span>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
