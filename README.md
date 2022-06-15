@@ -20,7 +20,7 @@ MFEE25 第六組大專 Goral
   2. 在自己的功能分支 `git merge develope`
 
   ```bash=
-    #範例
+    # 範例
     ~/Documents/GORAL-BIKE-FRONT-END (shoppingcart)
     git merge develope
   ```
@@ -29,11 +29,10 @@ MFEE25 第六組大專 Goral
   4. 有解決衝突請再做一次
 
   ```bash=
-    #範例
+    # 範例
     git add .
     git commit -m "[UPDATE]Merge develop into shoppingcart"
     git push
-
   ```
 
   5. 切換到 `develope` 分支再輸入 `git merge "你的分支名稱"`
