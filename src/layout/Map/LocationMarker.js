@@ -15,6 +15,7 @@ function LocationMarker(props) {
   const map = useMapEvents({
     click() {
       props.setZoom(8);
+      props.setShow(true);
       map.flyTo(props.position, props.zoom);
     },
   });

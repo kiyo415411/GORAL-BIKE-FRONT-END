@@ -1,44 +1,14 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 import logo from '../../images/CourseImg1.jpg';
-import proj4 from 'proj4';
+import filterDataAPI from './filterDataAPI';
+import Twd97toWsg84 from './Twd97toWsg84';
 
 function MapImformation(props) {
-  const [response, setResponse] = useState([]);
-
-  proj4.defs([
-    [
-      'EPSG:4326',
-      '+title=WGS84 (long/lat) +proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees',
-    ],
-    [
-      'EPSG:3826',
-      '+title=TWD97 TM2 +proj=tmerc +lat_0=0 +lon_0=121 +k=0.9999 +x_0=250000 +y_0=0 +ellps=GRS80 +units=m +no_defs',
-    ],
-  ]);
-  //定義EPSG
-  const EPSG3826 = new proj4.Proj('EPSG:3826'); //TWD97 TM2(121分帶)
-  const EPSG4326 = new proj4.Proj('EPSG:4326'); //WGS84
-
-  useEffect(() => {
-    const data = async () => {
-      // 連接政府81條林道 API資料
-      const data = await axios.get(
-        'https://data.coa.gov.tw/Service/OpenData/DataFileService.aspx?UnitId=151'
-      );
-      // 設定資料 setResponse->response
-      setResponse(data.data);
-    };
-    data();
-  }, []);
+  const dataApi = filterDataAPI();
 
   return (
     <>
-      {response.map((value, index) => {
-        let dataAxis = proj4(EPSG3826, EPSG4326, [
-          Number(value['起點X坐標']),
-          Number(value['起點Y坐標']),
-        ]);
+      {dataApi.map((value, index) => {
+        let dataAxis = Twd97toWsg84(value['起點X坐標'], value['起點Y坐標']);
         return (
           <div key={value['編號']} className="card m-0 p-0 rounded-0">
             <div className="row g-0">
@@ -66,7 +36,8 @@ function MapImformation(props) {
                       onClick={(e) => {
                         const position = [dataAxis[1], dataAxis[0]];
                         props.setPosition(position);
-                        props.setZoom(12);
+                        props.setZoom(15);
+                        props.setShow(false);
                       }}
                     >
                       前往座標

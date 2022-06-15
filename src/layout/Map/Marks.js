@@ -1,8 +1,7 @@
-import proj4 from 'proj4';
-import axios from 'axios';
 import { Marker, Popup, Tooltip } from 'react-leaflet';
-import { useState, useEffect } from 'react';
 import L from 'leaflet';
+import filterDataAPI from './filterDataAPI';
+import Twd97toWsg84 from './Twd97toWsg84';
 
 // MARKS ICONS圖案設定
 function GetIcon(_iconSize) {
@@ -13,49 +12,14 @@ function GetIcon(_iconSize) {
 }
 
 function Mark(props) {
-  //轉換政府API座標成經緯度
-  //PROJ4 定義台灣EFSG經緯度預設轉換位置
-  proj4.defs([
-    [
-      'EPSG:4326',
-      '+title=WGS84 (long/lat) +proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees',
-    ],
-    [
-      'EPSG:3826',
-      '+title=TWD97 TM2 +proj=tmerc +lat_0=0 +lon_0=121 +k=0.9999 +x_0=250000 +y_0=0 +ellps=GRS80 +units=m +no_defs',
-    ],
-  ]);
-  //定義EPSG
-  const EPSG3826 = new proj4.Proj('EPSG:3826'); //TWD97 TM2(121分帶)
-  const EPSG4326 = new proj4.Proj('EPSG:4326'); //WGS84
-  const [response, setResponse] = useState([]);
-
-  useEffect(() => {
-    const data = async () => {
-      // 連接政府81條林道 API資料
-      const data = await axios.get(
-        'https://data.coa.gov.tw/Service/OpenData/DataFileService.aspx?UnitId=151'
-      );
-      // 設定資料 setResponse->response
-      setResponse(data.data);
-    };
-    data();
-  }, []);
-
-  useEffect(() => {
-    // console.log(props.position);
-    // Maps.flyTo(props.position, props.zoom);
-  }, [props.position, props.zoom]);
-
+  const dataApi = filterDataAPI();
   return (
     <>
       {/* 渲染所有座標位置，並定義各個MARKS內容 */}
-      {response.map((value, index) => {
+      {dataApi.map((value, index) => {
         // console.log(value['起點X坐標'], value['起點Y坐標']);
-        let dataAxis = proj4(EPSG3826, EPSG4326, [
-          Number(value['起點X坐標']),
-          Number(value['起點Y坐標']),
-        ]);
+        let dataAxis = Twd97toWsg84(value['起點X坐標'], value['起點Y坐標']);
+
         return (
           <div key={value['編號']}>
             <Marker
@@ -67,7 +31,8 @@ function Mark(props) {
                   const position = [dataAxis[1], dataAxis[0]];
                   // 父層回傳值設定
                   props.setPosition(position);
-                  props.setZoom(12);
+                  props.setZoom(14);
+                  props.setShow(false);
                 },
               }}
             >
