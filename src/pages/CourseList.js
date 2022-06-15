@@ -6,7 +6,7 @@ import ColCard from '../components/Cards/ColCard';
 import TopSort from '../components/TopSort';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { API_URL } from '../utils/config';
+import { API_URL, IMAGE_URL } from '../utils/config';
 
 const cardStyle = 'col'; // 切換排版 | row/col
 
@@ -28,7 +28,7 @@ export default function CourseList() {
         <RowCard
           key={i}
           height={15.625}
-          image={require('../images/course/' + data[i].course_pictures)}
+          image={`${IMAGE_URL}/course/${data[i].course_pictures}`}
           score={5}
           like={1}
           title={data[i].course_title}
@@ -50,8 +50,8 @@ export default function CourseList() {
           title={data[i].course_title}
           price={data[i].course_price}
           time={newDate}
-          location={data[i].course_location_id}
-          statu={data[i].course_status_id}
+          location={data[i].course_location_name}
+          statu={data[i].course_status_name}
           text={data[i].course_content}
         />
       );
@@ -65,26 +65,28 @@ export default function CourseList() {
         title="課程"
         bg={require('../images/course/CourseBanner.jpg')}
       />
-      <div className="row gx-5 justify-content-center my-5 flex-nowrap">
-        {/* -----------------------------左區塊 */}
-        <div className="col-auto">
-          {/* 邊攔 */}
-          <CourseAside />
-        </div>
-        {/* -----------------------------右區塊 */}
-        <div className="col-auto">
-          {/* 排序 */}
-          <TopSort />
-          {/* 卡片清單 */}
-          <div
-            className={cardStyle === 'col' ? 'd-flex flex-wrap mt-2' : 'mt-2'}
-            style={{ width: '63rem' }}
-          >
-            {courseItems}
+      <div className="container">
+        <div className="row gx-5 justify-content-center my-5 flex-nowrap">
+          {/* -----------------------------左區塊 */}
+          <div className="col-auto">
+            {/* 邊攔 */}
+            <CourseAside />
           </div>
-          {/* 分頁 */}
-          <div>
-            <Pagination />
+          {/* -----------------------------右區塊 */}
+          <div className="col-auto">
+            {/* 排序 */}
+            <TopSort />
+            {/* 卡片清單 */}
+            <div
+              className={cardStyle === 'col' ? 'd-flex flex-wrap mt-2' : 'mt-2'}
+              style={{ width: '63rem' }}
+            >
+              {courseItems}
+            </div>
+            {/* 分頁 */}
+            <div>
+              <Pagination />
+            </div>
           </div>
         </div>
       </div>
