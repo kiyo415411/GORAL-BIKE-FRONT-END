@@ -14,7 +14,7 @@ function Mark(props) {
   return (
     <>
       {/* 渲染所有座標位置，並定義各個MARKS內容 */}
-      {props.dataApi.map((value, index) => {
+      {props.filterDataApi.map((value, index) => {
         // console.log(value['起點X坐標'], value['起點Y坐標']);
         let dataAxis = Twd97toWsg84(value['起點X坐標'], value['起點Y坐標']);
 

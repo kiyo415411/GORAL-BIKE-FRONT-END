@@ -9,9 +9,9 @@ import 'leaflet/dist/leaflet.css';
 import MapData from './MapData.json';
 import Mark from './Marks';
 import LocationMarker from './LocationMarker';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import MapImformation from './MapImformation';
-import filterDataAPI from './filterDataAPI';
+import DataAPI from './DataAPI';
 import MapNav from './MapNav';
 
 function Index() {
@@ -21,31 +21,58 @@ function Index() {
   const [zoom, setZoom] = useState(8);
   const [show, setShow] = useState(true);
   const [area, setArea] = useState('');
-  const [mapURL] = useState(
-    'https://api.maptiler.com/maps/hybrid/256/{z}/{x}/{y}.jpg?key=YdAyuapGGLNDoknjhGzG'
+  const [mapName, setMapName] = useState(
+    'https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=YdAyuapGGLNDoknjhGzG'
   );
+
+  const layerRef = useRef(null);
+
   const attribution =
     '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
-  // 檢查傳遞參數
-  // setDataApi(FilterDataAPI);
 
   // 篩選政府林道API資料(依地區)
-  const dataApi = filterDataAPI(area);
+
+  // 取得林道API
+  const [dataApi, setDataApi] = useState([]);
+  const [filterDataApi, setFilterDataApi] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const getData = await DataAPI();
+      setDataApi(getData);
+      setFilterDataApi(getData);
+    })();
+  }, []);
+
   // 特定區域製圖
   const filterMapData = MapData.features.filter((value) =>
     area ? value.properties.POSTION === area : value
   );
+
   useEffect(() => {
-    console.log(position);
-    console.log(dataApi);
-    console.log(zoom);
-    console.log(area);
-  }, [position, zoom, area, dataApi]);
+    // console.log(position);
+    // console.log(dataApi);
+    // console.log(filterDataApi);
+    // console.log(zoom);
+    // console.log(area);
+    // console.log(mapName);
+  }, [position, zoom, area, dataApi, mapName, filterDataApi]);
+
+  useEffect(() => {
+    if (layerRef.current) {
+      layerRef.current.setUrl(mapName);
+    }
+  }, [mapName]);
 
   return (
     // 世界地圖渲染
     <>
-      <MapNav setArea={setArea} />
+      <MapNav
+        dataApi={dataApi}
+        setArea={setArea}
+        setMapName={setMapName}
+        setFilterDataApi={setFilterDataApi}
+      />
       {/* 世界地圖渲染 */}
       <main className="container-fluid m-0 p-0 ">
         <section className="row p-0 m-0 ">
@@ -60,8 +87,15 @@ function Index() {
               // 滑鼠滾輪捲動設定
               scrollWheelZoom={false}
             >
-              {/* 地圖樣式覆蓋 */}
-              <TileLayer url={mapURL} attribution={attribution} />
+              {/* <TileLayer
+                url={`https://api.maptiler.com/maps/${mapName}/256/{z}/{x}/{y}.jpg?key=YdAyuapGGLNDoknjhGzG`}
+                attribution={attribution}
+              /> */}
+              <TileLayer
+                ref={layerRef}
+                attribution={attribution}
+                url={mapName}
+              />
               {/* 繪製地區界線 */}
               {show &&
                 filterMapData.map((value, index) => {
@@ -95,7 +129,7 @@ function Index() {
                 setZoom={setZoom}
                 zoom={zoom}
                 setShow={setShow}
-                dataApi={dataApi}
+                filterDataApi={filterDataApi}
               />
               ;
             </MapContainer>
@@ -109,7 +143,7 @@ function Index() {
               setZoom={setZoom}
               zoom={zoom}
               setShow={setShow}
-              dataApi={dataApi}
+              filterDataApi={filterDataApi}
             />
           </article>
         </section>

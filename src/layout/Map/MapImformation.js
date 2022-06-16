@@ -4,7 +4,7 @@ import Twd97toWsg84 from './Twd97toWsg84';
 function MapImformation(props) {
   return (
     <>
-      {props.dataApi.map((value, index) => {
+      {props.filterDataApi.map((value, index) => {
         let dataAxis = Twd97toWsg84(value['起點X坐標'], value['起點Y坐標']);
         return (
           <div key={value['編號']} className="card m-0 p-0 rounded-0">
