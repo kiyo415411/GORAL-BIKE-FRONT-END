@@ -2,7 +2,7 @@ import './App.css';
 import Navbar from './layout/Public/NavBar';
 // import Index from './layout/Home';
 import ProductPage from './components/ProductPage';
-import ProductPageDetail from './components/ProductPageDetail';
+import BikeDetailPage from './components/BikeDetailPage';
 import Map from './layout/Map';
 import Index from './layout/Home/index';
 import Footer from './layout/Public/Footer';
@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="/map" element={<Map />} />
         <Route path="/Product" element={<ProductPage />} />
-        <Route path="/Product/Detail" element={<ProductPageDetail />} />
+        <Route path="/Product/Detail" element={<BikeDetailPage />} />
       </Routes>
       <Footer />
     </>

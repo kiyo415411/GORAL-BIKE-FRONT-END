@@ -5,7 +5,7 @@ import Price from './Details/Price.js';
 import Like from './Aside/Like.js';
 import { useState } from 'react';
 
-function Details(props) {
+function BikeDetailDescription(props) {
   const [liked, setLiked] = useState([false]);
   const [color, setColor] = useState([
     '#32CE13',
@@ -45,4 +45,4 @@ function Details(props) {
   );
 }
 
-export default Details;
+export default BikeDetailDescription;

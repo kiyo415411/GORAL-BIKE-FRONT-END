@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Details from './BikeDetailsDescription';
+import BikeDetailDescription from './BikeDetailDescription';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 
 function BikeDetailCard() {
@@ -39,7 +39,7 @@ function BikeDetailCard() {
           </div>
         </div>
         <div>
-          <Details className="mx-5 w-75" />
+          <BikeDetailDescription className="mx-5 w-75" />
           {/* bike name
             description
             price
@@ -54,43 +54,49 @@ function BikeDetailCard() {
           </ul>
         );
       })} */}
-      <div>
-        {DownDesc.map((v, i) => {
-          return (
-            <p key={i} className="text-content">
-              {v}
-            </p>
-          );
-        })}
-      </div>
+      <div className='mt-5'>
+        <div>
+          {DownDesc.map((v, i) => {
+            return (
+              <p key={i} className="text-content">
+                {v}
+              </p>
+            );
+          })}
+        </div>
 
-      {/* //   <p className="m-2">{bikeDetail.Placeholder.LongDesc[1]}</p>
+        {/* //   <p className="m-2">{bikeDetail.Placeholder.LongDesc[1]}</p>
     //   <p className="m-2 text-content">{bikeDetail.Placeholder. */}
-      <div className="d-flex justify-content-start my-5">
-        <div className="me-5">
-          <h3 className="my-5">
-            <BsFillCheckCircleFill size={30} color="grey" />{' '}
-            採用三種不同管壁厚薄度打造的全鋁合金車體
-          </h3>
-          <h3 className="my-5">
-            <BsFillCheckCircleFill size={30} color="grey" /> 可鎖定前、後避震
-          </h3>
-          <h3 className="my-5">
-            <BsFillCheckCircleFill size={30} color="grey" /> 配備升降座桿
-          </h3>
+        <div className="d-flex justify-content-start my-5">
+          <div className="me-5">
+            <h3 className="my-5">
+              <BsFillCheckCircleFill size={30} color="grey" />{' '}
+              採用三種不同管壁厚薄度打造的全鋁合金車體
+            </h3>
+            <h3 className="my-5">
+              <BsFillCheckCircleFill size={30} color="grey" /> 可鎖定前、後避震
+            </h3>
+            <h3 className="my-5">
+              <BsFillCheckCircleFill size={30} color="grey" /> 配備升降座桿
+            </h3>
+          </div>
+          <div className="ms-5">
+            <h3 className="my-5">
+              <BsFillCheckCircleFill size={30} color="grey" /> FLOAT
+              LINK浮動連桿避震平台
+            </h3>
+            <h3 className="my-5">
+              <BsFillCheckCircleFill size={30} color="grey" /> Shimano 1X
+              傳動系統
+            </h3>
+            <h3 className="my-5">
+              <BsFillCheckCircleFill size={30} color="grey" /> 29er輪組
+            </h3>
+          </div>
         </div>
-        <div className="ms-5">
-          <h3 className="my-5">
-            <BsFillCheckCircleFill size={30} color="grey" /> FLOAT
-            LINK浮動連桿避震平台
-          </h3>
-          <h3 className="my-5">
-            <BsFillCheckCircleFill size={30} color="grey" /> Shimano 1X 傳動系統
-          </h3>
-          <h3 className="my-5">
-            <BsFillCheckCircleFill size={30} color="grey" /> 29er輪組
-          </h3>
-        </div>
+      </div>
+      <div className="ms-n5">
+        <h1>技術</h1>
       </div>
     </div>
   );
