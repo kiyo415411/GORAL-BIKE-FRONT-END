@@ -56,13 +56,9 @@ function Index() {
     })();
   }, []);
 
+  // 特定區域製圖，使用GeoJSON繪圖
   const [origianlMapData] = useState(MapData.features);
   const [filterMapData, setFilterMapData] = useState(MapData.features);
-
-  // 特定區域製圖，使用GeoJSON繪圖
-  // const filterMapData = MapData.features.filter((value) =>
-  //   city ? value.properties.COUNTYNAME === city : value
-  // );
 
   useEffect(() => {
     // console.log(position);
@@ -71,7 +67,8 @@ function Index() {
     // console.log(zoom);
     // console.log(area);
     // console.log(mapName);
-  }, [position, zoom, area, dataApi, mapName, filterDataApi]);
+    // console.log(filterMapData);
+  }, [position, zoom, area, dataApi, mapName, filterDataApi, filterMapData]);
 
   useEffect(() => {
     // 切換TileLayer的current p.s.mapName更動時改變
@@ -154,13 +151,17 @@ function Index() {
             className="bg-primary text-dark col-4 m-0 p-0 overflow-auto"
             style={{ height: '960px' }}
           >
-            <MapImformation
-              setPosition={setPosition}
-              setZoom={setZoom}
-              zoom={zoom}
-              setShow={setShow}
-              filterDataApi={filterDataApi}
-            />
+            {filterDataApi.length !== 0 ? (
+              <MapImformation
+                setPosition={setPosition}
+                setZoom={setZoom}
+                zoom={zoom}
+                setShow={setShow}
+                filterDataApi={filterDataApi}
+              />
+            ) : (
+              <h1 className="text-center text-white">沒有林道資料</h1>
+            )}
           </article>
         </section>
       </main>
