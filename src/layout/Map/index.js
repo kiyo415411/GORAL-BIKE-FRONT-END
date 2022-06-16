@@ -19,28 +19,35 @@ function Index() {
   const [position, setPosition] = useState([24, 121]);
   // 設定地圖縮放大小
   const [zoom, setZoom] = useState(8);
+  // 是否顯示
   const [show, setShow] = useState(true);
+  // 地區區域 ex.北部
   const [area, setArea] = useState('');
+  // 地圖樣式api選擇
   const [mapName, setMapName] = useState(
     'https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=YdAyuapGGLNDoknjhGzG'
   );
 
+  // 切換TileLayer地圖樣式，因為TileLayer無法自行重新渲染，需要使用useRef來切換
   const layerRef = useRef(null);
-
+  // TileLayer版權顯示
   const attribution =
     '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
 
-  // 篩選政府林道API資料(依地區)
-
   // 取得林道API
   const [dataApi, setDataApi] = useState([]);
+  // 篩選政府林道API資料(依地區)
   const [filterDataApi, setFilterDataApi] = useState([]);
 
+  // 設定預設資料及篩選資料
   useEffect(() => {
     (async () => {
       try {
+        // 需要等待資料pending，不然useState會是空值
         const getData = await DataAPI();
+        // 設定預設資料
         setDataApi(getData);
+        // 設定篩選資料
         setFilterDataApi(getData);
       } catch (e) {
         throw new Error(e);
@@ -48,7 +55,7 @@ function Index() {
     })();
   }, []);
 
-  // 特定區域製圖
+  // 特定區域製圖，使用GeoJSON繪圖
   const filterMapData = MapData.features.filter((value) =>
     area ? value.properties.POSTION === area : value
   );
@@ -63,6 +70,7 @@ function Index() {
   }, [position, zoom, area, dataApi, mapName, filterDataApi]);
 
   useEffect(() => {
+    // 切換TileLayer的current p.s.mapName更動時改變
     if (layerRef.current) {
       layerRef.current.setUrl(mapName);
     }
@@ -91,10 +99,6 @@ function Index() {
               // 滑鼠滾輪捲動設定
               scrollWheelZoom={false}
             >
-              {/* <TileLayer
-                url={`https://api.maptiler.com/maps/${mapName}/256/{z}/{x}/{y}.jpg?key=YdAyuapGGLNDoknjhGzG`}
-                attribution={attribution}
-              /> */}
               <TileLayer
                 ref={layerRef}
                 attribution={attribution}

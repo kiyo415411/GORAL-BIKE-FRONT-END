@@ -6,6 +6,7 @@ function LocationMarker(props) {
   const MAP = useMap();
 
   useEffect(() => {
+    // props.position, props.zoom, MAP 改變時飛往指定地點
     const flyToLocation = () => {
       MAP.flyTo(props.position, props.zoom);
     };
@@ -14,6 +15,7 @@ function LocationMarker(props) {
 
   const map = useMapEvents({
     click() {
+      // 依照地圖click觸發事件飛往指定地點
       props.setZoom(8);
       props.setShow(true);
       map.flyTo(props.position, props.zoom);
