@@ -1,6 +1,5 @@
 import { Marker, Popup, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
-import filterDataAPI from './filterDataAPI';
 import Twd97toWsg84 from './Twd97toWsg84';
 
 // MARKS ICONS圖案設定
@@ -12,11 +11,10 @@ function GetIcon(_iconSize) {
 }
 
 function Mark(props) {
-  const dataApi = filterDataAPI();
   return (
     <>
       {/* 渲染所有座標位置，並定義各個MARKS內容 */}
-      {dataApi.map((value, index) => {
+      {props.dataApi.map((value, index) => {
         // console.log(value['起點X坐標'], value['起點Y坐標']);
         let dataAxis = Twd97toWsg84(value['起點X坐標'], value['起點Y坐標']);
 

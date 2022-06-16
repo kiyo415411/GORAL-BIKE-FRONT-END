@@ -11,6 +11,7 @@ import Mark from './Marks';
 import LocationMarker from './LocationMarker';
 import { useState, useEffect } from 'react';
 import MapImformation from './MapImformation';
+import filterDataAPI from './filterDataAPI';
 
 function Index() {
   // 設定起始座標
@@ -19,15 +20,22 @@ function Index() {
   const [zoom, setZoom] = useState(8);
   const [show, setShow] = useState(true);
   const [area, setArea] = useState('');
+  const [mapURL] = useState(
+    'https://api.maptiler.com/maps/hybrid/256/{z}/{x}/{y}.jpg?key=YdAyuapGGLNDoknjhGzG'
+  );
+  const attribution =
+    '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
   // 檢查傳遞參數
   // setDataApi(FilterDataAPI);
+  const dataApi = filterDataAPI(area);
   useEffect(() => {
     console.log(position);
+    console.log(dataApi);
     console.log(zoom);
     console.log(area);
     setPosition(position);
     setZoom(zoom);
-  }, [position, zoom, area]);
+  }, [position, zoom, area, dataApi]);
 
   // 全部區域製圖
   // const fillMapData = MapData.features.map((value) => value);
@@ -69,10 +77,7 @@ function Index() {
               scrollWheelZoom={false}
             >
               {/* 地圖樣式覆蓋 */}
-              <TileLayer
-                url="https://api.maptiler.com/maps/hybrid/256/{z}/{x}/{y}.jpg?key=YdAyuapGGLNDoknjhGzG"
-                attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
-              />
+              <TileLayer url={mapURL} attribution={attribution} />
               {/* 繪製地區界線 */}
               {show &&
                 filterMapData.map((value, index) => {
@@ -106,6 +111,7 @@ function Index() {
                 setZoom={setZoom}
                 zoom={zoom}
                 setShow={setShow}
+                dataApi={dataApi}
               />
               ;
             </MapContainer>
@@ -119,6 +125,7 @@ function Index() {
               setZoom={setZoom}
               zoom={zoom}
               setShow={setShow}
+              dataApi={dataApi}
             />
           </article>
         </section>
