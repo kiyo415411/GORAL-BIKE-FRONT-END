@@ -38,9 +38,13 @@ function Index() {
 
   useEffect(() => {
     (async () => {
-      const getData = await DataAPI();
-      setDataApi(getData);
-      setFilterDataApi(getData);
+      try {
+        const getData = await DataAPI();
+        setDataApi(getData);
+        setFilterDataApi(getData);
+      } catch (e) {
+        throw new Error(e);
+      }
     })();
   }, []);
 
