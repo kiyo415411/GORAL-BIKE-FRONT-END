@@ -1,6 +1,7 @@
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import Like from './Aside/Like.js';
+import { Link } from 'react-router-dom';
 function separator(num) {
   let str = num.toString().split('.');
   str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -8,7 +9,7 @@ function separator(num) {
 }
 
 function BikeCard(props) {
-  // const [liked, setLiked] = useState(props.like);
+  const [liked, setLiked] = useState(false);
   // function like(l) {
   //   if (l === false) {
   //     return (
@@ -143,10 +144,12 @@ function BikeCard(props) {
             </div>
             <div className="card-body">
               <div className="w-100 d-flex justify-content-between">
-                <div className="d-flex align-items-center gap-2 mb-3">
-                  <h5 className="card-title m-0">{props.name}</h5>
+                <div className="d-flex align-items-center justify-content-start gap-2 mb-3">
+                  <Link to="/Product/Detail" className="">
+                    <h5 className="card-title m-0">{props.name}</h5>
+                  </Link>
                   {/* <{like(liked)}> */}
-                  <Like like={false}/>
+                  <Like liked={liked} setLiked={setLiked} />
                 </div>
                 <h5 className="text-content">${separator(props.price)}</h5>
               </div>

@@ -1,30 +1,51 @@
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
-import { useState, useEffect } from 'react';
 
 function Like(props) {
-  const [liked, setLiked] = useState(props.like);
-  function liken(l) {
-    if (l === false) {
-      return (
-        <BsHeart
-          color="red"
-          onClick={() => {
-            setLiked(!liked);
-          }}
-        />
-      );
-    } else if (l === true) {
-      return (
-        <BsHeartFill
-          color="red"
-          onClick={() => {
-            setLiked(!liked);
-          }}
-        />
-      );
-    }
-  }
-  return liken(liked);
+  // if (props.liked === false) {
+  //   return (
+  //     <BsHeart
+  //       color="red"
+  //       className={props.className}
+  //       size={props.width}
+  //       onClick={() => {
+  //         props.setLiked(!props.liked);
+  //       }}
+  //     />
+  //   );
+  // } else {
+  //   return (
+  //     <BsHeartFill
+  //       color="red"
+  //       className={props.className}
+  //       size={props.width}
+  //       onClick={() => {
+  //         props.setLiked(!props.liked);
+  //       }}
+  //     />
+  //   );
+  // }
+  
+
+  // SELECT asdf WHERE
+  return props.liked ? (
+    <BsHeartFill
+      color="red"
+      className={props.className}
+      size={props.width}
+      onClick={() => {
+        props.setLiked(!props.liked);
+      }}
+    />
+  ) : (
+    <BsHeart
+      color="red"
+      className={props.className}
+      size={props.width}
+      onClick={() => {
+        props.setLiked(!props.liked);
+      }}
+    />
+  );
 }
 
 export default Like;

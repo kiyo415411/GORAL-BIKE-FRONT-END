@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BsListUl } from 'react-icons/bs';
 import { BiGridSmall } from 'react-icons/bi';
-import { AiFillCaretDown } from 'react-icons/ai'
+import { AiFillCaretDown } from 'react-icons/ai';
 import BikeList from './BikeList.js';
 import ProductAside from './ProductAside.js';
 
@@ -18,7 +18,9 @@ function ProductPage() {
               <BsListUl size={30} color="FF7E55" />
               <BiGridSmall size={50} />
             </div>
-            <h4 className='text-hightlight'>商品排序 <AiFillCaretDown size={30}/></h4>
+            <h4 className="text-hightlight">
+              商品排序 <AiFillCaretDown size={30} />
+            </h4>
           </div>
           {/* list of bikes */}
           <BikeList />

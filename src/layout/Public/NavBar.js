@@ -1,5 +1,6 @@
 import Logo from '../../images/Logo.png';
 import { BsPersonCircle, BsCart3, BsHeart } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
@@ -12,38 +13,24 @@ function Navbar() {
         {/* ----------------LIST----------------- */}
         <div className="collapse navbar-collapse col-md-8">
           <ul className="navbar-nav mx-auto gap-4">
-            <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#/">
-                最新消息
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#/">
-                全部商品
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#/">
-                客製化
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#/">
-                場地資訊
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#/">
-                活動
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#/">
-                課程
-              </a>
-            </li>
+            <Link to="news" className="nav-link text-white">
+              最新消息
+            </Link>
+            <Link to="Product" className="nav-link text-white">
+              全部商品
+            </Link>
+            <Link to="custom" className="nav-link text-white">
+              客製化
+            </Link>
+            <Link to="map" className="nav-link text-white">
+              地圖
+            </Link>
+            <Link to="course" className="nav-link text-white">
+              課程
+            </Link>
           </ul>
         </div>
+
         {/* ----------------ICONS---------------- */}
         <div className="col-4 col-md-2">
           <ul className="list-unstyled row my-auto justify-content-end gap-2">

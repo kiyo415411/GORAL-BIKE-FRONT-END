@@ -59,32 +59,32 @@ function Footer() {
           <section className="col-2 text-muted fs-6">
             <nav>
               <ul className="list-unstyled row row-cols-6">
-                <li key="t1">
+                <li>
                   <a className="text-muted" href="#/">
                     <BsFacebook />
                   </a>
                 </li>
-                <li key="t2">
+                <li>
                   <a className="text-muted" href="#/">
                     <BsGoogle />
                   </a>
                 </li>
-                <li key="t3">
+                <li>
                   <a className="text-muted" href="#/">
                     <BsYoutube />
                   </a>
                 </li>
-                <li key="t4">
+                <li>
                   <a className="text-muted" href="#/">
                     <BsTwitter />
                   </a>
                 </li>
-                <li key="t5">
+                <li>
                   <a className="text-muted" href="#/">
                     <BsInstagram />
                   </a>
                 </li>
-                <li key="t6">
+                <li>
                   <a className="text-muted" href="#/">
                     <BsGithub />
                   </a>

@@ -8,6 +8,20 @@ import { useState } from 'react';
 
 // 商品篩選邊攔
 export default function ActivityAside() {
+  const [color, setColor] = useState([
+    '#643225',
+    '#D30000',
+    '#F4890A',
+    '#F4C10A',
+    '#80A23F',
+    '#3FA29C',
+    '#3F72A2',
+    '#3F49A2',
+    '#6628B6',
+    '#3E3E3E',
+    '#C4C4C4',
+    '#F6F6F6',
+  ]);
   const status = ['報名開放中', '報名未開放', '報名已結束'];
   return (
     <div className="product-aside shadow p-4 sticky-top mt-3">
@@ -29,7 +43,7 @@ export default function ActivityAside() {
       ></RangeSlider>
       {/* 報名人數篩選 */}
       <AsideTitle text="顏色篩選" />
-      <ColorPalette />
+      <ColorPalette color={color} />
     </div>
   );
 }
