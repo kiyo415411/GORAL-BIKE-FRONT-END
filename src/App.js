@@ -6,18 +6,21 @@ import Index from './layout/Home/index';
 import Footer from './layout/Public/Footer';
 import { Routes, Route } from 'react-router-dom';
 
+import UserAside from './components/UserAside';
+
 function App() {
   return (
     <>
       {/* <Navbar />
       <Map />
       <Footer /> */}
-      <Navbar />
+      {/* <Navbar />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/map" element={<Map />} />
       </Routes>
-      <Footer />
+      <Footer /> */}
+      <UserAside />
     </>
   );
 }
