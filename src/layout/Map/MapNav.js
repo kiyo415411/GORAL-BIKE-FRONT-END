@@ -5,7 +5,7 @@ function MapNav(props) {
     props.setMapName(e.target.value);
   };
 
-  const onChange = (e) => {
+  const onChangeArea = (e) => {
     props.setArea(e.target.value);
     const areaValue = e.target.value;
     const filterData = props.dataApi.filter((value, index) => {
@@ -14,8 +14,26 @@ function MapNav(props) {
     });
     props.setFilterDataApi(filterData);
 
-    // console.log(e.target.value);
-    // console.log(props.dataApi);
+    const filterMapData = props.origianlMapData.filter((value) => {
+      console.log(areaValue);
+      return areaValue ? value.properties.POSTION === areaValue : value;
+    });
+    props.setFilterMapData(filterMapData);
+  };
+
+  const onSetName = (e) => {
+    console.log(e.target.value);
+    const cityValue = e.target.value;
+    const filterData = props.dataApi.filter((value, index) => {
+      return cityValue ? value['縣市'] === cityValue : value;
+    });
+    props.setFilterDataApi(filterData);
+
+    const filterMapData = props.origianlMapData.filter((value) => {
+      console.log(cityValue);
+      return cityValue ? value.properties.COUNTYNAME === cityValue : value;
+    });
+    props.setFilterMapData(filterMapData);
   };
 
   return (
@@ -47,7 +65,7 @@ function MapNav(props) {
           aria-label="Area"
           id="area"
           defaultValue="Select "
-          onChange={onChange}
+          onChange={onChangeArea}
         >
           <option value="">全部</option>
           <option value="北部">北部</option>
@@ -60,10 +78,26 @@ function MapNav(props) {
           aria-label="MapType"
           id="area"
           defaultValue="Select "
-          onChange={onChange}
+          onChange={onSetName}
         >
-          {Object.keys(Area).map((value, index) => value)}
-          {/* {console.log(Area)} */}
+          <option value="">全部</option>
+          {Object.keys(Area).map((value, index) => {
+            if (value === props.area) {
+              return Area[props.area].map((value, index) => (
+                <option key={index} value={value}>
+                  {value}
+                </option>
+              ));
+            }
+            if (props.area === '') {
+              return Area[value].map((value, index) => (
+                <option key={index} value={value}>
+                  {value}
+                </option>
+              ));
+            }
+            return null;
+          })}
         </select>
       </nav>
     </>

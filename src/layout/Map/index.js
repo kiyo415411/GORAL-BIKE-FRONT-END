@@ -23,6 +23,7 @@ function Index() {
   const [show, setShow] = useState(true);
   // 地區區域 ex.北部
   const [area, setArea] = useState('');
+
   // 地圖樣式api選擇
   const [mapName, setMapName] = useState(
     'https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=YdAyuapGGLNDoknjhGzG'
@@ -55,10 +56,13 @@ function Index() {
     })();
   }, []);
 
+  const [origianlMapData] = useState(MapData.features);
+  const [filterMapData, setFilterMapData] = useState(MapData.features);
+
   // 特定區域製圖，使用GeoJSON繪圖
-  const filterMapData = MapData.features.filter((value) =>
-    area ? value.properties.POSTION === area : value
-  );
+  // const filterMapData = MapData.features.filter((value) =>
+  //   city ? value.properties.COUNTYNAME === city : value
+  // );
 
   useEffect(() => {
     // console.log(position);
@@ -80,10 +84,14 @@ function Index() {
     // 世界地圖渲染
     <>
       <MapNav
+        area={area}
         dataApi={dataApi}
+        origianlMapData={origianlMapData}
+        filterMapData={filterMapData}
         setArea={setArea}
         setMapName={setMapName}
         setFilterDataApi={setFilterDataApi}
+        setFilterMapData={setFilterMapData}
       />
       {/* 世界地圖渲染 */}
       <main className="container-fluid m-0 p-0 ">
