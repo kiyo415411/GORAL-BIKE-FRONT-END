@@ -14,7 +14,7 @@ export default function CourseList() {
   const [data, setData] = useState([]);
   // 目前在第幾頁
   const [page, setPage] = useState(1);
-  // 總筆數 1,2,3,...,12
+  // 總筆數
   const [lastPage, setLastPage] = useState(1);
 
   useEffect(() => {
@@ -27,35 +27,6 @@ export default function CourseList() {
     };
     getData();
   }, [page]);
-
-  function getPage() {
-    let pages = [];
-    for (let i = 1; i <= lastPage; i++) {
-      pages.push(
-        <li
-          key={i}
-          style={{
-            display: 'inline-block',
-            margin: '2px',
-            backgroundColor: page === i ? '#00d1b2' : '',
-            borderColor: page === i ? '#00d1b2' : '#dbdbdb',
-            color: page === i ? '#fff' : '#363636',
-            borderWidth: '1px',
-            width: '28px',
-            height: '28px',
-            borderRadius: '3px',
-            textAlign: 'center',
-          }}
-          onClick={(e) => {
-            setPage(i);
-          }}
-        >
-          {i}
-        </li>
-      );
-    }
-    return pages;
-  }
 
   const courseItems = [];
   data.map((v, i) => {
@@ -108,7 +79,6 @@ export default function CourseList() {
         title="課程"
         bg={require('../images/course/CourseBanner.jpg')}
       />
-      {getPage()}
       <div className="container">
         <div className="row gx-5 justify-content-center my-5 flex-nowrap">
           {/* -----------------------------左區塊 */}
@@ -129,7 +99,7 @@ export default function CourseList() {
             </div>
             {/* 分頁 */}
             <div>
-              <Pagination />
+              <Pagination page={page} setPage={setPage} lastPage={lastPage} />
             </div>
           </div>
         </div>
