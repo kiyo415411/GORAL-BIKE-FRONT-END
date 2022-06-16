@@ -12,6 +12,7 @@ import LocationMarker from './LocationMarker';
 import { useState, useEffect } from 'react';
 import MapImformation from './MapImformation';
 import filterDataAPI from './filterDataAPI';
+import MapNav from './MapNav';
 
 function Index() {
   // 設定起始座標
@@ -27,41 +28,24 @@ function Index() {
     '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
   // 檢查傳遞參數
   // setDataApi(FilterDataAPI);
+
+  // 篩選政府林道API資料(依地區)
   const dataApi = filterDataAPI(area);
+  // 特定區域製圖
+  const filterMapData = MapData.features.filter((value) =>
+    area ? value.properties.POSTION === area : value
+  );
   useEffect(() => {
     console.log(position);
     console.log(dataApi);
     console.log(zoom);
     console.log(area);
-    setPosition(position);
-    setZoom(zoom);
   }, [position, zoom, area, dataApi]);
-
-  // 全部區域製圖
-  // const fillMapData = MapData.features.map((value) => value);
-  // // 特定區域製圖
-  const filterMapData = MapData.features.filter((value) =>
-    area ? value.properties.POSTION === area : value
-  );
 
   return (
     // 世界地圖渲染
     <>
-      <nav className="nav bg-dark">
-        <select
-          className="form-select w-25"
-          aria-label="Default select example"
-          id="area"
-          defaultValue="Select "
-          onChange={(e) => setArea(e.target.value)}
-        >
-          <option value="">全部</option>
-          <option value="北部">北部</option>
-          <option value="中部">中部</option>
-          <option value="南部">南部</option>
-          <option value="東部">東部</option>
-        </select>
-      </nav>
+      <MapNav setArea={setArea} />
       {/* 世界地圖渲染 */}
       <main className="container-fluid m-0 p-0 ">
         <section className="row p-0 m-0 ">
