@@ -7,31 +7,37 @@ import TopSort from '../components/TopSort';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { API_URL, IMAGE_URL } from '../utils/config';
-
-const cardStyle = 'col'; // 切換排版 | row/col
-
+// const cardStyle = 'col';
 export default function CourseList() {
   const [data, setData] = useState([]);
   // 目前在第幾頁
   const [page, setPage] = useState(1);
   // 總筆數
   const [lastPage, setLastPage] = useState(1);
+  // 卡片排列方式
+  const [cardStyle, setCardStyle] = useState('row');
+  // 狀態篩選
+  const [statu, setStatu] = useState(1);
 
   useEffect(() => {
     let getData = async () => {
-      let response = await axios.get(`${API_URL}/course/`, {
-        params: { page: page },
-      });
-      setData(response.data.data);
-      setLastPage(response.data.pagination.lastPage);
+      try {
+        let response = await axios.get(`${API_URL}/course/`, {
+          params: { page: page, statu: statu },
+        });
+        setData(response.data.data);
+        setLastPage(response.data.pagination.lastPage);
+      } catch (e) {
+        console.error(e);
+      }
     };
     getData();
-  }, [page]);
+  }, [page, statu]);
 
   const courseItems = [];
+
   data.map((v, i) => {
     const newDate = data[i].course_date.split('T').shift();
-
     if (cardStyle === 'row') {
       courseItems.push(
         <RowCard
@@ -70,6 +76,7 @@ export default function CourseList() {
         />
       );
     }
+
     return 0;
   });
 
@@ -84,12 +91,12 @@ export default function CourseList() {
           {/* -----------------------------左區塊 */}
           <div className="col-auto">
             {/* 邊攔 */}
-            <CourseAside />
+            <CourseAside statu={statu} setStatu={setStatu} />
           </div>
           {/* -----------------------------右區塊 */}
           <div className="col-auto">
             {/* 排序 */}
-            <TopSort />
+            <TopSort cardStyle={cardStyle} setCardStyle={setCardStyle} />
             {/* 卡片清單 */}
             <div
               className={cardStyle === 'col' ? 'd-flex flex-wrap mt-2' : 'mt-2'}
@@ -98,7 +105,7 @@ export default function CourseList() {
               {courseItems}
             </div>
             {/* 分頁 */}
-            <div>
+            <div className="d-flex justify-content-center pt-3">
               <Pagination page={page} setPage={setPage} lastPage={lastPage} />
             </div>
           </div>

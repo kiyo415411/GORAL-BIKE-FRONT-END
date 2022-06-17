@@ -1,10 +1,10 @@
-import { BsHeart, BsHeartFill } from 'react-icons/bs';
+import { useState } from 'react';
+import Like from '../Aside/Like';
 
 // 排版
 export default function ColCard({
   width,
   image,
-  like,
   title,
   price,
   time,
@@ -15,6 +15,7 @@ export default function ColCard({
   category,
   venue,
 }) {
+  const [liked, setLiked] = useState(false);
   return (
     <div
       className="card shadow rounded-0 border-0 mb-5 mx-2"
@@ -31,7 +32,7 @@ export default function ColCard({
         <div className="d-flex justify-content-between align-items-center">
           <h3 className="card-title m-0">{title}</h3>
           <div className="text-hightlight">
-            {like === true ? <BsHeartFill /> : <BsHeart />}
+            <Like liked={liked} setLiked={setLiked} />
           </div>
         </div>
 

@@ -18,15 +18,14 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Index />} />
         <Route path="/map" element={<Map />} />
-        <Route path="/" element={<App />} />
         <Route path="/course" element={<CourseList />} />
         <Route path="/course/like" element={<CourseLike />} />
         <Route path="/course/detail" element={<CourseDetail />} />
-        <Route path="/activity" element={<ActivityList />} />
-        <Route path="/activity/like" element={<ActivityLike />} />
         <Route path="/activity/detail" element={<ActivityDetail />} />
+        <Route path="/activity/like" element={<ActivityLike />} />
+        <Route path="/activity" element={<ActivityList />} />
+        <Route path="/" element={<Index />} />
       </Routes>
       <Footer />
     </>

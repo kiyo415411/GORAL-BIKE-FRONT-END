@@ -3,9 +3,10 @@ import RangeSlider from './Aside/RangeSlider';
 import CheckBox from './Aside/CheckBox';
 import SearchInput from './Aside/SearchInput';
 import CategoryList from './Aside/CategoryList';
+
 // 商品篩選邊攔
-function CourseAside() {
-  const status = ['報名開放中', '報名未開放', '報名已結束'];
+function CourseAside({ statu, setStatu, handleStatu }) {
+  const status = ['報名未開放', '報名開放中', '報名已結束'];
   return (
     <div className="sticky-top">
       <div className="Space" style={{ height: '3rem' }} />
@@ -15,7 +16,7 @@ function CourseAside() {
           <SearchInput />
           {/* 報名狀態篩選 */}
           <AsideTitle text="報名狀態" />
-          <CategoryList list={status} />
+          <CategoryList list={status} statu={statu} setStatu={setStatu} />
           {/* 報名費用篩選 */}
           <AsideTitle text="報名費用" />
           <RangeSlider
