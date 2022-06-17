@@ -1,6 +1,8 @@
 import { Marker, Popup, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import Twd97toWsg84 from './Twd97toWsg84';
+import { useContext } from 'react';
+import { MapDataValue } from './index';
 
 // MARKS ICONS圖案設定
 function GetIcon(_iconSize) {
@@ -10,11 +12,12 @@ function GetIcon(_iconSize) {
   });
 }
 
-function Mark(props) {
+function Mark() {
+  const Data = useContext(MapDataValue);
   return (
     <>
       {/* 渲染所有座標位置，並定義各個MARKS內容 */}
-      {props.filterDataApi.map((value, index) => {
+      {Data.filterDataApi.map((value, index) => {
         // console.log(value['起點X坐標'], value['起點Y坐標']);
         let dataAxis = Twd97toWsg84(value['起點X坐標'], value['起點Y坐標']);
 
@@ -28,9 +31,9 @@ function Mark(props) {
                   // 轉換座標值賦予
                   const position = [dataAxis[1], dataAxis[0]];
                   // 父層回傳值設定
-                  props.setPosition(position);
-                  props.setZoom(14);
-                  props.setShow(false);
+                  Data.setPosition(position);
+                  Data.setZoom(14);
+                  Data.setShow(false);
                 },
               }}
             >

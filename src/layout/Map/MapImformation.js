@@ -1,10 +1,26 @@
 import logo from '../../images/CourseImg1.jpg';
 import Twd97toWsg84 from './Twd97toWsg84';
+import MapImformationNavSort from './MapImformationNavSort';
+import { useState, useContext, useEffect } from 'react';
+import { MapDataValue } from './index';
 
-function MapImformation(props) {
+function MapImformation() {
+  const Data = useContext(MapDataValue);
+  // const [localImformation, setLocalImformation] = useState(Data.filterDataApi);
+
+  // useEffect(() => {
+  //   // console.log(Data.filterDataApi);
+  //   setLocalImformation(Data.filterDataApi);
+  // }, [Data.filterDataApi]);
+  console.log('mapInfo', Data.filterDataApi);
+
   return (
     <>
-      {props.filterDataApi.map((value, index) => {
+      <MapImformationNavSort
+      // localImformation={localImformation}
+      // setLocalImformation={setLocalImformation}
+      />
+      {Data.filterDataApi.map((value, index) => {
         let dataAxis = Twd97toWsg84(value['起點X坐標'], value['起點Y坐標']);
         return (
           <div key={value['編號']} className="card m-0 p-0 rounded-0">
@@ -25,6 +41,7 @@ function MapImformation(props) {
                 </div>
                 <div className="row justify-content-between align-items-center my-2">
                   <p className="col-4 card-text mx-3">
+                    <span>總長度</span>
                     {value['總長度'] + '公里'}
                   </p>
                   <div className="col-6 my-2 d-flex justify-content-around">
@@ -32,9 +49,9 @@ function MapImformation(props) {
                       className="btn btn-outline-primary text-primary rounded-pill border-2"
                       onClick={(e) => {
                         const position = [dataAxis[1], dataAxis[0]];
-                        props.setPosition(position);
-                        props.setZoom(15);
-                        props.setShow(false);
+                        Data.setPosition(position);
+                        Data.setZoom(15);
+                        Data.setShow(false);
                       }}
                     >
                       前往座標
