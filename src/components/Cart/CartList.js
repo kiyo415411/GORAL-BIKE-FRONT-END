@@ -23,7 +23,7 @@ function CartList(props) {
   if ((type === '課程') | (type === '活動')) {
     return (
       <>
-        <section className="shopping-cart py-3 px-lg-5 px-3">
+        <section className="shopping-cart py-3 px-lg-5 px-2">
           <div className="d-flex mb-3">
             <Button
               className="shopping-cart__tri-btn"
@@ -76,7 +76,7 @@ function CartList(props) {
   } else {
     return (
       <>
-        <section className="shopping-cart py-3 px-lg-5 px-3">
+        <section className="shopping-cart py-3 px-lg-5 px-2">
           <div className="d-flex mb-3">
             <Button
               className="shopping-cart__tri-btn"

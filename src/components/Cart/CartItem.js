@@ -61,7 +61,7 @@ function CartItem(props) {
                   <button class="btn btn-outline-primary" type="button">
                     +
                   </button>
-                  <input type="text" class="form-control" value={20} />
+                  <input type="text" class="form-control" value={99} />
                   <button class="btn btn-outline-primary" type="button">
                     -
                   </button>
