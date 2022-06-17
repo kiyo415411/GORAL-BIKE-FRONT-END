@@ -1,0 +1,12 @@
+.col-card-img-box {
+  height: 12rem;
+}
+
+.col-card-text {
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  height: 45px;
+}
