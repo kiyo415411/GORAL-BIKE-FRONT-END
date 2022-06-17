@@ -3,17 +3,20 @@ import { MapDataValue } from './index';
 
 function MapImformationNavSort(props) {
   const Data = useContext(MapDataValue);
-  const [loadData, setLoadData] = useState(true);
+  const [loadData, setLoadData] = useState(false);
 
   const sort = () => {
-    // setLoadData(!loadData);
+    setLoadData(!loadData);
     console.log('click');
-    // console.log(loadData);
+    console.log(loadData);
     // console.log('props->', props.localImformation);
     console.log('dataAPI->', Data.filterDataApi);
     const sortArray = loadData
-      ? Data.filterDataApi.sort((a, b) => a.總長度 - b.總長度)
-      : Data.filterDataApi.sort((a, b) => b.總長度 - a.總長度);
+      ? [...Data.filterDataApi].sort((a, b) => a.總長度 - b.總長度)
+      : [...Data.filterDataApi].sort((a, b) => b.總長度 - a.總長度);
+
+    console.log('sort->', sortArray);
+
     // props.setLocalImformation(Data.filterDataApi);
     Data.setFilterDataApi(sortArray);
   };
