@@ -13,3 +13,8 @@
     margin-left: calc(-0.5 * var(--bs-gutter-x));
   }
 }
+.checkout-list {
+  .hr {
+    border-top: 3px solid $goral-line;
+  }
+}

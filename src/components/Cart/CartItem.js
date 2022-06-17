@@ -8,7 +8,7 @@ function CartItem(props) {
   if ((type === '課程') | (type === '活動')) {
     return (
       <>
-        <div className="border-bottom text-center  shopping-cart__detail px-2 px-lg-0">
+        <div className="border-bottom text-center shopping-cart__detail px-2 px-lg-0">
           <div className="row align-items-center">
             <div className="col-lg-1 col-1">
               <input type="checkbox" name="" id="" />
