@@ -5,7 +5,7 @@ function MapImformationNavSort(props) {
   const Data = useContext(MapDataValue);
   const [loadData, setLoadData] = useState(true);
 
-  const sort = (e) => {
+  const sort = () => {
     // setLoadData(!loadData);
     console.log('click');
     // console.log(loadData);
