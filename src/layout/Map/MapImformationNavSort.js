@@ -1,5 +1,6 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { MapDataValue } from './index';
+import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 
 function MapImformationNavSort(props) {
   const Data = useContext(MapDataValue);
@@ -7,31 +8,12 @@ function MapImformationNavSort(props) {
 
   const sort = () => {
     setLoadData(!loadData);
-    console.log('click');
-    console.log(loadData);
-    // console.log('props->', props.localImformation);
     console.log('dataAPI->', Data.filterDataApi);
     const sortArray = loadData
       ? [...Data.filterDataApi].sort((a, b) => a.總長度 - b.總長度)
       : [...Data.filterDataApi].sort((a, b) => b.總長度 - a.總長度);
-
-    console.log('sort->', sortArray);
-
-    // props.setLocalImformation(Data.filterDataApi);
     Data.setFilterDataApi(sortArray);
   };
-
-  // useEffect(() => {
-  //   const sortArray = loadData
-  //     ? Data.filterDataApi.sort((a, b) => a.總長度 - b.總長度)
-  //     : Data.filterDataApi.sort((a, b) => b.總長度 - a.總長度);
-  //   console.log('sort', sortArray);
-  //   Data.setFilterDataApi(sortArray);
-  // }, [loadData]);
-
-  //   useEffect(() => {
-  //     props.setLocalImformation(Data.filterDataApi);
-  //   }, [loadData, props, Data]);
 
   return (
     <>
@@ -40,10 +22,17 @@ function MapImformationNavSort(props) {
           排序
         </label>
         <button
-          className="btn btn-link text-decoration-none my-1 mx-3"
+          className="btn btn-link text-decoration-none my-1 mx-3 row p-1"
           onClick={sort}
         >
-          公里
+          <span className="col-1 p-0">公里</span>
+          <span className="col-1 p-1">
+            {loadData ? (
+              <TiArrowSortedDown className="mb-1" />
+            ) : (
+              <TiArrowSortedUp className="mb-1" />
+            )}
+          </span>
         </button>
       </nav>
     </>

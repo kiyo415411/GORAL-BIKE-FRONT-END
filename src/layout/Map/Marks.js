@@ -7,8 +7,8 @@ import { MapDataValue } from './index';
 // MARKS ICONS圖案設定
 function GetIcon(_iconSize) {
   return L.icon({
-    iconUrl: require('../../images/Logo.png'),
-    iconSize: [_iconSize * 4.5, _iconSize],
+    iconUrl: require('../../images/pin.png'),
+    iconSize: [_iconSize, _iconSize],
   });
 }
 

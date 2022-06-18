@@ -28,6 +28,7 @@ function MapNav() {
   const onSetName = (e) => {
     console.log(e.target.value);
     const cityValue = e.target.value;
+    Data.setCity(cityValue);
     const filterData = Data.dataApi.filter((value, index) => {
       return cityValue ? value['縣市'] === cityValue : value;
     });
@@ -38,6 +39,16 @@ function MapNav() {
       return cityValue ? value.properties.COUNTYNAME === cityValue : value;
     });
     Data.setFilterMapData(filterMapData);
+  };
+
+  const clear = () => {
+    Data.setFilterMapData(Data.origianlMapData);
+    Data.setFilterDataApi(Data.dataApi);
+    Data.setMapName(
+      'https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=YdAyuapGGLNDoknjhGzG'
+    );
+    Data.setCity('');
+    Data.setArea('');
   };
 
   return (
@@ -51,21 +62,37 @@ function MapNav() {
             <select
               className="form-select col-6 w-40"
               aria-label="MapType"
-              id="area"
-              defaultValue="Select "
+              id="select"
+              value={Data.mapName}
               onChange={onSetMapName}
             >
-              <option value="">Null</option>
-              <option value="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=YdAyuapGGLNDoknjhGzG">
+              <option value={''}>Null</option>
+              <option
+                value={
+                  'https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=YdAyuapGGLNDoknjhGzG'
+                }
+              >
                 Basic
               </option>
-              <option value="https://api.maptiler.com/maps/bright/256/{z}/{x}/{y}.png?key=YdAyuapGGLNDoknjhGzG">
+              <option
+                value={
+                  'https://api.maptiler.com/maps/bright/256/{z}/{x}/{y}.png?key=YdAyuapGGLNDoknjhGzG'
+                }
+              >
                 Bright
               </option>
-              <option value="https://api.maptiler.com/maps/hybrid/256/{z}/{x}/{y}.jpg?key=YdAyuapGGLNDoknjhGzG">
-                Satellite Hybrid
+              <option
+                value={
+                  'https://api.maptiler.com/maps/hybrid/256/{z}/{x}/{y}.jpg?key=YdAyuapGGLNDoknjhGzG'
+                }
+              >
+                Hybrid
               </option>
-              <option value="https://api.maptiler.com/maps/toner/256/{z}/{x}/{y}.png?key=YdAyuapGGLNDoknjhGzG">
+              <option
+                value={
+                  'https://api.maptiler.com/maps/toner/256/{z}/{x}/{y}.png?key=YdAyuapGGLNDoknjhGzG'
+                }
+              >
                 Toner
               </option>
             </select>
@@ -77,15 +104,15 @@ function MapNav() {
             <select
               className="form-select w-75"
               aria-label="Area"
-              id="area"
-              defaultValue="Select "
+              id="select"
+              value={Data.area}
               onChange={onChangeArea}
             >
-              <option value="">全部</option>
-              <option value="北部">北部</option>
-              <option value="中部">中部</option>
-              <option value="南部">南部</option>
-              <option value="東部">東部</option>
+              <option value={''}>全部</option>
+              <option value={'北部'}>北部</option>
+              <option value={'中部'}>中部</option>
+              <option value={'南部'}>南部</option>
+              <option value={'東部'}>東部</option>
             </select>
           </section>
           <section className="col-md-2 d-flex justify-content-end align-items-center gap-3">
@@ -95,8 +122,8 @@ function MapNav() {
             <select
               className="form-select w-75"
               aria-label="MapType"
-              id="area"
-              defaultValue="Select "
+              id="select"
+              value={Data.city}
               onChange={onSetName}
             >
               <option value="">全部</option>
@@ -118,6 +145,11 @@ function MapNav() {
                 return null;
               })}
             </select>
+          </section>
+          <section className="col-md-1 d-flex justify-content-end align-items-center gap-3">
+            <button className="btn btn-danger text-white" onClick={clear}>
+              清除篩選
+            </button>
           </section>
         </section>
       </nav>

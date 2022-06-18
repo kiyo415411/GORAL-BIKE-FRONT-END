@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/Map" element={<Map />} />
-        <Route path="/Map/Deatail" element={<Map />} />
+        <Route path="/MapDetail/:mapId" element={<Map />} />
       </Routes>
       <Footer />
     </>

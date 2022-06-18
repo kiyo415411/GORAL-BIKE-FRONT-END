@@ -24,6 +24,7 @@ function Index() {
   const [show, setShow] = useState(true);
   // 地區區域 ex.北部
   const [area, setArea] = useState('');
+  const [city, setCity] = useState('');
 
   // 地圖樣式api選擇
   const [mapName, setMapName] = useState(
@@ -68,6 +69,8 @@ function Index() {
     setZoom,
     area,
     setArea,
+    city,
+    setCity,
     mapName,
     setMapName,
     dataApi,
@@ -84,10 +87,11 @@ function Index() {
     // console.log(dataApi);
     // console.log(filterDataApi);
     // console.log(zoom);
-    // console.log(area);
-    // console.log(mapName);
+    console.log(area);
+    console.log(city);
+    console.log(mapName);
     // console.log(filterMapData);
-  }, []);
+  }, [area, mapName, city]);
 
   useEffect(() => {
     // 切換TileLayer的current p.s.mapName更動時改變
