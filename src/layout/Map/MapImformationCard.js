@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import Twd97toWsg84 from './Twd97toWsg84';
 import { MapDataValue } from './index';
 import logo from '../../images/CourseImg1.jpg';
+import { Link } from 'react-router-dom';
 
 function MapImformation(props) {
   const Data = useContext(MapDataValue);
@@ -41,12 +42,12 @@ function MapImformation(props) {
               >
                 前往座標
               </button>
-              <button
+              <Link
+                to={`MapDetail/${value['林道名稱']}`}
                 className="btn btn-primary text-white rounded-pill border-2"
-                onClick={(e) => {}}
               >
                 詳細資訊
-              </button>
+              </Link>
             </div>
           </div>
           <div>

@@ -24,23 +24,25 @@ function Index() {
   const [show, setShow] = useState(true);
   // 地區區域 ex.北部
   const [area, setArea] = useState('');
+  // 縣市名稱 ex.台北市
   const [city, setCity] = useState('');
-
+  // 取得林道API
+  const [dataApi, setDataApi] = useState([]);
+  // 篩選政府林道API資料(依地區)
+  const [filterDataApi, setFilterDataApi] = useState([]);
+  // 特定區域製圖，使用GeoJSON繪圖
+  const [origianlMapData] = useState(MapData.features);
+  // 篩選特定區域製圖，使用GeoJSON繪圖
+  const [filterMapData, setFilterMapData] = useState(MapData.features);
   // 地圖樣式api選擇
   const [mapName, setMapName] = useState(
     'https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=YdAyuapGGLNDoknjhGzG'
   );
-
   // 切換TileLayer地圖樣式，因為TileLayer無法自行重新渲染，需要使用useRef來切換
   const layerRef = useRef(null);
   // TileLayer版權顯示
   const attribution =
     '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
-
-  // 取得林道API
-  const [dataApi, setDataApi] = useState([]);
-  // 篩選政府林道API資料(依地區)
-  const [filterDataApi, setFilterDataApi] = useState([]);
 
   // 設定預設資料及篩選資料
   useEffect(() => {
@@ -57,10 +59,6 @@ function Index() {
       }
     })();
   }, []);
-
-  // 特定區域製圖，使用GeoJSON繪圖
-  const [origianlMapData] = useState(MapData.features);
-  const [filterMapData, setFilterMapData] = useState(MapData.features);
 
   const VALUE = {
     position,
@@ -82,6 +80,8 @@ function Index() {
     filterMapData,
     setFilterMapData,
   };
+
+  // 檢查生命週期區域
   useEffect(() => {
     // console.log(position);
     // console.log(dataApi);
@@ -106,7 +106,6 @@ function Index() {
 
   return (
     // 世界地圖渲染
-
     <>
       <MapDataValue.Provider value={VALUE}>
         <MapNav />
