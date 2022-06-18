@@ -54,6 +54,7 @@ $goral-content: #535353 !default;
 $goral-line: #c4c4c4 !default;
 $goral-highlight: #ff7e55 !default;
 $goral-subcontent: #a9a9a9 !default;
+$goral-graybg: #f7f7f7 !default;
 // badge
 $goral-location: #f04765 !default;
 $goral-badge-yellow: #ffc107 !default;
@@ -114,7 +115,8 @@ $theme-colors: (
   "badge-yellow": $goral-badge-yellow,
   "badge-red": $goral-badge-red,
   "badge-lightblue": $goral-badge-lightblue,
-  "icon-star": $goral-icon-star
+  "icon-star": $goral-icon-star,
+  "graybg": $goral-graybg
 ) !default;
 // scss-docs-end theme-colors-map
 
