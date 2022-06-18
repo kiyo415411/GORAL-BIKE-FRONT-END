@@ -53,16 +53,16 @@ function CartItem(props) {
                 alt="..."
               />
             </div>
-            <div className="col-lg-7 col-5 row mx-0 gap-1 gap-lg-0">
+            <div className="col-lg-7 col-5 row mx-0 gap-2 gap-lg-0">
               <div className="col-12 col-lg text-highlight fw-bold">{name}</div>
               <div className="col-12 col-lg">{price}</div>
               <div className="col-12 col-lg">
-                <div class="input-group">
-                  <button class="btn btn-outline-primary" type="button">
+                <div className="input-group">
+                  <button className="btn btn-outline-primary" type="button">
                     +
                   </button>
-                  <input type="text" class="form-control" value={99} />
-                  <button class="btn btn-outline-primary" type="button">
+                  <div>12</div>
+                  <button className="btn btn-outline-primary" type="button">
                     -
                   </button>
                 </div>

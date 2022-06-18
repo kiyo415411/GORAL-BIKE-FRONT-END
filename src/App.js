@@ -8,8 +8,8 @@ function App() {
   return (
     <>
       {/* <Navbar /> */}
-      {/* <ShoppingCart /> */}
-      <Checkout />
+      <ShoppingCart />
+      {/* <Checkout /> */}
       {/* <Footer /> */}
     </>
   );

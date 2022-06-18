@@ -35,11 +35,21 @@
   .input-group {
     margin: auto;
     width: 75%;
+    justify-content: center;
+    div {
+      padding: 0.375rem;
+      border: 1px solid $goral-primary;
+    }
+    @media (max-width: 768px) {
+      .btn,
+      div {
+        padding: 0.125rem 0.375rem;
+      }
+    }
   }
 }
 
-.cart-summary {
-  margin-bottom: 3rem;
+.summary {
   .line {
     border: 1px solid $goral-line;
     width: 30rem;

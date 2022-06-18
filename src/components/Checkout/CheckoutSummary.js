@@ -27,11 +27,6 @@ function CheckoutSummary() {
           </div>
           <div className="col-md-2 col">$ 200,000</div>
         </div>
-        <div className="col-md-12 col-12 text-end end-row">
-          <button className="btn btn-primary rounded-0 fs-4 fw-bold">
-            下訂單
-          </button>
-        </div>
       </section>
     </>
   );

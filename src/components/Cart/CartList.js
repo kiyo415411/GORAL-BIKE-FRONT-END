@@ -4,7 +4,7 @@ import { VscTriangleDown, VscTriangleRight } from 'react-icons/vsc';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import CartItem from './CartItem';
-import Summary from './Summary';
+import CartSummary from './CartSummary';
 
 // const products = [
 //   {
@@ -25,19 +25,22 @@ function CartList(props) {
       <>
         <section className="shopping-cart py-3 px-lg-5 px-2">
           <div className="d-flex mb-3">
+            {/* 收合購物車按鈕 */}
             <Button
               className="shopping-cart__tri-btn"
               type="button"
               onClick={() => setOpen(!open)}
-              aria-controls="example-collapse-text"
+              aria-controls="collapse-area"
               aria-expanded={open}
             >
               {open ? <VscTriangleDown /> : <VscTriangleRight />}
             </Button>
             <h2>{type}</h2>
           </div>
+          {/* 收合區域 */}
           <Collapse in={open}>
-            <div id="example-collapse-text">
+            <div id="collapse-area">
+              {/* thead */}
               <div className="d-md-block border-bottom text-center d-none">
                 <div className="row">
                   <div className="col-lg-1">
@@ -52,7 +55,8 @@ function CartList(props) {
                   <div className="col-lg-1">移除</div>
                 </div>
               </div>
-              {/* details */}
+              {/* thead */}
+              {/* tbody */}
               {products.map((product, i) => {
                 return (
                   <CartItem
@@ -61,13 +65,12 @@ function CartList(props) {
                     price={product.price}
                     count={product.count}
                     type={type}
+                    key={product.id}
                   />
                 );
               })}
-              {/* details-end */}
-              {/* summary */}
-              <Summary type={type} />
-              {/* summary-end */}
+              {/* tbody */}
+              <CartSummary type={type} />
             </div>
           </Collapse>
         </section>
@@ -78,19 +81,22 @@ function CartList(props) {
       <>
         <section className="shopping-cart py-3 px-lg-5 px-2">
           <div className="d-flex mb-3">
+            {/* 收合購物車按鈕 */}
             <Button
               className="shopping-cart__tri-btn"
               type="button"
               onClick={() => setOpen(!open)}
-              aria-controls="example-collapse-text"
+              aria-controls="collapse-area"
               aria-expanded={open}
             >
               {open ? <VscTriangleDown /> : <VscTriangleRight />}
             </Button>
             <h2>{type}</h2>
           </div>
+          {/* 收合區域 */}
           <Collapse in={open}>
-            <div id="example-collapse-text">
+            <div id="collapse-area">
+              {/* thead */}
               <div className="d-md-block border-bottom text-center d-none">
                 <div className="row">
                   <div className="col-lg-1">
@@ -107,7 +113,8 @@ function CartList(props) {
                   <div className="col-lg-1">移除</div>
                 </div>
               </div>
-              {/* details */}
+              {/* thead */}
+              {/* tbody */}
               {products.map((product, i) => {
                 return (
                   <CartItem
@@ -116,13 +123,12 @@ function CartList(props) {
                     price={product.price}
                     count={product.count}
                     totalPrice={product.totalPrice}
+                    key={product.id}
                   />
                 );
               })}
-              {/* details-end */}
-              {/* summary */}
-              <Summary type={type} />
-              {/* summary-end */}
+              {/* tbody */}
+              <CartSummary type={type} />
             </div>
           </Collapse>
         </section>
