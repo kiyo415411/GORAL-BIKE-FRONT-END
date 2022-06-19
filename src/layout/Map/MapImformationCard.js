@@ -1,19 +1,21 @@
 import { useContext } from 'react';
 import Twd97toWsg84 from './Twd97toWsg84';
 import { MapDataValue } from './index';
-import logo from '../../images/CourseImg1.jpg';
 import { Link } from 'react-router-dom';
+import { IMAGE_URL } from '../../utils/config';
 
 function MapImformation(props) {
   const Data = useContext(MapDataValue);
   const { value } = props;
+  const picURL = `/81pic/${value['編號']}.jpg`;
+  console.log(IMAGE_URL);
   let dataAxis = Twd97toWsg84(value['起點X坐標'], value['起點Y坐標']);
   return (
     <div className="card m-0 p-0 rounded-0">
       <div className="row g-0">
         <div className="col-md-4 overflow-hidden">
           <img
-            src={logo}
+            src={`${IMAGE_URL}${picURL}`}
             className=""
             style={{ height: '100%', width: '100%', objectFit: 'cover' }}
             alt="..."

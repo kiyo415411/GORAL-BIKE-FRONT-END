@@ -1,11 +1,13 @@
 import DataAPI from '../Map/DataAPI';
 import { useEffect, useState } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-
+import { IMAGE_URL } from '../../utils/config';
 function Index() {
   const getName = decodeURI(window.location.pathname.split('/').pop());
-  const backImage = new URL('../../images/林道.jpg', import.meta.url);
   const [mapDetailData, setMapDetailData] = useState([]);
+  const [num, setNum] = useState(1);
+  const backImage = new URL(`${IMAGE_URL}/81pic/${num}.jpg`, import.meta.url);
+
   useEffect(() => {
     (async () => {
       try {
@@ -15,6 +17,9 @@ function Index() {
           (value) => value['林道名稱'] === getName
         );
         setMapDetailData(result[0]);
+        const getNum = result[0]['編號'];
+        setNum(getNum);
+
         // 設定預設資料
       } catch (e) {
         throw new Error(e);
