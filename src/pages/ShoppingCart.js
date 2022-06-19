@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import CartList from '../components/Cart/CartList';
 import Summary from '../components/Cart/Summary';
+import { useProductCart } from '../utils/useProductCart';
 
 const products = [
   {
     id: 1,
     name: 'BIG_NINE_15',
     image: '../../images/products/BIG_NINE_15.jpg',
-    price: '$22,000',
-    count: 1,
-    totalPrice: '$22,000',
+    price: 22000,
+    quantity: 1,
   },
   {
     id: 2,
-    name: 'BIG_NINE_15',
+    name: 'BIG_NINE_13',
     image: '../../images/products/BIG_NINE_15.jpg',
-    price: '$22,000',
-    count: 1,
-    totalPrice: '$22,000',
+    price: 12000,
+    quantity: 1,
   },
 ];
 const course = [
@@ -50,12 +49,15 @@ const activities = [
 ];
 
 function ShoppingCart() {
-  // const [open, setOpen] = useState(false);
+  // useEffect(() => {
+  //   localStorage.setItem('productCart', JSON.stringify(products));
+  // }, []);
+  const productCart = useProductCart();
   return (
     <>
       <div className="container">
         {/* 商品購物車 */}
-        <CartList products={products} type="商品" />
+        <CartList productCart={productCart} type="商品" />
         {/* 課程購物車 */}
         <CartList products={course} type="課程" />
         {/* 活動購物車 */}

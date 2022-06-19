@@ -12,13 +12,12 @@ import CartSummary from './CartSummary';
 //     name: 'BIG_NINE_15',
 //     count: 1,
 //     price: '$22,000',
-//     totalPrice: '$44,000',
 //   },
 // ];
 
 function CartList(props) {
   const [open, setOpen] = useState(true);
-  const { products, type } = props;
+  const { productCart, products, type } = props;
 
   if ((type === '課程') | (type === '活動')) {
     return (
@@ -77,6 +76,9 @@ function CartList(props) {
       </>
     );
   } else {
+    const { cart, items, removeItem, plusOne, minusOne } = productCart;
+    console.log(cart);
+    console.log(items);
     return (
       <>
         <section className="shopping-cart py-3 px-lg-5 px-2">
@@ -115,15 +117,19 @@ function CartList(props) {
               </div>
               {/* thead */}
               {/* tbody */}
-              {products.map((product, i) => {
+              {items.map((product, i) => {
                 return (
                   <CartItem
+                    id={product.id}
                     image={product.image}
                     name={product.name}
                     price={product.price}
-                    count={product.count}
-                    totalPrice={product.totalPrice}
+                    quantity={product.quantity}
+                    itemTotal={product.itemTotal}
                     key={product.id}
+                    removeItem={removeItem}
+                    plusOne={plusOne}
+                    minusOne={minusOne}
                   />
                 );
               })}

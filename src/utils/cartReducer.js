@@ -120,19 +120,19 @@ const minusItemQuantityOnce = (state, action) => {
   return [...state.items];
 };
 
-// 計算商品總金額
+// 計算商品總價
 const calculateItemTotals = (items) =>
   items.map((item) => ({
     ...item,
     itemTotal: item.price * item.quantity,
   }));
-// 計算單樣商品的總價
+// 計算購物車總價
 const calculateTotal = (items) =>
   items.reduce((total, item) => total + item.quantity * item.price, 0);
-
+// 計算商品總數
 const calculateTotalItems = (items) =>
   items.reduce((sum, item) => sum + item.quantity, 0);
-
+// 生成新的購物車狀態
 const generateCartState = (state, items) => {
   const isEmpty = items.length === 0;
 
