@@ -82,10 +82,10 @@ function Index() {
                 返回
               </Link>
               <section className="col-12 pe-0">
-                <h1 className="m-0 col-12 display-6 fw-bolder">
+                <h1 className="m-0 col-12 display-5 fw-bolder">
                   {mapDetailData['林道名稱']}
                 </h1>
-                <section className="col-12 row mt-3">
+                <section className="col-12 row mt-5">
                   <span className="col-6 text-white">
                     <span>林區：</span>
                     {mapDetailData['林區']}
@@ -180,6 +180,12 @@ function Index() {
               </ul>
             </section>
             <section className="row justify-content-between">
+              <span className="col-12 d-flex justify-content-between">
+                <strong className="text-muted fw-bold">鋪面</strong>
+                <span className="text-muted fw-bold">
+                  面積(km<sup>2</sup>)
+                </span>
+              </span>
               <span className="col-12 d-flex justify-content-between">
                 <strong className="">水泥</strong>
                 <span>
