@@ -6,13 +6,17 @@ import SearchInput from './Aside/SearchInput';
 import CategoryList from './Aside/CategoryList';
 import { useState } from 'react';
 // 商品篩選邊攔
-function CourseAside({ statu, setStatu, setPriceSubmit }) {
+function CourseAside({ statu, setStatu, setPriceSubmit, setPersonSubmit }) {
   const status = ['報名未開放', '報名開放中', '報名已結束'];
   // 價錢變化
   const [price, setPrice] = useState([0, 10000]);
+  const [person, setPerson] = useState([0, 100]);
 
-  const handleChange = (event, newPrice) => {
+  const handlePrice = (event, newPrice) => {
     setPrice(newPrice);
+  };
+  const handlePerson = (event, newPerson) => {
+    setPerson(newPerson);
   };
 
   return (
@@ -43,7 +47,7 @@ function CourseAside({ statu, setStatu, setPriceSubmit }) {
                 },
               }}
               value={price}
-              onChange={handleChange}
+              onChange={handlePrice}
               step={1000}
               min={0}
               max={10000}
@@ -65,6 +69,42 @@ function CourseAside({ statu, setStatu, setPriceSubmit }) {
           </div>
           {/* 報名人數篩選 */}
           <AsideTitle text="報名人數" />
+          <Box sx={{ width: 250 }} className="mx-auto">
+            <Slider
+              sx={{
+                color: 'var(--bs-content)',
+                '& .MuiSlider-thumb': {
+                  width: '0.8rem',
+                  height: '0.8rem',
+                },
+                '& .css-1gv0vcd-MuiSlider-track': {
+                  color: 'var(--bs-subcontent)',
+                },
+                '& .css-14pt78w-MuiSlider-rail': {
+                  color: 'var(--bs-line)',
+                },
+              }}
+              value={person}
+              onChange={handlePerson}
+              step={5}
+              min={0}
+              max={100}
+            />
+          </Box>
+          {/* toLocaleString() --> 將數字千位格式化*/}
+          <div className="d-flex align-items-center justify-content-between px-2 mb-5">
+            <p className="m-0 fs-6">
+              {person[0].toLocaleString()} 人 - {person[1].toLocaleString()} 人
+            </p>
+            <button
+              className="btn fs-6 border-2 px-4 py-1 rounded-0 btn-primary rounded-pill"
+              onClick={() => {
+                setPersonSubmit(person);
+              }}
+            >
+              篩選
+            </button>
+          </div>
           {/* 活動地點 */}
           <AsideTitle text="課程難度" />
           <div className="d-flex gap-5 mb-5">

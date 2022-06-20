@@ -20,12 +20,19 @@ export default function CourseList() {
   const [statu, setStatu] = useState(1);
   // 價錢篩選
   const [priceSubmit, setPriceSubmit] = useState([0, 10000]);
+  // 人數篩選
+  const [personSubmit, setPersonSubmit] = useState([0, 100]);
 
   useEffect(() => {
     let getData = async () => {
       try {
         let response = await axios.get(`${API_URL}/course/`, {
-          params: { page: page, statu: statu, priceSubmit: priceSubmit },
+          params: {
+            page: page,
+            statu: statu,
+            priceSubmit: priceSubmit,
+            personSubmit: personSubmit,
+          },
         });
         setData(response.data.data);
         setLastPage(response.data.pagination.lastPage);
@@ -34,7 +41,7 @@ export default function CourseList() {
       }
     };
     getData();
-  }, [page, statu, priceSubmit]);
+  }, [page, statu, priceSubmit, personSubmit]);
 
   const courseItems = [];
 
@@ -98,6 +105,8 @@ export default function CourseList() {
               setStatu={setStatu}
               priceSubmit={priceSubmit}
               setPriceSubmit={setPriceSubmit}
+              personSubmit={personSubmit}
+              setPersonSubmit={setPersonSubmit}
             />
           </div>
           {/* -----------------------------右區塊 */}
