@@ -33,7 +33,7 @@ function Footer() {
     '網路購物須知',
   ];
   return (
-    <footer className="container-fluid p-0">
+    <footer className="container-fluid p-0" style={{ minWidth: '468px' }}>
       <section className="bg-dark pt-5">
         <main className="w-75 row mx-auto mt-3 mb-5">
           <section className="col-1 text-end">
