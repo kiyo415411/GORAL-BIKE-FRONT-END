@@ -1,12 +1,31 @@
 import DataAPI from '../Map/DataAPI';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { IMAGE_URL } from '../../utils/config';
+
 function Index() {
   const getName = decodeURI(window.location.pathname.split('/').pop());
   const [mapDetailData, setMapDetailData] = useState([]);
   const [num, setNum] = useState(1);
   const backImage = new URL(`${IMAGE_URL}/81pic/${num}.jpg`, import.meta.url);
+
+  const [pics] = useState([1, 2, 3]);
+
+  const imgGroup = pics.map((value) => {
+    const numMOD = (num % 81) + value;
+    console.log(numMOD);
+    const backImage = `${IMAGE_URL}/81pic/${numMOD}.jpg`;
+    return (
+      <li
+        key={numMOD}
+        className="col-4 overflow-hidden"
+        style={{ height: '6.5rem' }}
+      >
+        <img key={numMOD} src={backImage} className="img-fluid" alt="" />
+      </li>
+    );
+  });
 
   useEffect(() => {
     (async () => {
@@ -53,16 +72,39 @@ function Index() {
         }}
       >
         <article className="row justify-content-end h-100">
-          <section className="col-lg-4 bg-black text-white bg-opacity-75 p-3 row gap-3">
-            <section className="row justify-content-between align-items-end mt-5">
-              <h1 className="m-0 col-5 col-xl-6 display-6 fw-bolder">
-                {mapDetailData['林道名稱']}
-              </h1>
-              <section className="col-7 col-xl-6 d-flex justify-content-around ">
-                <span className="text-hightlight">{mapDetailData['林區']}</span>
-                <span className="text-hightlight">{mapDetailData['縣市']}</span>
-                <span className="text-hightlight">{mapDetailData['鄉鎮']}</span>
-                <span className="text-hightlight">{mapDetailData['村里']}</span>
+          <section
+            className="bg-black opacity-75 d-lg-block d-none p-0 m-0"
+            style={{ width: '40px' }}
+          ></section>
+          <section className="col-lg-4 m-0 p-0 bg-black text-white bg-opacity-75 p-3 row ">
+            <section className="row align-items-center">
+              <Link to="/Map" className="btn btn-primary w-15 ms-auto">
+                返回
+              </Link>
+              <section className="col-12 pe-0">
+                <h1 className="m-0 col-12 display-6 fw-bolder">
+                  {mapDetailData['林道名稱']}
+                </h1>
+                <section className="col-12 row mt-3">
+                  <span className="col-6 text-white">
+                    <span>林區：</span>
+                    {mapDetailData['林區']}
+                  </span>
+                  <span className="col-6 text-white">
+                    <span>縣市：</span>
+                    {mapDetailData['縣市']}
+                  </span>
+                </section>
+                <section className="col-12 row mt-3">
+                  <span className="col-6 text-white">
+                    <span>鄉鎮：</span>
+                    {mapDetailData['鄉鎮']}
+                  </span>
+                  <span className="col-6 text-white">
+                    <span>村里：</span>
+                    {mapDetailData['村里']}
+                  </span>
+                </section>
               </section>
             </section>
             <section className="mt-5">
@@ -94,8 +136,8 @@ function Index() {
                   x2="92%"
                   y2="50%"
                   stroke="white"
-                  stroke-width="2"
-                  stroke-dasharray="10"
+                  strokeWidth="2"
+                  strokeDasharray="10"
                 />
                 <OverlayTrigger
                   show={true}
@@ -131,6 +173,11 @@ function Index() {
                 <strong className="">總長度</strong>　　
                 <span>{mapDetailData['總長度']}ｋｍ</span>
               </span>
+            </section>
+            <section className="d-flex justify-content-center align-items-center">
+              <ul className="row justify-content-center list-unstyled">
+                {imgGroup}
+              </ul>
             </section>
             <section className="row justify-content-between">
               <span className="col-12 d-flex justify-content-between">
