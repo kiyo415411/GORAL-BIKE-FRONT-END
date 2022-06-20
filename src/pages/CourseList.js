@@ -121,7 +121,7 @@ export default function CourseList() {
               {courseItems}
             </div>
             {/* 分頁 */}
-            <div className="d-flex justify-content-center pt-3">
+            <div>
               <Pagination page={page} setPage={setPage} lastPage={lastPage} />
             </div>
           </div>
