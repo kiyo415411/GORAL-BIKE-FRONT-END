@@ -1,12 +1,20 @@
 import AsideTitle from './Aside/AsideTitle';
-import RangeSlider from './Aside/RangeSlider';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 import CheckBox from './Aside/CheckBox';
 import SearchInput from './Aside/SearchInput';
 import CategoryList from './Aside/CategoryList';
-
+import { useState } from 'react';
 // 商品篩選邊攔
-function CourseAside({ statu, setStatu, handleStatu }) {
+function CourseAside({ statu, setStatu, setPriceSubmit }) {
   const status = ['報名未開放', '報名開放中', '報名已結束'];
+  // 價錢變化
+  const [price, setPrice] = useState([0, 10000]);
+
+  const handleChange = (event, newPrice) => {
+    setPrice(newPrice);
+  };
+
   return (
     <div className="sticky-top">
       <div className="Space" style={{ height: '3rem' }} />
@@ -19,26 +27,44 @@ function CourseAside({ statu, setStatu, handleStatu }) {
           <CategoryList list={status} statu={statu} setStatu={setStatu} />
           {/* 報名費用篩選 */}
           <AsideTitle text="報名費用" />
-          <RangeSlider
-            min={0}
-            max={5}
-            step={0.5}
-            setmin="0"
-            setmax="23,000"
-            startunit="$ "
-            text="篩選"
-          ></RangeSlider>
+          <Box sx={{ width: 250 }} className="mx-auto">
+            <Slider
+              sx={{
+                color: 'var(--bs-content)',
+                '& .MuiSlider-thumb': {
+                  width: '0.8rem',
+                  height: '0.8rem',
+                },
+                '& .css-1gv0vcd-MuiSlider-track': {
+                  color: 'var(--bs-subcontent)',
+                },
+                '& .css-14pt78w-MuiSlider-rail': {
+                  color: 'var(--bs-line)',
+                },
+              }}
+              value={price}
+              onChange={handleChange}
+              step={1000}
+              min={0}
+              max={10000}
+            />
+          </Box>
+          {/* toLocaleString() --> 將數字千位格式化*/}
+          <div className="d-flex align-items-center justify-content-between px-2 mb-5">
+            <p className="m-0 fs-6">
+              $ {price[0].toLocaleString()} - $ {price[1].toLocaleString()}
+            </p>
+            <button
+              className="btn fs-6 border-2 px-4 py-1 rounded-0 btn-primary rounded-pill"
+              onClick={() => {
+                setPriceSubmit(price);
+              }}
+            >
+              篩選
+            </button>
+          </div>
           {/* 報名人數篩選 */}
           <AsideTitle text="報名人數" />
-          <RangeSlider
-            min={0}
-            max={5}
-            step={0.5}
-            setmin="0"
-            setmax="100"
-            endunit=" 人"
-            text="篩選"
-          ></RangeSlider>
           {/* 活動地點 */}
           <AsideTitle text="課程難度" />
           <div className="d-flex gap-5 mb-5">

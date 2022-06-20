@@ -18,12 +18,14 @@ export default function CourseList() {
   const [cardStyle, setCardStyle] = useState('row');
   // 狀態篩選
   const [statu, setStatu] = useState(1);
+  // 價錢篩選
+  const [priceSubmit, setPriceSubmit] = useState([0, 10000]);
 
   useEffect(() => {
     let getData = async () => {
       try {
         let response = await axios.get(`${API_URL}/course/`, {
-          params: { page: page, statu: statu },
+          params: { page: page, statu: statu, priceSubmit: priceSubmit },
         });
         setData(response.data.data);
         setLastPage(response.data.pagination.lastPage);
@@ -32,7 +34,7 @@ export default function CourseList() {
       }
     };
     getData();
-  }, [page, statu]);
+  }, [page, statu, priceSubmit]);
 
   const courseItems = [];
 
@@ -91,7 +93,12 @@ export default function CourseList() {
           {/* -----------------------------左區塊 */}
           <div className="col-auto">
             {/* 邊攔 */}
-            <CourseAside statu={statu} setStatu={setStatu} />
+            <CourseAside
+              statu={statu}
+              setStatu={setStatu}
+              priceSubmit={priceSubmit}
+              setPriceSubmit={setPriceSubmit}
+            />
           </div>
           {/* -----------------------------右區塊 */}
           <div className="col-auto">
