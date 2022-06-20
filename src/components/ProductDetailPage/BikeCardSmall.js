@@ -1,6 +1,6 @@
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
-import Like from './Aside/Like.js';
+import Like from '../Aside/Like.js';
 import { Link } from 'react-router-dom';
 function separator(num) {
   let str = num.toString().split('.');
@@ -19,7 +19,7 @@ function BikeCardSmall(props) {
         <div className="row">
           <div className="my-auto">
             <img
-              src={require('../images/bikes/' + props.bike + '.png')}
+              src={require('../../images/bikes/' + props.bike + '.png')}
               className="img-fluid rounded-start my-auto"
               alt="..."
             />
@@ -27,12 +27,12 @@ function BikeCardSmall(props) {
           <div className="m-auto">
             <div className="card-body">
               <div className="">
-                <div className="mb-3">
+                <div className="mb-3 d-flex gap-2">
                   <Link to="/Product/Detail" className="">
                     <h5 className="card-title m-0">{props.name}</h5>
                   </Link>
                   {/* <{like(liked)}> */}
-                  <Like liked={liked} setLiked={setLiked} />
+                  <Like className="my-auto" liked={liked} setLiked={setLiked} />
                 </div>
                 <h5 className="text-content">${separator(props.price)}</h5>
               </div>

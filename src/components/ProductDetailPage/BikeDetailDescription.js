@@ -1,8 +1,8 @@
-import Color from './Details/Color.js';
-import Description from './Details/Description.js';
-import Name from './Details/Name.js';
-import Price from './Details/Price.js';
-import Like from './Aside/Like.js';
+import Color from '../Details/Color.js';
+import Description from '../Details/Description.js';
+import Name from '../Details/Name.js';
+import Price from '../Details/Price.js';
+import Like from '../Aside/Like.js';
 import { useState } from 'react';
 
 function BikeDetailDescription(props) {

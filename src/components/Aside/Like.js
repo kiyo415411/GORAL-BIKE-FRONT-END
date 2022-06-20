@@ -9,6 +9,7 @@ function Like(props) {
       onClick={() => {
         props.setLiked(!props.liked);
       }}
+      style={{ cursor: 'pointer' }}
     />
   ) : (
     <BsHeart
@@ -18,6 +19,7 @@ function Like(props) {
       onClick={() => {
         props.setLiked(!props.liked);
       }}
+      style={{ cursor: 'pointer' }}
     />
   );
 }

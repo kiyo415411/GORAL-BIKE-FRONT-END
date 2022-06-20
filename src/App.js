@@ -1,8 +1,8 @@
 import './App.css';
 import Navbar from './layout/Public/NavBar';
 // import Index from './layout/Home';
-import ProductPage from './components/ProductPage';
-import BikeDetailPage from './components/BikeDetailPage';
+import ProductPage from './components/ProductMainPage/ProductPage';
+import BikeDetailPage from './components/ProductDetailPage/BikeDetailPage';
 import Map from './layout/Map';
 import Index from './layout/Home/index';
 import Footer from './layout/Public/Footer';

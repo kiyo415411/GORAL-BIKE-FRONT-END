@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import BikeDetailDescription from './BikeDetailDescription';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
-import LabelCard from './Label/LabelCard';
+import LabelCard from '../Label/LabelCard';
 
 function BikeDetailCard() {
   const [bikeLabel, setBikeLabel] = useState([
@@ -32,23 +32,26 @@ function BikeDetailCard() {
     <div className="container mt-5">
       <div className="d-flex">
         <div className="">
-          <img height="538" src={require('../images/bikes/Bike8.png')} alt="" />{' '}
+          <img
+            height="538"
+            src={require('../../images/bikes/Bike8.png')}
+            alt=""
+          />{' '}
           {/* Big bike */}
           <div height="175.71" className="d-flex justify-content-start">
             {/* small bikes + this needs a map*/}
             <img
               height="175.71"
               className="overflow-auto mx-4"
-              src={require('../images/bikes/Bike2.png')}
+              src={require('../../images/bikes/Bike2.png')}
               alt=""
             />
             <img
               height="175.71"
               className="overflow-auto mx-4"
-              src={require('../images/bikes/Bike2.png')}
+              src={require('../../images/bikes/Bike2.png')}
               alt=""
             />
-            
           </div>
         </div>
         <div>

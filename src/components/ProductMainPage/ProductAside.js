@@ -1,9 +1,9 @@
-import AsideTitle from './Aside/AsideTitle';
-import RangeSlider from './Aside/RangeSlider';
-import CheckBox from './Aside/CheckBox';
-import SearchInput from './Aside/SearchInput';
-import CategoryList from './Aside/CategoryList';
-import ColorPalette from './Aside/ColorPalette';
+import AsideTitle from '../Aside/AsideTitle';
+import RangeSlider from '../Aside/RangeSlider';
+import CheckBox from '../Aside/CheckBox';
+import SearchInput from '../Aside/SearchInput';
+import CategoryList from '../Aside/CategoryList';
+import ColorPalette from '../Aside/ColorPalette';
 import { useState } from 'react';
 
 // 商品篩選邊攔

@@ -1,7 +1,7 @@
 import BikeCard from './BikeCard.js';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { API_URL } from '../utils/config';
+import { API_URL } from '../../utils/config';
 
 function BikeList() {
   // list of the names of the bikes

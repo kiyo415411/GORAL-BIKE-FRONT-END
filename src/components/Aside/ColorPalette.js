@@ -24,9 +24,12 @@ function ColorPalette(props) {
       {current !== null && <h1>Copied {current}</h1>}
       <div className="container row p-0 justify-content-center m-0">
         {color.map((color, index) => {
-          console.log(color);
+          // console.log(color);
           return (
-            <div key={index} className="col-2 p-0 d-flex justify-content-center">
+            <div
+              key={index}
+              className="col-2 p-0 d-flex justify-content-center"
+            >
               <div
                 className="rounded-circle m-1"
                 style={{
@@ -35,6 +38,7 @@ function ColorPalette(props) {
                   height: 24,
                   filter: 'brightness(85%)',
                   boxShadow: color === background ? '0 0 5px #000' : '',
+                  cursor: 'pointer',
                 }}
                 onClick={() => setBackground(color)}
               />
