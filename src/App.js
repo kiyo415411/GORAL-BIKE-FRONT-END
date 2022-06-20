@@ -17,22 +17,27 @@ import { Routes, Route } from 'react-router-dom';
 // ----------------------context
 import { ProductCartProvider } from './utils/useProductCart';
 
+// 測試先將 checked:false 塞入陣列，正式會在 addItem 的時候加入 checked 屬性
 const products = [
   {
     id: 1,
     name: 'BIG_NINE_15',
-    image: '../../images/products/BIG_NINE_15.jpg',
+    image: 'BIG_NINE_15.jpg',
     price: 22000,
     quantity: 1,
+    checked: false,
   },
   {
     id: 2,
     name: 'BIG_NINE_13',
-    image: '../../images/products/BIG_NINE_15.jpg',
+    image: 'BIG_NINE_15.jpg',
     price: 12000,
     quantity: 1,
+    checked: false,
   },
 ];
+
+// 測試屬性 initialCartItems={products}
 function App() {
   return (
     <>

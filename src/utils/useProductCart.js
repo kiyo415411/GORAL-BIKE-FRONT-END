@@ -13,10 +13,11 @@ const ProductCartContext = createContext(null);
 
 // item = {
 //   id: '',
-//   img:'',
-//   count: 0,
 //   name: '',
+//   image:'',
 //   price: 0,
+//   quantity: 0,
+//   checked: false,
 // }
 
 export const ProductCartProvider = ({
@@ -57,14 +58,14 @@ export const ProductCartProvider = ({
   }, [state]);
 
   /**
-   * 加入新項目(quantity:1)，重覆項目 quantity: quantity + 1
+   * 加入新項目(quantity:1, checked:false)，重覆項目 quantity: quantity + 1
    * @param  {Object} item
    * @returns {void}
    */
   const addItem = (item) => {
     dispatch({
       type: 'ADD_ITEM',
-      payload: item,
+      payload: { ...item, checked: false },
     });
   };
 
@@ -128,6 +129,50 @@ export const ProductCartProvider = ({
   };
 
   /**
+   * 給定一id值，有尋找到商品時，設定checked: !checked
+   * @param {string} id
+   * @returns {void}
+   */
+  const checkedChange = (id) => {
+    return dispatch({
+      type: 'CHECKED_CHANGE',
+      payload: {
+        id,
+      },
+    });
+  };
+
+  /**
+   * 改變購物車的所有商品的 checked 狀態
+   * @returns {void}
+   */
+  const checkedAllChange = () => {
+    dispatch({
+      type: 'CHECKED_ALL_CHANGE',
+    });
+  };
+
+  /**
+   * 刪除購物車的所有 checked 的商品
+   * @returns {void}
+   */
+  const checkedItemRemove = () => {
+    dispatch({
+      type: 'CHECKED_ITEM_REMOVE',
+    });
+  };
+
+  /**
+   * 購物車結帳
+   * @returns {void}
+   */
+  const checkoutCart = () => {
+    dispatch({
+      type: 'CHECKOUT_CART',
+    });
+  };
+
+  /**
    * 給定一id值，有尋找到商品時，設定quantity: quantity - 1，但 quantity 最小值為1
    * @param {string} id
    * @returns {void}
@@ -146,6 +191,8 @@ export const ProductCartProvider = ({
       value={{
         cart: state,
         items: state.items,
+        checkedItems: state.checkedItems,
+        checkedAll: state.checkedAll,
         addItem,
         removeItem,
         updateItem,
@@ -153,6 +200,10 @@ export const ProductCartProvider = ({
         isInCart,
         plusOne,
         minusOne,
+        checkedChange,
+        checkedAllChange,
+        checkedItemRemove,
+        checkoutCart,
       }}
     >
       {children}

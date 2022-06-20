@@ -8,16 +8,17 @@ import CartSummary from './CartSummary';
 
 // const products = [
 //   {
-//     img: '../images/products/BIG_NINE_15.jpg',
+//     id:1,
 //     name: 'BIG_NINE_15',
-//     count: 1,
+//     image: 'BIG_NINE_15.jpg',
 //     price: '$22,000',
+//     quantity: 1,
 //   },
 // ];
 
 function CartList(props) {
   const [open, setOpen] = useState(true);
-  const { productCart, products, type } = props;
+  const { products, type } = props;
 
   if ((type === '課程') | (type === '活動')) {
     return (
@@ -76,9 +77,20 @@ function CartList(props) {
       </>
     );
   } else {
-    const { cart, items, removeItem, plusOne, minusOne } = productCart;
-    console.log(cart);
-    console.log(items);
+    const { productCart } = props;
+    const {
+      cart,
+      items,
+      checkedAll,
+      removeItem,
+      plusOne,
+      minusOne,
+      checkedChange,
+      checkedAllChange,
+      checkedItemRemove,
+    } = productCart;
+    // console.log('father', cart);
+    // console.log(items);
     return (
       <>
         <section className="shopping-cart py-3 px-lg-5 px-2">
@@ -102,7 +114,13 @@ function CartList(props) {
               <div className="d-md-block border-bottom text-center d-none">
                 <div className="row">
                   <div className="col-lg-1">
-                    <input type="checkbox" name="" id="" />
+                    <input
+                      type="checkbox"
+                      checked={checkedAll}
+                      onChange={() => {
+                        checkedAllChange();
+                      }}
+                    />
                   </div>
                   <div className="col-lg-2">圖片</div>
                   <div className="row col-lg-7 mx-0">
@@ -120,21 +138,28 @@ function CartList(props) {
               {items.map((product, i) => {
                 return (
                   <CartItem
+                    key={product.id}
+                    type={type}
                     id={product.id}
-                    image={product.image}
                     name={product.name}
+                    image={product.image}
                     price={product.price}
                     quantity={product.quantity}
+                    checked={product.checked}
                     itemTotal={product.itemTotal}
-                    key={product.id}
                     removeItem={removeItem}
                     plusOne={plusOne}
                     minusOne={minusOne}
+                    checkedChange={checkedChange}
                   />
                 );
               })}
               {/* tbody */}
-              <CartSummary type={type} />
+              <CartSummary
+                type={type}
+                cart={cart}
+                checkedItemRemove={checkedItemRemove}
+              />
             </div>
           </Collapse>
         </section>

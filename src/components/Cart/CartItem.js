@@ -15,6 +15,16 @@ function toThousands(num) {
   return result;
 }
 
+// const item =
+//   {
+//     id:1,
+//     name: 'BIG_NINE_15',
+//     image: 'BIG_NINE_15.jpg',
+//     price: '$22,000',
+//     quantity: 1,
+//   },
+//
+
 function CartItem(props) {
   const {
     id,
@@ -22,11 +32,13 @@ function CartItem(props) {
     image,
     price,
     quantity,
-    itemTotal,
+    checked,
     type,
+    itemTotal,
     removeItem,
     plusOne,
     minusOne,
+    checkedChange,
   } = props;
 
   if ((type === '課程') | (type === '活動')) {
@@ -68,11 +80,17 @@ function CartItem(props) {
         <div className="border-bottom text-center  shopping-cart__detail px-2 px-lg-0">
           <div className="row align-items-center">
             <div className="col-lg-1 col-1">
-              <input type="checkbox" name="" id="" />
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={() => {
+                  checkedChange(id);
+                }}
+              />
             </div>
             <div className="col-lg-2 col-4 figure">
               <img
-                src={require('../../images/products/BIG_NINE_15.jpg')}
+                src={require('../../images/products/' + image)}
                 className="figure-img img-fluid p-2"
                 alt="..."
               />

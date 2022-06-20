@@ -4,6 +4,8 @@ export const initialState = {
   isEmpty: true,
   totalItems: 0,
   cartTotal: 0,
+  checkedItems: [],
+  checkedAll: false,
 };
 
 // const item = {
@@ -11,8 +13,7 @@ export const initialState = {
 //   quantity: 0,
 //   name: '',
 //   price: 0,
-//   color: '',
-//   size: '',
+//   image:'',
 // }
 
 /**
@@ -67,7 +68,7 @@ const updateItem = (state, action) => {
   if (existingItemIndex > -1) {
     const newState = [...state.items];
     newState[existingItemIndex] = {
-      // 展開要改變的數量的商品,傳入新的數量進去
+      // 展開要改變的商品,傳入新的值進去
       ...newState[existingItemIndex],
       ...action.payload,
     };
@@ -75,6 +76,49 @@ const updateItem = (state, action) => {
   }
 
   return [...state.items];
+};
+// 改變物品勾選狀態
+const checkItem = (state, action) => {
+  const existingItemIndex = state.items.findIndex(
+    (item) => item.id === action.payload.id
+  );
+  if (existingItemIndex > -1) {
+    const item = state.items[existingItemIndex];
+    const id = item.id;
+    const checked = !item.checked;
+    const action = {
+      type: 'UPDATE_ITEM',
+      payload: { id, checked },
+    };
+    return updateItem(state, action);
+  }
+
+  return [...state.items];
+};
+// 改變所有物品勾選狀態
+const checkAllItem = (state, action) => {
+  // state.checkedAll = false
+  const newStateItem = state.items.map((item) => {
+    item.checked = !state.checkedAll;
+    return item;
+  });
+  state.checkedAll = !state.checkedAll;
+  return [...newStateItem];
+};
+
+// 刪除勾選物品
+const checkItemRemove = (state, action) => {
+  // state.checkedAll = false
+  const newStateItem = state.items.filter((item) => item.checked === false);
+  state.checkedAll = false;
+  return [...newStateItem];
+};
+
+// 購物車結帳
+const checkoutCart = (state, action) => {
+  const newStateItem = state.items.filter((item) => item.checked === false);
+  const newState = { ...state, items: newStateItem, checkedItems: [] };
+  return newState;
 };
 
 const plusItemQuantityOnce = (state, action) => {
@@ -119,6 +163,12 @@ const minusItemQuantityOnce = (state, action) => {
 
   return [...state.items];
 };
+// 製作 checked items array
+const checkedItemsArray = (items) => {
+  return items.filter((item) => {
+    return item.checked === true;
+  });
+};
 
 // 計算商品總價
 const calculateItemTotals = (items) =>
@@ -127,11 +177,16 @@ const calculateItemTotals = (items) =>
     itemTotal: item.price * item.quantity,
   }));
 // 計算購物車總價
-const calculateTotal = (items) =>
-  items.reduce((total, item) => total + item.quantity * item.price, 0);
+const calculateTotal = (items) => {
+  items = checkedItemsArray(items);
+  return items.reduce((total, item) => total + item.quantity * item.price, 0);
+};
 // 計算商品總數
-const calculateTotalItems = (items) =>
-  items.reduce((sum, item) => sum + item.quantity, 0);
+const calculateTotalItems = (items) => {
+  items = checkedItemsArray(items);
+  return items.reduce((sum, item) => sum + item.quantity, 0);
+};
+
 // 生成新的購物車狀態
 const generateCartState = (state, items) => {
   const isEmpty = items.length === 0;
@@ -139,9 +194,11 @@ const generateCartState = (state, items) => {
   return {
     ...initialState,
     ...state,
+    // 將 itemTotal 塞入 items 陣列
     items: calculateItemTotals(items),
     totalItems: calculateTotalItems(items),
     cartTotal: calculateTotal(items),
+    checkedItems: checkedItemsArray(items),
     isEmpty,
   };
 };
@@ -163,8 +220,16 @@ export const reducer = (state, action) => {
       return generateCartState(state, plusItemQuantityOnce(state, action));
     case 'MINUS_ONE':
       return generateCartState(state, minusItemQuantityOnce(state, action));
+    case 'CHECKED_CHANGE':
+      return generateCartState(state, checkItem(state, action));
+    case 'CHECKED_ALL_CHANGE':
+      return generateCartState(state, checkAllItem(state, action));
+    case 'CHECKED_ITEM_REMOVE':
+      return generateCartState(state, checkItemRemove(state, action));
     case 'CLEAR_CART':
       return initialState;
+    case 'CHECKOUT_CART':
+      return checkoutCart(state, action);
     default:
       throw new Error('No action specified');
   }
