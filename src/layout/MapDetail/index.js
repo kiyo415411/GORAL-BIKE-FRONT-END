@@ -74,7 +74,7 @@ function Index() {
         <article className="row justify-content-end h-100">
           <section
             className="bg-black opacity-75 d-lg-block d-none p-0 m-0"
-            style={{ width: '40px' }}
+            style={{ width: '80px' }}
           ></section>
           <section className="col-lg-4 m-0 p-0 bg-black text-white bg-opacity-75 p-3 row ">
             <section className="row align-items-center">
