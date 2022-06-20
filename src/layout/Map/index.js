@@ -155,7 +155,7 @@ function Index() {
               </MapContainer>
             </map>
             <article
-              className="bg-primary text-dark col-4 m-0 p-0 overflow-auto"
+              className="bg-primary text-dark col-4 m-0 p-0 overflow-auto "
               style={{ height: '960px' }}
             >
               {filterDataApi.length !== 0 ? (
