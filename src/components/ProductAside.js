@@ -24,7 +24,10 @@ export default function ActivityAside() {
   ]);
   const status = ['報名開放中', '報名未開放', '報名已結束'];
   return (
-    <div className="product-aside shadow p-4 sticky-top mt-3">
+    <div
+      className="product-aside shadow p-4 sticky-top mt-3"
+      style={{ width: '324px', height: '660px' }}
+    >
       {/* 關鍵字篩選 */}
       <SearchInput />
       {/* 報名狀態篩選 */}

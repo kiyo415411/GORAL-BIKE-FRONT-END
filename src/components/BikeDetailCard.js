@@ -1,8 +1,20 @@
 import { useState } from 'react';
 import BikeDetailDescription from './BikeDetailDescription';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
+import LabelCard from './Label/LabelCard';
 
 function BikeDetailCard() {
+  const [bikeLabel, setBikeLabel] = useState([
+    'RACELITE 61 ALUMINIUM',
+    'X-TAPER HEADTUBE',
+    'SMOOTH WELDING',
+    'INTERNAL CABLE ROUTING',
+    'DOWN TUBE EXIT',
+    'K-MOUNT',
+    'C-MOUNT',
+    'TECHNO FORMING SYSTEM',
+    'F-MOUNT',
+  ]);
   const [bikeDetail, setbikeDetail] = useState([
     {
       Name: 'BIG NINE 15',
@@ -36,6 +48,7 @@ function BikeDetailCard() {
               src={require('../images/bikes/Bike2.png')}
               alt=""
             />
+            
           </div>
         </div>
         <div>
@@ -54,14 +67,10 @@ function BikeDetailCard() {
           </ul>
         );
       })} */}
-      <div className='mt-5'>
+      <div className="mt-5">
         <div>
           {DownDesc.map((v, i) => {
-            return (
-              <p key={i} className="text-content">
-                {v}
-              </p>
-            );
+            return <p className="text-content">{v}</p>;
           })}
         </div>
 
@@ -97,6 +106,11 @@ function BikeDetailCard() {
       </div>
       <div className="ms-n5">
         <h1>技術</h1>
+        <div className="row">
+          {bikeLabel.map((v, i) => {
+            return <LabelCard name={v} />;
+          })}
+        </div>
       </div>
     </div>
   );

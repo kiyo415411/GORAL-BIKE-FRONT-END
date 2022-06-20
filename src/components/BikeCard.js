@@ -31,7 +31,7 @@ function BikeCard(props) {
   //     );
   //   }
   // }
-  console.log(props.like);
+  console.log(props);
   // function handleLike() {
   //   this.setLike((prevState) => !prevState);
   // }
@@ -39,10 +39,10 @@ function BikeCard(props) {
     <>
       <div
         className="card shadow p-2 mb-5 bg-body rounded"
-        style={{ maxWidth: '1049px', maxHeight: '256px' }}
+        style={{ Width: '1049px', Height: '256px' }}
       >
-        <div className="row g-0">
-          <div className="col-md-4 h-75 my-auto" style={{ width: 328 }}>
+        <div className="row g-0 justify-content-center">
+          <div className="col-4 h-75 my-auto" style={{ width: 328 }}>
             <img
               src={require('../images/bikes/' + props.bike + '.png')}
               className="img-fluid rounded-start my-auto"
@@ -143,8 +143,8 @@ function BikeCard(props) {
               </svg>
             </div>
             <div className="card-body">
-              <div className="w-100 d-flex justify-content-between">
-                <div className="d-flex align-items-center justify-content-start gap-2 mb-3">
+              <div className="d-flex justify-content-between">
+                <div className="d-flex align-items-center gap-2 mb-3">
                   <Link to="/Product/Detail" className="">
                     <h5 className="card-title m-0">{props.name}</h5>
                   </Link>

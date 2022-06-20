@@ -85,7 +85,12 @@ function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a className="text-muted" href="#/">
+                  <a
+                    className="text-muted"
+                    href="https://github.com/Zaynliao/GORAL-BIKE-FRONT-END"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <BsGithub />
                   </a>
                 </li>

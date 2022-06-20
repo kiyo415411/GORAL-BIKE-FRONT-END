@@ -8,11 +8,11 @@ import ProductAside from './ProductAside.js';
 function ProductPage() {
   return (
     <>
-      <div className="d-flex justify-content-around me-5 pe-5 mt-4">
-        <div className="w-25">
+      <div className="d-flex justify-content-around mx-auto mt-4">
+        <div className="w-25 d-flex justify-content-center">
           <ProductAside />
         </div>
-        <div className="me-5">
+        <div className="w-75 mx-5">
           <div className="d-flex justify-content-between">
             <div>
               <BsListUl size={30} color="FF7E55" />
