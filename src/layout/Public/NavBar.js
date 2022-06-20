@@ -28,6 +28,9 @@ function Navbar() {
             <Link to="course" className="nav-link text-white">
               課程
             </Link>
+            <Link to="activity" className="nav-link text-white">
+              活動
+            </Link>
           </ul>
         </div>
 

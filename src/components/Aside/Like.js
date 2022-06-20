@@ -3,22 +3,34 @@ import { BsHeartFill, BsHeart } from 'react-icons/bs';
 function Like(props) {
   return props.liked ? (
     <BsHeartFill
+<<<<<<< HEAD
       color="red"
+=======
+      color="hightlight"
+>>>>>>> develope
       className={props.className}
       size={props.width}
       onClick={() => {
         props.setLiked(!props.liked);
       }}
+<<<<<<< HEAD
       style={{ cursor: 'pointer' }}
     />
   ) : (
     <BsHeart
       color="red"
+=======
+    />
+  ) : (
+    <BsHeart
+      color="hightlight"
+>>>>>>> develope
       className={props.className}
       size={props.width}
       onClick={() => {
         props.setLiked(!props.liked);
       }}
+<<<<<<< HEAD
       style={{ cursor: 'pointer' }}
     />
   );
@@ -48,5 +60,10 @@ function Like(props) {
 // }
 
 // SELECT asdf WHERE
+=======
+    />
+  );
+}
+>>>>>>> develope
 
 export default Like;

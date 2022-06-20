@@ -17,10 +17,10 @@ function BikeCardSmall(props) {
         style={{ width: '400px' }}
       >
         <div className="row">
-          <div className="my-auto">
+          <div className="mx-auto d-flex justify-content-center">
             <img
               src={require('../../images/bikes/' + props.bike + '.png')}
-              className="img-fluid rounded-start my-auto"
+              className="img-fluid rounded-start"
               alt="..."
             />
           </div>

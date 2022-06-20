@@ -1,46 +1,151 @@
 // 底部分頁
+import Pagination from 'react-bootstrap/Pagination';
 import { RiArrowRightSLine, RiArrowLeftSLine } from 'react-icons/ri';
-function Pagination() {
+
+export default function PaginationActive({ page, setPage, lastPage }) {
   return (
-    <nav className="d-flex justify-content-center pt-4">
-      <ul className="pagination gap-2">
-        <li className="page-item">
-          <a
-            href="#/"
-            className="btn btn-outline-primary rounded-circle px-2 py-1"
+    <Pagination>
+      {/* ---------------------------------------- 上一頁  */}
+      <Pagination.Item
+        disabled={page === 1 ? 'disabled' : ''}
+        onClick={(e) => {
+          setPage(page - 1);
+        }}
+      >
+        <RiArrowLeftSLine />
+      </Pagination.Item>
+      {/* ---------------------------------------- 中間頁  */}
+      {lastPage >= 3 && page === 1 ? (
+        <>
+          <Pagination.Item
+            active={page === 1 ? 'active' : ''}
+            onClick={(e) => {
+              setPage(page);
+            }}
           >
-            <RiArrowLeftSLine />
-          </a>
-        </li>
-        <li className="page-item">
-          <a href="#/" className=" btn btn-outline-primary rounded-circle py-1">
-            1
-          </a>
-        </li>
-        <li className="page-item active">
-          <a
-            href="#/"
-            className="page-link btn btn-outline-primary rounded-circle py-1"
+            {page}
+          </Pagination.Item>
+          <Pagination.Item
+            onClick={(e) => {
+              setPage(page + 1);
+            }}
           >
-            2
-          </a>
-        </li>
-        <li className="page-item">
-          <a href="#/" className="btn btn-outline-primary rounded-circle py-1">
-            3
-          </a>
-        </li>
-        <li className="page-item">
-          <a
-            href="#/"
-            className="btn btn-outline-primary rounded-circle px-2 py-1"
+            {page + 1}
+          </Pagination.Item>
+          <Pagination.Item
+            onClick={(e) => {
+              setPage(page + 2);
+            }}
           >
-            <RiArrowRightSLine />
-          </a>
-        </li>
-      </ul>
-    </nav>
+            {page + 2}
+          </Pagination.Item>
+        </>
+      ) : lastPage >= 3 && page + 1 <= lastPage ? (
+        <>
+          <Pagination.Item
+            onClick={(e) => {
+              setPage(page - 1);
+            }}
+          >
+            {page - 1}
+          </Pagination.Item>
+          <Pagination.Item
+            active
+            onClick={(e) => {
+              setPage(page);
+            }}
+          >
+            {page}
+          </Pagination.Item>
+          <Pagination.Item
+            onClick={(e) => {
+              setPage(page + 1);
+            }}
+          >
+            {page + 1}
+          </Pagination.Item>
+        </>
+      ) : lastPage >= 3 && page === lastPage ? (
+        <>
+          <Pagination.Item
+            onClick={(e) => {
+              setPage(page - 2);
+            }}
+          >
+            {page - 2}
+          </Pagination.Item>
+          <Pagination.Item
+            active={page === lastPage - 1 ? 'active' : ''}
+            onClick={(e) => {
+              setPage(page - 1);
+            }}
+          >
+            {page - 1}
+          </Pagination.Item>
+          <Pagination.Item
+            active={page === lastPage ? 'active' : ''}
+            onClick={(e) => {
+              setPage(page);
+            }}
+          >
+            {page}
+          </Pagination.Item>
+        </>
+      ) : lastPage === 2 && page === 1 ? (
+        <>
+          <Pagination.Item
+            active={page === lastPage - 1 ? 'active' : ''}
+            onClick={(e) => {
+              setPage(page);
+            }}
+          >
+            {page}
+          </Pagination.Item>
+          <Pagination.Item
+            onClick={(e) => {
+              setPage(page + 1);
+            }}
+          >
+            {page + 1}
+          </Pagination.Item>
+        </>
+      ) : lastPage === 2 && page !== 1 ? (
+        <>
+          <Pagination.Item
+            onClick={(e) => {
+              setPage(page - 1);
+            }}
+          >
+            {page - 1}
+          </Pagination.Item>
+          <Pagination.Item
+            active={page === lastPage ? 'active' : ''}
+            onClick={(e) => {
+              setPage(page);
+            }}
+          >
+            {page}
+          </Pagination.Item>
+        </>
+      ) : (
+        <Pagination.Item
+          active
+          onClick={(e) => {
+            setPage(page);
+          }}
+        >
+          {page}
+        </Pagination.Item>
+      )}
+      {/* ---------------------------------------- 下一頁  */}
+      <Pagination.Item
+        disabled={page === lastPage ? 'disabled' : ''}
+        onClick={(e) => {
+          setPage(page + 1);
+        }}
+      >
+        <RiArrowRightSLine />
+      </Pagination.Item>
+    </Pagination>
   );
 }
-
-export default Pagination;

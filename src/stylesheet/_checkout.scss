@@ -1,0 +1,20 @@
+.checkout-summary {
+  margin-bottom: 2rem;
+  .line {
+    border: 1px solid $goral-line;
+    width: 30rem;
+  }
+  select,
+  option {
+    font-size: 0.875rem;
+  }
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+.checkout-list {
+  .hr {
+    border-top: 3px solid $goral-line;
+  }
+}
