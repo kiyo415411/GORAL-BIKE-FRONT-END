@@ -16,11 +16,41 @@ import CartSummary from './CartSummary';
 //   },
 // ];
 
+// const course = [
+//   {
+//     id: 1,
+//     name: '初階課程',
+//     image: 'BIG_NINE_15.jpg',
+//     price: '$6,000',
+//     quantity: 1,
+//   },
+// ]
+
+// const activities = [
+//   {
+//     id: 1,
+//     name: '小活動',
+//     image: 'BIG_NINE_15.jpg',
+//     price: '$2,000',
+//     quantity: 1,
+//   },
+// ]
+
 function CartList(props) {
   const [open, setOpen] = useState(true);
-  const { products, type } = props;
+  const { type } = props;
 
   if ((type === '課程') | (type === '活動')) {
+    const { productCart } = props;
+    const {
+      cart,
+      items,
+      checkedAll,
+      removeItem,
+      checkedChange,
+      checkedAllChange,
+      checkedItemRemove,
+    } = productCart;
     return (
       <>
         <section className="shopping-cart py-3 px-lg-5 px-2">
@@ -44,7 +74,13 @@ function CartList(props) {
               <div className="d-md-block border-bottom text-center d-none">
                 <div className="row">
                   <div className="col-lg-1">
-                    <input type="checkbox" name="" id="" />
+                    <input
+                      type="checkbox"
+                      value={checkedAll}
+                      onChange={() => {
+                        checkedAllChange();
+                      }}
+                    />
                   </div>
                   <div className="col-lg-2">圖片</div>
                   <div className="row col-lg-7 mx-0">
@@ -57,20 +93,27 @@ function CartList(props) {
               </div>
               {/* thead */}
               {/* tbody */}
-              {products.map((product, i) => {
+              {items.map((product, i) => {
                 return (
                   <CartItem
-                    image={product.image}
-                    name={product.name}
-                    price={product.price}
-                    count={product.count}
-                    type={type}
                     key={product.id}
+                    id={product.id}
+                    checked={product.checked}
+                    name={product.name}
+                    image={product.image}
+                    price={product.price}
+                    type={type}
+                    removeItem={removeItem}
+                    checkedChange={checkedChange}
                   />
                 );
               })}
               {/* tbody */}
-              <CartSummary type={type} />
+              <CartSummary
+                type={type}
+                cart={cart}
+                checkedItemRemove={checkedItemRemove}
+              />
             </div>
           </Collapse>
         </section>
@@ -141,11 +184,11 @@ function CartList(props) {
                     key={product.id}
                     type={type}
                     id={product.id}
+                    checked={product.checked}
                     name={product.name}
                     image={product.image}
                     price={product.price}
                     quantity={product.quantity}
-                    checked={product.checked}
                     itemTotal={product.itemTotal}
                     removeItem={removeItem}
                     plusOne={plusOne}

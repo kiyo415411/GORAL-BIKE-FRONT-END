@@ -4,6 +4,7 @@ export const initialState = {
   isEmpty: true,
   totalItems: 0,
   cartTotal: 0,
+  totalCheckItems: 0,
   checkedItems: [],
   checkedAll: false,
 };
@@ -176,13 +177,18 @@ const calculateItemTotals = (items) =>
     ...item,
     itemTotal: item.price * item.quantity,
   }));
-// 計算購物車總價
-const calculateTotal = (items) => {
+// 計算商品總數
+const calculateTotalItems = (items) => {
+  return items.reduce((sum, item) => sum + item.quantity, 0);
+};
+
+// 計算勾選商品購物車總價
+const calculateItemsTotal = (items) => {
   items = checkedItemsArray(items);
   return items.reduce((total, item) => total + item.quantity * item.price, 0);
 };
-// 計算商品總數
-const calculateTotalItems = (items) => {
+// 計算勾選商品總數
+const calculateTotalCheckedItems = (items) => {
   items = checkedItemsArray(items);
   return items.reduce((sum, item) => sum + item.quantity, 0);
 };
@@ -196,8 +202,9 @@ const generateCartState = (state, items) => {
     ...state,
     // 將 itemTotal 塞入 items 陣列
     items: calculateItemTotals(items),
+    totalCheckItems: calculateTotalCheckedItems(items),
     totalItems: calculateTotalItems(items),
-    cartTotal: calculateTotal(items),
+    cartTotal: calculateItemsTotal(items),
     checkedItems: checkedItemsArray(items),
     isEmpty,
   };

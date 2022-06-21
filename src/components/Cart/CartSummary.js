@@ -1,5 +1,6 @@
 import React from 'react';
 import { BsSquareFill } from 'react-icons/bs';
+import { toThousands } from '../../utils/common';
 
 // cart = {
 //   items: [],
@@ -13,7 +14,7 @@ import { BsSquareFill } from 'react-icons/bs';
 function CartSummary(props) {
   const { type, cart, checkedItemRemove } = props;
 
-  const { cartTotal, totalItems } = cart;
+  const { cartTotal, totalCheckItems } = cart;
   return (
     <>
       <div className="row mt-3 mt-lg-5 justify-content-end align-items-center gap-2 gap-lg-0">
@@ -31,14 +32,14 @@ function CartSummary(props) {
           </button>
         </div>
         <div className="col-lg-4 text-lg-center text-end">
-          共 {totalItems} 項{type}
+          共 {totalCheckItems} 項{type}
         </div>
         <div className="d-flex col-lg-4 justify-content-lg-center justify-content-end text-end mx-0">
           <div className="d-flex justify-content-end align-items-center">
             <BsSquareFill className="me-2" />
             <span className="fs-4 fw-bold">{type}總額:</span>
           </div>
-          <div className="fs-4 px-3">{cartTotal}</div>
+          <div className="fs-4 px-3">${toThousands(cartTotal)}</div>
         </div>
       </div>
     </>

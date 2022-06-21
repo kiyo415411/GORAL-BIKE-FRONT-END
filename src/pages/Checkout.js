@@ -32,6 +32,10 @@ function Checkout() {
       <form action="" onSubmit={handleSubmit}>
         {/* 結帳訂單清單 */}
         <CheckoutList />
+        {/* 結帳訂單清單 */}
+        <CheckoutList />
+        {/* 結帳訂單清單 */}
+        <CheckoutList />
         {/* 收件人資訊 */}
         <ReceiverInfo
           handleReceiverChange={handleReceiverChange}

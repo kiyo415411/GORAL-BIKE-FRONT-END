@@ -3,7 +3,7 @@ import React from 'react';
 function CheckoutList() {
   return (
     <>
-      <section className="checkout-list mb-4">
+      <section className="checkout-list my-4">
         <h3 className="text-primary mb-4">訂單商品明細</h3>
         {/* thead */}
         <div className="row text-center fs-5 mb-2 mx-0">
