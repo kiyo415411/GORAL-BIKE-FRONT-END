@@ -9,7 +9,7 @@ export default function TopSort(props) {
           <a
             href="#/"
             className={
-              props.cardStyle === 'row' ? 'link-hightlight' : 'link-content'
+              props.cardStyle === 'row' ? 'link-highlight' : 'link-content'
             }
             onClick={() => {
               props.setCardStyle('row');
@@ -22,7 +22,7 @@ export default function TopSort(props) {
           <a
             href="#/"
             className={
-              props.cardStyle === 'col' ? 'link-hightlight' : 'link-content'
+              props.cardStyle === 'col' ? 'link-highlight' : 'link-content'
             }
             onClick={() => {
               props.setCardStyle('col');
@@ -32,7 +32,7 @@ export default function TopSort(props) {
           </a>
         </li>
       </ul>
-      <a href="#/" className="text-hightlight">
+      <a href="#/" className="text-highlight">
         商品排序 <AiFillCaretDown size={20} />
       </a>
     </div>
