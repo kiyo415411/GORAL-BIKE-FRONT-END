@@ -55,12 +55,12 @@ export default function MapNav() {
     <>
       <nav className="nav bg-dark p-3 justify-content-end">
         <section className="row justify-content-end gap-3 w-75">
-          <section className="col-md-5 d-flex justify-content-end align-items-center w-15 gap-3">
-            <label className="col-5 text-white" htmlFor="地圖樣式">
+          <section className="col-md-2 d-flex justify-content-end align-items-center w-25 gap-3">
+            <label className="col-3 text-white" htmlFor="地圖樣式">
               地圖樣式
             </label>
             <select
-              className="form-select col-6 w-40"
+              className="form-select col-4 w-50"
               aria-label="MapType"
               id="select"
               value={Data.mapName}

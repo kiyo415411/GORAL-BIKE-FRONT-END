@@ -16,7 +16,7 @@ import CourseLike from './pages/CourseLike';
 import CourseDetail from './pages/CourseDetail';
 
 import News from './pages/news';
-import NewsDetail from './pages/news/detail';
+import NewsDetail from './pages/news/NewsDetiail';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
         <Route path="/shopping-cart/checkout" element={<Checkout />} />
         <Route path="/shopping-cart" element={<ShoppingCart />} />
         <Route path="/news" element={<News />} />
-        <Route path="/news/:newsTitle" element={<NewsDetail />} />
+        <Route path="/news/:newsID" element={<NewsDetail />} />
         <Route path="/course/detail" element={<CourseDetail />} />
         <Route path="/course/like" element={<CourseLike />} />
         <Route path="/course" element={<CourseList />} />
