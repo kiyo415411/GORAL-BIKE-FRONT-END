@@ -15,7 +15,7 @@ function Index() {
             className="bg-info overflow-hidden position-relative"
             style={{ height: '804px' }}
           >
-            <video src={VIDEO} autoplay="true" loop="true" muted></video>
+            <video src={VIDEO} autoPlay={true} loop={true} muted></video>
 
             <article
               className="position-absolute translate-middle lh-lg text-white"
@@ -50,7 +50,7 @@ function Index() {
             </aside>
             <article className="col-8">
               <div className="card border-0" style={{ width: '68.125rem' }}>
-                <img src={BIKE} class="card-img-top" alt="..." />
+                <img src={BIKE} className="card-img-top" alt="..." />
                 <div className="card-body mx-auto">
                   <h1 className="display-6 fw-bold">BIG.NINE 200</h1>
                   <p className="card-text fs-6">
@@ -120,22 +120,28 @@ function Index() {
               2022年，你絕不能錯過的登山車活動
             </h1>
             <div className="row flex-nowrap" style={{ marginLeft: '-25%' }}>
-              <div class="card border-0 mt-5" style={{ width: '40%' }}>
-                <img src={ACTIVTY} class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text fs-1 text-center">XTERRA TAIWAN 2022</p>
+              <div className="card border-0 mt-5" style={{ width: '40%' }}>
+                <img src={ACTIVTY} className="card-img-top" alt="..." />
+                <div className="card-body">
+                  <p className="card-text fs-1 text-center">
+                    XTERRA TAIWAN 2022
+                  </p>
                 </div>
               </div>
-              <div class="card border-0 mt-5" style={{ width: '40%' }}>
-                <img src={ACTIVTY} class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text fs-1 text-center">XTERRA TAIWAN 2022</p>
+              <div className="card border-0 mt-5" style={{ width: '40%' }}>
+                <img src={ACTIVTY} className="card-img-top" alt="..." />
+                <div className="card-body">
+                  <p className="card-text fs-1 text-center">
+                    XTERRA TAIWAN 2022
+                  </p>
                 </div>
               </div>
-              <div class="card border-0 mt-5" style={{ width: '40%' }}>
-                <img src={ACTIVTY} class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text fs-1 text-center">XTERRA TAIWAN 2022</p>
+              <div className="card border-0 mt-5" style={{ width: '40%' }}>
+                <img src={ACTIVTY} className="card-img-top" alt="..." />
+                <div className="card-body">
+                  <p className="card-text fs-1 text-center">
+                    XTERRA TAIWAN 2022
+                  </p>
                 </div>
               </div>
             </div>
