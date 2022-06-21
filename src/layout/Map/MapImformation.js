@@ -3,7 +3,7 @@ import { MapDataValue } from './index';
 import MapImformationNavSort from './MapImformationNavSort';
 import MapImformationCard from './MapImformationCard';
 
-function MapImformation() {
+export default function MapImformation() {
   const Data = useContext(MapDataValue);
   return (
     <>
@@ -14,4 +14,3 @@ function MapImformation() {
     </>
   );
 }
-export default MapImformation;

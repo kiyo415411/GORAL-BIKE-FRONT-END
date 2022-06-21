@@ -2,7 +2,7 @@ import Area from './Area.json';
 import { useContext } from 'react';
 import { MapDataValue } from './index';
 
-function MapNav() {
+export default function MapNav() {
   const Data = useContext(MapDataValue);
 
   const onSetMapName = (e) => {
@@ -55,8 +55,8 @@ function MapNav() {
     <>
       <nav className="nav bg-dark p-3 justify-content-end">
         <section className="row justify-content-end gap-3 w-75">
-          <section className="col-md-4 d-flex justify-content-end align-items-center gap-3">
-            <label className="text-white" htmlFor="地圖樣式">
+          <section className="col-md-5 d-flex justify-content-end align-items-center w-15 gap-3">
+            <label className="col-5 text-white" htmlFor="地圖樣式">
               地圖樣式
             </label>
             <select
@@ -156,4 +156,3 @@ function MapNav() {
     </>
   );
 }
-export default MapNav;

@@ -5,7 +5,7 @@ import EVENT from '../../images/event.png';
 import LOCATION from '../../images/Location.svg';
 import ACTIVTY from '../../images/Acitvity.png';
 
-function Index() {
+export default function Index() {
   return (
     <>
       <main>
@@ -205,4 +205,3 @@ function Index() {
     </>
   );
 }
-export default Index;

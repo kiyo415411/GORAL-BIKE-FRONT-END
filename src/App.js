@@ -14,6 +14,8 @@ import ActivityDetail from './pages/ActivityDetail';
 import CourseList from './pages/CourseList';
 import CourseLike from './pages/CourseLike';
 import CourseDetail from './pages/CourseDetail';
+
+import News from './pages/news';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -23,7 +25,7 @@ function App() {
       <Routes>
         <Route path="/shopping-cart/checkout" element={<Checkout />} />
         <Route path="/shopping-cart" element={<ShoppingCart />} />
-        <Route path="/map" element={<Map />} />
+        <Route path="/news" element={<News />} />
         <Route path="/course/detail" element={<CourseDetail />} />
         <Route path="/course/like" element={<CourseLike />} />
         <Route path="/course" element={<CourseList />} />
@@ -31,8 +33,8 @@ function App() {
         <Route path="/activity/like" element={<ActivityLike />} />
         <Route path="/activity" element={<ActivityList />} />
         <Route exact path="/" element={<Index />} />
-        <Route path="/Map" element={<Map />} />
-        <Route path="/Map/MapDetail/:mapName" element={<MapDetail />} />
+        <Route path="/map" element={<Map />} />
+        <Route path="/map/mapDetail/:mapName" element={<MapDetail />} />
       </Routes>
       <Footer />
     </>

@@ -15,7 +15,7 @@ import DataAPI from './DataAPI';
 import MapNav from './MapNav';
 
 export const MapDataValue = createContext();
-function Index() {
+export default function Index() {
   // 設定起始座標
   const [position, setPosition] = useState([24, 121]);
   // 設定地圖縮放大小
@@ -170,5 +170,3 @@ function Index() {
     </>
   );
 }
-
-export default Index;
