@@ -4,6 +4,7 @@ import { API_URL, IMAGE_URL } from '../../utils/config';
 
 export default function News() {
   const [news, setNews] = useState([]);
+  const [hotNews, setHotNews] = useState([]);
 
   useEffect(() => {
     const getNews = async () => {
@@ -11,7 +12,8 @@ export default function News() {
         // 需要等待資料pending，不然useState會是空值
         const getNewsValue = await axios.get(`${API_URL}/news`);
 
-        setNews(getNewsValue.data);
+        setNews(getNewsValue.data.newsResults);
+        setHotNews(getNewsValue.data.hotNewsResults);
       } catch (e) {
         throw new Error(e);
       }
@@ -25,43 +27,41 @@ export default function News() {
         <aside className="col-4 g-4 row flex-column">
           <h3 className=" text-primary mb-5">其他熱門文章</h3>
           <ul className="list-unstyled row flex-column g-4 p-0 m-0">
-            {news.map((value) => {
+            {hotNews.map((value) => {
               const date = value.date.split('T').shift();
               return (
-                <>
-                  <li
-                    key={value.id}
-                    className="text-primary fw-bolder fs-6 row p-0 m-0"
+                <li
+                  key={value.id}
+                  className="text-primary fw-bolder fs-6 row p-0 m-0"
+                >
+                  <div
+                    className="card mb-3 px-0 overflow-hidden"
+                    //   style={{ height: '90px' }}
                   >
-                    <div
-                      className="card mb-3 px-0 overflow-hidden"
-                      //   style={{ height: '90px' }}
-                    >
-                      <div className="row g-0">
-                        <div
-                          className="col-md-4 overflow-hidden"
-                          style={{ height: '110px' }}
-                        >
-                          <img
-                            src={`${IMAGE_URL}/news/${value.name}`}
-                            className="w-100 h-100 cover img-fluid "
-                            alt="..."
-                          />
-                        </div>
-                        <div className="col-md-8">
-                          <div className="card-body">
-                            <p className="card-text">
-                              <small className="text-muted">{date}</small>
-                            </p>
-                            <h5 className="card-title text-truncate fs-6">
-                              {value.title}
-                            </h5>
-                          </div>
+                    <div className="row g-0">
+                      <div
+                        className="col-md-4 overflow-hidden"
+                        style={{ height: '110px' }}
+                      >
+                        <img
+                          src={`${IMAGE_URL}/news/${value.name}`}
+                          className="w-100 h-100 cover img-fluid "
+                          alt="..."
+                        />
+                      </div>
+                      <div className="col-md-8">
+                        <div className="card-body">
+                          <p className="card-text">
+                            <small className="text-muted">{date}</small>
+                          </p>
+                          <h5 className="card-title text-truncate fs-6">
+                            {value.title}
+                          </h5>
                         </div>
                       </div>
                     </div>
-                  </li>
-                </>
+                  </div>
+                </li>
               );
             })}
           </ul>
