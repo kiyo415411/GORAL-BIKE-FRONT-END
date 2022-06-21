@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import Like from '../Aside/Like';
+import { Link } from 'react-router-dom';
 
 // 排版
 export default function ColCard({
   width,
+  courseId,
   image,
   title,
   price,
@@ -22,15 +24,19 @@ export default function ColCard({
       style={{ width: width + 'rem' }}
     >
       <div className="col-card-img-box overflow-hidden">
-        <img
-          src={image}
-          className="card-img-top rounded-0 object-fit"
-          alt={title}
-        />
+        <Link to={`/course/${courseId}`}>
+          <img
+            src={image}
+            className="card-img-top rounded-0 object-fit"
+            alt={title}
+          />
+        </Link>
       </div>
       <div className="card-body d-grid gap-2 px-4">
         <div className="d-flex justify-content-between align-items-center">
-          <h3 className="card-title m-0">{title}</h3>
+          <Link to={`/course/${courseId}`}>
+            <h3 className="card-title m-0">{title}</h3>
+          </Link>
           <div className="text-highlight">
             <Like liked={liked} setLiked={setLiked} />
           </div>
@@ -100,13 +106,18 @@ export default function ColCard({
         <p className="m-0 text-primary">活動簡介 ：</p>
         <p className="col-card-text card-text text-content">{text}</p>
         {/* 購買按鈕 */}
-        <div className="d-flex gap-2 align-items-center justify-content-between">
-          <button className="btn fs-6 border-2 px-4 py-1 rounded-0 btn-primary rounded-pill">
-            直接購買
-          </button>
-          <button className="btn fs-6 border-2 px-4 py-1 rounded-0 btn-outline-primary rounded-pill">
-            加入購物車
-          </button>
+        <div className="d-flex align-items-center justify-content-between">
+          <Link to={`/course/${courseId}`}>
+            <p className="text-nowrap m-0 btn fs-6 border-2 px-4 py-1 rounded-0 btn-primary rounded-pill">
+              課程詳情
+            </p>
+          </Link>
+          {/* TODO 課程報名連結頁面 */}
+          <Link to={''}>
+            <p className="text-nowrap m-0 btn fs-6 border-2 px-4 py-1 rounded-0 btn-outline-primary rounded-pill">
+              課程報名
+            </p>
+          </Link>
         </div>
       </div>
     </div>

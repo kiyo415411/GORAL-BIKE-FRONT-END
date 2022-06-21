@@ -74,6 +74,7 @@ export default function CourseList() {
         <ColCard
           key={i}
           width={20}
+          courseId={data[i].course_id}
           image={`${IMAGE_URL}/course/${data[i].course_pictures}`}
           like={false}
           title={data[i].course_title}
@@ -126,7 +127,7 @@ export default function CourseList() {
               {courseItems}
             </div>
             {/* 分頁 */}
-            <div>
+            <div className="d-flex justify-content-center">
               <Pagination page={page} setPage={setPage} lastPage={lastPage} />
             </div>
           </div>
