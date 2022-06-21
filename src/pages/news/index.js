@@ -34,10 +34,7 @@ export default function News() {
                   key={value.id}
                   className="text-primary fw-bolder fs-6 row p-0 m-0"
                 >
-                  <div
-                    className="card mb-3 px-0 overflow-hidden"
-                    //   style={{ height: '90px' }}
-                  >
+                  <div className="card mb-3 px-0 overflow-hidden">
                     <div className="row g-0">
                       <div
                         className="col-md-4 overflow-hidden"
@@ -51,8 +48,11 @@ export default function News() {
                       </div>
                       <div className="col-md-8">
                         <div className="card-body">
-                          <p className="card-text">
+                          <p className="card-text d-flex justify-content-between">
                             <small className="text-muted">{date}</small>
+                            <small className="text-muted fw-lighter">
+                              觀看{value.touch}次
+                            </small>
                           </p>
                           <h5 className="card-title text-truncate fs-6">
                             {value.title}
