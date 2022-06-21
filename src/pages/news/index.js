@@ -23,7 +23,7 @@ export default function News() {
     <>
       <main className="row container mx-auto justify-content-between mb-5">
         <aside className="col-4 g-4 row flex-column">
-          <h3 className=" text-primary text-center">其他熱門文章</h3>
+          <h3 className=" text-primary mb-5">其他熱門文章</h3>
           <ul className="list-unstyled row flex-column g-4 p-0 m-0">
             {news.map((value) => {
               const date = value.date.split('T').shift();
@@ -67,7 +67,7 @@ export default function News() {
           </ul>
         </aside>
         <article className="col-8 g-4 row flex-column ">
-          <h3 className="col text-primary text-center">最新新聞</h3>
+          <h3 className="col text-primary mb-5">最新新聞</h3>
 
           <div className="row">
             {news.map((value) => {
