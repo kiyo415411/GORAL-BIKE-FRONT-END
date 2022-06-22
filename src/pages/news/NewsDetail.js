@@ -5,7 +5,7 @@ import { API_URL, IMAGE_URL } from '../../utils/config';
 import NewsAside from './NewsAside';
 import { Carousel } from 'react-bootstrap';
 
-export default function Detail() {
+export default function NewsDetail() {
   const [data, setData] = useState({
     title: '',
     content: '',
@@ -42,7 +42,7 @@ export default function Detail() {
   return (
     <>
       <main className="row container mx-auto justify-content-between mb-5">
-        <NewsAside />
+        <NewsAside show={false} />
         <article className="col-8 g-4 row flex-column">
           <h3 className="col-12 text-primary">最新新聞</h3>
           <section className="col-12 d-flex justify-content-between">

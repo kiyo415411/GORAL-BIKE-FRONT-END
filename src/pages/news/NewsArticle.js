@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 import { IMAGE_URL } from '../../utils/config';
 
-export default function NewsAside(props) {
+export default function NewsArticle(props) {
+  console.log('props->', props.filterNews);
   return (
     <>
-      <article className="col-8 g-4 row flex-column ">
-        <h3 className="col text-primary mb-5">最新新聞</h3>
+      <article className="col-8 g-4 mt-5">
+        <h3 className="col text-primary mb-3">最新新聞</h3>
         <div className="row">
-          {props.news.map((value) => {
+          {props.filterNews.map((value) => {
             const date = value.date.split('T').shift();
-
             return (
               <div key={value.id} className="col col-md-6 mb-4">
                 <Link to={`/news/${value.id}`}>

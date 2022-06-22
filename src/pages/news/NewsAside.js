@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { API_URL } from '../../utils/config';
 
-export default function NewsAside() {
+export default function NewsAside(props) {
   const [hotNews, setHotNews] = useState([]);
 
   useEffect(() => {
@@ -20,10 +20,29 @@ export default function NewsAside() {
     getNews();
   }, []);
 
+  const serchValue = (e) => {
+    const getvalue = new RegExp(e.target.value, 'gi');
+    const newFilter = [...props.news].filter((value) =>
+      getvalue.exec(value.title)
+    );
+    props.setFilterNews(newFilter);
+  };
+
   return (
     <>
-      <aside className="col-4 g-4 row flex-column">
-        <h3 className=" text-primary mb-5">其他熱門文章</h3>
+      <aside className="col-4 g-4 mt-5">
+        <h3 className="text-primary mb-3">其他熱門文章</h3>
+        {props.show ? (
+          <input
+            className="form-control w-95 mx-auto mb-3"
+            id="exampleDataList"
+            placeholder="搜尋文章"
+            onChange={serchValue}
+          />
+        ) : (
+          ''
+        )}
+
         <ul className="list-unstyled row flex-column g-4 p-0 m-0">
           {hotNews.map((value) => {
             const date = value.date.split('T').shift();

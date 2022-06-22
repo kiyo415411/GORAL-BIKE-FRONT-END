@@ -6,6 +6,7 @@ import NewsArticle from './NewsArticle';
 
 export default function News() {
   const [news, setNews] = useState([]);
+  const [filterNews, setFilterNews] = useState([]);
 
   useEffect(() => {
     const getNews = async () => {
@@ -13,6 +14,7 @@ export default function News() {
         // 需要等待資料pending，不然useState會是空值
         const getNewsValue = await axios.get(`${API_URL}/news`);
         setNews(getNewsValue.data.newsResults);
+        setFilterNews(getNewsValue.data.newsResults);
       } catch (e) {
         throw new Error(e);
       }
@@ -23,8 +25,13 @@ export default function News() {
   return (
     <>
       <main className="row container mx-auto justify-content-between mb-5">
-        <NewsAside />
-        <NewsArticle news={news} />
+        <NewsAside
+          show={true}
+          news={news}
+          filterNews={filterNews}
+          setFilterNews={setFilterNews}
+        />
+        <NewsArticle news={news} filterNews={filterNews} />
       </main>
     </>
   );

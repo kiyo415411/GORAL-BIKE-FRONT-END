@@ -15,8 +15,8 @@ import CourseList from './pages/CourseList';
 import CourseLike from './pages/CourseLike';
 import CourseDetail from './pages/CourseDetail';
 
-import News from './pages/news';
-import NewsDetail from './pages/news/NewsDetiail';
+import News from './pages/News';
+import NewsDetail from './pages/News/NewsDetail';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
