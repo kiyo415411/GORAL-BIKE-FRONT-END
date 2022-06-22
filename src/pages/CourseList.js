@@ -15,6 +15,8 @@ export default function CourseList() {
   const [page, setPage] = useState(1); // 當前頁數
   const [lastPage, setLastPage] = useState(1); // 總頁數
   const [cardStyle, setCardStyle] = useState('row'); // 卡片排列方式
+  const [searchWord, setSearchWord] = useState(''); // 關鍵字變動
+  const [search, setSearch] = useState(''); // 關鍵字篩選
   const [statu, setStatu] = useState(1); // 狀態篩選
   const [price, setPrice] = useState([0, 10000]); // slider 價錢變動
   const [priceSubmit, setPriceSubmit] = useState([0, 10000]); // 價錢篩選
@@ -46,6 +48,7 @@ export default function CourseList() {
             sortMethod: sortMethod,
             startDateSubmit: startDateSubmit,
             endDateSubmit: endDateSubmit,
+            search: search,
           },
         });
         setData(response.data.data);
@@ -68,6 +71,7 @@ export default function CourseList() {
     sortMethod,
     startDateSubmit,
     endDateSubmit,
+    search,
   ]);
 
   const courseItems = [];
@@ -79,6 +83,7 @@ export default function CourseList() {
         <RowCard
           key={i}
           height={15.625}
+          courseId={data[i].course_id}
           image={`${IMAGE_URL}/course/${data[i].course_pictures}`}
           score={5}
           like={false}
@@ -149,6 +154,9 @@ export default function CourseList() {
               setPrice={setPrice}
               person={person}
               setPerson={setPerson}
+              setSearch={setSearch}
+              searchWord={searchWord}
+              setSearchWord={setSearchWord}
             />
           </div>
           {/* -----------------------------右區塊 */}
@@ -163,10 +171,9 @@ export default function CourseList() {
             {/* 卡片清單 */}
             {data.length > 0 ? (
               <>
-                {' '}
                 <div
                   className={
-                    cardStyle === 'col' ? 'd-flex flex-wrap mt-2' : 'mt-2'
+                    cardStyle === 'col' ? 'd-flex flex-wrap mt-2' : 'mt-2 mb-5'
                   }
                   style={{ width: '63rem' }}
                 >

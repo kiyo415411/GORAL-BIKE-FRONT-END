@@ -1,9 +1,12 @@
 import AsideTitle from './Aside/AsideTitle';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import SearchInput from './Aside/SearchInput';
 import CategoryList from './Aside/CategoryList';
 import { BsCalendar3 } from 'react-icons/bs';
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import IconButton from '@mui/material/IconButton';
+import { FiSearch } from 'react-icons/fi';
 
 function CourseAside({
   // ------------------------------ 篩選邊欄 props
@@ -25,6 +28,9 @@ function CourseAside({
   setPrice,
   person,
   setPerson,
+  searchWord,
+  setSearchWord,
+  setSearch,
 }) {
   // ----------------------------------------------- 變化處理
 
@@ -57,6 +63,10 @@ function CourseAside({
     }
   };
 
+  const handleSearch = (e) => {
+    setSearchWord(e.target.value);
+  };
+
   // ----------------------------------------------- 頁面呈現
 
   return (
@@ -64,8 +74,31 @@ function CourseAside({
       <div className="Space" style={{ height: '3rem' }} />
       <div className="scrollbar-space shadow pe-2">
         <div className="course-list-aside p-4" style={{ height: '51rem' }}>
-          {/* 關鍵字篩選 */}
-          <SearchInput />
+          {/* ----------------------------- 關鍵字篩選 */}
+          <div className="pt-3 px-1 pb-5 d-flex justify-content-center">
+            <Paper
+              className="border-primary border-2 rounded-pill d-flex align-items-center ps-4 pe-3"
+              variant="outlined"
+              sx={{ width: '18rem', height: '2.5rem' }}
+            >
+              <InputBase
+                placeholder="搜尋課程名稱"
+                value={searchWord}
+                onChange={handleSearch}
+              />
+              <IconButton
+                className="text-line"
+                type="submit"
+                sx={{ p: '10px' }}
+                aria-label="search"
+                onClick={() => {
+                  setSearch(searchWord);
+                }}
+              >
+                <FiSearch size={26} strokeWidth={3} />
+              </IconButton>
+            </Paper>
+          </div>
           {/* 報名狀態篩選 */}
           <AsideTitle text="報名狀態" />
           <CategoryList list={state} statu={statu} setStatu={setStatu} />
@@ -171,7 +204,7 @@ function CourseAside({
           </div>
           {/* 活動日期 */}
           <AsideTitle text="報名日期" />
-          <div className="d-flex gap-1 mb-5 ps-2">
+          <div className="d-flex gap-1 mb-5 px-2">
             <div className="position-relative w-auto h-auto">
               <div
                 className="bg-primary px-2 position-absolute rounded-end h-100"
