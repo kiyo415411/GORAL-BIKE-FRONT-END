@@ -15,6 +15,7 @@
     "css-loader": "^6.7.1",
     "jquery": "^3.6.0",
     "leaflet": "^1.8.0",
+    "moment": "^2.29.3",
     "node-sass": "^7.0.1",
     "popper.js": "^1.16.1",
     "postcss-loader": "^7.0.0",

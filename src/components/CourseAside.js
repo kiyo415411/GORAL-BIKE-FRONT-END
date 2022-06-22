@@ -3,9 +3,6 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import SearchInput from './Aside/SearchInput';
 import CategoryList from './Aside/CategoryList';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { API_URL } from '../utils/config';
 import { BsCalendar3 } from 'react-icons/bs';
 
 function CourseAside({
@@ -16,33 +13,20 @@ function CourseAside({
   setPersonSubmit,
   category,
   setCategory,
+  startDate,
+  startDateSubmit,
+  setStartDateSubmit,
+  endDate,
+  endDateSubmit,
+  setEndDateSubmit,
+  state,
+  categoryLabel,
+  price,
+  setPrice,
+  person,
+  setPerson,
 }) {
-  // ------------------------------ 篩選值變化宣告
-
-  const [price, setPrice] = useState([0, 10000]); // 價錢
-  const [person, setPerson] = useState([0, 100]); // 人數
-
-  // ------------------------------ 篩選分類宣告
-
-  const [state, setState] = useState([]); // 狀態
-  const [categoryLabel, setCategoryLabel] = useState([]); // 難度分類
-
-  // ------------------------------- 從後端接資料
-
-  useEffect(() => {
-    let getCategory = async () => {
-      try {
-        let response = await axios.get(`${API_URL}/course/`);
-        setState(response.data.stateGroup);
-        setCategoryLabel(response.data.categoryGroup);
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    getCategory();
-  }, [categoryLabel, state]);
-
-  // ------------------------------- 條件變化處理
+  // ----------------------------------------------- 變化處理
 
   // 價錢
   const handlePrice = (event, newPrice) => {
@@ -52,6 +36,17 @@ function CourseAside({
   const handlePerson = (event, newPerson) => {
     setPerson(newPerson);
   };
+  // 最早日期
+  const handleStartDate = (e) => {
+    const startDateValue = e.target.value;
+    setStartDateSubmit(startDateValue);
+  };
+  // 最晚日期
+  const handleEndDate = (e) => {
+    const endDateValue = e.target.value;
+    setEndDateSubmit(endDateValue);
+  };
+
   // 難度
   const handleChecked = (e) => {
     const value = Number(e.target.value);
@@ -61,6 +56,8 @@ function CourseAside({
       setCategory(newCategory);
     }
   };
+
+  // ----------------------------------------------- 頁面呈現
 
   return (
     <div className="sticky-top">
@@ -187,6 +184,11 @@ function CourseAside({
                 type="date"
                 name="dateStart"
                 id="dateStart"
+                value={startDateSubmit ? startDateSubmit : startDate}
+                min={startDate}
+                max={endDateSubmit ? endDateSubmit : endDate}
+                onChange={handleStartDate}
+                required
               />
             </div>
             -
@@ -200,8 +202,13 @@ function CourseAside({
               <input
                 className="date-input ps-2 pb-1"
                 type="date"
-                name="dateStart"
-                id="dateStart"
+                name="dateEnd"
+                id="dateEnd"
+                value={endDateSubmit ? endDateSubmit : endDate}
+                min={startDateSubmit ? startDateSubmit : startDate}
+                max={endDate}
+                onChange={handleEndDate}
+                required
               />
             </div>
           </div>
