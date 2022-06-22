@@ -17,7 +17,7 @@ export default function MapImformation(props) {
           <img
             src={`${IMAGE_URL}${picURL}`}
             className=""
-            style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+            style={{ height: '9rem', width: '100%', objectFit: 'cover' }}
             alt="..."
           />
         </div>
@@ -28,7 +28,7 @@ export default function MapImformation(props) {
             <span className="card-text">{value['林區']}</span>
           </div>
           <div className="row justify-content-between align-items-center my-2">
-            <p className="col-4 card-text mx-3">
+            <p className="col-4 card-text mx-3 my-auto">
               <span>總長度</span>
               {value['總長度'] + '公里'}
             </p>
