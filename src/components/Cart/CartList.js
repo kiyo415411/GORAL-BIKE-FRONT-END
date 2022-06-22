@@ -39,18 +39,20 @@ import CartSummary from './CartSummary';
 function CartList(props) {
   const [open, setOpen] = useState(true);
   const { type } = props;
+  const { productCart } = props;
+  const {
+    cart,
+    items,
+    checkedAll,
+    removeItem,
+    plusOne,
+    minusOne,
+    checkedChange,
+    checkedAllChange,
+    checkedItemRemove,
+  } = productCart;
 
   if ((type === '課程') | (type === '活動')) {
-    const { productCart } = props;
-    const {
-      cart,
-      items,
-      checkedAll,
-      removeItem,
-      checkedChange,
-      checkedAllChange,
-      checkedItemRemove,
-    } = productCart;
     return (
       <>
         <section className="shopping-cart py-3 px-lg-5 px-2">
@@ -76,7 +78,7 @@ function CartList(props) {
                   <div className="col-lg-1">
                     <input
                       type="checkbox"
-                      value={checkedAll}
+                      checked={checkedAll}
                       onChange={() => {
                         checkedAllChange();
                       }}
@@ -120,20 +122,6 @@ function CartList(props) {
       </>
     );
   } else {
-    const { productCart } = props;
-    const {
-      cart,
-      items,
-      checkedAll,
-      removeItem,
-      plusOne,
-      minusOne,
-      checkedChange,
-      checkedAllChange,
-      checkedItemRemove,
-    } = productCart;
-    // console.log('father', cart);
-    // console.log(items);
     return (
       <>
         <section className="shopping-cart py-3 px-lg-5 px-2">

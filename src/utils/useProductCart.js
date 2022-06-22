@@ -4,12 +4,15 @@ import useLocalStorage from './useLocalstorage';
 
 const ProductCartContext = createContext(null);
 
-// initialState = {
+// const initialState = {
 //   items: [],
 //   isEmpty: true,
 //   totalItems: 0,
 //   cartTotal: 0,
-// }
+//   totalCheckItems: 0,
+//   checkedItems: [],
+//   checkedAll: false,
+// };
 
 // item = {
 //   id: '',

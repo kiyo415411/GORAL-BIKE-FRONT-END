@@ -39,7 +39,7 @@ function CartSummary(props) {
             <BsSquareFill className="me-2" />
             <span className="fs-4 fw-bold">{type}總額:</span>
           </div>
-          <div className="fs-4 px-3">${toThousands(cartTotal)}</div>
+          <div className="fs-4 px-3">$ {toThousands(cartTotal)}</div>
         </div>
       </div>
     </>

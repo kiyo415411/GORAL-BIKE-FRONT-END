@@ -66,7 +66,7 @@ function CartItem(props) {
             <div className="col-lg-7 col-5 row mx-0 ">
               <div className="col-12 col-lg text-highlight fw-bold">{name}</div>
               <div className="col-12 col-lg mb-3 mb-lg-0">
-                ${toThousands(price)}
+                $ {toThousands(price)}
               </div>
             </div>
             <div className="col-1 col-lg-1">
@@ -111,7 +111,7 @@ function CartItem(props) {
             </div>
             <div className="col-lg-7 col-5 row mx-0 gap-2 gap-lg-0">
               <div className="col-12 col-lg text-highlight fw-bold">{name}</div>
-              <div className="col-12 col-lg">${toThousands(price)}</div>
+              <div className="col-12 col-lg">$ {toThousands(price)}</div>
               <div className="col-12 col-lg">
                 <div className="input-group">
                   <button

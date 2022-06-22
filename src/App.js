@@ -85,13 +85,13 @@ function App() {
     <>
       <ActivityCartProvider
         localStorageKey="activityCart"
-        initialCartItems={activities}
+        // initialCartItems={activities}
       >
         <CourseCartProvider
           localStorageKey="courseCart"
-          initialCartItems={course}
+          // initialCartItems={course}
         >
-          <ProductCartProvider initialCartItems={products}>
+          <ProductCartProvider>
             <CartProvider>
               <Navbar />
               <ScrollToTop>

@@ -63,33 +63,32 @@ import { useNavigate } from 'react-router-dom';
 function ShoppingCart() {
   const navigate = useNavigate();
   const cart = useCart();
-  const { allCartTotal, setAllCartTotal, setAllCartTotalItems } = cart;
+  const { allCartTotal } = cart;
   const productCart = useProductCart();
   const courseCart = useCourseCart();
   const activityCart = useActivityCart();
-  const productTotalItems = productCart.cart.totalItems;
-  const courseTotalItems = courseCart.cart.totalItems;
-  const activityTotalItems = activityCart.cart.totalItems;
-  const productCartTotal = productCart.cart.cartTotal;
-  const courseCartTotal = courseCart.cart.cartTotal;
-  const activityCartTotal = activityCart.cart.cartTotal;
-
-  useEffect(() => {
-    setAllCartTotal(productCartTotal + courseCartTotal + activityCartTotal);
-    setAllCartTotalItems(
-      productTotalItems + courseTotalItems + activityTotalItems
-    );
-  }, [productCart.cart, courseCart.cart, activityCart.cart]);
 
   return (
     <>
       <div className="container">
         {/* 商品購物車 */}
-        <CartList productCart={productCart} type="商品" />
+        {productCart.cart.isEmpty ? (
+          <div></div>
+        ) : (
+          <CartList productCart={productCart} type="商品" />
+        )}
         {/* 課程購物車 */}
-        <CartList productCart={courseCart} type="課程" />
+        {courseCart.cart.isEmpty ? (
+          <div></div>
+        ) : (
+          <CartList productCart={courseCart} type="課程" />
+        )}
         {/* 活動購物車 */}
-        <CartList productCart={activityCart} type="活動" />
+        {activityCart.cart.isEmpty ? (
+          <div></div>
+        ) : (
+          <CartList productCart={activityCart} type="活動" />
+        )}
         {/* 三個購物車加總 */}
         <Summary allCartTotal={allCartTotal} />
         {/* 按鈕群組 */}
@@ -101,7 +100,11 @@ function ShoppingCart() {
             <button
               className="btn btn-primary rounded-0 fs-4 fw-bold"
               onClick={() => {
-                navigate('/shopping-cart/checkout');
+                if (allCartTotal === 0) {
+                  alert('請勾選結帳商品');
+                } else {
+                  navigate('/shopping-cart/checkout');
+                }
               }}
             >
               商品結帳

@@ -118,7 +118,13 @@ const checkItemRemove = (state, action) => {
 // 購物車結帳
 const checkoutCart = (state, action) => {
   const newStateItem = state.items.filter((item) => item.checked === false);
-  const newState = { ...state, items: newStateItem, checkedItems: [] };
+  const newState = {
+    ...state,
+    items: newStateItem,
+    checkedItems: [],
+    cartTotal: 0,
+    totalCheckItems: 0,
+  };
   return newState;
 };
 
@@ -196,16 +202,21 @@ const calculateTotalCheckedItems = (items) => {
 // 生成新的購物車狀態
 const generateCartState = (state, items) => {
   const isEmpty = items.length === 0;
+  const checkedAll = items.every((item) => {
+    return item.checked === true;
+  });
+  console.log(checkedAll);
 
   return {
     ...initialState,
     ...state,
     // 將 itemTotal 塞入 items 陣列
     items: calculateItemTotals(items),
-    totalCheckItems: calculateTotalCheckedItems(items),
     totalItems: calculateTotalItems(items),
-    cartTotal: calculateItemsTotal(items),
     checkedItems: checkedItemsArray(items),
+    totalCheckItems: calculateTotalCheckedItems(items),
+    cartTotal: calculateItemsTotal(items),
+    checkedAll,
     isEmpty,
   };
 };

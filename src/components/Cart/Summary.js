@@ -11,7 +11,7 @@ function Summary({ allCartTotal }) {
         </div>
         <div className="row col-md-12 col-12 fs-6 justify-content-end mb-2">
           <div className="col-md-2 col">總計</div>
-          <div className="col-md-2 col">${toThousands(allCartTotal)}</div>
+          <div className="col-md-2 col">$ {toThousands(allCartTotal)}</div>
         </div>
         <div className="row col-md-12 col-12 fs-6 justify-content-end mb-2">
           <div className="col-md-2 col">折扣金額</div>
