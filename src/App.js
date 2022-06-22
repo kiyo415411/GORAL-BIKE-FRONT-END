@@ -20,8 +20,8 @@ import ScrollToTop from './components/ScrollToTop';
 function App() {
   return (
     <>
+      <Navbar />
       <ScrollToTop>
-        <Navbar />
         <Routes>
           <Route path="/shopping-cart/checkout" element={<Checkout />} />
           <Route path="/shopping-cart" element={<ShoppingCart />} />
@@ -36,8 +36,8 @@ function App() {
           <Route path="/Map" element={<Map />} />
           <Route path="/Map/MapDetail/:mapName" element={<MapDetail />} />
         </Routes>
-        <Footer />
       </ScrollToTop>
+      <Footer />
     </>
   );
 }

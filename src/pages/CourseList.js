@@ -24,6 +24,8 @@ export default function CourseList() {
   const [personSubmit, setPersonSubmit] = useState([0, 100]);
   // 課程難度篩選
   const [category, setCategory] = useState([1, 2]);
+  // 排序狀態
+  const [sortMethod, setSortMethod] = useState('hotSort');
 
   useEffect(() => {
     let getData = async () => {
@@ -35,6 +37,7 @@ export default function CourseList() {
             priceSubmit: priceSubmit,
             personSubmit: personSubmit,
             category: category,
+            sortMethod: sortMethod,
           },
         });
         setData(response.data.data);
@@ -44,7 +47,7 @@ export default function CourseList() {
       }
     };
     getData();
-  }, [page, statu, priceSubmit, personSubmit, category]);
+  }, [page, statu, priceSubmit, personSubmit, category, sortMethod]);
 
   const courseItems = [];
 
@@ -118,7 +121,12 @@ export default function CourseList() {
           {/* -----------------------------右區塊 */}
           <div className="col-auto">
             {/* 排序 */}
-            <TopSort cardStyle={cardStyle} setCardStyle={setCardStyle} />
+            <TopSort
+              cardStyle={cardStyle}
+              setCardStyle={setCardStyle}
+              sortMethod={sortMethod}
+              setSortMethod={setSortMethod}
+            />
             {/* 卡片清單 */}
             <div
               className={cardStyle === 'col' ? 'd-flex flex-wrap mt-2' : 'mt-2'}
