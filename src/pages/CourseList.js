@@ -22,6 +22,8 @@ export default function CourseList() {
   const [priceSubmit, setPriceSubmit] = useState([0, 10000]);
   // 人數篩選
   const [personSubmit, setPersonSubmit] = useState([0, 100]);
+  // 課程難度篩選
+  const [category, setCategory] = useState([1, 2]);
 
   useEffect(() => {
     let getData = async () => {
@@ -32,6 +34,7 @@ export default function CourseList() {
             statu: statu,
             priceSubmit: priceSubmit,
             personSubmit: personSubmit,
+            category: category,
           },
         });
         setData(response.data.data);
@@ -41,7 +44,7 @@ export default function CourseList() {
       }
     };
     getData();
-  }, [page, statu, priceSubmit, personSubmit]);
+  }, [page, statu, priceSubmit, personSubmit, category]);
 
   const courseItems = [];
 
@@ -107,6 +110,8 @@ export default function CourseList() {
               setPriceSubmit={setPriceSubmit}
               personSubmit={personSubmit}
               setPersonSubmit={setPersonSubmit}
+              category={category}
+              setCategory={setCategory}
             />
           </div>
           {/* -----------------------------右區塊 */}
