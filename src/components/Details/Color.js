@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 function ColorPalette(props) {
-  const [color, setColor] = useState(props.color);
-
+  const [color] = useState(props.color);
   const [background, setBackground] = useState('#071415');
-  const [current, setCurrent] = useState(null);
-  const [nowColor, setNowColor] = useState(null);
+  const [current] = useState(null);
 
   return (
     <div className="App" style={{ background: background }}>
@@ -13,7 +11,10 @@ function ColorPalette(props) {
         {color.map((color, index) => {
           console.log(color);
           return (
-            <div key={index} className="col-2 p-0 d-flex justify-content-center">
+            <div
+              key={index}
+              className="col-2 p-0 d-flex justify-content-center"
+            >
               <div
                 className="rounded-circle m-1"
                 style={{

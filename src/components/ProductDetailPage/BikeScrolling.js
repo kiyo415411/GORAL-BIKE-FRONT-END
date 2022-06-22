@@ -2,7 +2,7 @@ import BikeCardSmall from './BikeCardSmall';
 import { useState } from 'react';
 
 function BikeScrolling() {
-  const [bikes, setBikes] = useState([
+  const [bikes] = useState([
     {
       Bike: 'Bike1',
       Rating: 5,
@@ -74,8 +74,6 @@ function BikeScrolling() {
         {bikes.map((item, index) => {
           return (
             <li key={index} className="me-5 mt-4">
-              {/* {console.log(item)}
-        {console.log(index)} */}
               <BikeCardSmall
                 bike={item.Bike}
                 rating={item.Rating}

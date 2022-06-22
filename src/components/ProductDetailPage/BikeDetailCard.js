@@ -4,7 +4,7 @@ import { BsFillCheckCircleFill } from 'react-icons/bs';
 import LabelCard from '../Label/LabelCard';
 
 function BikeDetailCard() {
-  const [bikeLabel, setBikeLabel] = useState([
+  const [bikeLabel] = useState([
     'RACELITE 61 ALUMINIUM',
     'X-TAPER HEADTUBE',
     'SMOOTH WELDING',
@@ -15,7 +15,7 @@ function BikeDetailCard() {
     'TECHNO FORMING SYSTEM',
     'F-MOUNT',
   ]);
-  const [bikeDetail, setbikeDetail] = useState([
+  const [bikeDetail] = useState([
     {
       Name: 'BIG NINE 15',
       ShortDesc:
@@ -56,29 +56,19 @@ function BikeDetailCard() {
         </div>
         <div>
           <BikeDetailDescription className="mx-5 w-75" />
-          {/* bike name
-            description
-            price
-            colour picker
-            add to cart */}
         </div>
       </div>
-      {/* {bikeDetail.map((v, i, a) => {
-        return (
-          <ul key={i}>
-            <li>{v.LongDesc[i]}</li>;
-          </ul>
-        );
-      })} */}
       <div className="mt-5">
         <div>
           {DownDesc.map((v, i) => {
-            return <p className="text-content">{v}</p>;
+            return (
+              <p key={i} className="text-content">
+                {v}
+              </p>
+            );
           })}
         </div>
 
-        {/* //   <p className="m-2">{bikeDetail.Placeholder.LongDesc[1]}</p>
-    //   <p className="m-2 text-content">{bikeDetail.Placeholder. */}
         <div className="d-flex justify-content-start my-5">
           <div className="me-5">
             <h3 className="my-5">
@@ -111,7 +101,7 @@ function BikeDetailCard() {
         <h1>技術</h1>
         <div className="row">
           {bikeLabel.map((v, i) => {
-            return <LabelCard name={v} />;
+            return <LabelCard name={v} key={i} />;
           })}
         </div>
       </div>

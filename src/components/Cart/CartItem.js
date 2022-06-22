@@ -3,7 +3,7 @@ import { BsHeart } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
 
 function CartItem(props) {
-  const { name, image, price, count, totalPrice, type } = props;
+  const { name, price, totalPrice, type } = props;
 
   if ((type === '課程') | (type === '活動')) {
     return (

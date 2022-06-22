@@ -1,5 +1,4 @@
-import { BsHeartFill, BsHeart } from 'react-icons/bs';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Like from '../Aside/Like.js';
 import { Link } from 'react-router-dom';
 function separator(num) {

@@ -1,32 +1,41 @@
-export default function RangeSlider({
-  min, // 最小值
-  max, // 最大值
-  step, // 間隔
-  setmin, // 範圍最小值選擇
-  setmax, // 範圍最大值選擇
-  startunit, // 前綴單位
-  endunit, // 後綴單位
-  text, // 按鈕字串
-}) {
+import { Box } from '@mui/material';
+import Slider from '@mui/material/Slider';
+
+export default function RangeSlider(setPriceSubmit) {
+  const step = 1000;
+
   return (
-    <div>
-      <input
-        type="range"
-        className="form-range"
-        min={min}
-        max={max}
-        step={step}
-      />
-      <div className="d-flex align-items-center justify-content-between  mb-5">
-        <p className="m-0 fs-5">
-          {startunit}
-          {setmin} {endunit} - {startunit}
-          {setmax} {endunit}
+    <>
+      <Box sx={{ width: 250 }} className="mx-auto">
+        <Slider
+          sx={{
+            color: 'var(--bs-content)',
+            '& .MuiSlider-thumb': {
+              width: '0.8rem',
+              height: '0.8rem',
+            },
+            '& .css-1gv0vcd-MuiSlider-track': {
+              color: 'var(--bs-subcontent)',
+            },
+            '& .css-14pt78w-MuiSlider-rail': {
+              color: 'var(--bs-line)',
+            },
+          }}
+          value={setPriceSubmit.price}
+          step={step}
+          onChange={(e) => {
+            setPriceSubmit.setPrice(e.target.value);
+          }}
+          min={0}
+          max={200000}
+        />
+      </Box>
+      <div className="d-flex align-items-center justify-content-between px-2 mb-2">
+        <p className="m-0 fs-6">
+          $ {setPriceSubmit.price[0].toLocaleString()} - ${' '}
+          {setPriceSubmit.price[1].toLocaleString()}
         </p>
-        <button className="btn fs-6 border-2 px-4 py-1 rounded-0 btn-primary rounded-pill">
-          篩選
-        </button>
       </div>
-    </div>
+    </>
   );
 }

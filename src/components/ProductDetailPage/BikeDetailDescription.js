@@ -7,12 +7,7 @@ import { useState } from 'react';
 
 function BikeDetailDescription(props) {
   const [liked, setLiked] = useState([false]);
-  const [color, setColor] = useState([
-    '#32CE13',
-    '#E0CF05',
-    '#D3484F',
-    '#6F6669',
-  ]);
+  const [color] = useState(['#32CE13', '#E0CF05', '#D3484F', '#6F6669']);
   return (
     <div width="478px" className={props.className}>
       <div>

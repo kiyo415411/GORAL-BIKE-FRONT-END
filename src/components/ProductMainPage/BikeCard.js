@@ -1,7 +1,7 @@
-import { BsHeartFill, BsHeart } from 'react-icons/bs';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Like from '../Aside/Like.js';
 import { Link } from 'react-router-dom';
+import { API_URL, IMAGE_URL } from '../../utils/config.js';
 function separator(num) {
   let str = num.toString().split('.');
   str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -10,31 +10,6 @@ function separator(num) {
 
 function BikeCard(props) {
   const [liked, setLiked] = useState(false);
-  // function like(l) {
-  //   if (l === false) {
-  //     return (
-  //       <BsHeart
-  //         color="red"
-  //         onClick={() => {
-  //           setLiked(!liked);
-  //         }}
-  //       />
-  //     );
-  //   } else if (l === true) {
-  //     return (
-  //       <BsHeartFill
-  //         color="red"
-  //         onClick={() => {
-  //           setLiked(!liked);
-  //         }}
-  //       />
-  //     );
-  //   }
-  // }
-  console.log(props);
-  // function handleLike() {
-  //   this.setLike((prevState) => !prevState);
-  // }
   return (
     <>
       <div
@@ -44,7 +19,8 @@ function BikeCard(props) {
         <div className="row g-0 justify-content-center">
           <div className="col-4 h-75 my-auto" style={{ width: 328 }}>
             <img
-              src={require('../../images/bikes/' + props.bike + '.png')}
+              // src={require(`${IMAGE_URL}/bikes/${props.bike}`)}
+              src={`${IMAGE_URL}/bikes/${props.bike}`}
               className="img-fluid rounded-start my-auto"
               alt="..."
             />

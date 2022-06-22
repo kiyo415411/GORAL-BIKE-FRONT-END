@@ -1,51 +1,46 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 function ColorPalette(props) {
-  const [color, setColor] = useState([
-    '#643225',
-    '#D30000',
-    '#F4890A',
-    '#F4C10A',
-    '#80A23F',
-    '#3FA29C',
-    '#3F72A2',
-    '#3F49A2',
-    '#6628B6',
-    '#3E3E3E',
-    '#C4C4C4',
-    '#F6F6F6',
-  ]);
-
   const [background, setBackground] = useState('#071415');
-  const [current, setCurrent] = useState(null);
-  const [nowColor, setNowColor] = useState(null);
-
+  // const [current, setCurrent] = useState(null);props.currentColor
   return (
-    <div className="App" style={{ background: background }}>
-      {current !== null && <h1>Copied {current}</h1>}
-      <div className="container row p-0 justify-content-center m-0">
-        {color.map((color, index) => {
-          // console.log(color);
-          return (
-            <div
-              key={index}
-              className="col-2 p-0 d-flex justify-content-center"
-            >
+    <div>
+      <div className="App" style={{ background: background }}>
+        <div className="container row p-0 justify-content-center m-0">
+          {props.color.map((v, index) => {
+            const color = v.color_value;
+
+            return (
               <div
-                className="rounded-circle m-1"
-                style={{
-                  background: color,
-                  width: 24,
-                  height: 24,
-                  filter: 'brightness(85%)',
-                  boxShadow: color === background ? '0 0 5px #000' : '',
-                  cursor: 'pointer',
-                }}
-                onClick={() => setBackground(color)}
-              />
-            </div>
-          );
-        })}
+                key={index}
+                className="col-2 p-0 d-flex justify-content-center"
+              >
+                <div
+                  className="rounded-circle m-1"
+                  style={{
+                    background: color,
+                    width: 24,
+                    height: 24,
+                    filter: 'brightness(85%)',
+                    boxShadow: color === background ? '0 0 5px #000' : '',
+                    cursor: 'pointer',
+                  }}
+                  onClick={(e) => {
+                    setBackground(color);
+                    props.setCurrentColor(v.color_name);
+                  }}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
+      {/* A BUTTON FOR SENDING THE DATA TO THE BACKEND INCASE I NEED IT */}
+      {/* <div className="d-flex justify-content-between">
+        <div></div>
+        <button className="btn fs-6 border-2 px-4 py-1 rounded-0 btn-primary rounded-pill">
+          篩選
+        </button>
+      </div> */}
     </div>
   );
 }

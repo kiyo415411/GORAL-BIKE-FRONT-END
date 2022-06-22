@@ -1,11 +1,8 @@
 import './App.css';
 import Navbar from './layout/Public/NavBar';
-<<<<<<< HEAD
 // import Index from './layout/Home';
 import ProductPage from './components/ProductMainPage/ProductPage';
 import BikeDetailPage from './components/ProductDetailPage/BikeDetailPage';
-=======
->>>>>>> develope
 import Map from './layout/Map';
 import Index from './layout/Home/index';
 import Footer from './layout/Public/Footer';
@@ -29,10 +26,8 @@ function App() {
         <Route path="/shopping-cart/checkout" element={<Checkout />} />
         <Route path="/shopping-cart" element={<ShoppingCart />} />
         <Route path="/map" element={<Map />} />
-<<<<<<< HEAD
         <Route path="/Product" element={<ProductPage />} />
         <Route path="/Product/Detail" element={<BikeDetailPage />} />
-=======
         <Route path="/course/detail" element={<CourseDetail />} />
         <Route path="/course/like" element={<CourseLike />} />
         <Route path="/course" element={<CourseList />} />
@@ -40,7 +35,6 @@ function App() {
         <Route path="/activity/like" element={<ActivityLike />} />
         <Route path="/activity" element={<ActivityList />} />
         <Route exact path="/" element={<Index />} />
->>>>>>> develope
       </Routes>
       <Footer />
     </>

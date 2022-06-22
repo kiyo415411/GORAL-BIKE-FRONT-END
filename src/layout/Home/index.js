@@ -123,19 +123,25 @@ function Index() {
               <div className="card border-0 mt-5" style={{ width: '40%' }}>
                 <img src={ACTIVTY} className="card-img-top" alt="..." />
                 <div className="card-body">
-                  <p className="card-text fs-1 text-center">XTERRA TAIWAN 2022</p>
+                  <p className="card-text fs-1 text-center">
+                    XTERRA TAIWAN 2022
+                  </p>
                 </div>
               </div>
               <div className="card border-0 mt-5" style={{ width: '40%' }}>
                 <img src={ACTIVTY} className="card-img-top" alt="..." />
                 <div className="card-body">
-                  <p className="card-text fs-1 text-center">XTERRA TAIWAN 2022</p>
+                  <p className="card-text fs-1 text-center">
+                    XTERRA TAIWAN 2022
+                  </p>
                 </div>
               </div>
               <div className="card border-0 mt-5" style={{ width: '40%' }}>
                 <img src={ACTIVTY} className="card-img-top" alt="..." />
                 <div className="card-body">
-                  <p className="card-text fs-1 text-center">XTERRA TAIWAN 2022</p>
+                  <p className="card-text fs-1 text-center">
+                    XTERRA TAIWAN 2022
+                  </p>
                 </div>
               </div>
             </div>
