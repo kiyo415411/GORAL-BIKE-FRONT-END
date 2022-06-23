@@ -1,6 +1,5 @@
 import VIDEO from '../../videos/index-heros.webm';
 import BIKE from '../../images/bike.svg';
-import CUSTOM from '../../images/custom.png';
 import EVENT from '../../images/event.png';
 import LOCATION from '../../images/Location.svg';
 import ACTIVTY from '../../images/Acitvity.png';
@@ -8,8 +7,24 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
 import DataAPI from '../Map/DataAPI';
-import '~slick-carousel/slick/slick.css';
-import '~slick-carousel/slick/slick-theme.css';
+
+//Swiper
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+// import required modules
+import { Pagination } from 'swiper';
+
+const pagination = {
+  clickable: true,
+  renderBullet: function (index, className) {
+    return '<span class="' + className + '">' + (index + 1) + '</span>';
+  },
+};
 
 export default function Index() {
   useEffect(() => {
@@ -57,53 +72,44 @@ export default function Index() {
             </article>
           </section>
           {/* PRODUCT */}
-          <section className="row justify-content-center m-5 p-5">
-            <article className="col-8 row justify-content-between">
-              <div className="col-3 my-auto">
-                <h1 className="display-6 fw-bold">BIG.NINE 200</h1>
-                <p className="card-text fs-6">
-                  鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano Deore
-                  1x10零組件搭配，Suntour避震前叉。
-                </p>
-                <a className="text-danger fw-bold fs-6" href="#/">
-                  了解更多商品 &nbsp;&nbsp;&gt;
-                </a>
-              </div>
-              <div className="card border-0 col-8">
-                <img src={BIKE} className="col-8 card-img-top" alt="..." />
-              </div>
-            </article>
-            <nav className="col-12">
-              <ul className="list-unstyled text-center row mt-5">
-                <li className="col-2">SPORT/TOUR</li>
-                <li className="col-2">全避震登山車</li>
-                <li className="col-2">單避震登山車</li>
-                <li className="col-2">XC/MARATHON</li>
-                <li className="col-2">MARATHON / TRAIL</li>
-                <li className="col-2">ENDURO</li>
-                <li className="col-2">TRAIL</li>
-              </ul>
-            </nav>
-          </section>
-          {/* CUSTOM */}
-          {/* <section className="position-relative overflow-hidden">
-            <img src={CUSTOM} alt="" />
-            <div
-              className="position-absolute"
-              style={{
-                left: '15%',
-                top: '58%',
-              }}
+          <section className="w-60 m-auto mt-5 p-5">
+            <Swiper
+              pagination={pagination}
+              modules={[Pagination]}
+              className="mySwiper"
             >
-              <h1 className="display-6 fw-bold text-white">
-                引爆你的創意魂打造專屬登山車
-              </h1>
-              <button className="btn btn-danger px-5 fw-bolder mt-3">
-                開始客製
-              </button>
-            </div>
-          </section> */}
-          {/* EVENT */}
+              <SwiperSlide className="row mx-auto">
+                <div className="col-4 my-auto">
+                  <h1 className="display-6 fw-bold">BIG.NINE 200</h1>
+                  <p className="fs-6">
+                    鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano
+                    Deore 1x10零組件搭配，Suntour避震前叉。
+                  </p>
+                  <a className="text-danger fw-bold fs-6" href="#/">
+                    了解更多商品 &nbsp;&nbsp;&gt;
+                  </a>
+                </div>
+                <div className="card border-0 col-8 my-auto">
+                  <img src={BIKE} className="col-8 card-img-top" alt="..." />
+                </div>
+              </SwiperSlide>
+              <SwiperSlide className="row mx-auto">
+                <div className="col-4 my-auto">
+                  <h1 className="display-6 fw-bold">BIG.NINE 200</h1>
+                  <p className="fs-6">
+                    鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano
+                    Deore 1x10零組件搭配，Suntour避震前叉。
+                  </p>
+                  <a className="text-danger fw-bold fs-6" href="#/">
+                    了解更多商品 &nbsp;&nbsp;&gt;
+                  </a>
+                </div>
+                <div className="card border-0 col-8 my-auto">
+                  <img src={BIKE} className="col-8 card-img-top" alt="..." />
+                </div>
+              </SwiperSlide>
+            </Swiper>
+          </section>
           <section className="row p-5 overflow-hidden m-0">
             <article className="col-4 my-auto me-5" style={{ width: '25%' }}>
               <h2 className="fw-bold">登山車訓練營</h2>
