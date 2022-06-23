@@ -221,7 +221,6 @@ function CourseAside({
                 min={startDate}
                 max={endDateSubmit ? endDateSubmit : endDate}
                 onChange={handleStartDate}
-                required
               />
             </div>
             -
@@ -241,7 +240,6 @@ function CourseAside({
                 min={startDateSubmit ? startDateSubmit : startDate}
                 max={endDate}
                 onChange={handleEndDate}
-                required
               />
             </div>
           </div>
