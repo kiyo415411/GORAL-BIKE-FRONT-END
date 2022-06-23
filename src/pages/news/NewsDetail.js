@@ -47,7 +47,7 @@ export default function NewsDetail() {
           <h3 className="col-12 text-primary">最新新聞</h3>
           <section className="col-12 d-flex justify-content-between">
             <span className="">{data.date}</span>
-            <span className="">點擊次數：{data.touch} 次</span>
+            <span className="">當前觀看次數：{data.touch} 次</span>
           </section>
           <Carousel fade>
             {dataPic.map((value, index) => {

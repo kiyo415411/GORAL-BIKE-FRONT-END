@@ -4,8 +4,29 @@ import CUSTOM from '../../images/custom.png';
 import EVENT from '../../images/event.png';
 import LOCATION from '../../images/Location.svg';
 import ACTIVTY from '../../images/Acitvity.png';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { API_URL } from '../../utils/config';
+import DataAPI from '../Map/DataAPI';
+import '~slick-carousel/slick/slick.css';
+import '~slick-carousel/slick/slick-theme.css';
 
 export default function Index() {
+  useEffect(() => {
+    const getIndexData = async () => {
+      try {
+        // 需要等待資料pending，不然useState會是空值
+        const getDataValue = await DataAPI();
+        const getNewsValue = await axios.get(`${API_URL}/news`);
+        const getProductValue = await axios.get(`${API_URL}/product`);
+        const getActivitytValue = await axios.get(`${API_URL}/activity`);
+      } catch (e) {
+        throw new Error(e);
+      }
+    };
+    getIndexData();
+  }, []);
+
   return (
     <>
       <main>
@@ -37,35 +58,35 @@ export default function Index() {
           </section>
           {/* PRODUCT */}
           <section className="row justify-content-center m-5 p-5">
-            <aside className="col-4">
-              <ul className="list-unstyled text-center lh-lg row gap-5">
-                <li>SPORT/TOUR</li>
-                <li>全避震登山車</li>
-                <li>單避震登山車</li>
-                <li>XC/MARATHON</li>
-                <li>MARATHON / TRAIL</li>
-                <li>ENDURO</li>
-                <li>TRAIL</li>
-              </ul>
-            </aside>
-            <article className="col-8">
-              <div className="card border-0" style={{ width: '68.125rem' }}>
-                <img src={BIKE} className="card-img-top" alt="..." />
-                <div className="card-body mx-auto">
-                  <h1 className="display-6 fw-bold">BIG.NINE 200</h1>
-                  <p className="card-text fs-6">
-                    鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano
-                    Deore 1x10零組件搭配，Suntour避震前叉。
-                  </p>
-                  <a className="text-danger fw-bold fs-6" href="#/">
-                    了解更多商品 &nbsp;&nbsp;&gt;
-                  </a>
-                </div>
+            <article className="col-8 row justify-content-between">
+              <div className="col-3 my-auto">
+                <h1 className="display-6 fw-bold">BIG.NINE 200</h1>
+                <p className="card-text fs-6">
+                  鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano Deore
+                  1x10零組件搭配，Suntour避震前叉。
+                </p>
+                <a className="text-danger fw-bold fs-6" href="#/">
+                  了解更多商品 &nbsp;&nbsp;&gt;
+                </a>
+              </div>
+              <div className="card border-0 col-8">
+                <img src={BIKE} className="col-8 card-img-top" alt="..." />
               </div>
             </article>
+            <nav className="col-12">
+              <ul className="list-unstyled text-center row mt-5">
+                <li className="col-2">SPORT/TOUR</li>
+                <li className="col-2">全避震登山車</li>
+                <li className="col-2">單避震登山車</li>
+                <li className="col-2">XC/MARATHON</li>
+                <li className="col-2">MARATHON / TRAIL</li>
+                <li className="col-2">ENDURO</li>
+                <li className="col-2">TRAIL</li>
+              </ul>
+            </nav>
           </section>
           {/* CUSTOM */}
-          <section className="position-relative overflow-hidden">
+          {/* <section className="position-relative overflow-hidden">
             <img src={CUSTOM} alt="" />
             <div
               className="position-absolute"
@@ -81,7 +102,7 @@ export default function Index() {
                 開始客製
               </button>
             </div>
-          </section>
+          </section> */}
           {/* EVENT */}
           <section className="row p-5 overflow-hidden m-0">
             <article className="col-4 my-auto me-5" style={{ width: '25%' }}>

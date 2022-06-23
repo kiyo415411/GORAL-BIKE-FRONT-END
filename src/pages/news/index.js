@@ -14,7 +14,7 @@ export default function News() {
         // 需要等待資料pending，不然useState會是空值
         const getNewsValue = await axios.get(`${API_URL}/news`);
         setNews(getNewsValue.data.newsResults);
-        setFilterNews(getNewsValue.data.newsResults);
+        setFilterNews(getNewsValue.data.newsLimitResults);
       } catch (e) {
         throw new Error(e);
       }
