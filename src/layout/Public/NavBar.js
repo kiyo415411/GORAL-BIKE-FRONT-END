@@ -1,6 +1,7 @@
 import Logo from '../../images/Logo.png';
 import { BsPersonCircle, BsCart3, BsHeart } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import LoginModal from '../../components/auth/LoginModal';
 
 function Navbar() {
   return (
@@ -35,9 +36,7 @@ function Navbar() {
         <div className="col-4 col-md-2">
           <ul className="list-unstyled row my-auto justify-content-end gap-2">
             <li className="col-2 text-center">
-              <a className="text-muted" href="#/">
-                <BsPersonCircle />
-              </a>
+              <LoginModal />
             </li>
             <li className="col-2 text-center">
               <a className="text-muted" href="#/">

@@ -1,9 +1,11 @@
-function SignUp() {
+function SignUp(props) {
+  const { handleChangeModal } = props;
+
   return (
     <>
-      <div className="container-fluid bg-dark">
-        <div className="row justify-content-center ">
-          <div className="col-md-12 col-lg-10 singup">
+      <div className="container-fluid">
+        <div className="row justify-content-center">
+          <div className="col-md-12 singup p-0">
             <div className="wrap d-md-flex">
               <div className="img"></div>
               <div className="p-4 p-md-5 bg-white">
@@ -11,7 +13,7 @@ function SignUp() {
                   <div className="text-center">
                     <img
                       className="goral_logo object-cover"
-                      src={require(`../images/Logo-green.png`)}
+                      src={require(`../../images/Logo-green.png`)}
                       alt=""
                     ></img>
                     <h4 className="pb-4 ">註冊Goral帳號</h4>
@@ -76,7 +78,14 @@ function SignUp() {
                   <div className="py-3 text-center">
                     <p>
                       已有帳號？
-                      <a href="#/" className="text-hightlight">
+                      <a
+                        href="#/"
+                        className="text-hightlight"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleChangeModal('登入');
+                        }}
+                      >
                         馬上登入
                       </a>
                     </p>
@@ -89,7 +98,7 @@ function SignUp() {
                   <div>
                     <img
                       className="google_logo"
-                      src={require(`../images/Google_Logo.png`)}
+                      src={require(`../../images/Google_Logo.png`)}
                       alt=""
                     />
                   </div>
