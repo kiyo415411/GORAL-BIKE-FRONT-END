@@ -96,6 +96,7 @@ export default function CourseList() {
           text={data[i].course_content}
           category={data[i].course_category_name}
           venue={data[i].venue_name}
+          datailLink={`/course/${data[i].id}`}
         />
       );
     } else {
@@ -115,6 +116,7 @@ export default function CourseList() {
           text={data[i].course_content}
           category={data[i].course_category_name}
           venue={data[i].venue_name}
+          datailLink={`/course/${data[i].id}`}
         />
       );
     }

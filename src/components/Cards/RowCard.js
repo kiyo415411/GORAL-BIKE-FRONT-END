@@ -31,6 +31,7 @@ function RowCard({
   count,
   category,
   venue,
+  datailLink,
 }) {
   const [liked, setLiked] = useState(false);
   return (
@@ -41,7 +42,7 @@ function RowCard({
       <div className="overflow-hidden d-flex">
         <div className="product-img">
           {/* 圖片 */}
-          <Link to={`/course/${courseId}`}>
+          <Link to={datailLink}>
             <img src={image} className="object-fit" alt={title} />
           </Link>
         </div>
@@ -55,7 +56,7 @@ function RowCard({
             </div>
           </div>
           <div className="d-flex justify-content-between align-items-center">
-            <Link to={`/course/${courseId}`}>
+            <Link to={datailLink}>
               <div className="d-flex align-items-center gap-2">
                 {/* 時間 */}
                 <p className="text-primary fs-3 fw-bold m-0">{time}</p>
@@ -82,19 +83,19 @@ function RowCard({
             {/* ------------------------ 地點 */}
             {venue === '北部' ? (
               <p className="bg-badge-red badge rounded-pill px-3 fw-light m-0">
-                {location}
+                {location ? location : venue}
               </p>
             ) : venue === '中部' ? (
               <p className="bg-badge-yellow badge rounded-pill px-3 fw-light m-0">
-                {location}
+                {location ? location : venue}
               </p>
             ) : venue === '南部' ? (
               <p className="bg-badge-lightblue badge rounded-pill px-3 fw-light m-0">
-                {location}
+                {location ? location : venue}
               </p>
             ) : venue === '東部' ? (
               <p className="bg-secondary badge rounded-pill px-3 fw-light m-0">
-                {location}
+                {location ? location : venue}
               </p>
             ) : (
               ''
@@ -124,7 +125,7 @@ function RowCard({
           <p className="row-card-text card-text text-subcontent">{text}</p>
           {/* 購買按鈕 */}
           <div className="d-flex gap-2 align-items-center">
-            <Link to={`/course/${courseId}`}>
+            <Link to={datailLink}>
               <p className="text-nowrap m-0 btn fs-6 border-2 px-4 py-1 rounded-0 btn-primary rounded-pill">
                 課程詳情
               </p>

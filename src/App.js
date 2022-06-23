@@ -29,8 +29,8 @@ function App() {
           <Route path="/course/like" element={<CourseLike />} />
           <Route path="/course/:courseId" element={<CourseDetail />} />
           <Route path="/course" element={<CourseList />} />
-          <Route path="/activity/detail" element={<ActivityDetail />} />
           <Route path="/activity/like" element={<ActivityLike />} />
+          <Route path="/activity/:courseId" element={<ActivityDetail />} />
           <Route path="/activity" element={<ActivityList />} />
           <Route exact path="/" element={<Index />} />
           <Route path="/Map" element={<Map />} />

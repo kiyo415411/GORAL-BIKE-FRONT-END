@@ -16,6 +16,7 @@ export default function ColCard({
   count,
   category,
   venue,
+  datailLink,
 }) {
   const [liked, setLiked] = useState(false);
   return (
@@ -24,7 +25,7 @@ export default function ColCard({
       style={{ width: width + 'rem' }}
     >
       <div className="col-card-img-box overflow-hidden">
-        <Link to={`/course/${courseId}`}>
+        <Link to={datailLink}>
           <img
             src={image}
             className="card-img-top rounded-0 object-fit"
@@ -34,7 +35,7 @@ export default function ColCard({
       </div>
       <div className="card-body d-grid gap-2 px-4">
         <div className="d-flex justify-content-between align-items-center">
-          <Link to={`/course/${courseId}`}>
+          <Link to={datailLink}>
             <h3 className="card-title m-0">{title}</h3>
           </Link>
           <div className="text-highlight">
@@ -58,19 +59,19 @@ export default function ColCard({
           {/* ------------------------ 地點 */}
           {venue === '北部' ? (
             <p className="bg-badge-red badge rounded-pill px-3 fw-light m-0">
-              {location}
+              {location ? location : venue}
             </p>
           ) : venue === '中部' ? (
             <p className="bg-badge-yellow badge rounded-pill px-3 fw-light m-0">
-              {location}
+              {location ? location : venue}
             </p>
           ) : venue === '南部' ? (
             <p className="bg-badge-lightblue badge rounded-pill px-3 fw-light m-0">
-              {location}
+              {location ? location : venue}
             </p>
           ) : venue === '東部' ? (
             <p className="bg-secondary badge rounded-pill px-3 fw-light m-0">
-              {location}
+              {location ? location : venue}
             </p>
           ) : (
             ''
@@ -107,7 +108,7 @@ export default function ColCard({
         <p className="col-card-text card-text text-content">{text}</p>
         {/* 購買按鈕 */}
         <div className="d-flex align-items-center justify-content-between">
-          <Link to={`/course/${courseId}`}>
+          <Link to={datailLink}>
             <p className="text-nowrap m-0 btn fs-6 border-2 px-4 py-1 rounded-0 btn-primary rounded-pill">
               課程詳情
             </p>
