@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form, useField, ErrorMessage } from 'formik';
+import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
 
 // const handleChangeModal = (modal) => {
@@ -25,7 +25,7 @@ const MyTextField = ({ label, ...props }) => {
     <>
       <input {...field} {...props} />
       {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
+        <div className="error-msg">{meta.error}</div>
       ) : null}
     </>
   );
@@ -48,11 +48,8 @@ function Login(props) {
                 <h6 className="text-hightlight">會員登入</h6>
               </div>
               <Formik
-                initialValues={{
-                  email: '',
-                  firstName: 'red',
-                  lastName: '',
-                }}
+                initialValues={{ email: '', password: '' }}
+                validationSchema={loginValidationSchema} //
                 onSubmit={(values, actions) => {
                   setTimeout(() => {
                     alert(JSON.stringify(values, null, 2));
