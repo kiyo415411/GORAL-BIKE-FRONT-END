@@ -1,32 +1,35 @@
 import VIDEO from '../../videos/index-heros.webm';
-import BIKE from '../../images/bike.svg';
-import EVENT from '../../images/event.png';
 import LOCATION from '../../images/Location.svg';
 import ACTIVTY from '../../images/Acitvity.png';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { API_URL } from '../../utils/config';
+import { API_URL, IMAGE_URL } from '../../utils/config';
 import DataAPI from '../Map/DataAPI';
-
-//Swiper
-// Import Swiper React components
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import { FreeMode, Navigation } from 'swiper';
 // Import Swiper styles
 import 'swiper/css';
+import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
-
+import Slider from 'react-slick';
 // import required modules
-import { Pagination } from 'swiper';
+// import { Pagination, Navigation } from 'swiper';
 
-const pagination = {
-  clickable: true,
-  renderBullet: function (index, className) {
-    return '<span class="' + className + '">' + (index + 1) + '</span>';
-  },
-};
+//Slider
+import React from 'react';
 
 export default function Index() {
+  const [api, setApi] = useState([]);
+  const [news, setNews] = useState([]);
+  const [product, setProduct] = useState([]);
+  const [activity, setActivity] = useState([]);
+  const [course, setCourse] = useState([]);
+  const [nav1, setNav1] = useState();
+  const [nav2, setNav2] = useState();
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
   useEffect(() => {
     const getIndexData = async () => {
       try {
@@ -34,13 +37,25 @@ export default function Index() {
         const getDataValue = await DataAPI();
         const getNewsValue = await axios.get(`${API_URL}/news`);
         const getProductValue = await axios.get(`${API_URL}/product`);
-        const getActivitytValue = await axios.get(`${API_URL}/activity`);
+        const getActivityValue = await axios.get(`${API_URL}/activity`);
+        const getCourseValue = await axios.get(`${API_URL}/course`);
+
+        setApi(getDataValue);
+        setNews(getNewsValue.data.newsResults);
+        setProduct(getProductValue.data.data);
+        setActivity(getActivityValue.data);
+        setCourse(getCourseValue.data.classFullDtaa);
       } catch (e) {
         throw new Error(e);
       }
     };
     getIndexData();
   }, []);
+  console.log(api);
+  console.log(news);
+  console.log(product);
+  console.log(activity);
+  console.log(course);
 
   return (
     <>
@@ -72,43 +87,50 @@ export default function Index() {
             </article>
           </section>
           {/* PRODUCT */}
-          <section className="w-60 m-auto mt-5 p-5">
-            <Swiper
-              pagination={pagination}
-              modules={[Pagination]}
-              className="mySwiper"
+          <section className="my-5 py-5">
+            <Slider asNavFor={nav2} ref={(slider1) => setNav1(slider1)}>
+              {product.map((value, index) => {
+                return (
+                  <section
+                    className="w-75 row d-flex justify-content-center align-items-center m-auto"
+                    style={{ height: '40rem' }}
+                  >
+                    <article className="col-4" style={{ textAlign: 'justify' }}>
+                      <h3>{value.product_name}</h3>
+                      <p className="mt-4 fs-6">
+                        鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano
+                        Deore 1x10零組件搭配，Suntour避震前叉。
+                      </p>
+                      <p className="text-danger fw-bold text-end">查看更多</p>
+                    </article>
+                    <figure className="col-6 d-block ms-5 my-auto">
+                      <img
+                        className="img-fluid m-0 p-0 "
+                        style={{
+                          objectFit: 'contain',
+                          width: '50rem',
+                          height: '30rem',
+                        }}
+                        src={`${IMAGE_URL}/bikes/${value.product_images}`}
+                        alt=""
+                      />
+                    </figure>
+                  </section>
+                );
+              })}
+            </Slider>
+            <Slider
+              asNavFor={nav1}
+              ref={(slider2) => setNav2(slider2)}
+              slidesToShow={3}
+              swipeToSlide={true}
+              focusOnSelect={true}
+              className="mt-5"
             >
-              <SwiperSlide className="row mx-auto">
-                <div className="col-4 my-auto">
-                  <h1 className="display-6 fw-bold">BIG.NINE 200</h1>
-                  <p className="fs-6">
-                    鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano
-                    Deore 1x10零組件搭配，Suntour避震前叉。
-                  </p>
-                  <a className="text-danger fw-bold fs-6" href="#/">
-                    了解更多商品 &nbsp;&nbsp;&gt;
-                  </a>
-                </div>
-                <div className="card border-0 col-8 my-auto">
-                  <img src={BIKE} className="col-8 card-img-top" alt="..." />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="row mx-auto">
-                <div className="col-4 my-auto">
-                  <h1 className="display-6 fw-bold">BIG.NINE 200</h1>
-                  <p className="fs-6">
-                    鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano
-                    Deore 1x10零組件搭配，Suntour避震前叉。
-                  </p>
-                  <a className="text-danger fw-bold fs-6" href="#/">
-                    了解更多商品 &nbsp;&nbsp;&gt;
-                  </a>
-                </div>
-                <div className="card border-0 col-8 my-auto">
-                  <img src={BIKE} className="col-8 card-img-top" alt="..." />
-                </div>
-              </SwiperSlide>
-            </Swiper>
+              {product.map((value, index) => {
+                return <h5 className="text-center">{value.product_name}</h5>;
+              })}
+            </Slider>
           </section>
           <section className="row p-5 overflow-hidden m-0">
             <article className="col-4 my-auto me-5" style={{ width: '25%' }}>
@@ -121,20 +143,33 @@ export default function Index() {
               </button>
             </article>
             <section className="col-6">
-              <ul className="d-flex gap-5 list-unstyled">
-                <li>
-                  <img src={EVENT} alt="" />
-                </li>
-                <li>
-                  <img src={EVENT} alt="" />
-                </li>
-                <li>
-                  <img src={EVENT} alt="" />
-                </li>
-                <li>
-                  <img src={EVENT} alt="" />
-                </li>
-              </ul>
+              {/* <Swiper
+                effect={'coverflow'}
+                grabCursor={true}
+                centeredSlides={true}
+                slidesPerView={'auto'}
+                coverflowEffect={{
+                  rotate: 50,
+                  stretch: 0,
+                  depth: 100,
+                  modifier: 1,
+                  slideShadows: true,
+                }}
+                pagination={true}
+                modules={[EffectCoverflow, Pagination]}
+                className="mySwiper h-50"
+              >
+                {course.map((value, index) => {
+                  return (
+                    <SwiperSlide>
+                      <img
+                        src={`${IMAGE_URL}/course/${value.course_pictures}`}
+                        alt="..."
+                      />
+                    </SwiperSlide>
+                  );
+                })}
+              </Swiper> */}
             </section>
           </section>
           {/* LOCATION */}
