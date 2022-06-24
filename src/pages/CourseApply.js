@@ -7,44 +7,57 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import React from 'react';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 export default function CourseApply() {
-  const [member, setMember] = useState({
-    firstName: '羊',
-    lastName: '百克',
-    email: 'testemail@gmail.com',
-    phone: '0912345678',
-    contactPerson: 'Goral Bike',
-    relationship: '弟弟',
-    contactPhone: '0923456789',
-    rentBike: 'bikeYes',
-    clothes: 0,
-    illness: 'illnessNo',
-    illnessText: '',
-    food: 'meatYes',
-    foodText: '',
-    other: '',
+  const validationSchema = yup.object({
+    firstName: yup.string().required('請輸入姓氏'),
+    lastName: yup.string().required('請輸入名字'),
+    email: yup
+      .string()
+      .email('請輸入有效的電子信箱格式')
+      .required('請輸入電子信箱'),
+    phone: yup
+      .string()
+      .matches(/^(09)[0-9]{8}$/, '請輸入有效的手機號碼')
+      .required('請輸入手機號碼'),
+    contactPerson: yup.string().required('請輸入聯絡人姓名'),
+    relationship: yup.string().required('請輸入關係'),
+    contactPhone: yup
+      .string()
+      .matches(/^(09)[0-9]{8}$/, '請輸入有效的手機號碼')
+      .required('請輸入手機號碼'),
   });
 
-  function handleChange(e) {
-    setMember({ ...member, [e.target.name]: e.target.value });
-    console.log(e.target.value);
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    try {
-      // let response = await axios.post(`${API_URL}/auth/register`, member);
-      // // console.log(response.data);
-    } catch (e) {
-      console.error(e);
-    }
-  }
+  const formik = useFormik({
+    initialValues: {
+      firstName: '羊',
+      lastName: '百克',
+      email: 'testemail@gmail.com',
+      phone: '0912345678',
+      contactPerson: '羊百客',
+      relationship: '弟弟',
+      contactPhone: '0923456789',
+      rentBike: 'bikeYes',
+      clothes: 'personal',
+      illness: 'illnessNo',
+      illnessText: '',
+      food: 'meatYes',
+      foodText: '',
+      other: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      await new Promise((r) => setTimeout(r, 500));
+      alert(JSON.stringify(formik.values, null, 2));
+    },
+  });
 
   return (
     <>
+      {console.log(formik.values.food)}
       <div className="col-4 shadow text-content py-5 m-5">
         {/* ----------------------- 表頭 */}
         <div className="d-flex flex-nowrap align-items-center col-12 ms-5 mb-4">
@@ -55,7 +68,7 @@ export default function CourseApply() {
             課程報名表
           </h4>
         </div>
-        <div className="row gy-2 ps-5">
+        <form className="row gy-2 ps-5" onSubmit={formik.handleSubmit}>
           {/* ------------------------------- 基本資料 */}
           <div className="d-flex flex-nowrap col-12 ps-5">
             <p className="m-0 p-0 fs-5">基本資料 Personal Particulars</p>
@@ -64,13 +77,19 @@ export default function CourseApply() {
           <div className="d-flex flex-nowrap align-items-center col-5 me-4 ps-5">
             <TextField
               id="firstName"
-              label="姓 First Name"
-              type="search"
-              variant="standard"
               name="firstName"
-              defaultValue={member.firstName}
-              onChange={handleChange}
-              required
+              label="姓 Fast Name"
+              variant="standard"
+              type="search"
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.firstName && Boolean(formik.errors.firstName)
+              }
+              helperText={
+                formik.errors.firstName ? formik.errors.firstName : null
+              }
+              className="text-field"
             />
           </div>
           {/* ----------------------- 名 */}
@@ -79,11 +98,15 @@ export default function CourseApply() {
               id="lastName"
               name="lastName"
               label="名 Last Name"
-              type="search"
               variant="standard"
-              defaultValue={member.lastName}
-              onChange={handleChange}
-              required
+              type="search"
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+              helperText={
+                formik.errors.lastName ? formik.errors.lastName : null
+              }
+              className="text-field"
             />
           </div>
           {/* ----------------------- 電子信箱 */}
@@ -92,11 +115,13 @@ export default function CourseApply() {
               id="email"
               name="email"
               label="電子信箱 E-mail"
-              type="search"
               variant="standard"
-              defaultValue={member.email}
-              onChange={handleChange}
-              required
+              type="search"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.errors.email ? formik.errors.email : null}
+              className="text-field"
             />
           </div>
           {/* ----------------------- 連絡電話 */}
@@ -104,12 +129,14 @@ export default function CourseApply() {
             <TextField
               id="phone"
               name="phone"
-              label="聯絡電話 Phone"
-              type="search"
+              label="連絡電話 Phone"
               variant="standard"
-              defaultValue={member.phone}
-              onChange={handleChange}
-              required
+              type="search"
+              value={formik.values.phone}
+              onChange={formik.handleChange}
+              error={formik.touched.phone && Boolean(formik.errors.phone)}
+              helperText={formik.errors.phone ? formik.errors.phone : null}
+              className="text-field"
             />
           </div>
           {/* ------------------------------- 緊急聯絡 */}
@@ -122,11 +149,18 @@ export default function CourseApply() {
               id="contactPerson"
               name="contactPerson"
               label="緊急聯絡人 Contact Person"
-              type="search"
               variant="standard"
-              defaultValue={member.contactPerson}
-              onChange={handleChange}
-              required
+              type="search"
+              value={formik.values.contactPerson}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.contactPerson &&
+                Boolean(formik.errors.contactPerson)
+              }
+              helperText={
+                formik.errors.contactPerson ? formik.errors.contactPerson : null
+              }
+              className="text-field"
             />
           </div>
           {/* ----------------------- 關係 */}
@@ -135,11 +169,18 @@ export default function CourseApply() {
               id="relationship"
               name="relationship"
               label="關係 Relationship"
-              type="search"
               variant="standard"
-              defaultValue={member.relationship}
-              onChange={handleChange}
-              required
+              type="search"
+              value={formik.values.relationship}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.relationship &&
+                Boolean(formik.errors.relationship)
+              }
+              helperText={
+                formik.errors.relationship ? formik.errors.relationship : null
+              }
+              className="text-field"
             />
           </div>
           {/* ----------------------- 連絡電話 */}
@@ -148,11 +189,18 @@ export default function CourseApply() {
               id="contactPhone"
               name="contactPhone"
               label="聯絡電話 Contact Phone"
-              type="search"
               variant="standard"
-              defaultValue={member.contactPhone}
-              onChange={handleChange}
-              required
+              type="search"
+              value={formik.values.contactPhone}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.contactPhone &&
+                Boolean(formik.errors.contactPhone)
+              }
+              helperText={
+                formik.errors.contactPhone ? formik.errors.contactPhone : null
+              }
+              className="text-field"
             />
           </div>
           {/* ------------------------------- 需求資料 */}
@@ -164,9 +212,9 @@ export default function CourseApply() {
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
-              name="row-radio-buttons-group"
-              defaultValue={member.rentBike}
-              onChange={handleChange}
+              name="rentBike"
+              value={formik.values.rentBike}
+              onChange={formik.handleChange}
             >
               <p className="m-0 col-12 mb-3">單車租借</p>
               <FormControlLabel
@@ -202,7 +250,7 @@ export default function CourseApply() {
             </RadioGroup>
           </div>
           {/* ----------------------- 車衣尺寸 */}
-          <div className="d-flex flex-nowrap align-items-center col-6">
+          <div className="d-flex flex-nowrap align-items-center col-5 me-4 ps-5">
             <FormControl variant="standard" sx={{ mt: 2, minWidth: 200 }}>
               <InputLabel id="demo-simple-select-standard-label">
                 車衣尺寸
@@ -210,19 +258,20 @@ export default function CourseApply() {
               <Select
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
+                name="demo-simple-select-standard"
                 label="車衣尺寸"
                 className="text-content"
-                defaultValue={member.clothes}
-                onChange={handleChange}
+                defaultValue={formik.values.clothes}
+                onChange={formik.handleChange}
               >
-                <MenuItem value={0}>自備車衣</MenuItem>
-                <MenuItem value={1}>S</MenuItem>
-                <MenuItem value={2}>M</MenuItem>
-                <MenuItem value={3}>L</MenuItem>
-                <MenuItem value={4}>XL</MenuItem>
-                <MenuItem value={5}>XXL</MenuItem>
-                <MenuItem value={6}>3XL</MenuItem>
-                <MenuItem value={7}>XS</MenuItem>
+                <MenuItem value="personal">自備車衣</MenuItem>
+                <MenuItem value="S">S</MenuItem>
+                <MenuItem value="M">M</MenuItem>
+                <MenuItem value="L">L</MenuItem>
+                <MenuItem value="XL">XL</MenuItem>
+                <MenuItem value="XXL">XXL</MenuItem>
+                <MenuItem value="3XL">3XL</MenuItem>
+                <MenuItem value="XS">XS</MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -231,9 +280,9 @@ export default function CourseApply() {
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
-              name="row-radio-buttons-group"
-              defaultValue={member.illness}
-              onChange={handleChange}
+              name="illness"
+              value={formik.values.illness}
+              onChange={formik.handleChange}
             >
               <p className="m-0 col-12">特殊病史</p>
               <FormControlLabel
@@ -273,21 +322,20 @@ export default function CourseApply() {
                 label="病史描述"
                 type="search"
                 variant="standard"
-                defaultValue={member.illnessText}
-                onChange={handleChange}
-                required
+                value={formik.values.illnessText}
+                onChange={formik.handleChange}
                 sx={{ mb: 2 }}
               />
             </RadioGroup>
           </div>
           {/* ----------------------- 飲食習慣 */}
-          <div className="d-flex flex-nowrap align-items-center col-6">
+          <div className="d-flex flex-nowrap align-items-center col-6 ps-5">
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
-              name="row-radio-buttons-group"
-              defaultValue={member.food}
-              onChange={handleChange}
+              name="food"
+              value={formik.values.food}
+              onChange={formik.handleChange}
             >
               <p className="m-0 col-12">飲食習慣</p>
               <FormControlLabel
@@ -327,9 +375,9 @@ export default function CourseApply() {
                 label="其他飲食習慣"
                 type="search"
                 variant="standard"
-                defaultValue={member.foodText}
-                onChange={handleChange}
-                sx={{ mb: 2 }}
+                value={formik.values.contactText}
+                onChange={formik.handleChange}
+                sx={{ mb: 2, width: 200 }}
               />
             </RadioGroup>
           </div>
@@ -341,22 +389,20 @@ export default function CourseApply() {
               label="備註 | 如需特殊協助請於此欄詳細說明，將於報名確認後由專人與您聯繫。"
               type="search"
               variant="standard"
-              defaultValue={member.other}
-              onChange={handleChange}
-              sx={{ width: 470 }}
+              value={formik.values.other}
+              onChange={formik.handleChange}
+              sx={{ width: 480 }}
             />
           </div>
-          <Link to={''}>
-            <div className="col-12 d-flex justify-content-end mt-3 pe-5">
-              <p
-                className="text-nowrap m-0 btn fs-6 border-2 px-4 py-1 me-5 rounded-0 btn-primary rounded-pill"
-                onClick={handleSubmit}
-              >
-                送出
-              </p>
-            </div>
-          </Link>
-        </div>
+          <div className="col-12 d-flex justify-content-end mt-3 pe-5">
+            <button
+              className="text-nowrap m-0 btn fs-6 border-2 px-4 py-1 me-5 rounded-0 btn-primary rounded-pill"
+              type="submit"
+            >
+              送出
+            </button>
+          </div>
+        </form>
       </div>
     </>
   );
