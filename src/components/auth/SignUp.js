@@ -89,13 +89,14 @@ function SignUp(props) {
                           type="text"
                           className="form-control"
                           name="name"
+                          example="ex.王小明"
                         />
                         <MySignUpField
                           label="手機"
                           type="text"
                           className="form-control"
                           name="phone"
-                          example="不需「-」"
+                          example="ex.0912345678"
                         />
                       </div>
                       <MySignUpField
@@ -103,6 +104,7 @@ function SignUp(props) {
                         type="email"
                         className="form-control"
                         name="email"
+                        example="ex.goral@test.com"
                       />
                       <div className="d-flex">
                         <MySignUpField
@@ -110,7 +112,7 @@ function SignUp(props) {
                           type="text"
                           className="form-control"
                           name="password"
-                          example="密碼需為 6 碼以上的英文、數字"
+                          example="限輸入英文、數字"
                         />
                         <MySignUpField
                           label="再次輸入密碼"
