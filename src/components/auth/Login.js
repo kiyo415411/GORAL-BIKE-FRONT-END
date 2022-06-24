@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 // const handleChangeModal = (modal) => {
 //   setActiveModal(modal);
@@ -31,6 +32,11 @@ const MyTextField = ({ label, ...props }) => {
   );
 };
 
+// const handleSubmit = async (values) => {
+//   const loginData = await axios.post(`${API_URL}/auth/login`, values, {
+//     withCredentials: true,
+//   });
+// };
 function Login(props) {
   const { handleChangeModal } = props;
   return (
@@ -52,6 +58,7 @@ function Login(props) {
                 validationSchema={loginValidationSchema} //
                 onSubmit={(values, actions) => {
                   setTimeout(() => {
+                    alert(values);
                     alert(JSON.stringify(values, null, 2));
                     actions.setSubmitting(false);
                   }, 1000);
