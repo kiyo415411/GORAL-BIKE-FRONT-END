@@ -8,26 +8,32 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid row justify-content-between">
         {/* --------------- LOGO----------------- */}
-        <a className="navbar-brand col-5 col-md-2 p-0 text-center" href="#/">
+        <Link to="/" className="navbar-brand col-5 col-md-2 p-0 text-center">
           <img id="Logo" src={Logo} alt="Logo" />
-        </a>
+        </Link>
+        {/* <a className="navbar-brand col-5 col-md-2 p-0 text-center" href="#/">
+          <img id="Logo" src={Logo} alt="Logo" />
+        </a> */}
         {/* ----------------LIST----------------- */}
         <div className="collapse navbar-collapse col-md-8">
           <ul className="navbar-nav mx-auto gap-4">
-            <Link to="news" className="nav-link text-white">
+            <Link to="news" className="nav-link text-white ">
               最新消息
             </Link>
-            <Link to="product" className="nav-link text-white">
+            <Link to="product" className="nav-link text-muted">
               全部商品
             </Link>
-            <Link to="custom" className="nav-link text-white">
+            <Link to="custom" className="nav-link text-muted">
               客製化
             </Link>
-            <Link to="map" className="nav-link text-white">
+            <Link to="Map" className="nav-link text-muted">
               地圖
             </Link>
-            <Link to="course" className="nav-link text-white">
+            <Link to="course" className="nav-link text-muted">
               課程
+            </Link>
+            <Link to="activity" className="nav-link text-white">
+              活動
             </Link>
           </ul>
         </div>

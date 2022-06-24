@@ -1,8 +1,11 @@
 import TopSection from '../components/TopSection';
 import UserAside from '../components/UserAside';
 import Pagination from '../components/Pagination';
-import RowCard from '../components/RowCard';
+import RowCard from '../components/Cards/RowCard';
+import ColCard from '../components/Cards/ColCard';
+import TopSort from '../components/TopSort';
 
+const cardStyle = 'col'; // 切換排版 | row/col
 const activitys = [];
 
 const count = 7;
@@ -20,35 +23,52 @@ for (let i = 0; i < count; i++) {
   });
 }
 
-const courseItems = [];
+const activityItems = [];
 activitys.map((v, i) => {
-  courseItems.push(
-    <RowCard
-      key={i}
-      height={250}
-      image={activitys[i].image}
-      score={activitys[i].score}
-      like={activitys[i].like}
-      title={activitys[i].title}
-      price={activitys[i].price}
-      time={activitys[i].time}
-      location={activitys[i].location}
-      statu={activitys[i].statu}
-      text={activitys[i].text}
-    />
-  );
+  if (cardStyle === 'row') {
+    activityItems.push(
+      <RowCard
+        key={i}
+        height={15.625}
+        image={activitys[i].image}
+        score={activitys[i].score}
+        like={activitys[i].like}
+        title={activitys[i].title}
+        price={activitys[i].price}
+        time={activitys[i].time}
+        location={activitys[i].location}
+        statu={activitys[i].statu}
+        text={activitys[i].text}
+      />
+    );
+  } else {
+    activityItems.push(
+      <ColCard
+        key={i}
+        width={20}
+        image={activitys[i].image}
+        like={activitys[i].like}
+        title={activitys[i].title}
+        price={activitys[i].price}
+        time={activitys[i].time}
+        location={activitys[i].location}
+        statu={activitys[i].statu}
+        text={activitys[i].text}
+      />
+    );
+  }
   return 0;
 });
 
 function ActivityLike() {
   return (
-    <>
+    <div className="bg-graybg">
       <TopSection
         title="活動收藏"
         bg={require('../images/activity/ActivityBanner.jpg')}
       />
       <div className="container">
-        <div className="row gx-5 justify-content-center my-5 flex-nowrap">
+        <div className="row gx-5 justify-content-center py-5 flex-nowrap">
           {/* -----------------------------左區塊 */}
           <div className="col-auto">
             {/* 邊攔 */}
@@ -56,14 +76,23 @@ function ActivityLike() {
           </div>
           {/* -----------------------------右區塊 */}
           <div className="col-auto">
+            {/* 排序 */}
+            <TopSort />
             {/* 卡片清單 */}
-            {courseItems}
+            <div
+              className={cardStyle === 'col' ? 'd-flex flex-wrap mt-2' : 'mt-2'}
+              style={{ width: '63rem' }}
+            >
+              {activityItems}
+            </div>
             {/* 分頁 */}
-            <Pagination />
+            <div>
+              <Pagination />
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

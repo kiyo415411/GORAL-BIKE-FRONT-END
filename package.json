@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/material": "^5.8.4",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
@@ -13,6 +16,7 @@
     "formik": "^2.2.9",
     "jquery": "^3.6.0",
     "leaflet": "^1.8.0",
+    "moment": "^2.29.3",
     "node-sass": "^7.0.1",
     "popper.js": "^1.16.1",
     "postcss-loader": "^7.0.0",

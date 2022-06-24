@@ -1,10 +1,18 @@
-export default function CategoryList({ list }) {
+export default function CategoryList({ list, statu, setStatu }) {
   return (
-    <ul className="list-unstyled d-grid gap-3 mb-5">
+    <ul className="list-unstyled d-grid gap-3 mb-5 ms-2">
       {list.map((v, i) => {
         return (
-          <li key={i}>
-            <a href="#/">{v}</a>
+          <li key={i + 1}>
+            <a
+              href="#/"
+              className={statu === i + 1 ? 'link-highlight' : 'link-content'}
+              onClick={() => {
+                setStatu(i + 1);
+              }}
+            >
+              {v}
+            </a>
           </li>
         );
       })}

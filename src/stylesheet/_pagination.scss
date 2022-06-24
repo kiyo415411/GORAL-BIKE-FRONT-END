@@ -1,0 +1,27 @@
+.pagination {
+  gap: 0.4rem;
+  .page-link {
+    border-radius: 50%;
+    padding: 0.4rem 0.85rem;
+    border-color: var(--bs-primary);
+  }
+
+  .page-item:last-child .page-link {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    padding: 0.3rem 0.6rem 0.5rem 0.7rem;
+  }
+
+  .page-item:first-child .page-link {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    padding: 0.3rem 0.6rem 0.5rem 0.7rem;
+  }
+
+  .page-item.disabled .page-link {
+    color: var(--bs-line);
+    pointer-events: none;
+    background-color: #fff;
+    border-color: var(--bs-line);
+  }
+}
