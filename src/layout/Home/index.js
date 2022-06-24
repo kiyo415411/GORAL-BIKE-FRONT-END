@@ -7,15 +7,11 @@ import { API_URL, IMAGE_URL } from '../../utils/config';
 import DataAPI from '../Map/DataAPI';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode, Navigation } from 'swiper';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import Slider from 'react-slick';
-// import required modules
-// import { Pagination, Navigation } from 'swiper';
 
 //Slider
 import React from 'react';
@@ -28,7 +24,6 @@ export default function Index() {
   const [course, setCourse] = useState([]);
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   useEffect(() => {
     const getIndexData = async () => {
@@ -88,7 +83,13 @@ export default function Index() {
           </section>
           {/* PRODUCT */}
           <section className="my-5 py-5">
-            <Slider asNavFor={nav2} ref={(slider1) => setNav1(slider1)}>
+            <Slider
+              fade={true}
+              asNavFor={nav2}
+              centerMode={true}
+              ref={(slider1) => setNav1(slider1)}
+              speed={1000}
+            >
               {product.map((value, index) => {
                 return (
                   <section
@@ -122,10 +123,11 @@ export default function Index() {
             <Slider
               asNavFor={nav1}
               ref={(slider2) => setNav2(slider2)}
-              slidesToShow={3}
+              slidesToShow={5}
+              centerMode={true}
               swipeToSlide={true}
               focusOnSelect={true}
-              className="mt-5"
+              className="mt-5 w-75 mx-auto"
             >
               {product.map((value, index) => {
                 return <h5 className="text-center">{value.product_name}</h5>;
