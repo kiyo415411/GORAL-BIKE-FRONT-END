@@ -13,7 +13,7 @@ function ForgotPassword(props) {
                   src={require(`../../images/Logo-green.png`)}
                   alt=""
                 ></img>
-                <h6 className="text-hightlight">忘記密碼</h6>
+                <h6 className="text-highlight">忘記密碼</h6>
               </div>
               <div className="py-3">
                 <p>
@@ -43,7 +43,7 @@ function ForgotPassword(props) {
               </form>
               <div className="text-center pt-3">
                 <a
-                  className="text-hightlight"
+                  className="text-highlight"
                   href="#/"
                   onClick={(e) => {
                     e.preventDefault();
