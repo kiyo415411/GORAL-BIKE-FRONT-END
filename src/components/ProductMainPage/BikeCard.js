@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Like from '../Aside/Like.js';
 import { Link } from 'react-router-dom';
-import { API_URL, IMAGE_URL } from '../../utils/config.js';
+import { IMAGE_URL } from '../../utils/config.js';
 function separator(num) {
   let str = num.toString().split('.');
   str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -14,14 +14,17 @@ function BikeCard(props) {
     <>
       <div
         className="card shadow p-2 mb-5 bg-body rounded"
-        style={{ Width: '1049px', Height: '256px' }}
+        style={{ Width: '1049px', minHeight: '256px' }}
       >
-        <div className="row g-0 justify-content-center">
-          <div className="col-4 h-75 my-auto" style={{ width: 328 }}>
+        <div className="row g-0 justify-content-center my-auto align-items-center">
+          <div
+            className="col-4 h-75 my-auto overflow-hidden"
+            style={{ maxWidth: 328, maxHeight: 220 }}
+          >
             <img
               // src={require(`${IMAGE_URL}/bikes/${props.bike}`)}
               src={`${IMAGE_URL}/bikes/${props.bike}`}
-              className="img-fluid rounded-start my-auto"
+              className="img-fluid rounded-start my-auto img-fluid"
               alt="..."
             />
           </div>

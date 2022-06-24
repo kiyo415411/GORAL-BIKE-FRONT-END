@@ -11,7 +11,7 @@ function BikeList(props) {
             className="col-12 col-md-8 col-lg-12 mx-auto"
           >
             <BikeCard
-              bike={item.product_images.replace(/ /g, '%20')}
+              bike={item.product_images}
               name={item.product_name}
               like={false}
               price={item.product_price}
@@ -22,7 +22,12 @@ function BikeList(props) {
           </li>
         );
       })}
-      <Pagination page={1} setPage={1} lastPage={10} />
+      <Pagination
+        className=""
+        page={props.page}
+        setPage={props.setPage}
+        lastPage={props.lastPage}
+      />
     </ul>
   );
 }

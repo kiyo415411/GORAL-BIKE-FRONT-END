@@ -16,10 +16,16 @@ function Like(props) {
       color="red"
       className={props.className}
       size={props.width}
-      onClick={() => {
+      onClick={(e) => {
         props.setLiked(!props.liked);
+        console.log(e.target.viewBox.animVal.width);
+        e.target.viewBox.baseVal.width = `100px`;
+        e.target.viewBox.baseVal.height = `100px`;
+        //useless code but leads somewhere
       }}
-      style={{ cursor: 'pointer' }}
+      style={{
+        cursor: 'pointer',
+      }}
     />
   );
 }

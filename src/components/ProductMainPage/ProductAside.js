@@ -2,31 +2,45 @@ import AsideTitle from '../Aside/AsideTitle';
 import RangeSlider from '../Aside/RangeSlider';
 import SearchInput from '../Aside/SearchInput';
 import CategoryList from '../Aside/CategoryList';
+import BrandList from '../Aside/BrandList';
 import ColorPalette from '../Aside/ColorPalette';
 
 // 商品篩選邊攔
 export default function ActivityAside(props) {
-  // const [color, setColor] = useState([]);
-
-  // useEffect(() => {
-  //   const getColor = async () => {
-  //     const response = await axios.get(API_URL + '/product/product_color');
-  //     setColor(response.data.data);
-  //   };
-  //   getColor();
-  // }, []);
-
-  const status = ['報名開放中', '報名未開放', '報名已結束'];
+  const category = [
+    '全部車款',
+    '登山車基礎車款',
+    '全避震登山車',
+    '單避震登山車',
+  ];
+  // const brand = [
+  //   'All Brands',
+  //   'XC/MARATHON',
+  //   'MARATHON/TRAIL',
+  //   'TRAIL',
+  //   'ALL MOUNTAIN',
+  //   'ENDURO',
+  // ];
   return (
     <div
       className="product-aside shadow p-4 sticky-top mt-3"
-      style={{ width: '324px', height: '600px' }}
+      style={{ width: '324px', height: '1000px' }}
     >
       {/* 關鍵字篩選 */}
-      <SearchInput />
+      <SearchInput setCurrentSearch={props.setCurrentSearch} />
       {/* 報名狀態篩選 */}
       <AsideTitle text="車款分類" />
-      <CategoryList list={status} />
+      <CategoryList
+        list={category}
+        setCurrentCategory={props.setCurrentCategory}
+      />
+      <AsideTitle text="品牌名稱" />
+
+      <BrandList
+        setCurrentBrand={props.setCurrentBrand}
+        brand={props.brand}
+        setBrand={props.setBrand}
+      />
       {/* 報名費用篩選 */}
       <AsideTitle text="價錢區間" />
       <RangeSlider

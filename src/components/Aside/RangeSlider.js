@@ -27,7 +27,7 @@ export default function RangeSlider(setPriceSubmit) {
             setPriceSubmit.setPrice(e.target.value);
           }}
           min={0}
-          max={200000}
+          max={500000}
         />
       </Box>
       <div className="d-flex align-items-center justify-content-between px-2 mb-2">
