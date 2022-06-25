@@ -1,7 +1,7 @@
 import VIDEO from '../../videos/index-heros.webm';
 import LOCATION from '../../images/Location.svg';
 import ACTIVTY from '../../images/Acitvity.png';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { API_URL, IMAGE_URL } from '../../utils/config';
 import DataAPI from '../Map/DataAPI';
@@ -16,16 +16,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
+import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
+import 'swiper/css/thumbs';
 import 'swiper/css/navigation';
 
 // import required modules
-import {
-  EffectCreative,
-  EffectCoverflow,
-  Mousewheel,
-  Navigation,
-} from 'swiper';
+import { EffectCoverflow, Mousewheel, Navigation, Controller } from 'swiper';
 
 export default function Index() {
   const [api, setApi] = useState([]);
@@ -33,8 +30,12 @@ export default function Index() {
   const [product, setProduct] = useState([]);
   const [activity, setActivity] = useState([]);
   const [course, setCourse] = useState([]);
-  const [nav1, setNav1] = useState();
-  const [nav2, setNav2] = useState();
+  // store swiper instances
+  const [firstSwiper, setFirstSwiper] = useState(0);
+  const [secondSwiper, setSecondSwiper] = useState(0);
+
+  const productCarousel = useRef(null);
+  const productNameCarousel = useRef(null);
 
   useEffect(() => {
     const getIndexData = async () => {
@@ -60,13 +61,20 @@ export default function Index() {
 
   // 檢查生命週期區域
   useEffect(() => {
-    // console.log(api);
-    // console.log(news);
-    // console.log(product);
-    // console.log(activity);
-    // console.log(course);
-    console.log(nav2);
-  }, [nav2]);
+    console.log(firstSwiper);
+    console.log(secondSwiper);
+  }, [firstSwiper, secondSwiper]);
+
+  useEffect(() => {
+    const product = productCarousel.current.swiper;
+    const productName = productNameCarousel.current.swiper;
+    if (product.controller && productName.controller) {
+      console.log(product.controller.control);
+      console.log(productName.controller.control);
+      product.controller.control = productName;
+      productName.controller.control = product;
+    }
+  }, []);
 
   return (
     <>
@@ -101,17 +109,19 @@ export default function Index() {
           <section className="w-75 mx-auto py-5">
             <h1 className="w-60 mx-auto mt-4">熱門商品</h1>
             <Swiper
+              modules={[Navigation, Mousewheel, Controller]}
+              // onSwiper={setFirstSwiper}
+              // controller={{ control: secondSwiper }}
               navigation={true}
-              mousewheel={true}
-              modules={[EffectCoverflow, Navigation, Mousewheel]}
+              // mousewheel={true}
+              centeredSlides={true}
               className="mySwiper"
               loop={true}
-              // asNavFor={nav2}
-              // ref={(slider1) => setNav1(slider1)}
+              ref={productCarousel}
             >
-              {product.map((value, index) => {
+              {product.map((value) => {
                 return (
-                  <SwiperSlide key={index}>
+                  <SwiperSlide key={value.product_id}>
                     <section
                       className="w-75 row d-flex justify-content-center align-items-center m-auto"
                       style={{ height: '30rem' }}
@@ -145,13 +155,18 @@ export default function Index() {
               })}
             </Swiper>
             <Swiper
+              modules={[EffectCoverflow, Mousewheel, Navigation, Controller]}
               effect={'coverflow'}
+              // spaceBetween={10}
+              // onSwiper={setSecondSwiper}
+              // // onSlideChange={(swiper) => setFirstSwiper(swiper.activeIndex)}
+              // controller={{ control: firstSwiper }}
               mousewheel={true}
               slidesPerView={5}
-              grabCursor={true}
-              navigation={true}
               centeredSlides={true}
-              // slidesPerView={'auto'}
+              navigation={true}
+              ref={productNameCarousel}
+              slideToClickedSlide={true}
               coverflowEffect={{
                 rotate: 0,
                 stretch: 0,
@@ -159,16 +174,15 @@ export default function Index() {
                 modifier: 1,
                 slideShadows: false,
               }}
-              modules={[EffectCoverflow, Mousewheel, Navigation]}
               loop={true}
               className="mySwiper"
-
-              // asNavFor={nav1}
-              // ref={(slider2) => setNav2(slider2)}
             >
-              {product.map((value, index) => {
+              {product.map((value) => {
                 return (
-                  <SwiperSlide key={index} style={{ height: '8rem' }}>
+                  <SwiperSlide
+                    key={value.product_id}
+                    style={{ height: '8rem' }}
+                  >
                     <h6 className="text-center m-5 fs-5">
                       {value.product_name}
                     </h6>
