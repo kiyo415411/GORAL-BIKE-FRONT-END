@@ -12,7 +12,7 @@ function GetIcon(_iconSize) {
   });
 }
 
-function Mark() {
+export default function Mark() {
   const Data = useContext(MapDataValue);
   return (
     <>
@@ -48,5 +48,3 @@ function Mark() {
     </>
   );
 }
-
-export default Mark;

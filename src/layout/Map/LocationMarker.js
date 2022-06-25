@@ -3,7 +3,7 @@ import { useEffect, useContext } from 'react';
 import { MapDataValue } from './index';
 
 // 地圖觸發事件
-function LocationMarker() {
+export default function LocationMarker() {
   const Data = useContext(MapDataValue);
   // 地圖上點擊，觸發click()useEffect 前往指定座標
   const MAP = useMap();
@@ -27,4 +27,3 @@ function LocationMarker() {
 
   return null;
 }
-export default LocationMarker;

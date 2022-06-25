@@ -4,7 +4,7 @@ import { MapDataValue } from './index';
 import { Link } from 'react-router-dom';
 import { IMAGE_URL } from '../../utils/config';
 
-function MapImformation(props) {
+export default function MapImformation(props) {
   const Data = useContext(MapDataValue);
   const { value } = props;
   const picURL = `/81pic/${value['編號']}.jpg`;
@@ -17,7 +17,7 @@ function MapImformation(props) {
           <img
             src={`${IMAGE_URL}${picURL}`}
             className=""
-            style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+            style={{ height: '9rem', width: '100%', objectFit: 'cover' }}
             alt="..."
           />
         </div>
@@ -28,7 +28,7 @@ function MapImformation(props) {
             <span className="card-text">{value['林區']}</span>
           </div>
           <div className="row justify-content-between align-items-center my-2">
-            <p className="col-4 card-text mx-3">
+            <p className="col-4 card-text mx-3 my-auto">
               <span>總長度</span>
               {value['總長度'] + '公里'}
             </p>
@@ -45,7 +45,7 @@ function MapImformation(props) {
                 前往座標
               </button>
               <Link
-                to={`MapDetail/${value['林道名稱']}`}
+                to={`mapDetail/${value['林道名稱']}`}
                 className="btn btn-primary text-white rounded-pill border-2"
               >
                 詳細資訊
@@ -83,4 +83,3 @@ function MapImformation(props) {
     </div>
   );
 }
-export default MapImformation;

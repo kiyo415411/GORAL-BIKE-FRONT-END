@@ -22,10 +22,10 @@ function Navbar() {
             <Link to="product" className="nav-link text-muted">
               全部商品
             </Link>
-            <Link to="custom" className="nav-link text-muted">
-              客製化
+            <Link to="/" className="nav-link text-muted">
+              其他
             </Link>
-            <Link to="Map" className="nav-link text-muted">
+            <Link to="map" className="nav-link text-muted">
               地圖
             </Link>
             <Link to="course" className="nav-link text-muted">
