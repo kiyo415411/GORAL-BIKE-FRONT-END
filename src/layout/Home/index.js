@@ -5,13 +5,14 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { API_URL, IMAGE_URL } from '../../utils/config';
 import DataAPI from '../Map/DataAPI';
+
+// slick css
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-// Import Swiper styles
-
 //Slider
-import React from 'react';
+import Slider from 'react-slick';
 
+// Import Swiper styles
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
@@ -31,11 +32,11 @@ export default function Index() {
   const [activity, setActivity] = useState([]);
   const [course, setCourse] = useState([]);
   // store swiper instances
-  const [firstSwiper, setFirstSwiper] = useState(0);
-  const [secondSwiper, setSecondSwiper] = useState(0);
+  const [firstSwiper, setFirstSwiper] = useState(null);
+  const [secondSwiper, setSecondSwiper] = useState(null);
 
-  const productCarousel = useRef(null);
-  const productNameCarousel = useRef(null);
+  // const productCarousel = useRef(null);
+  // const productNameCarousel = useRef(null);
 
   useEffect(() => {
     const getIndexData = async () => {
@@ -57,23 +58,6 @@ export default function Index() {
       }
     };
     getIndexData();
-  }, []);
-
-  // 檢查生命週期區域
-  useEffect(() => {
-    console.log(firstSwiper);
-    console.log(secondSwiper);
-  }, [firstSwiper, secondSwiper]);
-
-  useEffect(() => {
-    const product = productCarousel.current.swiper;
-    const productName = productNameCarousel.current.swiper;
-    if (product.controller && productName.controller) {
-      console.log(product.controller.control);
-      console.log(productName.controller.control);
-      product.controller.control = productName;
-      productName.controller.control = product;
-    }
   }, []);
 
   return (
@@ -106,90 +90,66 @@ export default function Index() {
             </article>
           </section>
           {/* PRODUCT */}
-          <section className="w-75 mx-auto py-5">
+          <section className="py-5 my-5">
             <h1 className="w-60 mx-auto mt-4">熱門商品</h1>
-            <Swiper
-              modules={[Navigation, Mousewheel, Controller]}
-              // onSwiper={setFirstSwiper}
-              // controller={{ control: secondSwiper }}
-              navigation={true}
-              // mousewheel={true}
-              centeredSlides={true}
-              className="mySwiper"
-              loop={true}
-              ref={productCarousel}
+            <Slider
+              asNavFor={secondSwiper}
+              ref={(slider1) => setFirstSwiper(slider1)}
+              centerMode={true}
+              infinite={true}
+              className="mx-5 px-5"
             >
               {product.map((value) => {
                 return (
-                  <SwiperSlide key={value.product_id}>
-                    <section
-                      className="w-75 row d-flex justify-content-center align-items-center m-auto"
-                      style={{ height: '30rem' }}
-                    >
-                      <article
-                        className="col-5"
-                        style={{ textAlign: 'justify' }}
-                      >
-                        <h3>{value.product_name}</h3>
-                        <p className="mt-4 fs-6">
-                          鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano
-                          Deore 1x10零組件搭配，Suntour避震前叉。
-                        </p>
-                        <p className="text-danger fw-bold text-end">查看更多</p>
-                      </article>
-                      <figure className="col-6 d-block ms-5 my-auto">
-                        <img
-                          className="img-fluid m-0 p-0"
-                          style={{
-                            objectFit: 'contain',
-                            width: '50rem',
-                            height: '30rem',
-                          }}
-                          src={`${IMAGE_URL}/bikes/${value.product_images}`}
-                          alt=""
-                        />
-                      </figure>
-                    </section>
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
-            <Swiper
-              modules={[EffectCoverflow, Mousewheel, Navigation, Controller]}
-              effect={'coverflow'}
-              // spaceBetween={10}
-              // onSwiper={setSecondSwiper}
-              // // onSlideChange={(swiper) => setFirstSwiper(swiper.activeIndex)}
-              // controller={{ control: firstSwiper }}
-              mousewheel={true}
-              slidesPerView={5}
-              centeredSlides={true}
-              navigation={true}
-              ref={productNameCarousel}
-              slideToClickedSlide={true}
-              coverflowEffect={{
-                rotate: 0,
-                stretch: 0,
-                depth: 0,
-                modifier: 1,
-                slideShadows: false,
-              }}
-              loop={true}
-              className="mySwiper"
-            >
-              {product.map((value) => {
-                return (
-                  <SwiperSlide
+                  <section
                     key={value.product_id}
-                    style={{ height: '8rem' }}
+                    className="w-75 row d-flex justify-content-center align-items-center m-auto"
+                    style={{ height: '30rem' }}
                   >
-                    <h6 className="text-center m-5 fs-5">
-                      {value.product_name}
-                    </h6>
-                  </SwiperSlide>
+                    <article className="col-5" style={{ textAlign: 'justify' }}>
+                      <h3>{value.product_name}</h3>
+                      <p className="mt-4 fs-6">
+                        鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano
+                        Deore 1x10零組件搭配，Suntour避震前叉。
+                      </p>
+                      <p className="text-danger fw-bold text-end">查看更多</p>
+                    </article>
+                    <figure className="col-6 d-block ms-5 my-auto">
+                      <img
+                        className="img-fluid m-0 p-0"
+                        style={{
+                          objectFit: 'contain',
+                          width: '50rem',
+                          height: '30rem',
+                        }}
+                        src={`${IMAGE_URL}/bikes/${value.product_images}`}
+                        alt=""
+                      />
+                    </figure>
+                  </section>
                 );
               })}
-            </Swiper>
+            </Slider>
+            <Slider
+              asNavFor={firstSwiper}
+              ref={(slider2) => setSecondSwiper(slider2)}
+              slidesToShow={5}
+              centerMode={true}
+              swipeToSlide={true}
+              focusOnSelect={true}
+              className="mx-5 px-5"
+            >
+              {product.map((value) => {
+                return (
+                  <h6
+                    key={value.product_id}
+                    className="text-center fs-5 my-auto"
+                  >
+                    {value.product_name}
+                  </h6>
+                );
+              })}
+            </Slider>
           </section>
           {/* LOCATION */}
           <section className="overflow-hidden">
