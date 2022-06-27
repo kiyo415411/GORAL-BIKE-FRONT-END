@@ -17,12 +17,46 @@ import CourseDetail from './pages/CourseDetail';
 import { Routes, Route } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 // ---------------------- context
-import { LoginProvider } from './utils/useLogin';
+import { LoginContext } from './utils/useLogin';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { API_URL } from './utils/config';
 
 function App() {
+  const [isLogin, setIsLogin] = useState(false);
+  const [userData, setUserData] = useState({ userId: '' });
+  useEffect(() => {
+    (async () => {
+      try {
+        // api/login
+        // 判斷用戶是否有登入，且是否為admin
+        const checkStatus = await axios.get(`${API_URL}/session/user`, {
+          withCredentials: true,
+        });
+        const login = checkStatus.data;
+        setIsLogin(true);
+        setUserData({
+          userId: login.user_id,
+          email: login.email,
+        });
+
+        // if (!login.status) {
+        //   localStorage.setItem('fav', '');
+        //   setFavItemsArr([]);
+        //   localStorage.setItem('cartList', '');
+        //   setCartListData([]);
+        // }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [isLogin]);
+
   return (
     <>
-      <LoginProvider>
+      <LoginContext.Provider
+        value={{ isLogin, setIsLogin, userData, setUserData }}
+      >
         <Navbar />
         <ScrollToTop>
           <Routes>
@@ -41,7 +75,7 @@ function App() {
           </Routes>
         </ScrollToTop>
         <Footer />
-      </LoginProvider>
+      </LoginContext.Provider>
     </>
   );
 }

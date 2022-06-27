@@ -1,9 +1,47 @@
 import Logo from '../../images/Logo.png';
-import { BsPersonCircle, BsCart3, BsHeart } from 'react-icons/bs';
+import { BsPersonFill, BsCart3, BsHeart } from 'react-icons/bs';
+import { BiLogOut } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import LoginModal from '../../components/auth/LoginModal';
+import { useLogin } from '../../utils/useLogin';
+import axios from 'axios';
+import { API_URL } from '../../utils/config';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
+  const { isLogin, setIsLogin, setUserData } = useLogin();
+  const history = useNavigate();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    Swal.fire({
+      title: '確定要登出嗎？',
+      icon: 'warning',
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonText: '登出',
+      cancelButtonText: '返回',
+      focusCancel: false,
+      focusConfirm: false,
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const logoutRes = await axios.get(`${API_URL}/auth/logout`, {
+          withCredentials: true,
+        });
+        if (logoutRes.status === 200 && logoutRes.data.code === 0) {
+          setUserData({
+            userId: '',
+            email: '',
+          });
+          setIsLogin(false);
+          history('/');
+        }
+      }
+    });
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid row justify-content-between">
@@ -41,19 +79,46 @@ function Navbar() {
         {/* ----------------ICONS---------------- */}
         <div className="col-4 col-md-2">
           <ul className="list-unstyled row my-auto justify-content-end gap-2">
-            <li className="col-2 text-center">
-              <LoginModal />
-            </li>
-            <li className="col-2 text-center">
-              <a className="text-muted" href="#/">
-                <BsCart3 />
-              </a>
-            </li>
-            <li className="col-2 text-center">
-              <a className="text-muted" href="#/">
-                <BsHeart />
-              </a>
-            </li>
+            {isLogin ? (
+              <>
+                <li className="col-2 text-center">
+                  <a className="text-muted" href="#/">
+                    <BsPersonFill />
+                  </a>
+                </li>
+                <li className="col-2 text-center">
+                  <a className="text-muted" href="#/">
+                    <BsCart3 />
+                  </a>
+                </li>
+                <li className="col-2 text-center">
+                  <a className="text-muted" href="#/">
+                    <BsHeart />
+                  </a>
+                </li>
+                <li className="col-2 text-center">
+                  <a className="text-muted" href="#/" onClick={handleLogout}>
+                    <BiLogOut className="transform-flipX" />
+                  </a>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="col-2 text-center">
+                  <LoginModal />
+                </li>
+                <li className="col-2 text-center">
+                  <a className="text-muted" href="#/">
+                    <BsCart3 />
+                  </a>
+                </li>
+                <li className="col-2 text-center">
+                  <a className="text-muted" href="#/">
+                    <BsHeart />
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

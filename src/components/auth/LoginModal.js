@@ -52,12 +52,18 @@ function LoginModal(props) {
         dialogClassName={modalDialogClass}
       >
         {activeModal === '登入' ? (
-          <Login handleChangeModal={handleChangeModal}></Login>
+          <Login
+            handleChangeModal={handleChangeModal}
+            handleClose={handleClose}
+          ></Login>
         ) : (
           <></>
         )}
         {activeModal === '註冊' ? (
-          <SignUp handleChangeModal={handleChangeModal}></SignUp>
+          <SignUp
+            handleChangeModal={handleChangeModal}
+            handleClose={handleClose}
+          ></SignUp>
         ) : (
           <></>
         )}

@@ -12,32 +12,57 @@ import { useLogin } from '../../utils/useLogin';
 // };
 
 function Login(props) {
-  const { handleChangeModal } = props;
+  const { handleChangeModal, handleClose } = props;
   const history = useNavigate();
   const { setIsLogin } = useLogin();
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer);
+      toast.addEventListener('mouseleave', Swal.resumeTimer);
+    },
+  });
 
   const handleSubmit = async (values) => {
     try {
       // 傳資料到後端做登入
-      const loginData = await axios.post(`${API_URL}/auth/login`, values, {
+      const loginRes = await axios.post(`${API_URL}/auth/login`, values, {
         withCredentials: true,
       });
-      let userProfile = loginData.data;
+      let loginData = loginRes.data;
       // 如果驗證成功跳出登入成功視窗
-      if (loginData.status === 200 && userProfile.code < 30000) {
+      if (loginRes.status === 200 && loginData.code === 0) {
         Swal.fire({
           icon: 'success',
-          html: userProfile.msg,
+          html: '登入成功',
           confirmButtonText: 'OK',
+          focusConfirm: false,
           // buttonsStyling: false,
         }).then((result) => {
           if (result.isConfirmed) {
             setIsLogin(true);
+            handleClose();
             history('/');
           }
         });
+      } else {
+        Toast.fire({
+          icon: 'error',
+          html: loginRes.data.error,
+          // customClass: {},
+        });
       }
     } catch (err) {
+      Toast.fire({
+        icon: 'error',
+        html: err.response.data.error,
+        // customClass: {},
+      });
       console.log(err.response.data);
     }
   };
@@ -86,8 +111,8 @@ function Login(props) {
                 validationSchema={loginValidationSchema} //
                 onSubmit={(values, actions) => {
                   handleSubmit(values);
-                  alert(JSON.stringify(values, null, 2));
                   actions.setSubmitting(false);
+                  actions.resetForm();
                 }}
               >
                 {(props) => (

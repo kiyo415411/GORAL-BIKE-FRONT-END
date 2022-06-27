@@ -3,9 +3,12 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp(props) {
-  const { handleChangeModal } = props;
+  const { handleChangeModal, handleClose } = props;
+  const history = useNavigate();
+
   const signupValidationSchema = Yup.object({
     // Yup 會驗證輸入格式
     name: Yup.string().required('此欄位必填'),
@@ -50,6 +53,57 @@ function SignUp(props) {
       </div>
     );
   };
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer);
+      toast.addEventListener('mouseleave', Swal.resumeTimer);
+    },
+  });
+
+  const handleSubmit = async (values) => {
+    try {
+      const registerRes = await axios.post(`${API_URL}/auth/register`, values, {
+        withCredentials: true,
+      });
+      let registerData = registerRes.data;
+
+      if (registerRes.status === 200 && registerData.code === 0) {
+        Swal.fire({
+          icon: 'success',
+          html: '註冊成功',
+          confirmButtonText: 'OK',
+          focusConfirm: false,
+          // buttonsStyling: false,
+          // customClass: {
+          // },
+        }).then((result) => {
+          if (result.isConfirmed) {
+            handleClose();
+            history('/');
+          }
+        });
+      } else {
+        Toast.fire({
+          icon: 'error',
+          html: registerRes.data.error,
+          // customClass: {},
+        });
+      }
+    } catch (err) {
+      Toast.fire({
+        icon: 'error',
+        html: err.response.data.error,
+        // customClass: {},
+      });
+      console.log(err);
+    }
+  };
   return (
     <>
       <div className="container-fluid">
@@ -77,8 +131,10 @@ function SignUp(props) {
                   }}
                   validationSchema={signupValidationSchema}
                   onSubmit={(values, actions) => {
-                    alert(JSON.stringify(values, null, 2));
+                    handleSubmit(values);
+                    // alert(JSON.stringify(values, null, 2));
                     actions.setSubmitting(false);
+                    actions.resetForm();
                   }}
                 >
                   {(props) => (
