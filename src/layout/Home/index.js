@@ -21,17 +21,13 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import 'swiper/css/thumbs';
+import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 
 // import required modules
-import {
-  EffectCoverflow,
-  Mousewheel,
-  Navigation,
-  Controller,
-  Scrollbar,
-} from 'swiper';
+import { EffectCoverflow, Mousewheel, EffectFade, Scrollbar } from 'swiper';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function Index() {
   const [api, setApi] = useState([]);
@@ -39,18 +35,8 @@ export default function Index() {
   const [product, setProduct] = useState([]);
   const [activity, setActivity] = useState([]);
   const [course, setCourse] = useState([]);
-  // store swiper instances
   const [firstSwiper, setFirstSwiper] = useState(null);
   const [secondSwiper, setSecondSwiper] = useState(null);
-
-  // const productCarousel = useRef(null);
-  // const productNameCarousel = useRef(null);
-
-  // const settings = {
-  //   focusOnSelect: true,
-  //   speed: 2500,
-  //   centerMode: true,
-  // };
 
   useEffect(() => {
     const getIndexData = async () => {
@@ -75,8 +61,8 @@ export default function Index() {
   }, []);
 
   useEffect(() => {
-    console.log(news);
-  }, [news]);
+    console.log(api);
+  }, [api]);
 
   return (
     <>
@@ -107,6 +93,7 @@ export default function Index() {
               </p>
             </article>
           </section>
+
           {/* NEWS */}
           <section className="bg-light row row justify-content-around p-5 m-0">
             <article className="col-5 my-5">
@@ -172,6 +159,7 @@ export default function Index() {
               })}
             </aside>
           </section>
+
           {/* PRODUCT */}
           <section className="py-5 my-5">
             {/* <h1 className="w-60 mx-auto mt-4">熱門商品</h1> */}
@@ -230,9 +218,109 @@ export default function Index() {
               })}
             </Slider>
           </section>
+
           {/* LOCATION */}
-          <section className="overflow-hidden">
-            <img src={LOCATION} alt="" />
+          <section className="" style={{ height: '50rem' }}>
+            <Swiper effect={'fade'} navigation={true} modules={[EffectFade]}>
+              {api.map((value, index) => {
+                return (
+                  <SwiperSlide key={index} className="position-relative">
+                    <img
+                      className="cover position-absolute top-0 start-0"
+                      src={`${IMAGE_URL}/81pic/${value['編號']}.jpg`}
+                      alt=""
+                    />
+                    <section className="bg-black position-absolute top-50 end-0 translate-middle-y h-60 w-35 bg-opacity-75">
+                      <section className="col-12 m-0 text-white p-4 row">
+                        <section className="col-12 m-3">
+                          <h1 className="m-0 col-10  display-5 fw-bolder text-secondary">
+                            {value['林道名稱']}
+                          </h1>
+                          <section className="col-10 row mt-5">
+                            <span className="col-6 text-white">
+                              <span className="">林區：</span>
+                              {value['林區']}
+                            </span>
+                            <span className="col-6 text-white">
+                              <span className="">縣市：</span>
+                              {value['縣市']}
+                            </span>
+                          </section>
+                          <section className="col-10 row mt-3">
+                            <span className="col-6 text-white">
+                              <span className="">鄉鎮：</span>
+                              {value['鄉鎮']}
+                            </span>
+                            <span className="col-6 text-white">
+                              <span className="">村里：</span>
+                              {value['村里']}
+                            </span>
+                          </section>
+
+                          <section className="col-10 row mt-5 justify-content-between">
+                            <section className="col-6 row mt-3">
+                              <span className="col-12 d-flex justify-content-between">
+                                <strong className="fw-bold">長度</strong>
+                                <span className="fw-bold">公里(km)</span>
+                              </span>
+                              <span className="col-12 d-flex justify-content-between">
+                                <strong className="">步行長度</strong>
+                                <span>{value['步行長度']}ｋｍ</span>
+                              </span>
+                              <span className="col-12 d-flex justify-content-between">
+                                <strong className="">車行長度</strong>
+                                <span>{value['車行長度']}ｋｍ</span>
+                              </span>
+                              <span className="col-12 d-flex justify-content-between">
+                                <strong className="">中斷長度</strong>　　
+                                <span>{value['中斷長度']}ｋｍ</span>
+                              </span>
+                              <span className="col-12 d-flex justify-content-between">
+                                <strong className="">總長度</strong>　　
+                                <span>{value['總長度']}ｋｍ</span>
+                              </span>
+                            </section>
+                            <section className="col-6 row mt-3">
+                              <span className="col-12 d-flex justify-content-between">
+                                <strong className="fw-bold">鋪面</strong>
+                                <span className="fw-bold">
+                                  面積(km<sup>2</sup>)
+                                </span>
+                              </span>
+                              <span className="col-12 d-flex justify-content-between">
+                                <strong className="">水泥</strong>
+                                <span>
+                                  {value['A.C鋪面']}ｋｍ<sup>2</sup>
+                                </span>
+                              </span>
+                              <span className="col-12 d-flex justify-content-between">
+                                <strong className="">柏油</strong>
+                                <span>
+                                  {value['P.C鋪面']}ｋｍ<sup>2</sup>
+                                </span>
+                              </span>
+                              <span className="col-12 d-flex justify-content-between">
+                                <strong className="">碎石</strong>　　
+                                <span>
+                                  {value['碎石面或土石鋪面']}ｋｍ
+                                  <sup>2</sup>
+                                </span>
+                              </span>
+                            </section>
+                          </section>
+                          <Link
+                            className="mt-5 btn btn-primary"
+                            to={`map/mapDetail/${value['林道名稱']}`}
+                          >
+                            前往詳細頁面
+                          </Link>
+                        </section>
+                      </section>
+                    </section>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
           </section>
           <section className="row m-5 p-5 justify-content-center align-items-center">
             <article className="col-3 my-auto me-5">
@@ -290,7 +378,6 @@ export default function Index() {
               autoplay={true}
               slidesPerView={3}
               speed={300}
-              autoplaySpeed={2000}
               grabCursor={true}
               centeredSlides={true}
               spaceBetween={20}
