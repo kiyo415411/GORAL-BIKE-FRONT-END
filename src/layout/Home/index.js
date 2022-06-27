@@ -1,11 +1,12 @@
 import VIDEO from '../../videos/index-heros.webm';
 import LOCATION from '../../images/Location.svg';
 import ACTIVTY from '../../images/Acitvity.png';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_URL, IMAGE_URL } from '../../utils/config';
 import DataAPI from '../Map/DataAPI';
-
+import { BsSquareFill } from 'react-icons/bs';
 // slick css
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -105,6 +106,71 @@ export default function Index() {
                 Deore 2x10傳動系統，油壓碟煞，Suntour避震前叉。
               </p>
             </article>
+          </section>
+          {/* NEWS */}
+          <section className="bg-light row row justify-content-around p-5 m-0">
+            <article className="col-5 my-5">
+              <h1 className="border-5 border-start border-secondary mb-3">
+                　最新消息
+              </h1>
+              <main>
+                {news.slice(0, 1).map((value, index) => {
+                  return (
+                    <Link to={`/news/${value.id}`} key={value.id}>
+                      <div className="row align-items-end border-bottom  pb-3">
+                        <div className="col-12 ">
+                          <div
+                            className="col-6 overflow-hidden mb-2"
+                            style={{ width: '621px', height: '416px' }}
+                          >
+                            <img
+                              className="cover "
+                              src={`${IMAGE_URL}/news/${value.name}`}
+                              // style={{ width: '100%' }}
+                              alt=""
+                            />
+                          </div>
+                          <span className="d-flex align-items-start gap-2">
+                            <span className="">
+                              <BsSquareFill />
+                            </span>
+                            <span>{value.date.split('T').shift()}</span>
+                          </span>
+                        </div>
+                        <h3>{value.title}</h3>
+                        <p style={{ textAlign: 'justify' }}>{value.content}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </main>
+            </article>
+
+            <aside className="col-5 my-5 row gap-3">
+              {news.slice(0, 6).map((value, index) => {
+                return (
+                  <Link to={`/news/${value.id}`} key={value.id}>
+                    <div className="row align-items-end border-bottom  pb-3">
+                      <div className="col-8 ">
+                        <p>{value.date.split('T').shift()}</p>
+                        <h6>{value.title}</h6>
+                      </div>
+                      <div
+                        className="col-4 overflow-hidden"
+                        style={{ width: '200px', height: '80px' }}
+                      >
+                        <img
+                          className="cover"
+                          src={`${IMAGE_URL}/news/${value.name}`}
+                          // style={{ width: '100%' }}
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </aside>
           </section>
           {/* PRODUCT */}
           <section className="py-5 my-5">
@@ -223,10 +289,11 @@ export default function Index() {
             <Swiper
               autoplay={true}
               slidesPerView={3}
-              speed={2000}
+              speed={300}
+              autoplaySpeed={2000}
               grabCursor={true}
               centeredSlides={true}
-              spaceBetween={50}
+              spaceBetween={20}
               scrollbar={{
                 draggable: true,
                 hide: false,
@@ -255,40 +322,6 @@ export default function Index() {
                 );
               })}
             </Swiper>
-          </section>
-          {/* NEWS */}
-          <section className="bg-light row row justify-content-around p-5 m-0">
-            <article className="col-4 my-5 row gap-2">
-              {/* <h4 className="fw-bolder">最新消息</h4>
-              <img src={ACTIVTY} className="w-100" alt="" />
-              <p className="fw-bold">{news[0].date.split('T').shift()}</p>
-              <h6 className="fw-bolder fs-5">{news[0].title}</h6>
-              <p>{news[0].content}</p> */}
-            </article>
-
-            <aside className="col-5 my-5 row gap-3">
-              {news.map((value, index) => {
-                return (
-                  <div className="row align-items-end border-bottom  pb-3">
-                    <div className="col-8 ">
-                      <p>{value.date.split('T').shift()}</p>
-                      <h6>{value.title}</h6>
-                    </div>
-                    <div
-                      className="col-4 overflow-hidden"
-                      style={{ width: '200px', height: '80px' }}
-                    >
-                      <img
-                        className="cover"
-                        src={`${IMAGE_URL}/news/${value.name}`}
-                        // style={{ width: '100%' }}
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                );
-              })}
-            </aside>
           </section>
         </div>
       </main>
