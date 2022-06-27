@@ -103,7 +103,7 @@ export default function Index() {
           </section>
           {/* PRODUCT */}
           <section className="py-5 my-5">
-            <h1 className="w-60 mx-auto mt-4">熱門商品</h1>
+            {/* <h1 className="w-60 mx-auto mt-4">熱門商品</h1> */}
             <Slider
               asNavFor={secondSwiper}
               ref={(slider1) => setFirstSwiper(slider1)}
@@ -184,13 +184,14 @@ export default function Index() {
               <Swiper
                 effect={'coverflow'}
                 coverflowEffect={{
-                  rotate: 30,
+                  rotate: 0,
                   stretch: 0,
-                  scale: 0.5,
-                  depth: 100,
+                  scale: 1,
+                  depth: 0,
                   modifier: 1,
-                  slideShadows: true,
+                  slideShadows: false,
                 }}
+                spaceBetween={100}
                 mousewheel={true}
                 grabCursor={true}
                 centeredSlides={true}
