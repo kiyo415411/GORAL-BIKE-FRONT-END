@@ -46,6 +46,12 @@ export default function Index() {
   // const productCarousel = useRef(null);
   // const productNameCarousel = useRef(null);
 
+  // const settings = {
+  //   focusOnSelect: true,
+  //   speed: 2500,
+  //   centerMode: true,
+  // };
+
   useEffect(() => {
     const getIndexData = async () => {
       try {
@@ -107,9 +113,7 @@ export default function Index() {
             <Slider
               asNavFor={secondSwiper}
               ref={(slider1) => setFirstSwiper(slider1)}
-              centerMode={true}
-              infinite={true}
-              className="mx-5 px-5"
+              className="mx-5 px-5 center"
             >
               {product.map((value) => {
                 return (
@@ -144,24 +148,19 @@ export default function Index() {
             </Slider>
             <Slider
               asNavFor={firstSwiper}
+              centerMode={true}
               ref={(slider2) => setSecondSwiper(slider2)}
               slidesToShow={5}
-              centerMode={true}
               autoplay={true}
-              speed={2000}
-              autoplaySpeed={2000}
-              swipeToSlide={true}
+              autoplaySpeed={3000}
               focusOnSelect={true}
-              className="mx-5 px-5"
+              className="mx-5 px-5 w-75 mx-auto scroll center d-flex align-items-center"
             >
               {product.map((value) => {
                 return (
-                  <h6
-                    key={value.product_id}
-                    className="text-center fs-5 my-auto"
-                  >
+                  <p key={value.product_id} className="text-center fs-6 m-auto">
                     {value.product_name}
-                  </h6>
+                  </p>
                 );
               })}
             </Slider>
@@ -223,14 +222,11 @@ export default function Index() {
               2022年，你絕不能錯過的登山車活動
             </h1>
             <Swiper
-              centerMode={true}
               autoplay={true}
               slidesPerView={3}
               speed={2000}
-              autoplaySpeed={2000}
               grabCursor={true}
               centeredSlides={true}
-              swipeToSlide={true}
               spaceBetween={50}
               scrollbar={{
                 draggable: true,
@@ -241,9 +237,9 @@ export default function Index() {
               mousewheel={true}
               modules={[Scrollbar, Mousewheel]}
             >
-              {activity.map((value) => {
+              {activity.map((value, index) => {
                 return (
-                  <SwiperSlide className="my-auto overflow-hidden">
+                  <SwiperSlide key={index} className="my-auto overflow-hidden">
                     <figure className="activity_img_block mx-auto">
                       <img
                         src={`${IMAGE_URL}/activity/${value.activity_pictures}`}
