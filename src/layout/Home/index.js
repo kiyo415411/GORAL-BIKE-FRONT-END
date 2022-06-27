@@ -1,11 +1,10 @@
 import VIDEO from '../../videos/index-heros.webm';
 import LOCATION from '../../images/Location.svg';
 import ACTIVTY from '../../images/Acitvity.png';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_URL, IMAGE_URL } from '../../utils/config';
 import DataAPI from '../Map/DataAPI';
-import { IoChevronBackSharp, IoChevronForwardSharp } from 'react-icons/io5';
 
 // slick css
 import 'slick-carousel/slick/slick.css';
@@ -75,8 +74,8 @@ export default function Index() {
   }, []);
 
   useEffect(() => {
-    console.log(activity);
-  }, [activity]);
+    console.log(news);
+  }, [news]);
 
   return (
     <>
@@ -170,7 +169,7 @@ export default function Index() {
             <img src={LOCATION} alt="" />
           </section>
           <section className="row m-5 p-5 justify-content-center align-items-center">
-            <article className="col-2 my-auto me-5">
+            <article className="col-3 my-auto me-5">
               <h2 className="fw-bold">登山車訓練營</h2>
               <p className="mt-3">
                 帶著這些問題，我們一起來審視登山車訓練營。需要考慮周詳登山車訓練營的影響及因應對策。如果此時我們選擇忽略登山車訓練營，那後果可想而知。當前最急迫的事，想必就是釐清疑惑了。這樣看來，對於登山車訓練營，我們不能不去想，卻也不能走火入魔。
@@ -179,7 +178,7 @@ export default function Index() {
                 更多訓練營
               </button>
             </article>
-            <section className="col-9 course">
+            <section className="col-8 course">
               <Swiper
                 effect={'coverflow'}
                 coverflowEffect={{
@@ -190,11 +189,11 @@ export default function Index() {
                   modifier: 1,
                   slideShadows: false,
                 }}
-                spaceBetween={100}
+                spaceBetween={20}
                 mousewheel={true}
                 grabCursor={true}
                 centeredSlides={true}
-                slidesPerView={'auto'}
+                slidesPerView={4}
                 modules={[EffectCoverflow, Mousewheel]}
                 className="mySwiper my-auto h-100"
               >
@@ -217,7 +216,7 @@ export default function Index() {
           </section>
 
           {/* ACTIVTY */}
-          <section className="my-5 py-5">
+          <section className="my-5 py-5 activity">
             <h1 className="display-6 fw-bolder text-center mb-5">
               2022年，你絕不能錯過的登山車活動
             </h1>
@@ -260,55 +259,35 @@ export default function Index() {
           {/* NEWS */}
           <section className="bg-light row row justify-content-around p-5 m-0">
             <article className="col-4 my-5 row gap-2">
-              <h4 className="fw-bolder">最新消息</h4>
+              {/* <h4 className="fw-bolder">最新消息</h4>
               <img src={ACTIVTY} className="w-100" alt="" />
-              <p className="fw-bold">2022/06/30</p>
-              <h6 className="fw-bolder fs-5">
-                稱霸La Flèche Wallonne(瓦隆之箭) Dylan
-                Teuns(特恩斯)生涯古典賽代表作
-              </h6>
-              <p>
-                稱霸La Flèche Wallonne(瓦隆之箭) Dylan
-                Teuns(特恩斯)寫生涯古典賽代力退阿登大賽5屆冠軍、現役世界冠軍、環法冠軍，Teuns技驚四座
-              </p>
+              <p className="fw-bold">{news[0].date.split('T').shift()}</p>
+              <h6 className="fw-bolder fs-5">{news[0].title}</h6>
+              <p>{news[0].content}</p> */}
             </article>
+
             <aside className="col-5 my-5 row gap-3">
-              <div className="row align-items-end border-bottom  pb-3">
-                <div className="col-8 ">
-                  <p>2022/06/30</p>
-                  <h6>稱霸La Flèche Wallonne (瓦隆之箭) Dylan Teuns...</h6>
-                </div>
-                <div className="col-4">
-                  <img src={ACTIVTY} style={{ width: '100%' }} alt="" />
-                </div>
-              </div>
-              <div className="row align-items-end border-bottom  pb-3">
-                <div className="col-8 ">
-                  <p>2022/06/30</p>
-                  <h6>稱霸La Flèche Wallonne (瓦隆之箭) Dylan Teuns...</h6>
-                </div>
-                <div className="col-4">
-                  <img src={ACTIVTY} style={{ width: '100%' }} alt="" />
-                </div>
-              </div>
-              <div className="row align-items-end border-bottom pb-3">
-                <div className="col-8 ">
-                  <p>2022/06/30</p>
-                  <h6>稱霸La Flèche Wallonne (瓦隆之箭) Dylan Teuns...</h6>
-                </div>
-                <div className="col-4">
-                  <img src={ACTIVTY} style={{ width: '100%' }} alt="" />
-                </div>
-              </div>
-              <div className="row align-items-end border-bottom  pb-3">
-                <div className="col-8 ">
-                  <p>2022/06/30</p>
-                  <h6>稱霸La Flèche Wallonne (瓦隆之箭) Dylan Teuns...</h6>
-                </div>
-                <div className="col-4">
-                  <img src={ACTIVTY} style={{ width: '100%' }} alt="" />
-                </div>
-              </div>
+              {news.map((value, index) => {
+                return (
+                  <div className="row align-items-end border-bottom  pb-3">
+                    <div className="col-8 ">
+                      <p>{value.date.split('T').shift()}</p>
+                      <h6>{value.title}</h6>
+                    </div>
+                    <div
+                      className="col-4 overflow-hidden"
+                      style={{ width: '200px', height: '80px' }}
+                    >
+                      <img
+                        className="cover"
+                        src={`${IMAGE_URL}/news/${value.name}`}
+                        // style={{ width: '100%' }}
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                );
+              })}
             </aside>
           </section>
         </div>
