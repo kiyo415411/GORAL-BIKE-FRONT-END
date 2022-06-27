@@ -6,6 +6,10 @@
     height: 300px;
     width: 400px;
 }
+.activity_img_block {
+    height: 25rem;
+    // width: 400px;
+}
 
 .cover{    
     width: 100%;
@@ -19,12 +23,12 @@
 }
 
 
-.swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+// .swiper-slide img {
+//     display: block;
+//     width: 100%;
+//     height: 100%;
+//     object-fit: cover;
+// }
 .slick-track{
     display: flex;
     justify-content: center;

@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { API_URL, IMAGE_URL } from '../../utils/config';
 import DataAPI from '../Map/DataAPI';
+import { IoChevronBackSharp, IoChevronForwardSharp } from 'react-icons/io5';
 
 // slick css
 import 'slick-carousel/slick/slick.css';
@@ -21,9 +22,16 @@ import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import 'swiper/css/thumbs';
 import 'swiper/css/navigation';
+import 'swiper/css/scrollbar';
 
 // import required modules
-import { EffectCoverflow, Mousewheel, Navigation, Controller } from 'swiper';
+import {
+  EffectCoverflow,
+  Mousewheel,
+  Navigation,
+  Controller,
+  Scrollbar,
+} from 'swiper';
 
 export default function Index() {
   const [api, setApi] = useState([]);
@@ -51,7 +59,7 @@ export default function Index() {
         setApi(getDataValue);
         setNews(getNewsValue.data.newsResults);
         setProduct(getProductValue.data.data);
-        setActivity(getActivityValue.data);
+        setActivity(getActivityValue.data.activityFullDtaa);
         setCourse(getCourseValue.data.classFullDtaa);
       } catch (e) {
         throw new Error(e);
@@ -59,6 +67,10 @@ export default function Index() {
     };
     getIndexData();
   }, []);
+
+  useEffect(() => {
+    console.log(activity);
+  }, [activity]);
 
   return (
     <>
@@ -135,6 +147,9 @@ export default function Index() {
               ref={(slider2) => setSecondSwiper(slider2)}
               slidesToShow={5}
               centerMode={true}
+              autoplay={true}
+              speed={2000}
+              autoplaySpeed={2000}
               swipeToSlide={true}
               focusOnSelect={true}
               className="mx-5 px-5"
@@ -202,36 +217,48 @@ export default function Index() {
           </section>
 
           {/* ACTIVTY */}
-          <section className="my-5 p-5 overflow-hidden">
-            <h1 className="display-6 fw-bolder text-center">
+          <section className="my-5 py-5">
+            <h1 className="display-6 fw-bolder text-center mb-5">
               2022年，你絕不能錯過的登山車活動
             </h1>
-            <div className="row flex-nowrap" style={{ marginLeft: '-25%' }}>
-              <div className="card border-0 mt-5" style={{ width: '40%' }}>
-                <img src={ACTIVTY} className="card-img-top" alt="..." />
-                <div className="card-body">
-                  <p className="card-text fs-1 text-center">
-                    XTERRA TAIWAN 2022
-                  </p>
-                </div>
-              </div>
-              <div className="card border-0 mt-5" style={{ width: '40%' }}>
-                <img src={ACTIVTY} className="card-img-top" alt="..." />
-                <div className="card-body">
-                  <p className="card-text fs-1 text-center">
-                    XTERRA TAIWAN 2022
-                  </p>
-                </div>
-              </div>
-              <div className="card border-0 mt-5" style={{ width: '40%' }}>
-                <img src={ACTIVTY} className="card-img-top" alt="..." />
-                <div className="card-body">
-                  <p className="card-text fs-1 text-center">
-                    XTERRA TAIWAN 2022
-                  </p>
-                </div>
-              </div>
-            </div>
+            <Swiper
+              centerMode={true}
+              autoplay={true}
+              slidesPerView={3}
+              speed={2000}
+              autoplaySpeed={2000}
+              grabCursor={true}
+              centeredSlides={true}
+              swipeToSlide={true}
+              spaceBetween={50}
+              scrollbar={{
+                draggable: true,
+                hide: false,
+                snapOnRelease: true,
+              }}
+              loop={true}
+              mousewheel={true}
+              modules={[Scrollbar, Mousewheel]}
+            >
+              {activity.map((value) => {
+                return (
+                  <SwiperSlide className="my-auto overflow-hidden">
+                    <figure className="activity_img_block mx-auto">
+                      <img
+                        src={`${IMAGE_URL}/activity/${value.activity_pictures}`}
+                        className="cover"
+                        alt="..."
+                      />
+                    </figure>
+                    <div className="card-body">
+                      <p className="card-text fs-3 text-center">
+                        {value.activity_name}
+                      </p>
+                    </div>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
           </section>
           {/* NEWS */}
           <section className="bg-light row row justify-content-around p-5 m-0">
