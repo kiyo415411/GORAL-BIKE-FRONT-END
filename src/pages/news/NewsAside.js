@@ -25,6 +25,8 @@ export default function NewsAside(props) {
     const newFilter = [...props.news].filter((value) =>
       getvalue.exec(value.title)
     );
+    props.setPage(1);
+    props.setLastPage(Math.ceil(newFilter.length / props.perPage));
     props.setFilterNews(newFilter);
   };
 

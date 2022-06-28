@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { IMAGE_URL } from '../../utils/config';
+import PaginationActive from '../../components/Pagination';
 
 export default function NewsArticle(props) {
   console.log('props->', props.filterNews);
@@ -32,6 +33,13 @@ export default function NewsArticle(props) {
               </div>
             );
           })}
+        </div>
+        <div className="d-flex justify-content-center">
+          <PaginationActive
+            page={props.page}
+            setPage={props.setPage}
+            lastPage={props.lastPage}
+          />
         </div>
       </article>
     </>

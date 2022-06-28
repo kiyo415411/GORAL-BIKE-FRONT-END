@@ -9,6 +9,7 @@ export default function News() {
   const [filterNews, setFilterNews] = useState([]);
   const [perPage, setPerPage] = useState(6);
   const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState(null);
 
   useEffect(() => {
     const getNews = async () => {
@@ -17,19 +18,22 @@ export default function News() {
         const getNewsValue = await axios.get(`${API_URL}/news`);
         const result = getNewsValue.data.newsResults;
         setNews(result);
-        setFilterNews(result.slice((page - 1) * perPage, perPage * page));
-        // sliceIntoChunks(news, perPage);
+        setFilterNews(result);
+        setLastPage(Math.ceil(filterNews.length / perPage));
       } catch (e) {
         throw new Error(e);
       }
     };
     getNews();
-  }, []);
+  }, [page, perPage, lastPage]);
+
+  // .slice((page - 1) * perPage, perPage * page)
 
   useEffect(() => {
     console.log('filterNews->', filterNews);
-    setFilterNews(news.slice((page - 1) * perPage, perPage * page));
-  }, [page, perPage]);
+    setFilterNews(news);
+    console.log(lastPage);
+  }, [page, perPage, lastPage]);
 
   return (
     <>
@@ -37,10 +41,20 @@ export default function News() {
         <NewsAside
           show={true}
           news={news}
-          filterNews={filterNews}
           setFilterNews={setFilterNews}
+          page={page}
+          setPage={setPage}
+          perPage={perPage}
+          lastPage={lastPage}
+          setLastPage={setLastPage}
         />
-        <NewsArticle news={news} filterNews={filterNews} />
+        <NewsArticle
+          news={news}
+          filterNews={filterNews.slice((page - 1) * perPage, perPage * page)}
+          lastPage={lastPage}
+          page={page}
+          setPage={setPage}
+        />
       </main>
     </>
   );
