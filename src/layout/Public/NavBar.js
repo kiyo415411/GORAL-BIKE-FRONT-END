@@ -16,7 +16,7 @@ function Navbar() {
             <Link to="news" className="nav-link text-white">
               最新消息
             </Link>
-            <Link to="Product" className="nav-link text-white">
+            <Link to="product" className="nav-link text-white">
               全部商品
             </Link>
             <Link to="custom" className="nav-link text-white">

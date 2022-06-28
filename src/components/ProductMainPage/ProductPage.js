@@ -21,6 +21,8 @@ function ProductPage() {
   const [currentCategory, setCurrentCategory] = useState();
   const [currentBrand, setCurrentBrand] = useState();
   const [currentSearch, setCurrentSearch] = useState();
+  const [page, setPage] = useState(0);
+  const [lastPage, setLastPage] = useState(0);
   const [handleSubmit, setHandleSubmit] = useState({
     category: currentCategory,
     brand: currentBrand,
@@ -30,8 +32,6 @@ function ProductPage() {
     search: currentSearch,
     page: page,
   });
-  const [page, setPage] = useState(0);
-  const [lastPage, setLastPage] = useState(0);
 
   useEffect(() => {
     const getLastPage = async () => {

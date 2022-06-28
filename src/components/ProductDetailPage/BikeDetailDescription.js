@@ -7,7 +7,13 @@ import { useState } from 'react';
 
 function BikeDetailDescription(props) {
   const [liked, setLiked] = useState([false]);
-  const [color] = useState(['#32CE13', '#E0CF05', '#D3484F', '#6F6669']);
+  const [color] = useState([
+    { color_value: '#32CE13' },
+    { color_value: '#E0CF05' },
+    { color_value: '#D3484F' },
+    { color_value: '#6F6669' },
+  ]);
+  const [currentColor, setCurrentColor] = useState();
   return (
     <div width="478px" className={props.className}>
       <div>
@@ -26,7 +32,11 @@ function BikeDetailDescription(props) {
         <Price price="308,000" />
         <hr />
         <p className="md-5">顏色</p>
-        <Color color={color} />
+        <Color
+          color={color}
+          currentColor={currentColor}
+          setCurrentColor={setCurrentColor}
+        />
         <hr />
         <div>
           <button className="btn border border-primary rounded-0 me-2">

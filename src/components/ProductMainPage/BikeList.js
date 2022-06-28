@@ -18,6 +18,8 @@ function BikeList(props) {
               text={
                 '鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano Deore 1x10零組件搭配，Suntour避震前叉。'
               }
+              rating={item.product_rating}
+              id={item.product_id}
             />
           </li>
         );

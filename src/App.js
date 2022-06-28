@@ -26,8 +26,8 @@ function App() {
         <Route path="/shopping-cart/checkout" element={<Checkout />} />
         <Route path="/shopping-cart" element={<ShoppingCart />} />
         <Route path="/map" element={<Map />} />
-        <Route path="/Product" element={<ProductPage />} />
-        <Route path="/Product/Detail" element={<BikeDetailPage />} />
+        <Route path="/product" element={<ProductPage />} />
+        <Route path="/product/detail/:product_id" element={<BikeDetailPage />} />
         <Route path="/course/detail" element={<CourseDetail />} />
         <Route path="/course/like" element={<CourseLike />} />
         <Route path="/course" element={<CourseList />} />

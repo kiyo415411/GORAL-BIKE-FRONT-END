@@ -1,9 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BikeDetailDescription from './BikeDetailDescription';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import LabelCard from '../Label/LabelCard';
+import axios from 'axios';
+import { API_URL } from '../../utils/config';
+import { IMAGE_URL } from '../../utils/config';
 
-function BikeDetailCard() {
+function BikeDetailCard(props) {
+  const [bike, setBike] = useState([]);
+  useEffect(() => {
+    const getPage = async () => {
+      const response = await axios.get(API_URL + '/product/product_id', {
+        params: {
+          product_id: props.product_id,
+        },
+      });
+      setBike(response.data.data);
+    };
+    getPage();
+  }, []);
+
+  const backImage = new URL(
+    `${IMAGE_URL}/bikes/${bike.product_images}`,
+    import.meta.url
+  );
+
   const [bikeLabel] = useState([
     'RACELITE 61 ALUMINIUM',
     'X-TAPER HEADTUBE',
@@ -28,28 +49,27 @@ function BikeDetailCard() {
     },
   ]);
   const DownDesc = bikeDetail[0].LongDesc.split('&break');
+  if (bike.length === 0) return <></>;
   return (
     <div className="container mt-5">
       <div className="d-flex">
         <div className="">
           <img
             height="538"
-            src={require('../../images/bikes/Bike8.png')}
+            src={`${IMAGE_URL}/bikes/${bike[0].product_images}`}
             alt=""
-          />{' '}
-          {/* Big bike */}
+          />
           <div height="175.71" className="d-flex justify-content-start">
-            {/* small bikes + this needs a map*/}
             <img
               height="175.71"
               className="overflow-auto mx-4"
-              src={require('../../images/bikes/Bike2.png')}
+              src={`${IMAGE_URL}/bikes/${bike[0].product_images}`}
               alt=""
             />
             <img
               height="175.71"
               className="overflow-auto mx-4"
-              src={require('../../images/bikes/Bike2.png')}
+              src={`${IMAGE_URL}/bikes/${bike[0].product_images}`}
               alt=""
             />
           </div>
@@ -72,7 +92,7 @@ function BikeDetailCard() {
         <div className="d-flex justify-content-start my-5">
           <div className="me-5">
             <h3 className="my-5">
-              <BsFillCheckCircleFill size={30} color="grey" />{' '}
+              <BsFillCheckCircleFill size={30} color="grey" />
               採用三種不同管壁厚薄度打造的全鋁合金車體
             </h3>
             <h3 className="my-5">

@@ -29,13 +29,11 @@ function ColorPalette(props) {
                     e.target.style.width = '28px';
                     e.target.style.height = '28px';
                     e.target.style.margin = '0px';
-                    console.log(e.target.style.width);
                   }}
                   onMouseLeave={(e) => {
                     e.target.style.width = '24px';
                     e.target.style.height = '24px';
                     e.target.style.margin = '4px';
-                    console.log(e.target.style.width);
                   }}
                   onClick={() => {
                     setBackground(color);

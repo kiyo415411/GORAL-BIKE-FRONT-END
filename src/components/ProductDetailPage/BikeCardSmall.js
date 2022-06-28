@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Like from '../Aside/Like.js';
 import { Link } from 'react-router-dom';
+import { IMAGE_URL } from '../../utils/config';
 function separator(num) {
   let str = num.toString().split('.');
   str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -8,23 +9,25 @@ function separator(num) {
 }
 
 function BikeCardSmall(props) {
+  const img = props.img;
   const [liked, setLiked] = useState(false);
   return (
     <>
       <div
         className="card shadow p-2 mb-5 bg-body rounded container"
-        style={{ width: '400px' }}
+        style={{ width: '400px', height: '450px' }}
       >
         <div className="row">
           <div className="mx-auto d-flex justify-content-center">
             <img
-              src={require('../../images/bikes/' + props.bike + '.png')}
+              src={`${IMAGE_URL}/bikes/${img.replace(/ /g, '%20')}`}
               className="img-fluid rounded-start"
               alt="..."
             />
+            {console.log(props.img)}
           </div>
           <div className="m-auto">
-            <div className="card-body">
+            <div className="card-body" style={{position: "absolute", bottom: "10px"}}>
               <div className="">
                 <div className="mb-3 d-flex gap-2">
                   <Link to="/Product/Detail" className="">
@@ -35,9 +38,7 @@ function BikeCardSmall(props) {
                 </div>
                 <h5 className="text-content">${separator(props.price)}</h5>
               </div>
-              <p className="card-text text-subcontent">
-                <small>{props.text}</small>
-              </p>
+              <p className="card-text text-subcontent"></p>
               <div className="">
                 <button className="btn btn-primary rounded-pill px-4 me-2">
                   直接購買
