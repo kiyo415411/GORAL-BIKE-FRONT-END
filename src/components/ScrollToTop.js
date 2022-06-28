@@ -1,17 +1,12 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
-// import { withRouter } from '../utils/withRouter';
-
-// 頁面切換時要用捲軸讓頁面回到最上方
-function ScrollToTop({ children }) {
-  const { pathname } = useLocation();
+export default function ScrollToTop({ children }) {
+  let location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [location]);
 
   return children;
 }
-
-export default ScrollToTop;

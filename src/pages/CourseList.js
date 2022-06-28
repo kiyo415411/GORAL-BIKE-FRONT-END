@@ -8,35 +8,82 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { API_URL, IMAGE_URL } from '../utils/config';
 
-const cardStyle = 'col'; // 切換排版 | row/col
-
 export default function CourseList() {
-  const [data, setData] = useState([]);
-  // 目前在第幾頁
-  const [page, setPage] = useState(1);
-  // 總筆數
-  const [lastPage, setLastPage] = useState(1);
+  // ---------------------------------------------- 初始值
 
+  const [data, setData] = useState([]); // 主資料
+  const [page, setPage] = useState(1); // 當前頁數
+  const [lastPage, setLastPage] = useState(1); // 總頁數
+  const [cardStyle, setCardStyle] = useState('row'); // 卡片排列方式
+  const [searchWord, setSearchWord] = useState(''); // 關鍵字變動
+  const [search, setSearch] = useState(''); // 關鍵字篩選
+  const [statu, setStatu] = useState(1); // 狀態篩選
+  const [price, setPrice] = useState([0, 10000]); // slider 價錢變動
+  const [priceSubmit, setPriceSubmit] = useState([0, 10000]); // 價錢篩選
+  const [person, setPerson] = useState([0, 100]); // slider 人數變動
+  const [personSubmit, setPersonSubmit] = useState([0, 100]); // 人數篩選
+  const [category, setCategory] = useState([1, 2]); // 課程難度篩選
+  const [startDate, setStartDate] = useState(new Date()); // 最早日期
+  const [startDateSubmit, setStartDateSubmit] = useState(''); // 最早日期篩選
+  const [endDate, setEndDate] = useState(new Date()); // 最晚日期
+  const [endDateSubmit, setEndDateSubmit] = useState(''); // 最晚日期篩選
+  const [sortMethod, setSortMethod] = useState('hotSort'); // 排序
+
+  // ------------------------------------------- 固定值
+
+  const [categoryLabel, setCategoryLabel] = useState([]); // 難度分類
+  const [state, setState] = useState([]); // 狀態分類
+
+  // ------------------------------------------- 跟後端要資料
   useEffect(() => {
     let getData = async () => {
-      let response = await axios.get(`${API_URL}/course/`, {
-        params: { page: page },
-      });
-      setData(response.data.data);
-      setLastPage(response.data.pagination.lastPage);
+      try {
+        let response = await axios.get(`${API_URL}/course/`, {
+          params: {
+            page: page,
+            statu: statu,
+            priceSubmit: priceSubmit,
+            personSubmit: personSubmit,
+            category: category,
+            sortMethod: sortMethod,
+            startDateSubmit: startDateSubmit,
+            endDateSubmit: endDateSubmit,
+            search: search,
+          },
+        });
+        setData(response.data.data);
+        setLastPage(response.data.pagination.lastPage);
+        setStartDate(response.data.dateRange.finalStartDate);
+        setEndDate(response.data.dateRange.finalEndDate);
+        setState(response.data.stateGroup);
+        setCategoryLabel(response.data.categoryGroup);
+      } catch (e) {
+        console.error(e);
+      }
     };
     getData();
-  }, [page]);
+  }, [
+    page,
+    statu,
+    priceSubmit,
+    personSubmit,
+    category,
+    sortMethod,
+    startDateSubmit,
+    endDateSubmit,
+    search,
+  ]);
 
   const courseItems = [];
+
   data.map((v, i) => {
     const newDate = data[i].course_date.split('T').shift();
-
     if (cardStyle === 'row') {
       courseItems.push(
         <RowCard
           key={i}
           height={15.625}
+          courseId={data[i].course_id}
           image={`${IMAGE_URL}/course/${data[i].course_pictures}`}
           score={5}
           like={false}
@@ -49,6 +96,7 @@ export default function CourseList() {
           text={data[i].course_content}
           category={data[i].course_category_name}
           venue={data[i].venue_name}
+          datailLink={`/course/${data[i].id}`}
         />
       );
     } else {
@@ -56,6 +104,7 @@ export default function CourseList() {
         <ColCard
           key={i}
           width={20}
+          courseId={data[i].course_id}
           image={`${IMAGE_URL}/course/${data[i].course_pictures}`}
           like={false}
           title={data[i].course_title}
@@ -67,9 +116,11 @@ export default function CourseList() {
           text={data[i].course_content}
           category={data[i].course_category_name}
           venue={data[i].venue_name}
+          datailLink={`/course/${data[i].id}`}
         />
       );
     }
+
     return 0;
   });
 
@@ -84,23 +135,68 @@ export default function CourseList() {
           {/* -----------------------------左區塊 */}
           <div className="col-auto">
             {/* 邊攔 */}
-            <CourseAside />
+            <CourseAside
+              statu={statu}
+              setStatu={setStatu}
+              priceSubmit={priceSubmit}
+              setPriceSubmit={setPriceSubmit}
+              personSubmit={personSubmit}
+              setPersonSubmit={setPersonSubmit}
+              category={category}
+              setCategory={setCategory}
+              startDate={startDate}
+              startDateSubmit={startDateSubmit}
+              setStartDateSubmit={setStartDateSubmit}
+              endDate={endDate}
+              endDateSubmit={endDateSubmit}
+              setEndDateSubmit={setEndDateSubmit}
+              state={state}
+              categoryLabel={categoryLabel}
+              price={price}
+              setPrice={setPrice}
+              person={person}
+              setPerson={setPerson}
+              setSearch={setSearch}
+              searchWord={searchWord}
+              setSearchWord={setSearchWord}
+            />
           </div>
           {/* -----------------------------右區塊 */}
           <div className="col-auto">
             {/* 排序 */}
-            <TopSort />
+            <TopSort
+              cardStyle={cardStyle}
+              setCardStyle={setCardStyle}
+              sortMethod={sortMethod}
+              setSortMethod={setSortMethod}
+            />
             {/* 卡片清單 */}
-            <div
-              className={cardStyle === 'col' ? 'd-flex flex-wrap mt-2' : 'mt-2'}
-              style={{ width: '63rem' }}
-            >
-              {courseItems}
-            </div>
-            {/* 分頁 */}
-            <div>
-              <Pagination page={page} setPage={setPage} lastPage={lastPage} />
-            </div>
+            {data.length > 0 ? (
+              <>
+                <div
+                  className={
+                    cardStyle === 'col' ? 'd-flex flex-wrap mt-2' : 'mt-2 mb-5'
+                  }
+                  style={{ width: '63rem' }}
+                >
+                  {courseItems}
+                </div>
+                <div className="d-flex justify-content-center">
+                  <Pagination
+                    page={page}
+                    setPage={setPage}
+                    lastPage={lastPage}
+                  />
+                </div>
+              </>
+            ) : (
+              <div
+                className="row justify-content-center align-items-center text-content"
+                style={{ width: '63rem', height: '75%' }}
+              >
+                找不到課程，請調整篩選條件。
+              </div>
+            )}
           </div>
         </div>
       </div>

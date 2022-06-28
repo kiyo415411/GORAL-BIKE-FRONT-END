@@ -1,6 +1,7 @@
 import './App.css';
 import Navbar from './layout/Public/NavBar';
 import Map from './layout/Map';
+import MapDetail from './layout/MapDetail';
 import Index from './layout/Home/index';
 import Footer from './layout/Public/Footer';
 import ShoppingCart from './pages/ShoppingCart';
