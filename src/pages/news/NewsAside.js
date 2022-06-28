@@ -32,7 +32,7 @@ export default function NewsAside(props) {
 
   return (
     <>
-      <aside className="col-4 g-4 mt-5">
+      <aside className="col-12 col-md-4 g-4 mt-5">
         <h3 className="text-primary mb-3">其他熱門文章</h3>
         {props.show ? (
           <input
@@ -45,7 +45,7 @@ export default function NewsAside(props) {
           ''
         )}
 
-        <ul className="list-unstyled row flex-column g-4 p-0 m-0">
+        <ul className="list-unstyled row flex-column g-4 p-0 m-0 d-none d-md-block">
           {hotNews.map((value) => {
             const date = value.date.split('T').shift();
             return (
