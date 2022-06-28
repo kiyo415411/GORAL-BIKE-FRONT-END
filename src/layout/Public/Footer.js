@@ -43,34 +43,51 @@ function Footer() {
           <section className="col-12 col-md-6 mx-md-auto row justify-content-md-center fs-6 lh-sm text-center font-monospace m-0 p-0">
             {item_main.map((value, index) => {
               return (
-                <Accordion
-                  alwaysOpen={false}
-                  flus={false}
-                  className="p-0 m-0 d-none"
-                >
-                  <Accordion.Item eventKey={index} className="bg-dark w-100 ">
-                    <Accordion.Header className="bg-dark">
-                      {item_main[index][0]}
-                    </Accordion.Header>
-                    <Accordion.Body>
-                      <ul key={index} className="col-12 col-md-6 col-lg-3">
-                        {item_main[index].map((value, index) => {
-                          return (
-                            <li key={index}>
-                              <a className="nav-link text-muted" href="#/">
-                                {value}
-                              </a>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </Accordion.Body>
-                  </Accordion.Item>
-                </Accordion>
+                <>
+                  <ul
+                    key={'ul' + index}
+                    className="d-none d-md-block col-12 col-md-6 col-lg-3"
+                  >
+                    {item_main[index].map((value, index) => {
+                      return (
+                        <li key={'li' + index}>
+                          <a className="nav-link text-muted" href="#/">
+                            {value}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  <Accordion
+                    alwaysOpen={false}
+                    flush={false}
+                    className="p-0 m-0 d-md-none"
+                    key={'Accordion' + index}
+                  >
+                    <Accordion.Item eventKey={index} className="bg-dark w-100 ">
+                      <Accordion.Header className="bg-dark">
+                        {item_main[index][0]}
+                      </Accordion.Header>
+                      <Accordion.Body>
+                        <ul key={index} className="col-12 col-md-6 col-lg-3">
+                          {item_main[index].map((value, index) => {
+                            return (
+                              <li key={'Accordion li' + index}>
+                                <a className="nav-link text-muted" href="#/">
+                                  {value}
+                                </a>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </Accordion>
+                </>
               );
             })}
           </section>
-          <section className="col-12 mt-5 text-center text-md-start col-md-2 text-muted fs-6">
+          <section className="col-12 text-center text-md-start col-md-2 text-muted fs-6">
             <nav>
               <ul className="list-unstyled row justify-content-center justify-content-md-start">
                 <li className="col-1">

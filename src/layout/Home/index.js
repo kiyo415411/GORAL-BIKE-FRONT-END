@@ -75,18 +75,14 @@ export default function Index() {
           >
             <video src={VIDEO} autoPlay={true} loop={true} muted></video>
 
-            <article
-              className="position-absolute translate-middle lh-lg text-white"
-              style={{
-                left: '25%',
-                top: '45%',
-                width: '620px',
-              }}
-            >
+            <article className="position-absolute top-100 start-0 translate-middle-y w-100 h-100 lh-lg text-white mx-5">
               <h5 className="fw-bold fs-3">TRAIL</h5>
               <h1 className="fw-bolder display-1">ONE-TWENTY</h1>
               <h5 className="fw-bold fs-4">樂趣</h5>
-              <p className="fw-bold fs-6">
+              <p
+                className="fw-bold fs-6 w-75"
+                style={{ whiteSpace: 'pre-line', textAlign: 'justify' }}
+              >
                 BIG.NINE
                 300，車架為採用雙重管壁厚度的鋁合金管材所打造，較為直挺的騎乘幾何。Shimano
                 Deore 2x10傳動系統，油壓碟煞，Suntour避震前叉。
@@ -96,7 +92,7 @@ export default function Index() {
 
           {/* NEWS */}
           <section className="bg-light row row justify-content-around p-5 m-0">
-            <article className="col-5 my-5">
+            <article className="col-12 col-md-5 my-5">
               <h1 className="border-5 border-start border-secondary mb-3">
                 　最新消息
               </h1>
@@ -105,11 +101,8 @@ export default function Index() {
                   return (
                     <Link to={`/news/${value.id}`} key={value.id}>
                       <div className="row align-items-end border-bottom pb-3">
-                        <div className="col-12 ">
-                          <div
-                            className="col-6 overflow-hidden mb-2"
-                            style={{ width: '621px', height: '416px' }}
-                          >
+                        <div className="col-12 mt-3">
+                          <div className="col-6 overflow-hidden mb-2 w-100 h-100">
                             <img
                               className="cover "
                               src={`${IMAGE_URL}/news/${value.name}`}
@@ -117,13 +110,15 @@ export default function Index() {
                               alt=""
                             />
                           </div>
-                          <span className="d-flex align-items-center gap-2">
+                          <span className="d-flex mt-3 align-items-center gap-2">
                             <BsSquareFill />
                             <span>{value.date.split('T').shift()}</span>
                           </span>
                         </div>
-                        <h3>{value.title}</h3>
-                        <p style={{ textAlign: 'justify' }}>{value.content}</p>
+                        <h3 className="mt-3">{value.title}</h3>
+                        <p className="mt-3" style={{ textAlign: 'justify' }}>
+                          {value.content}
+                        </p>
                       </div>
                     </Link>
                   );
@@ -131,7 +126,10 @@ export default function Index() {
               </main>
             </article>
 
-            <aside className="col-5 my-5 row gap-3">
+            <aside className="col-5 my-5 row gap-3 d-none d-md-block">
+              <h3 className="border-5 border-start border-secondary mb-3">
+                　消息列表
+              </h3>
               {news.slice(0, 6).map((value, index) => {
                 return (
                   <Link to={`/news/${value.id}`} key={value.id}>
