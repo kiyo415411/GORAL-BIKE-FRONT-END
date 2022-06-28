@@ -104,7 +104,7 @@ export default function Index() {
                 {news.slice(0, 1).map((value, index) => {
                   return (
                     <Link to={`/news/${value.id}`} key={value.id}>
-                      <div className="row align-items-end border-bottom  pb-3">
+                      <div className="row align-items-end border-bottom pb-3">
                         <div className="col-12 ">
                           <div
                             className="col-6 overflow-hidden mb-2"
@@ -117,10 +117,8 @@ export default function Index() {
                               alt=""
                             />
                           </div>
-                          <span className="d-flex align-items-start gap-2">
-                            <span className="">
-                              <BsSquareFill />
-                            </span>
+                          <span className="d-flex align-items-center gap-2">
+                            <BsSquareFill />
                             <span>{value.date.split('T').shift()}</span>
                           </span>
                         </div>
@@ -139,7 +137,10 @@ export default function Index() {
                   <Link to={`/news/${value.id}`} key={value.id}>
                     <div className="row align-items-end border-bottom  pb-3">
                       <div className="col-8 ">
-                        <p>{value.date.split('T').shift()}</p>
+                        <span className="d-flex align-items-center mb-3 gap-2">
+                          <BsSquareFill />
+                          <span>{value.date.split('T').shift()}</span>
+                        </span>
                         <h6>{value.title}</h6>
                       </div>
                       <div
