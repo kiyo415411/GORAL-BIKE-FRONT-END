@@ -48,26 +48,22 @@ function Checkout() {
         {/* 結帳商品清單 */}
         {productCheckout ? (
           <CheckoutList productCart={productCart} type="商品" />
-        ) : (
-          <div></div>
-        )}
+        ) : null}
         {/* 結帳課程清單 */}
         {courseCheckout ? (
           <CheckoutList productCart={courseCart} type="課程" />
-        ) : (
-          <div></div>
-        )}
+        ) : null}
         {/* 結帳活動清單 */}
         {activityCheckout ? (
           <CheckoutList productCart={activityCart} type="活動" />
-        ) : (
-          <div></div>
-        )}
+        ) : null}
         {/* 收件人資訊 */}
-        <ReceiverInfo
-          handleReceiverChange={handleReceiverChange}
-          receiverInfo={receiverInfo}
-        />
+        {productCheckout ? (
+          <ReceiverInfo
+            handleReceiverChange={handleReceiverChange}
+            receiverInfo={receiverInfo}
+          />
+        ) : null}
         {/* 付款資訊 */}
         <PaymentInfo payment={payment} setPayment={setPayment} />
         {/* 結帳金額計算 */}

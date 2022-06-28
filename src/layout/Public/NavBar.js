@@ -87,7 +87,14 @@ function Navbar() {
                   </a>
                 </li>
                 <li className="col-2 text-center">
-                  <a className="text-muted" href="#/">
+                  <a
+                    className="text-muted"
+                    href="#/"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      history('/shopping-cart');
+                    }}
+                  >
                     <BsCart3 />
                   </a>
                 </li>
@@ -108,7 +115,14 @@ function Navbar() {
                   <LoginModal />
                 </li>
                 <li className="col-2 text-center">
-                  <a className="text-muted" href="#/">
+                  <a
+                    className="text-muted"
+                    href="#/"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      history('/shopping-cart');
+                    }}
+                  >
                     <BsCart3 />
                   </a>
                 </li>

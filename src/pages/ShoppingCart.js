@@ -94,7 +94,12 @@ function ShoppingCart() {
         {/* 按鈕群組 */}
         <section className="d-flex justify-content-end text-end mb-5">
           <div>
-            <button className="btn btn-outline-primary rounded-0 fs-4 fw-bold me-md-5 me-3">
+            <button
+              className="btn btn-outline-primary rounded-0 fs-4 fw-bold me-md-5 me-3"
+              onClick={() => {
+                navigate('/');
+              }}
+            >
               返回購物
             </button>
             <button
