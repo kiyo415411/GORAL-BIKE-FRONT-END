@@ -38,7 +38,7 @@ export default function Index() {
   let getScreenWidth = window.screen.width;
 
   console.log(getScreenWidth);
-  const [screenWidth, setScreenWidth] = useState([]);
+  const [screenWidth, setScreenWidth] = useState(768);
   const [api, setApi] = useState([]);
   const [news, setNews] = useState([]);
   const [product, setProduct] = useState([]);

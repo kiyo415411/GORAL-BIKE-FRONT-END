@@ -16,6 +16,10 @@ import MapNav from './MapNav';
 
 export const MapDataValue = createContext();
 export default function Index() {
+  // 抓取螢幕寬度
+  let getScreenWidth = window.screen.width;
+  // 設定螢幕寬度
+  const [screenWidth, setScreenWidth] = useState(768);
   // 設定起始座標
   const [position, setPosition] = useState([24, 121]);
   // 設定地圖縮放大小
@@ -105,6 +109,11 @@ export default function Index() {
     console.log('filterMapDataChg', filterMapData);
   }, [filterMapData]);
 
+  useEffect(() => {
+    let getScreenWidth = window.screen.width;
+    setScreenWidth(getScreenWidth);
+  }, [getScreenWidth]);
+
   return (
     // 世界地圖渲染
     <>
@@ -113,7 +122,7 @@ export default function Index() {
         {/* 世界地圖渲染 */}
         <main className="container-fluid m-0 p-0">
           <section className="row p-0 m-0 ">
-            <map className="col-8 p-0 m-0">
+            <map className="col-md-8 p-0 m-0 order-1 order-md-0">
               <MapContainer
                 // 座標中心點
                 center={position}
@@ -156,8 +165,8 @@ export default function Index() {
               </MapContainer>
             </map>
             <article
-              className="bg-primary text-dark col-4 m-0 p-0 overflow-auto "
-              style={{ height: '960px' }}
+              className="bg-primary text-dark col-md-4 m-0 p-0 overflow-auto "
+              style={{ height: screenWidth > 500 ? '960px' : '280px' }}
             >
               {filterDataApi.length !== 0 ? (
                 <MapImformation />

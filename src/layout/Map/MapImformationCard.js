@@ -28,13 +28,13 @@ export default function MapImformation(props) {
             <span className="card-text">{value['林區']}</span>
           </div>
           <div className="row justify-content-between align-items-center my-2">
-            <p className="col-4 card-text mx-3 my-auto">
+            <p className="col-md-4 card-text mx-3 my-auto">
               <span>總長度</span>
               {value['總長度'] + '公里'}
             </p>
-            <div className="col-6 my-2 d-flex justify-content-around">
+            <div className="col-md-6 my-2 d-flex justify-content-md-around">
               <button
-                className="btn btn-outline-primary text-primary rounded-pill border-2"
+                className="mx-2 mx-md-0 btn btn-outline-primary text-primary rounded-pill border-2"
                 onClick={(e) => {
                   const position = [dataAxis[1], dataAxis[0]];
                   Data.setPosition(position);
@@ -57,7 +57,7 @@ export default function MapImformation(props) {
             </div>
           </div>
           <div>
-            <div className="card-body fs-6 gap-3 d-flex py-0">
+            <div className="card-body fs-6 gap-3 d-flex py-0 mb-3 mb-md-0">
               {Number(value['碎石面或土石鋪面']) === 0 ? (
                 ''
               ) : (

@@ -71,8 +71,8 @@ export default function MapNav() {
     <>
       <nav className="nav bg-dark p-3 justify-content-end">
         <section className="row justify-content-end gap-3 w-75">
-          <section className="col-md-2 d-flex justify-content-end align-items-center w-25 gap-3">
-            <label className="col-3 text-white" htmlFor="地圖樣式">
+          <section className="col-md-2 d-flex justify-content-end align-items-center gap-3">
+            <label className="col-4 text-white" htmlFor="地圖樣式">
               地圖樣式
             </label>
             <select
@@ -162,13 +162,15 @@ export default function MapNav() {
               })}
             </select>
           </section>
-          <input
-            className="form-control w-20 ms-md-5"
-            id="serchMapName"
-            placeholder="搜尋地圖名稱"
-            onChange={serchValue}
-            ref={inputRef}
-          />
+          <section className="col-md-2 d-flex justify-content-end align-items-center gap-3">
+            <input
+              className="form-control w-100 ms-md-5 "
+              id="serchMapName"
+              placeholder="搜尋地圖名稱"
+              onChange={serchValue}
+              ref={inputRef}
+            />
+          </section>
           <section className="col-md-1 d-flex justify-content-end align-items-center gap-3">
             <button className="btn btn-danger text-white" onClick={Reset}>
               清除篩選
