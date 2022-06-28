@@ -3,8 +3,20 @@ import CheckoutList from '../components/Checkout/CheckoutList';
 import CheckoutSummary from '../components/Checkout/CheckoutSummary';
 import PaymentInfo from '../components/Checkout/PaymentInfo';
 import ReceiverInfo from '../components/Checkout/ReceiverInfo';
+import { useProductCart } from '../utils/useProductCart';
+import { useCourseCart } from '../utils/useCourseCart';
+import { useActivityCart } from '../utils/useActivityCart';
+import { useCart } from '../utils/useCart';
 
 function Checkout() {
+  const cart = useCart();
+  const { allCartTotal } = cart;
+  const productCart = useProductCart();
+  const courseCart = useCourseCart();
+  const activityCart = useActivityCart();
+  const productCheckout = productCart.cart.checkedItems.length;
+  const courseCheckout = courseCart.cart.checkedItems.length;
+  const activityCheckout = activityCart.cart.checkedItems.length;
   const [receiverInfo, setReceiverInfo] = useState({
     receiver_name: '',
     phone: '',
@@ -26,12 +38,31 @@ function Checkout() {
     e.preventDefault();
     console.log(receiverInfo);
     console.log(payment);
+    productCart.checkoutCart();
+    courseCart.checkoutCart();
+    activityCart.checkoutCart();
   };
   return (
     <div className="container">
-      <form action="" onSubmit={handleSubmit}>
-        {/* 結帳訂單清單 */}
-        <CheckoutList />
+      <form onSubmit={handleSubmit}>
+        {/* 結帳商品清單 */}
+        {productCheckout ? (
+          <CheckoutList productCart={productCart} type="商品" />
+        ) : (
+          <div></div>
+        )}
+        {/* 結帳課程清單 */}
+        {courseCheckout ? (
+          <CheckoutList productCart={courseCart} type="課程" />
+        ) : (
+          <div></div>
+        )}
+        {/* 結帳活動清單 */}
+        {activityCheckout ? (
+          <CheckoutList productCart={activityCart} type="活動" />
+        ) : (
+          <div></div>
+        )}
         {/* 收件人資訊 */}
         <ReceiverInfo
           handleReceiverChange={handleReceiverChange}
@@ -40,7 +71,7 @@ function Checkout() {
         {/* 付款資訊 */}
         <PaymentInfo payment={payment} setPayment={setPayment} />
         {/* 結帳金額計算 */}
-        <CheckoutSummary />
+        <CheckoutSummary allCartTotal={allCartTotal} />
         <div className="text-end mb-5">
           <button
             className="btn btn-primary rounded-0 fs-4 fw-bold"
