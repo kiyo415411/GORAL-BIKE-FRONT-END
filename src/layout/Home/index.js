@@ -26,7 +26,13 @@ import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 
 // import required modules
-import { EffectCoverflow, Mousewheel, EffectFade, Scrollbar } from 'swiper';
+import {
+  EffectCoverflow,
+  Mousewheel,
+  EffectFade,
+  Scrollbar,
+  Navigation,
+} from 'swiper';
 
 export default function Index() {
   let getScreenWidth = window.screen.width;
@@ -134,7 +140,7 @@ export default function Index() {
               <h3 className="border-5 border-start border-secondary mb-3">
                 　消息列表
               </h3>
-              {news.slice(0, 6).map((value, index) => {
+              {news.slice(0, 7).map((value, index) => {
                 return (
                   <Link to={`/news/${value.id}`} key={value.id}>
                     <div className="row align-items-end border-bottom  pb-3">
@@ -224,7 +230,11 @@ export default function Index() {
 
           {/* LOCATION */}
           <section style={{ height: '50rem' }}>
-            <Swiper effect={'fade'} navigation={true} modules={[EffectFade]}>
+            <Swiper
+              effect={'fade'}
+              navigation={true}
+              modules={[EffectFade, Navigation]}
+            >
               {api.map((value, index) => {
                 return (
                   <SwiperSlide key={index} className="position-relative">
@@ -329,17 +339,19 @@ export default function Index() {
               })}
             </Swiper>
           </section>
-          <section className="row m-5 p-5 justify-content-center align-items-center">
-            <article className="col-3 my-auto me-5">
-              <h2 className="fw-bold">登山車訓練營</h2>
-              <p className="mt-3">
+          <section className="row m-1 m-md-5 p-md-5 justify-content-md-center align-items-md-center">
+            <article className="col-md-3 my-auto me-md-5 row justify-content-center ">
+              <h3 className="my-3 fw-bold text-center text-md-start">
+                登山車訓練營
+              </h3>
+              <p className="my-3 mt-md-3" style={{ textAlign: 'justify' }}>
                 帶著這些問題，我們一起來審視登山車訓練營。需要考慮周詳登山車訓練營的影響及因應對策。如果此時我們選擇忽略登山車訓練營，那後果可想而知。當前最急迫的事，想必就是釐清疑惑了。這樣看來，對於登山車訓練營，我們不能不去想，卻也不能走火入魔。
               </p>
-              <button className="btn btn-danger fs-6 w-50 mt-1">
+              <button className="btn btn-danger fs-6 w-50 mb-3 mb-md-0 mt-md-1">
                 更多訓練營
               </button>
             </article>
-            <section className="col-8 course">
+            <section className="col-md-8 course">
               <Swiper
                 effect={'coverflow'}
                 coverflowEffect={{
@@ -354,7 +366,7 @@ export default function Index() {
                 mousewheel={true}
                 grabCursor={true}
                 centeredSlides={true}
-                slidesPerView={4}
+                slidesPerView={screenWidth > 500 ? 4 : 2}
                 modules={[EffectCoverflow, Mousewheel]}
                 className="mySwiper my-auto h-100"
               >
@@ -379,11 +391,12 @@ export default function Index() {
           {/* ACTIVTY */}
           <section className="my-5 py-5 activity">
             <h1 className="display-6 fw-bolder text-center mb-5">
-              2022年，你絕不能錯過的登山車活動
+              2022年 <br />
+              你絕不能錯過的登山車活動
             </h1>
             <Swiper
               autoplay={true}
-              slidesPerView={3}
+              slidesPerView={screenWidth > 500 ? 3 : 2}
               speed={300}
               grabCursor={true}
               centeredSlides={true}

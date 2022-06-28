@@ -68,7 +68,6 @@ function Index() {
           width: '100%',
           height: '960px',
           overflow: 'hidden',
-          minWidth: '468px',
         }}
       >
         <article className="row justify-content-end h-100">
@@ -78,7 +77,7 @@ function Index() {
           ></section>
           <section className="col-lg-4 m-0 p-0 bg-black text-white bg-opacity-75 p-3 row ">
             <section className="row align-items-center">
-              <Link to="/map" className="btn btn-primary w-15 ms-auto">
+              <Link to="/map" className="btn btn-primary w-20 ms-auto">
                 返回
               </Link>
               <section className="col-12 pe-0">
