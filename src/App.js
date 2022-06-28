@@ -15,10 +15,9 @@ import CourseList from './pages/CourseList';
 import CourseLike from './pages/CourseLike';
 import CourseDetail from './pages/CourseDetail';
 
-import News from './pages/News';
-import NewsDetail from './pages/News/NewsDetail';
+import News from './layout/News';
+import NewsDetail from './pages/NewsDetail';
 import { Routes, Route } from 'react-router-dom';
-import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (

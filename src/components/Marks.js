@@ -2,12 +2,12 @@ import { Marker, Popup, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import Twd97toWsg84 from './Twd97toWsg84';
 import { useContext } from 'react';
-import { MapDataValue } from './index';
+import { MapDataValue } from '../layout/Map/index';
 
 // MARKS ICONS圖案設定
 function GetIcon(_iconSize) {
   return L.icon({
-    iconUrl: require('../../images/pin.png'),
+    iconUrl: require('../images/pin.png'),
     iconSize: [_iconSize, _iconSize],
   });
 }

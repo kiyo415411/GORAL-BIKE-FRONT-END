@@ -6,13 +6,13 @@ import {
   // Popup,
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import MapData from './MapData.json';
-import Mark from './Marks';
-import LocationMarker from './LocationMarker';
+import MapData from '../../components/MapData.json';
+import Mark from '../../components/Marks';
+import LocationMarker from '../../components/LocationMarker';
 import { useState, useEffect, useRef, createContext } from 'react';
-import MapImformation from './MapImformation';
-import DataAPI from './DataAPI';
-import MapNav from './MapNav';
+import MapImformation from '../../pages/MapImformation';
+import DataAPI from '../../components/DataAPI';
+import MapNav from '../../components/MapNav';
 
 export const MapDataValue = createContext();
 export default function Index() {

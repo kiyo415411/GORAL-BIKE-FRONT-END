@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
-import NewsAside from './NewsAside';
-import NewsArticle from './NewsArticle';
+import NewsAside from '../../components/Aside/NewsAside';
+import NewsArticle from '../../pages/NewsArticle';
 
 export default function News() {
   const [news, setNews] = useState([]);
   const [filterNews, setFilterNews] = useState([]);
-  const [perPage, setPerPage] = useState(6);
+  const perPage = 6;
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(null);
 
@@ -25,15 +25,7 @@ export default function News() {
       }
     };
     getNews();
-  }, [page, perPage, lastPage]);
-
-  // .slice((page - 1) * perPage, perPage * page)
-
-  useEffect(() => {
-    console.log('filterNews->', filterNews);
-    setFilterNews(news);
-    console.log(lastPage);
-  }, [page, perPage, lastPage]);
+  }, []);
 
   return (
     <>

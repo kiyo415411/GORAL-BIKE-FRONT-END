@@ -1,6 +1,6 @@
 import Logo from '../../images/Logo.png';
 import { BsPersonCircle, BsCart3, BsHeart } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 function Navbar() {
   return (
@@ -16,24 +16,33 @@ function Navbar() {
         {/* ----------------LIST----------------- */}
         <div className="collapse navbar-collapse col-md-8">
           <ul className="navbar-nav mx-auto gap-4">
-            <Link to="news" className="nav-link text-white ">
+            <NavLink to="news" className={'nav-link'} activeClassName="active">
               最新消息
-            </Link>
-            <Link to="product" className="nav-link text-muted">
+            </NavLink>
+            <NavLink
+              to="product"
+              className={'nav-link'}
+              activeClassName="active"
+            >
               全部商品
-            </Link>
-            <Link to="/" className="nav-link text-muted">
-              其他
-            </Link>
-            <Link to="map" className="nav-link text-muted">
+            </NavLink>
+            <NavLink to="map" className={'nav-link'} activeClassName="active">
               地圖
-            </Link>
-            <Link to="course" className="nav-link text-muted">
+            </NavLink>
+            <NavLink
+              to="course"
+              className={'nav-link'}
+              activeClassName="active"
+            >
               課程
-            </Link>
-            <Link to="activity" className="nav-link text-white">
+            </NavLink>
+            <NavLink
+              to="activity"
+              className={'nav-link'}
+              activeClassName="active"
+            >
               活動
-            </Link>
+            </NavLink>
           </ul>
         </div>
 
@@ -41,19 +50,31 @@ function Navbar() {
         <div className="col-4 col-md-2">
           <ul className="list-unstyled row my-auto justify-content-end gap-2">
             <li className="col-2 text-center">
-              <a className="text-muted" href="#/">
+              <NavLink
+                to="/"
+                className={'nav-link text-muted'}
+                activeClassName="active"
+              >
                 <BsPersonCircle />
-              </a>
+              </NavLink>
             </li>
             <li className="col-2 text-center">
-              <a className="text-muted" href="#/">
+              <NavLink
+                to="/"
+                className={'nav-link text-muted'}
+                activeClassName="active"
+              >
                 <BsCart3 />
-              </a>
+              </NavLink>
             </li>
             <li className="col-2 text-center">
-              <a className="text-muted" href="#/">
+              <NavLink
+                to="/"
+                className={'nav-link text-muted'}
+                activeClassName="active"
+              >
                 <BsHeart />
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>

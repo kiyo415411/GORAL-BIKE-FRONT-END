@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { API_URL, IMAGE_URL } from '../../utils/config';
-import NewsAside from './NewsAside';
+import { API_URL, IMAGE_URL } from '../utils/config';
+import NewsAside from '../components/Aside/NewsAside';
 import { Carousel } from 'react-bootstrap';
 
 export default function NewsDetail() {

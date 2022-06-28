@@ -7,7 +7,10 @@ import {
   BsInstagram,
   BsGithub,
 } from 'react-icons/bs';
+import React from 'react';
 import { Accordion } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+
 function Footer() {
   const item_main = [
     [
@@ -43,7 +46,7 @@ function Footer() {
           <section className="col-12 col-md-6 mx-md-auto row justify-content-md-center fs-6 lh-sm text-center font-monospace m-0 p-0">
             {item_main.map((value, index) => {
               return (
-                <>
+                <React.Fragment key={index}>
                   <ul
                     key={'ul' + index}
                     className="d-none d-md-block col-12 col-md-6 col-lg-3"
@@ -51,9 +54,9 @@ function Footer() {
                     {item_main[index].map((value, index) => {
                       return (
                         <li key={'li' + index}>
-                          <a className="nav-link text-muted" href="#/">
+                          <NavLink to="#/" className={'nav-link text-muted'}>
                             {value}
-                          </a>
+                          </NavLink>
                         </li>
                       );
                     })}
@@ -62,7 +65,6 @@ function Footer() {
                     alwaysOpen={false}
                     flush={false}
                     className="p-0 m-0 d-md-none"
-                    key={'Accordion' + index}
                   >
                     <Accordion.Item eventKey={index} className="bg-dark w-100 ">
                       <Accordion.Header className="bg-dark">
@@ -73,9 +75,12 @@ function Footer() {
                           {item_main[index].map((value, index) => {
                             return (
                               <li key={'Accordion li' + index}>
-                                <a className="nav-link text-muted" href="#/">
+                                <NavLink
+                                  to="#/"
+                                  className={'nav-link text-muted'}
+                                >
                                   {value}
-                                </a>
+                                </NavLink>
                               </li>
                             );
                           })}
@@ -83,7 +88,7 @@ function Footer() {
                       </Accordion.Body>
                     </Accordion.Item>
                   </Accordion>
-                </>
+                </React.Fragment>
               );
             })}
           </section>

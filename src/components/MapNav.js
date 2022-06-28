@@ -1,6 +1,6 @@
 import Area from './Area.json';
 import { useContext, useRef } from 'react';
-import { MapDataValue } from './index';
+import { MapDataValue } from '../layout/Map/index';
 
 export default function MapNav() {
   const Data = useContext(MapDataValue);

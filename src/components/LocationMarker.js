@@ -1,6 +1,6 @@
 import { useMap, useMapEvents } from 'react-leaflet';
 import { useEffect, useContext } from 'react';
-import { MapDataValue } from './index';
+import { MapDataValue } from '../layout/Map/index';
 
 // 地圖觸發事件
 export default function LocationMarker() {

@@ -22,8 +22,9 @@ export default function NewsAside(props) {
 
   const serchValue = (e) => {
     const getvalue = new RegExp(e.target.value, 'gi');
-    const newFilter = [...props.news].filter((value) =>
-      getvalue.exec(value.title)
+    console.log(getvalue);
+    const newFilter = [...props.news].filter(
+      (value) => getvalue.exec(value.title) || getvalue.exec(value.content)
     );
     props.setPage(1);
     props.setLastPage(Math.ceil(newFilter.length / props.perPage));

@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { IMAGE_URL } from '../../utils/config';
-import PaginationActive from '../../components/Pagination';
+import { IMAGE_URL } from '../utils/config';
+import PaginationActive from '../components/Pagination';
 
 export default function NewsArticle(props) {
-  console.log('props->', props.filterNews);
+  // console.log('props->', props.filterNews);
   return (
     <>
       <article className="col-12 col-md-8 g-4 mt-5">

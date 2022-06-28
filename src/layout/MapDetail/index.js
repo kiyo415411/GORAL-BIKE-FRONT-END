@@ -1,4 +1,4 @@
-import DataAPI from '../Map/DataAPI';
+import DataAPI from '../../components/DataAPI';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';

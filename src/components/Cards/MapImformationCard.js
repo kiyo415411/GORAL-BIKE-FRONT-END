@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import Twd97toWsg84 from './Twd97toWsg84';
-import { MapDataValue } from './index';
+import Twd97toWsg84 from '../../components/Twd97toWsg84';
+import { MapDataValue } from '../../layout/Map/index';
 import { Link } from 'react-router-dom';
 import { IMAGE_URL } from '../../utils/config';
 

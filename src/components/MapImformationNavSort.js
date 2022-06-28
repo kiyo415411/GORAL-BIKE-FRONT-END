@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { MapDataValue } from './index';
+import { MapDataValue } from '../layout/Map/index';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 
 export default function MapImformationNavSort(props) {

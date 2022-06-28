@@ -1,11 +1,9 @@
 import VIDEO from '../../videos/index-heros.webm';
-import LOCATION from '../../images/Location.svg';
-import ACTIVTY from '../../images/Acitvity.png';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_URL, IMAGE_URL } from '../../utils/config';
-import DataAPI from '../Map/DataAPI';
+import DataAPI from '../../components/DataAPI';
 import { BsSquareFill } from 'react-icons/bs';
 // slick css
 import 'slick-carousel/slick/slick.css';
@@ -109,7 +107,7 @@ export default function Index() {
               <main>
                 {news.slice(0, 1).map((value, index) => {
                   return (
-                    <Link to={`/news/${value.id}`} key={value.id}>
+                    <Link to={`/news/${value.id}`} key={'news' + value.id}>
                       <div className="row align-items-end border-bottom pb-3">
                         <div className="col-12 mt-3">
                           <div className="col-6 overflow-hidden mb-2 w-100 h-100">
@@ -218,7 +216,7 @@ export default function Index() {
               {product.map((value) => {
                 return (
                   <p
-                    key={value.product_id}
+                    key={'p' + value.product_id}
                     className="text-center fs-6 m-md-auto mb-reset"
                   >
                     {value.product_name}
@@ -373,7 +371,7 @@ export default function Index() {
                 {course.map((value, index) => {
                   return (
                     <SwiperSlide
-                      key={index}
+                      key={'course' + index}
                       className="course_img_block my-auto"
                     >
                       <img
