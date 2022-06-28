@@ -40,6 +40,10 @@ export default function MapImformation(props) {
                   Data.setPosition(position);
                   Data.setZoom(15);
                   Data.setShow(false);
+                  // console.log(e);
+                  // Data.markerRef = 2;
+                  // console.log(Data.markerRef);
+                  // if (Data.markerRef) Data.markerRef.current.openPopup();
                 }}
               >
                 前往座標

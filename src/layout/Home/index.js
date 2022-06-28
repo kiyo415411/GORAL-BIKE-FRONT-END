@@ -27,9 +27,12 @@ import 'swiper/css/scrollbar';
 
 // import required modules
 import { EffectCoverflow, Mousewheel, EffectFade, Scrollbar } from 'swiper';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function Index() {
+  let getScreenWidth = window.screen.width;
+
+  console.log(getScreenWidth);
+  const [screenWidth, setScreenWidth] = useState([]);
   const [api, setApi] = useState([]);
   const [news, setNews] = useState([]);
   const [product, setProduct] = useState([]);
@@ -61,8 +64,9 @@ export default function Index() {
   }, []);
 
   useEffect(() => {
-    console.log(api);
-  }, [api]);
+    let getScreenWidth = window.screen.width;
+    setScreenWidth(getScreenWidth);
+  }, [getScreenWidth]);
 
   return (
     <>
@@ -171,9 +175,12 @@ export default function Index() {
                 return (
                   <section
                     key={value.product_id}
-                    className="w-80 row d-flex justify-content-center align-items-center m-auto"
+                    className="w-100 row d-flex justify-content-center align-items-center m-md-auto m-0 p-0"
                   >
-                    <article className="col-5" style={{ textAlign: 'justify' }}>
+                    <article
+                      className="col-12 col-md-5 order-1 order-md-0"
+                      style={{ textAlign: 'justify' }}
+                    >
                       <h3>{value.product_name}</h3>
                       <p className="mt-4 fs-6">
                         鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano
@@ -181,7 +188,7 @@ export default function Index() {
                       </p>
                       <p className="text-danger fw-bold text-end">查看更多</p>
                     </article>
-                    <figure className="col-6 d-block ms-5 my-auto">
+                    <figure className="col-12 col-md-6 d-block ms-md-5 my-5 my-md-auto ">
                       <img
                         className="img-fluid m-0 p-0"
                         src={`${IMAGE_URL}/bikes/${value.product_images}`}
@@ -196,15 +203,18 @@ export default function Index() {
               asNavFor={firstSwiper}
               centerMode={true}
               ref={(slider2) => setSecondSwiper(slider2)}
-              slidesToShow={5}
+              slidesToShow={screenWidth > 500 ? 5 : 1}
               autoplay={true}
               autoplaySpeed={3000}
               focusOnSelect={true}
-              className="mx-5 px-5 w-75 mx-auto scroll center d-flex align-items-center"
+              className="w-75 mx-auto justify-content-center scroll d-flex align-items-center"
             >
               {product.map((value) => {
                 return (
-                  <p key={value.product_id} className="text-center fs-6 m-auto">
+                  <p
+                    key={value.product_id}
+                    className="text-center fs-6 m-md-auto mb-reset"
+                  >
                     {value.product_name}
                   </p>
                 );
@@ -213,7 +223,7 @@ export default function Index() {
           </section>
 
           {/* LOCATION */}
-          <section className="" style={{ height: '50rem' }}>
+          <section style={{ height: '50rem' }}>
             <Swiper effect={'fade'} navigation={true} modules={[EffectFade]}>
               {api.map((value, index) => {
                 return (
@@ -223,13 +233,17 @@ export default function Index() {
                       src={`${IMAGE_URL}/81pic/${value['編號']}.jpg`}
                       alt=""
                     />
-                    <section className="bg-black position-absolute top-50 end-0 translate-middle-y h-60 w-35 bg-opacity-75">
+                    <section
+                      className={`bg-black position-absolute top-50 end-0 translate-middle-y h-60 ${
+                        getScreenWidth < 500 ? 'w-100' : 'w-35'
+                      } bg-opacity-75`}
+                    >
                       <section className="col-12 m-0 text-white p-4 row">
                         <section className="col-12 m-3">
-                          <h1 className="m-0 col-10  display-5 fw-bolder text-secondary">
+                          <h1 className="m-0 col-md-10  display-5 fw-bolder text-secondary">
                             {value['林道名稱']}
                           </h1>
-                          <section className="col-10 row mt-5">
+                          <section className="col-md-10 row mt-5">
                             <span className="col-6 text-white">
                               <span className="">林區：</span>
                               {value['林區']}
@@ -239,7 +253,7 @@ export default function Index() {
                               {value['縣市']}
                             </span>
                           </section>
-                          <section className="col-10 row mt-3">
+                          <section className="col-md-10 row mt-3">
                             <span className="col-6 text-white">
                               <span className="">鄉鎮：</span>
                               {value['鄉鎮']}
@@ -250,8 +264,8 @@ export default function Index() {
                             </span>
                           </section>
 
-                          <section className="col-10 row mt-5 justify-content-between">
-                            <section className="col-6 row mt-3">
+                          <section className="col-md-10 row mt-5 justify-content-between">
+                            <section className="col-md-6 row mt-3">
                               <span className="col-12 d-flex justify-content-between">
                                 <strong className="fw-bold">長度</strong>
                                 <span className="fw-bold">公里(km)</span>
@@ -273,7 +287,7 @@ export default function Index() {
                                 <span>{value['總長度']}ｋｍ</span>
                               </span>
                             </section>
-                            <section className="col-6 row mt-3">
+                            <section className="col-md-6 row mt-3">
                               <span className="col-12 d-flex justify-content-between">
                                 <strong className="fw-bold">鋪面</strong>
                                 <span className="fw-bold">

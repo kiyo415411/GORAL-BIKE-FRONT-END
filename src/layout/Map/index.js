@@ -43,7 +43,7 @@ export default function Index() {
   // TileLayer版權顯示
   const attribution =
     '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
-
+  const markerRef = useRef([]);
   // 設定預設資料及篩選資料
   useEffect(() => {
     (async () => {
@@ -61,6 +61,7 @@ export default function Index() {
   }, []);
 
   const VALUE = {
+    markerRef,
     position,
     setPosition,
     zoom,

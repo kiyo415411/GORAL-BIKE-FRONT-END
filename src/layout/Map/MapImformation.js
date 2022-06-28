@@ -5,6 +5,7 @@ import MapImformationCard from './MapImformationCard';
 
 export default function MapImformation() {
   const Data = useContext(MapDataValue);
+
   return (
     <>
       <MapImformationNavSort />

@@ -14,6 +14,7 @@ function GetIcon(_iconSize) {
 
 export default function Mark() {
   const Data = useContext(MapDataValue);
+
   return (
     <>
       {/* 渲染所有座標位置，並定義各個MARKS內容 */}
@@ -24,6 +25,7 @@ export default function Mark() {
         return (
           <div key={value['編號']}>
             <Marker
+              ref={Data.markerRef}
               position={[dataAxis[1], dataAxis[0]]}
               icon={GetIcon(30)}
               eventHandlers={{
