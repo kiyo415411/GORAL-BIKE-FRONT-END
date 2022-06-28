@@ -227,7 +227,7 @@ export default function Index() {
           </section>
 
           {/* LOCATION */}
-          <section style={{ height: '50rem' }}>
+          <section className="bg-light pb-5" style={{ height: '50rem' }}>
             <Swiper
               effect={'fade'}
               navigation={true}
@@ -337,7 +337,7 @@ export default function Index() {
               })}
             </Swiper>
           </section>
-          <section className="row m-1 m-md-5 p-md-5 justify-content-md-center align-items-md-center">
+          <section className="bg-light row m-1 m-md-0 p-md-5 justify-content-md-center align-items-md-center">
             <article className="col-md-3 my-auto me-md-5 row justify-content-center ">
               <h3 className="my-3 fw-bold text-center text-md-start">
                 登山車訓練營
@@ -387,8 +387,8 @@ export default function Index() {
           </section>
 
           {/* ACTIVTY */}
-          <section className="my-5 py-5 activity">
-            <h1 className="display-6 fw-bolder text-center mb-5">
+          <section className="bg-light py-5 activity">
+            <h1 className=" display-6 fw-bolder text-center my-5">
               2022年 <br />
               你絕不能錯過的登山車活動
             </h1>
