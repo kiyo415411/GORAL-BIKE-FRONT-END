@@ -171,8 +171,7 @@ export default function Index() {
                 return (
                   <section
                     key={value.product_id}
-                    className="w-75 row d-flex justify-content-center align-items-center m-auto"
-                    style={{ height: '30rem' }}
+                    className="w-80 row d-flex justify-content-center align-items-center m-auto"
                   >
                     <article className="col-5" style={{ textAlign: 'justify' }}>
                       <h3>{value.product_name}</h3>
@@ -185,11 +184,6 @@ export default function Index() {
                     <figure className="col-6 d-block ms-5 my-auto">
                       <img
                         className="img-fluid m-0 p-0"
-                        style={{
-                          objectFit: 'contain',
-                          width: '50rem',
-                          height: '30rem',
-                        }}
                         src={`${IMAGE_URL}/bikes/${value.product_images}`}
                         alt=""
                       />
