@@ -27,7 +27,10 @@ function BikeCardSmall(props) {
             {console.log(props.img)}
           </div>
           <div className="m-auto">
-            <div className="card-body" style={{position: "absolute", bottom: "10px"}}>
+            <div
+              className="card-body"
+              style={{ position: 'absolute', bottom: '10px' }}
+            >
               <div className="">
                 <div className="mb-3 d-flex gap-2">
                   <Link to="/Product/Detail" className="">

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 function ColorPalette(props) {
-  const [background, setBackground] = useState('#071415');
+  const [background, setBackground] = useState('#fff');
   // const [current, setCurrent] = useState(null);props.currentColor
   return (
     <div>
@@ -45,13 +45,13 @@ function ColorPalette(props) {
           })}
         </div>
       </div>
-      <div className="d-flex justify-content-between mt-3">
+      <div className="d-flex justify-content-between mt-1">
         <div></div>
         <button
           className="btn btn-warning"
           onClick={() => {
             props.setCurrentColor();
-            setBackground('#071415');
+            setBackground('#fff');
           }}
         >
           Reset Colour

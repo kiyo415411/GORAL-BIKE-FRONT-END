@@ -7,7 +7,7 @@ export default function CategoryList(props) {
     status === 0 ? props.setCurrentBrand() : props.setCurrentBrand(status);
   }, [status]);
   return (
-    <ul className="list-unstyled d-grid gap-3">
+    <ul className="list-unstyled d-grid gap-2">
       {props.brand.map((v, i) => {
         return (
           <li key={i}>

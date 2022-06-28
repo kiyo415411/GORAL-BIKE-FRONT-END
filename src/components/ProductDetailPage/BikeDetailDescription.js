@@ -13,12 +13,19 @@ function BikeDetailDescription(props) {
     { color_value: '#D3484F' },
     { color_value: '#6F6669' },
   ]);
+  function separator(num) {
+    let str = num.toString().split('.');
+    str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return str.join('.');
+  }
+  const [price] = useState(separator(props.bike[0].product_price));
   const [currentColor, setCurrentColor] = useState();
+  console.log('bikedsfsdfsdfdss ', props.bike);
   return (
     <div width="478px" className={props.className}>
       <div>
         <div className="d-flex">
-          <Name name="BIG NINE 15" />
+          <Name name={`${props.bike[0].product_name}`} />
           <Like
             liked={liked}
             setLiked={setLiked}
@@ -29,7 +36,7 @@ function BikeDetailDescription(props) {
         <hr />
         <Description desc="腳踏車改變了我的命運。腳踏車，發生了會如何，不發生又會如何。如果此時我們選擇忽略腳踏車，那後果可想而知。" />
         <hr />
-        <Price price="308,000" />
+        <Price price={`${price}`} />
         <hr />
         <p className="md-5">顏色</p>
         <Color

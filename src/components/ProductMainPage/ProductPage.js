@@ -116,8 +116,8 @@ function ProductPage() {
 
   return (
     <>
-      <div className="d-flex justify-content-around mx-auto mt-4">
-        <div className="w-25 d-flex justify-content-center">
+      <div className="d-sm-flex justify-content-center justify-sm-content-around mx-auto mt-4">
+        <div className=" d-flex justify-content-center">
           <ProductAside
             price={price}
             setPrice={setPrice}
@@ -131,7 +131,7 @@ function ProductPage() {
             color={colored}
           />
         </div>
-        <div className="w-75 mx-5">
+        <div className="w-sm-75 mx-5">
           <div className="d-flex justify-content-between">
             <div>
               <BsListUl size={30} color="FF7E55" />

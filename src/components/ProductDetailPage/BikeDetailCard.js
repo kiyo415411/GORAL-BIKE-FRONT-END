@@ -18,12 +18,7 @@ function BikeDetailCard(props) {
       setBike(response.data.data);
     };
     getPage();
-  }, []);
-
-  const backImage = new URL(
-    `${IMAGE_URL}/bikes/${bike.product_images}`,
-    import.meta.url
-  );
+  }, [props.product_id]);
 
   const [bikeLabel] = useState([
     'RACELITE 61 ALUMINIUM',
@@ -75,7 +70,7 @@ function BikeDetailCard(props) {
           </div>
         </div>
         <div>
-          <BikeDetailDescription className="mx-5 w-75" />
+          <BikeDetailDescription className="mx-5 w-75" bike={bike} />
         </div>
       </div>
       <div className="mt-5">

@@ -107,7 +107,7 @@ function BikeCard(props) {
             </div>
             <div className="card-body">
               <div className="d-flex justify-content-between">
-                <div className="d-flex align-items-center gap-2 mb-3">
+                <div className="d-flex align-items-center gap-1 mb-3">
                   <Link to={`/product/detail/${props.id}`}>
                     <h5 className="card-title m-0">{props.name}</h5>
                   </Link>

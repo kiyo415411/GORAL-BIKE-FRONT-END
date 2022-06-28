@@ -23,8 +23,8 @@ export default function ActivityAside(props) {
   // ];
   return (
     <div
-      className="product-aside shadow p-4 sticky-top mt-3"
-      style={{ width: '324px', height: '1000px' }}
+      className="shadow p-sm-4 mt-3 sticky-sm-top d-flex justify-content-center flex-column"
+      style={{ width: '324px', height: '100vh' }}
     >
       {/* 關鍵字篩選 */}
       <SearchInput setCurrentSearch={props.setCurrentSearch} />
