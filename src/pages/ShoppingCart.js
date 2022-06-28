@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import CartList from '../components/Cart/CartList';
 import Summary from '../components/Cart/Summary';
 import { useProductCart } from '../utils/useProductCart';
@@ -57,8 +57,8 @@ import { useNavigate } from 'react-router-dom';
 //   },
 // ];
 
-// TODO: 傳到結帳頁面，結帳頁面只讀取 checkedItems 做呈現
-// TODO: 結完帳清除 checkItems 陣列，以及 localStorage 裡 checked = true 的產品
+// 傳到結帳頁面，結帳頁面只讀取 checkedItems 做呈現
+// 結完帳清除 checkItems 陣列，以及 localStorage 裡 checked = true 的產品
 
 function ShoppingCart() {
   const navigate = useNavigate();

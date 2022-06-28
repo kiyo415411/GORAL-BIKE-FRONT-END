@@ -62,6 +62,7 @@ export const CourseCartProvider = ({
    * @param  {Object} item
    * @returns {void}
    */
+
   const addItem = (item) => {
     dispatch({
       type: 'ADD_ITEM',
