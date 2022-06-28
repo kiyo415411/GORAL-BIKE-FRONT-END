@@ -76,7 +76,7 @@ function SignUp(props) {
       if (registerRes.status === 200 && registerData.code === 0) {
         Swal.fire({
           icon: 'success',
-          html: '註冊成功',
+          html: registerData.msg,
           confirmButtonText: 'OK',
           focusConfirm: false,
           // buttonsStyling: false,
@@ -91,7 +91,7 @@ function SignUp(props) {
       } else {
         Toast.fire({
           icon: 'error',
-          html: registerRes.data.error,
+          html: registerData.error,
           // customClass: {},
         });
       }
