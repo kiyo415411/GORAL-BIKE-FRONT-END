@@ -124,16 +124,10 @@ function RowCard({
           {/* 說明 */}
           <p className="row-card-text card-text text-subcontent">{text}</p>
           {/* 購買按鈕 */}
-          <div className="d-flex gap-2 align-items-center">
+          <div className="d-flex gap-2 align-items-center justify-content-end">
             <Link to={datailLink}>
-              <p className="text-nowrap m-0 btn fs-6 border-2 px-4 py-1 rounded-0 btn-primary rounded-pill">
-                課程詳情
-              </p>
-            </Link>
-            {/* TODO 課程報名連結頁面 */}
-            <Link to={''}>
               <p className="text-nowrap m-0 btn fs-6 border-2 px-4 py-1 rounded-0 btn-outline-primary rounded-pill">
-                課程報名
+                課程詳情
               </p>
             </Link>
           </div>

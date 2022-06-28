@@ -7,11 +7,17 @@ import { useParams } from 'react-router-dom'; // 拿前端網址變數
 import { API_URL, IMAGE_URL } from '../utils/config';
 import { Link } from 'react-router-dom';
 import Like from '../components/Aside/Like';
+import Button from 'react-bootstrap/esm/Button';
+import ApplyForm from '../components/ApplyForm';
 
 export default function CourseDetail() {
   const [data, setData] = useState([]);
   const { courseId } = useParams(); // 從網址上拿變數
   const [liked, setLiked] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     let getDate = async () => {
@@ -24,6 +30,9 @@ export default function CourseDetail() {
   return (
     <>
       {data.map((item) => {
+        const newDate = item.course_date.split('T').shift();
+        const newStartTime = item.course_start_time.split('T').shift();
+        const newEndTime = item.course_end_time.split('T').shift();
         return (
           <>
             <TopSection
@@ -60,44 +69,32 @@ export default function CourseDetail() {
                     {item.course_title}
                   </h3>
                   <div className="card p-3 my-4 shadow border-0">
-                    <p className="fs-5 m-0 ms-2 text-content">2022-07-16</p>
-                    <ul className="list-unstyled my-0 ms-2">
-                      <li>集合時間：早上8點半</li>
-                      <li>練習地點： 東東單車公園 Don Don Bike Park。</li>
-                      <li>車種限制：XC以上，至少要有避震。</li>
-                      <li>
-                        裝備規定：必須要有符合規定的登山車，並戴上安全帽、長指手套及護膝。
-                      </li>
-                      <li>課程內容：一小時教學、一小時自由練習及指導。</li>
-                    </ul>
+                    <p className="fs-5 m-0 ms-2 text-highlight">{newDate}</p>
+                    <pre className="my-0 ms-2 fs-6 text-content">
+                      {item.course_content_infomation}
+                    </pre>
                   </div>
                   <div>
-                    <p className="fs-4 text-hightlight">活動資訊</p>
-                    <ul className="text-content">
-                      <li>報名開始日期：2022-06-10</li>
-                      <li>報名結束日期：2022-07-10 </li>
-                      <li>指導員：王小花</li>
-                      <li>
-                        適合對象：登山車新手、想學習基礎技巧的入門登山車騎乘者
-                      </li>
-                      <li>報名制度：採報名收費制，每次上限6人，5人成團。</li>
-                      <li>
-                        收費標準：600元/人，購買HHSPORT代理登山系列產品享有課程加購優惠價。
-                      </li>
-                      <li>－費用包含指導員教學、旅平險</li>
-                    </ul>
+                    <p className="fs-4 text-highlight">活動資訊</p>
+                    <pre className="my-0 ms-2 fs-6 text-content">
+                      報名開始日期： {newStartTime}
+                      <br />
+                      報名結束日期： {newEndTime}
+                      <br />
+                      {item.course_content_apply}
+                    </pre>
                   </div>
                   <div className="d-flex my-5">
                     <figure className="course-detail-figure">
                       <img
-                        src={require('../images/course/CourseImg2.jpg')}
+                        src={`${IMAGE_URL}/course/${item.course_content_image1}`}
                         className="object-fit"
                         alt="img1"
                       />
                     </figure>
                     <figure className="course-detail-figure">
                       <img
-                        src={require('../images/course/CourseImg3.jpg')}
+                        src={`${IMAGE_URL}/course/${item.course_content_image2}`}
                         className="object-fit"
                         alt="img2"
                       />
@@ -105,22 +102,7 @@ export default function CourseDetail() {
                   </div>
                   <div className="ms-3 text-content">
                     <p>學員須知</p>
-                    <ul className="list-unstyled">
-                      <li>1.課程內容：一小時教學、一小時自由練習及指導。</li>
-                      <li>
-                        {' '}
-                        2.參與小學堂不限服飾品牌，帥氣美型且安全是最高原則。
-                      </li>
-                      <li>
-                        3.遵守指導員指示，如未遵守且在過程發生任何意外事故，須由學員自行負責。
-                      </li>
-                      <li>
-                        4.如遇天候不佳，視情況調整活動路線或更改時間，請留意活動頁面留言公告。
-                      </li>
-                      <li>
-                        5.每次活動將會為每位學員投保旅平險200百萬，傷害醫療20萬。
-                      </li>
-                    </ul>
+                    <pre className="fs-6">{item.course_content_notice}</pre>
                   </div>
                 </div>
                 {/*---------------------------------- 報名箱 */}
@@ -133,27 +115,56 @@ export default function CourseDetail() {
                       </p>
                     </Link>
                     <div className="card p-3 shadow border-0 rounded-0 ">
-                      <p className="fs-5 m-0 text-primary">越野小學堂</p>
+                      <p className="fs-5 m-0 text-primary">
+                        {item.course_title}
+                      </p>
                       <ul className="list-unstyled d-flex gap-2 m-0">
                         <li>
                           <div className="badge bg-badge-lightblue rounded-pill px-3">
-                            入門
+                            {item.course_category_name}
                           </div>
                         </li>
                         <li>
                           <div className="badge bg-badge-red rounded-pill px-3">
-                            報名開放中
+                            {item.course_status_name}
                           </div>
                         </li>
                       </ul>
                       <div className="text-content d-grid gap-1 my-3">
-                        <p className="m-0">2022-07-16</p>
-                        <p className="m-0">$22,000</p>
-                        <p className="m-0">報名人數：30</p>
+                        <p className="m-0">{newDate}</p>
+                        <p className="m-0">$ {item.course_price}</p>
+                        <p className="m-0">剩餘名額：{item.course_inventory}</p>
                       </div>
-                      <button className="btn btn-primary rounded-0">
-                        立即報名
-                      </button>
+
+                      {item.course_status_name === '報名已截止' ? (
+                        <button className="btn btn-primary rounded-0" disabled>
+                          報名已截止
+                        </button>
+                      ) : item.course_status_name === '報名未開放' ? (
+                        <button className="btn btn-primary rounded-0" disabled>
+                          報名未開放
+                        </button>
+                      ) : (
+                        <>
+                          <Button
+                            variant="primary"
+                            onClick={handleShow}
+                            className="rounded-0"
+                          >
+                            填寫報名表
+                          </Button>
+                          <ApplyForm
+                            formName="課程報名表"
+                            show={show}
+                            handleClose={handleClose}
+                            id={item.course_id}
+                            name={item.course_title}
+                            image={item.course_pictures}
+                            price={item.course_price}
+                            quantity="1"
+                          />
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>

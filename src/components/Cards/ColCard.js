@@ -107,16 +107,10 @@ export default function ColCard({
         <p className="m-0 text-primary">活動簡介 ：</p>
         <p className="col-card-text card-text text-content">{text}</p>
         {/* 購買按鈕 */}
-        <div className="d-flex align-items-center justify-content-between">
+        <div className="d-flex align-items-center justify-content-end">
           <Link to={datailLink}>
-            <p className="text-nowrap m-0 btn fs-6 border-2 px-4 py-1 rounded-0 btn-primary rounded-pill">
-              課程詳情
-            </p>
-          </Link>
-          {/* TODO 課程報名連結頁面 */}
-          <Link to={''}>
             <p className="text-nowrap m-0 btn fs-6 border-2 px-4 py-1 rounded-0 btn-outline-primary rounded-pill">
-              課程報名
+              課程詳情
             </p>
           </Link>
         </div>

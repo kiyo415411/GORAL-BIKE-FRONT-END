@@ -93,10 +93,10 @@ export default function CourseList() {
           count={data[i].course_inventory}
           location={data[i].course_location_name}
           statu={data[i].course_status_name}
-          text={data[i].course_content}
+          text={data[i].course_content_introduction}
           category={data[i].course_category_name}
           venue={data[i].venue_name}
-          datailLink={`/course/${data[i].id}`}
+          datailLink={`/course/${data[i].course_id}`}
         />
       );
     } else {
@@ -113,10 +113,10 @@ export default function CourseList() {
           count={data[i].course_inventory}
           location={data[i].course_location_name}
           statu={data[i].course_status_name}
-          text={data[i].course_content}
+          text={data[i].course_content_introduction}
           category={data[i].course_category_name}
           venue={data[i].venue_name}
-          datailLink={`/course/${data[i].id}`}
+          datailLink={`/course/${data[i].course_id}`}
         />
       );
     }
