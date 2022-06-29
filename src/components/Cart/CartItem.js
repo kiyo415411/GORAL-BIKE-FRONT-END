@@ -2,6 +2,7 @@ import React from 'react';
 import { BsHeart } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
 import { toThousands } from '../../utils/common';
+import { API_URL, IMAGE_URL } from '../../utils/config';
 
 // function toThousands(num) {
 //   num = (num || 0).toString();
@@ -58,7 +59,11 @@ function CartItem(props) {
             </div>
             <div className="col-lg-2 col-4 figure">
               <img
-                src={require('../../images/products/' + image)}
+                src={
+                  type === '課程'
+                    ? `${IMAGE_URL}/course/${image}`
+                    : `${IMAGE_URL}/activity/${image}`
+                }
                 className="figure-img img-fluid p-2"
                 alt="..."
               />

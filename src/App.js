@@ -34,64 +34,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { API_URL } from './utils/config';
 
-// 測試先將 checked:false 塞入陣列，正式會在 addItem 的時候加入 checked 屬性
-const products = [
-  {
-    id: 1,
-    name: 'BIG_NINE_15',
-    image: 'BIG_NINE_15.jpg',
-    price: 22000,
-    quantity: 1,
-    checked: false,
-  },
-  {
-    id: 2,
-    name: 'BIG_NINE_13',
-    image: 'BIG_NINE_15.jpg',
-    price: 12000,
-    quantity: 1,
-    checked: false,
-  },
-];
-
-const course = [
-  {
-    id: 1,
-    name: '初階課程',
-    image: 'BIG_NINE_15.jpg',
-    price: 6000,
-    quantity: 1,
-    checked: false,
-  },
-  {
-    id: 2,
-    name: '進階課程',
-    image: 'BIG_NINE_15.jpg',
-    price: 4000,
-    quantity: 1,
-    checked: false,
-  },
-];
-const activities = [
-  {
-    id: 1,
-    name: '小活動',
-    image: 'BIG_NINE_15.jpg',
-    price: 2000,
-    quantity: 1,
-    checked: false,
-  },
-  {
-    id: 2,
-    name: '大活動',
-    image: 'BIG_NINE_15.jpg',
-    price: 2000,
-    quantity: 1,
-    checked: false,
-  },
-];
-
-// 測試屬性 initialCartItems={products}
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userData, setUserData] = useState({ userId: '' });
@@ -127,14 +69,8 @@ function App() {
       <LoginContext.Provider
         value={{ isLogin, setIsLogin, userData, setUserData }}
       >
-        <ActivityCartProvider
-          localStorageKey="activityCart"
-          initialCartItems={activities}
-        >
-          <CourseCartProvider
-            localStorageKey="courseCart"
-            initialCartItems={course}
-          >
+        <ActivityCartProvider localStorageKey="activityCart">
+          <CourseCartProvider localStorageKey="courseCart">
             <ProductCartProvider>
               <CartProvider>
                 <Navbar />
@@ -153,7 +89,10 @@ function App() {
                   />
                   <Route path="/course/:courseId" element={<CourseDetail />} />
                   <Route path="/product" element={<ProductPage />} />
-                  <Route path="/product/detail/:product_id" element={<BikeDetailPage />} />
+                  <Route
+                    path="/product/detail/:product_id"
+                    element={<BikeDetailPage />}
+                  />
                   <Route path="/course/detail" element={<CourseDetail />} />
                   <Route path="/course/like" element={<CourseLike />} />
                   <Route path="/course" element={<CourseList />} />
