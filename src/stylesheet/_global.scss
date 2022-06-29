@@ -2,6 +2,8 @@
 
 * {
   font-family: "Noto Sans TC", "Noto Sans" !important;
+  --swiper-theme-color: #ff7e55;
+  --swiper-navigation-size: 2.5rem;
 }
 
 a {
@@ -12,4 +14,37 @@ a {
   p {
     color: var(--bs-danger);
   }
+}
+
+.modal-w {
+  width: 30rem;
+  max-width: none;
+}
+
+.modal-signup-w {
+  width: 62.5rem;
+  max-width: none;
+}
+
+.error-msg {
+  color: #dc3545;
+  font-size: 0.875rem;
+  letter-spacing: 0.1rem;
+  line-height: 140%;
+  margin-top: 0.5rem;
+  // text-align: center;
+}
+.example-msg {
+  color: $goral-line;
+  font-size: 0.875rem;
+  letter-spacing: 0.1rem;
+  line-height: 140%;
+  margin-top: 0.5rem;
+  // text-align: center;
+}
+.transform-flipX {
+  -moz-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  transform: scaleX(-1);
 }

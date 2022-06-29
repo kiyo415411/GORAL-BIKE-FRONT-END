@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
-import { MapDataValue } from './index';
+import { MapDataValue } from '../layout/Map/index';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 
-function MapImformationNavSort(props) {
+export default function MapImformationNavSort(props) {
   const Data = useContext(MapDataValue);
   const [loadData, setLoadData] = useState(false);
 
@@ -38,4 +38,3 @@ function MapImformationNavSort(props) {
     </>
   );
 }
-export default MapImformationNavSort;

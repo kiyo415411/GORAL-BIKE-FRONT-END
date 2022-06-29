@@ -1,10 +1,10 @@
 import Area from './Area.json';
-import { useContext } from 'react';
-import { MapDataValue } from './index';
+import { useContext, useRef } from 'react';
+import { MapDataValue } from '../layout/Map/index';
 
-function MapNav() {
+export default function MapNav() {
   const Data = useContext(MapDataValue);
-
+  const inputRef = useRef(null);
   const onSetMapName = (e) => {
     Data.setMapName(e.target.value);
   };
@@ -44,23 +44,39 @@ function MapNav() {
   const clear = () => {
     Data.setFilterMapData(Data.origianlMapData);
     Data.setFilterDataApi(Data.dataApi);
+    Data.setCity('');
+    Data.setArea('');
+  };
+  const Reset = () => {
+    Data.setFilterMapData(Data.origianlMapData);
+    Data.setFilterDataApi(Data.dataApi);
     Data.setMapName(
       'https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=YdAyuapGGLNDoknjhGzG'
     );
     Data.setCity('');
     Data.setArea('');
+    inputRef.current.value = '';
+  };
+
+  const serchValue = (e) => {
+    clear();
+    const getvalue = new RegExp(e.target.value, 'gi');
+    const newdataApi = [...Data.dataApi].filter((value) =>
+      getvalue.exec(value['林道名稱'])
+    );
+    Data.setFilterDataApi(newdataApi);
   };
 
   return (
     <>
       <nav className="nav bg-dark p-3 justify-content-end">
         <section className="row justify-content-end gap-3 w-75">
-          <section className="col-md-4 d-flex justify-content-end align-items-center gap-3">
-            <label className="text-white" htmlFor="地圖樣式">
+          <section className="col-md-2 d-flex justify-content-end align-items-center gap-3">
+            <label className="col-4 text-white" htmlFor="地圖樣式">
               地圖樣式
             </label>
             <select
-              className="form-select col-6 w-40"
+              className="form-select col-4 w-50"
               aria-label="MapType"
               id="select"
               value={Data.mapName}
@@ -146,8 +162,17 @@ function MapNav() {
               })}
             </select>
           </section>
+          <section className="col-md-2 d-flex justify-content-end align-items-center gap-3">
+            <input
+              className="form-control w-100 ms-md-5 "
+              id="serchMapName"
+              placeholder="搜尋地圖名稱"
+              onChange={serchValue}
+              ref={inputRef}
+            />
+          </section>
           <section className="col-md-1 d-flex justify-content-end align-items-center gap-3">
-            <button className="btn btn-danger text-white" onClick={clear}>
+            <button className="btn btn-danger text-white" onClick={Reset}>
               清除篩選
             </button>
           </section>
@@ -156,4 +181,3 @@ function MapNav() {
     </>
   );
 }
-export default MapNav;

@@ -126,10 +126,7 @@ export default function CourseList() {
 
   return (
     <>
-      <TopSection
-        title="課程"
-        bg={require('../images/course/CourseBanner.jpg')}
-      />
+      <TopSection title="課程" bg={`${IMAGE_URL}/course/CourseBanner.jpg`} />
       <div className="container">
         <div className="row gx-5 justify-content-center my-5 flex-nowrap">
           {/* -----------------------------左區塊 */}

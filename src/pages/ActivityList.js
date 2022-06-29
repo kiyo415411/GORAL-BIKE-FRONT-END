@@ -114,7 +114,7 @@ export default function ActivityList() {
         <RowCard
           key={i}
           height={15.625}
-          courseId={data[i].id}
+          courseId={data[i].activity_id}
           image={`${IMAGE_URL}/activity/${data[i].activity_pictures}`}
           score={5}
           like={false}
@@ -123,9 +123,9 @@ export default function ActivityList() {
           time={newDate}
           count={data[i].activity_persons}
           statu={data[i].activity_status_name}
-          text={data[i].activity_content}
+          text={data[i].activity_content_introduction}
           venue={data[i].venue_name}
-          datailLink={`/activity/${data[i].id}`}
+          datailLink={`/activity/${data[i].activity_id}`}
         />
       );
     } else {
@@ -133,7 +133,7 @@ export default function ActivityList() {
         <ColCard
           key={i}
           width={20}
-          courseId={data[i].id}
+          courseId={data[i].activity_id}
           image={`${IMAGE_URL}/activity/${data[i].activity_pictures}`}
           score={5}
           like={false}
@@ -142,9 +142,9 @@ export default function ActivityList() {
           time={newDate}
           count={data[i].activity_persons}
           statu={data[i].activity_status_name}
-          text={data[i].activity_content}
+          text={data[i].activity_content_introduction}
           venue={data[i].venue_name}
-          datailLink={`/activity/${data[i].id}`}
+          datailLink={`/activity/${data[i].activity_id}`}
         />
       );
     }
