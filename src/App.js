@@ -12,6 +12,8 @@ import Checkout from './pages/Checkout';
 import ActivityList from './pages/ActivityList';
 import ActivityLike from './pages/ActivityLike';
 import ActivityDetail from './pages/ActivityDetail';
+
+// ----------------------課程
 import CourseList from './pages/CourseList';
 import CourseLike from './pages/CourseLike';
 import CourseDetail from './pages/CourseDetail';
@@ -151,6 +153,8 @@ function App() {
                   />
                   <Route path="/course/:courseId" element={<CourseDetail />} />
                   <Route path="/product" element={<ProductPage />} />
+                  <Route path="/product/detail/:product_id" element={<BikeDetailPage />} />
+                  <Route path="/course/detail" element={<CourseDetail />} />
                   <Route path="/course/like" element={<CourseLike />} />
                   <Route path="/course" element={<CourseList />} />
                   <Route

@@ -138,7 +138,7 @@ function ProductPage() {
               <BsListUl size={30} color="FF7E55" />
               <BiGridSmall size={50} />
             </div>
-            <h4 className="text-hightlight w-10">
+            <h4 className="text-hightlight w-25">
               <Accordion defaultActiveKey="0">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>商品排序</Accordion.Header>
