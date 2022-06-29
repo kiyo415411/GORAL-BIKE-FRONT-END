@@ -115,7 +115,7 @@ function Footer() {
                     <BsTwitter />
                   </a>
                 </li>
-                <li>
+                <li className="col-1">
                   <a
                     className="text-muted"
                     href="https://github.com/Zaynliao/GORAL-BIKE-FRONT-END"
