@@ -116,9 +116,12 @@ function ProductPage() {
   }, [handleSubmit]);
 
   return (
-    <>
-      <div className="d-sm-flex justify-content-center justify-sm-content-around mx-auto mt-4">
-        <div className=" d-flex justify-content-center">
+    <div className="container-fluid row m-5">
+      <div className="col-2 mt-2">
+        <div
+          className="ms-2 sticky-sm-top shadow d-flex justify-content-center p-2"
+          style={{ width: '324px', height: '90vh' }}
+        >
           <ProductAside
             price={price}
             setPrice={setPrice}
@@ -132,31 +135,31 @@ function ProductPage() {
             color={colored}
           />
         </div>
-        <div className="w-sm-75 mx-5">
-          <div className="d-flex justify-content-between">
-            <div>
-              <BsListUl size={30} color="FF7E55" />
-              <BiGridSmall size={50} />
-            </div>
-            <h4 className="text-hightlight w-25">
-              <Accordion defaultActiveKey="0">
-                <Accordion.Item eventKey="0">
-                  <Accordion.Header>商品排序</Accordion.Header>
-                  <Accordion.Body></Accordion.Body>
-                </Accordion.Item>
-              </Accordion>
-            </h4>
-          </div>
-          {/* list of bikes */}
-          <BikeList
-            data={data}
-            page={page}
-            setPage={setPage}
-            lastPage={lastPage}
-          />
-        </div>
       </div>
-    </>
+      <div className="mx-5 col-9">
+        <div className="d-flex justify-content-between">
+          <div>
+            <BsListUl size={30} color="FF7E55" />
+            <BiGridSmall size={50} />
+          </div>
+          <h4 className="text-hightlight w-25 text-nowrap">
+            <Accordion defaultActiveKey="0">
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>商品排序</Accordion.Header>
+                <Accordion.Body></Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          </h4>
+        </div>
+        {/* list of bikes */}
+        <BikeList
+          data={data}
+          page={page}
+          setPage={setPage}
+          lastPage={lastPage}
+        />
+      </div>
+    </div>
   );
 }
 

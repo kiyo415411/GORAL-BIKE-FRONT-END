@@ -22,7 +22,7 @@ function ColorPalette(props) {
                     width: 24,
                     height: 24,
                     filter: 'brightness(85%)',
-                    boxShadow: color === background ? '0 0 5px #000' : '',
+                    boxShadow: color === background ? '0 0 5px #ccc' : '',
                     cursor: 'pointer',
                     margin: 4,
                   }}

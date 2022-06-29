@@ -8,7 +8,7 @@ function ColorPalette(props) {
         <div className="container row p-0 justify-content-center m-0">
           {props.color.map((v, index) => {
             const color = v.color_value;
-            console.log(color)
+            console.log(color);
 
             return (
               <div

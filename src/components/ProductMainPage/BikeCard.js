@@ -23,7 +23,7 @@ function BikeCard(props) {
         <div className="row g-0 justify-content-center my-auto align-items-center">
           <div
             className="col-4 h-75 my-auto overflow-hidden"
-            style={{ maxWidth: 328, maxHeight: 220 }}
+            style={{ width: 328, height: 220 }}
           >
             <img
               // src={require(`${IMAGE_URL}/bikes/${props.bike}`)}

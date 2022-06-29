@@ -24,12 +24,14 @@ function BikeList(props) {
           </li>
         );
       })}
-      <Pagination
-        className=""
-        page={props.page}
-        setPage={props.setPage}
-        lastPage={props.lastPage}
-      />
+      <div className="d-flex justify-content-center">
+        <Pagination
+          className=""
+          page={props.page}
+          setPage={props.setPage}
+          lastPage={props.lastPage}
+        />
+      </div>
     </ul>
   );
 }
