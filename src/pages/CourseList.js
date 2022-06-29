@@ -93,10 +93,10 @@ export default function CourseList() {
           count={data[i].course_inventory}
           location={data[i].course_location_name}
           statu={data[i].course_status_name}
-          text={data[i].course_content}
+          text={data[i].course_content_introduction}
           category={data[i].course_category_name}
           venue={data[i].venue_name}
-          datailLink={`/course/${data[i].id}`}
+          datailLink={`/course/${data[i].course_id}`}
         />
       );
     } else {
@@ -113,10 +113,10 @@ export default function CourseList() {
           count={data[i].course_inventory}
           location={data[i].course_location_name}
           statu={data[i].course_status_name}
-          text={data[i].course_content}
+          text={data[i].course_content_introduction}
           category={data[i].course_category_name}
           venue={data[i].venue_name}
-          datailLink={`/course/${data[i].id}`}
+          datailLink={`/course/${data[i].course_id}`}
         />
       );
     }
@@ -126,10 +126,7 @@ export default function CourseList() {
 
   return (
     <>
-      <TopSection
-        title="課程"
-        bg={require('../images/course/CourseBanner.jpg')}
-      />
+      <TopSection title="課程" bg={`${IMAGE_URL}/course/CourseBanner.jpg`} />
       <div className="container">
         <div className="row gx-5 justify-content-center my-5 flex-nowrap">
           {/* -----------------------------左區塊 */}

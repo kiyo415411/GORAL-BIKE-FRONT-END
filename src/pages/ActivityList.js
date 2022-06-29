@@ -83,7 +83,7 @@ export default function ActivityList() {
         <RowCard
           key={i}
           height={15.625}
-          courseId={data[i].id}
+          courseId={data[i].activity_id}
           image={`${IMAGE_URL}/activity/${data[i].activity_pictures}`}
           score={5}
           like={false}
@@ -92,9 +92,9 @@ export default function ActivityList() {
           time={newDate}
           count={data[i].activity_persons}
           statu={data[i].activity_status_name}
-          text={data[i].activity_content}
+          text={data[i].activity_content_introduction}
           venue={data[i].venue_name}
-          datailLink={`/activity/${data[i].id}`}
+          datailLink={`/activity/${data[i].activity_id}`}
         />
       );
     } else {
@@ -102,7 +102,7 @@ export default function ActivityList() {
         <ColCard
           key={i}
           width={20}
-          courseId={data[i].id}
+          courseId={data[i].activity_id}
           image={`${IMAGE_URL}/activity/${data[i].activity_pictures}`}
           score={5}
           like={false}
@@ -111,9 +111,9 @@ export default function ActivityList() {
           time={newDate}
           count={data[i].activity_persons}
           statu={data[i].activity_status_name}
-          text={data[i].activity_content}
+          text={data[i].activity_content_introduction}
           venue={data[i].venue_name}
-          datailLink={`/activity/${data[i].id}`}
+          datailLink={`/activity/${data[i].activity_id}`}
         />
       );
     }
@@ -124,8 +124,8 @@ export default function ActivityList() {
   return (
     <>
       <TopSection
-        title="課程"
-        bg={require('../images/course/CourseBanner.jpg')}
+        title="活動"
+        bg={`${IMAGE_URL}/activity/ActivityBanner.jpg`}
       />
       <div className="container">
         <div className="row gx-5 justify-content-center my-5 flex-nowrap">
@@ -191,7 +191,7 @@ export default function ActivityList() {
                 className="row justify-content-center align-items-center text-content"
                 style={{ width: '63rem', height: '75%' }}
               >
-                找不到課程，請調整篩選條件。
+                找不到活動，請調整篩選條件。
               </div>
             )}
           </div>

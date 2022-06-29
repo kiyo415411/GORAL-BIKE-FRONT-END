@@ -8,8 +8,19 @@ import axios from 'axios';
 import { API_URL } from '../../utils/config';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
-function Navbar() {
+function GoralBikeNavbar() {
+  // 抓取螢幕寬度
+  let getScreenWidth = window.screen.width;
+  // 設定螢幕寬度
+  const [screenWidth, setScreenWidth] = useState(768);
+
+  useEffect(() => {
+    let getScreenWidth = window.screen.width;
+    setScreenWidth(getScreenWidth);
+  }, [getScreenWidth]);
   const { isLogin, setIsLogin, setUserData } = useLogin();
   const history = useNavigate();
 
@@ -43,96 +54,95 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div className="container-fluid row justify-content-between">
-        {/* --------------- LOGO----------------- */}
-        <Link to="/" className="navbar-brand col-5 col-md-2 p-0 text-center">
-          <img id="Logo" src={Logo} alt="Logo" />
-        </Link>
-        {/* <a className="navbar-brand col-5 col-md-2 p-0 text-center" href="#/">
-          <img id="Logo" src={Logo} alt="Logo" />
-        </a> */}
-        {/* ----------------LIST----------------- */}
-        <div className="collapse navbar-collapse col-md-8">
-          <ul className="navbar-nav mx-auto gap-4">
-            <NavLink to="news" className={'nav-link'} activeClassName="active">
-              最新消息
-            </NavLink>
-            <NavLink
-              to="product"
-              className={'nav-link'}
-              activeClassName="active"
+    <>
+      <Navbar
+        collapseOnSelect
+        className={`${screenWidth < 500 ? 'fixed-top' : ''}`}
+        expand="lg"
+        bg="primary"
+        variant="dark"
+      >
+        <Container>
+          <Navbar.Brand>
+            <Link
+              to="/"
+              className="navbar-brand col-5 col-md-2 p-0 text-center"
             >
-              全部商品
-            </NavLink>
-            <NavLink to="map" className={'nav-link'} activeClassName="active">
-              地圖
-            </NavLink>
-            <NavLink
-              to="course"
-              className={'nav-link'}
-              activeClassName="active"
-            >
-              課程
-            </NavLink>
-            <NavLink
-              to="activity"
-              className={'nav-link'}
-              activeClassName="active"
-            >
-              活動
-            </NavLink>
-          </ul>
-        </div>
-
-        {/* ----------------ICONS---------------- */}
-        <div className="col-4 col-md-2">
-          <ul className="list-unstyled row my-auto justify-content-end gap-2">
-            {isLogin ? (
-              <>
-                <li className="col-2 text-center">
-                  <a className="text-muted" href="#/">
-                    <BsPersonFill />
-                  </a>
-                </li>
-                <li className="col-2 text-center">
-                  <a className="text-muted" href="#/">
-                    <BsCart3 />
-                  </a>
-                </li>
-                <li className="col-2 text-center">
-                  <a className="text-muted" href="#/">
-                    <BsHeart />
-                  </a>
-                </li>
-                <li className="col-2 text-center">
-                  <a className="text-muted" href="#/" onClick={handleLogout}>
-                    <BiLogOut className="transform-flipX" />
-                  </a>
-                </li>
-              </>
-            ) : (
-              <>
-                <li className="col-2 text-center">
-                  <LoginModal />
-                </li>
-                <li className="col-2 text-center">
-                  <a className="text-muted" href="#/">
-                    <BsCart3 />
-                  </a>
-                </li>
-                <li className="col-2 text-center">
-                  <a className="text-muted" href="#/">
-                    <BsHeart />
-                  </a>
-                </li>
-              </>
-            )}
-          </ul>
-        </div>
-      </div>
-    </nav>
+              <img id="Logo" src={Logo} alt="Logo" />
+            </Link>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <ul className="navbar-nav mx-auto gap-4">
+              <NavLink to="news" className={'nav-link'}>
+                最新消息
+              </NavLink>
+              <NavLink to="product" className={'nav-link'}>
+                全部商品
+              </NavLink>
+              <NavLink to="map" className={'nav-link'}>
+                地圖
+              </NavLink>
+              <NavLink to="course" className={'nav-link'}>
+                課程
+              </NavLink>
+              <NavLink to="activity" className={'nav-link'}>
+                活動
+              </NavLink>
+            </ul>
+          </Navbar.Collapse>
+          <div
+            className={`${
+              screenWidth < 500 ? 'fixed-bottom' : ''
+            } bg-primary col-md-2`}
+          >
+            <ul className="list-unstyled row my-auto p-3 p-0 my-md-0  justify-content-between justify-content-md-end gap-2">
+              {isLogin ? (
+                <>
+                  <li className="col-2 text-center">
+                    <a className="text-muted" href="#/">
+                      <BsPersonFill />
+                    </a>
+                  </li>
+                  <li className="col-2 text-center">
+                    <a className="text-muted" href="#/">
+                      <BsCart3 />
+                    </a>
+                  </li>
+                  <li className="col-2 text-center">
+                    <a className="text-muted" href="#/">
+                      <BsHeart />
+                    </a>
+                  </li>
+                  <li className="col-2 text-center">
+                    <a className="text-muted" href="#/" onClick={handleLogout}>
+                      <BiLogOut className="transform-flipX" />
+                    </a>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="col-2 text-center">
+                    <LoginModal />
+                  </li>
+                  <li className="col-2 text-center">
+                    <a className="text-muted" href="#/">
+                      <BsCart3 />
+                    </a>
+                  </li>
+                  <li className="col-2 text-center">
+                    <a className="text-muted" href="#/">
+                      <BsHeart />
+                    </a>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
+        </Container>
+      </Navbar>
+    </>
   );
 }
 
-export default Navbar;
+export default GoralBikeNavbar;

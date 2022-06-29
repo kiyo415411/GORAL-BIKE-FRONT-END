@@ -34,7 +34,7 @@ export default function NewsAside(props) {
   return (
     <>
       <aside className="col-12 col-md-4 g-4 mt-5">
-        <h3 className="text-primary mb-3">其他熱門文章</h3>
+        <h3 className="d-none d-md-block text-primary mb-3">其他熱門文章</h3>
         {props.show ? (
           <input
             className="form-control w-95 mx-auto mb-3"

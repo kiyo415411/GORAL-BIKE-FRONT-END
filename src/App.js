@@ -9,7 +9,6 @@ import Index from './layout/Home/index';
 import Footer from './layout/Public/Footer';
 import ShoppingCart from './pages/ShoppingCart';
 import Checkout from './pages/Checkout';
-// ----------------------活動
 import ActivityList from './pages/ActivityList';
 import ActivityLike from './pages/ActivityLike';
 import ActivityDetail from './pages/ActivityDetail';
@@ -139,7 +138,6 @@ function App() {
             <ProductCartProvider>
               <CartProvider>
                 <Navbar />
-
                 <Routes>
                   <Route
                     path="/shopping-cart/checkout"
@@ -153,12 +151,16 @@ function App() {
                     path="/map/mapDetail/:mapName"
                     element={<MapDetail />}
                   />
+                  <Route path="/course/:courseId" element={<CourseDetail />} />
                   <Route path="/product" element={<ProductPage />} />
                   <Route path="/product/detail/:product_id" element={<BikeDetailPage />} />
                   <Route path="/course/detail" element={<CourseDetail />} />
                   <Route path="/course/like" element={<CourseLike />} />
                   <Route path="/course" element={<CourseList />} />
-                  <Route path="/activity/detail" element={<ActivityDetail />} />
+                  <Route
+                    path="/activity/:courseId"
+                    element={<ActivityDetail />}
+                  />
                   <Route path="/activity/like" element={<ActivityLike />} />
                   <Route path="/activity" element={<ActivityList />} />
                   <Route exact path="/" element={<Index />} />
