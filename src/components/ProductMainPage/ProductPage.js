@@ -116,7 +116,7 @@ function ProductPage() {
   }, [handleSubmit]);
 
   return (
-    <div className="container-fluid row m-5">
+    <div className="container-fluid row my-5">
       <div className="col-2 mt-2">
         <div
           className="ms-2 sticky-sm-top shadow d-flex justify-content-center p-2"
