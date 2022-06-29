@@ -43,8 +43,10 @@ export default function NewsDetail() {
     <>
       <main className="row container mx-auto justify-content-between mb-5">
         <NewsAside show={false} />
-        <article className="col-8 g-4 row flex-column">
-          <h3 className="col-12 text-primary">最新新聞</h3>
+        <article className="col-md-8 g-4 row flex-column">
+          <h3 className="text-center text-md-start col-12 text-primary">
+            最新新聞
+          </h3>
           <section className="col-12 d-flex justify-content-between">
             <span className="">{data.date}</span>
             <span className="">當前觀看次數：{data.touch} 次</span>

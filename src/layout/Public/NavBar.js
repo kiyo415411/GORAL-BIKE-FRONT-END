@@ -8,8 +8,17 @@ import axios from 'axios';
 import { API_URL } from '../../utils/config';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-
+import { useEffect, useState } from 'react';
 function Navbar() {
+  // 抓取螢幕寬度
+  let getScreenWidth = window.screen.width;
+  // 設定螢幕寬度
+  const [screenWidth, setScreenWidth] = useState(768);
+
+  useEffect(() => {
+    let getScreenWidth = window.screen.width;
+    setScreenWidth(getScreenWidth);
+  }, [getScreenWidth]);
   const { isLogin, setIsLogin, setUserData } = useLogin();
   const history = useNavigate();
 
@@ -43,7 +52,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav className="navbar navbar-expand-lg justify-content-center navbar-dark bg-primary">
       <div className="container-fluid row justify-content-between">
         {/* --------------- LOGO----------------- */}
         <Link to="/" className="navbar-brand col-5 col-md-2 p-0 text-center">
@@ -86,8 +95,12 @@ function Navbar() {
         </div>
 
         {/* ----------------ICONS---------------- */}
-        <div className="col-4 col-md-2">
-          <ul className="list-unstyled row my-auto justify-content-end gap-2">
+        <div
+          className={`${
+            screenWidth < 500 ? 'fixed-bottom' : ''
+          } bg-primary col-md-2`}
+        >
+          <ul className="list-unstyled row my-auto p-3 p-0 my-md-0  justify-content-between justify-content-md-end gap-2">
             {isLogin ? (
               <>
                 <li className="col-2 text-center">
