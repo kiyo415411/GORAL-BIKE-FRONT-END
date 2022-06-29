@@ -85,19 +85,22 @@ export default function MapNav() {
     <>
       <Navbar
         collapseOnSelect
-        className="nav mt-5 mt-md-3 px-3 pt-5 pb-3 p-md-0 justify-content-end"
+        className="nav mt-5 mt-md-0 px-3 pt-5 pb-3 p-md-2"
         expand="md"
         bg="dark"
         variant="dark"
       >
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
+        <Navbar.Collapse
+          className=" justify-content-md-end mx-md-2"
+          id="responsive-navbar-nav"
+        >
           <section
-            className={`row justify-content-end gap-3 ${
+            className={`row justify-content-end py-2 gap-3 ${
               screenWidth < 500 ? 'w-100' : 'w-75'
-            }w-100`}
+            }`}
           >
-            <section className="col-md-2 d-flex justify-content-end align-items-center gap-3 mt-3 mt-md-0">
+            <section className="col-md-3 d-flex justify-content-end align-items-center gap-3 mt-3 mt-md-0">
               <label className="col-4 text-white" htmlFor="地圖樣式">
                 地圖樣式
               </label>
