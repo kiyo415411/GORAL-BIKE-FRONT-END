@@ -1,7 +1,7 @@
 import Logo from '../../images/Logo.png';
+import { Link, NavLink } from 'react-router-dom';
 import { BsPersonFill, BsCart3, BsHeart } from 'react-icons/bs';
 import { BiLogOut } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
 import LoginModal from '../../components/auth/LoginModal';
 import { useLogin } from '../../utils/useLogin';
 import axios from 'axios';
@@ -55,24 +55,33 @@ function Navbar() {
         {/* ----------------LIST----------------- */}
         <div className="collapse navbar-collapse col-md-8">
           <ul className="navbar-nav mx-auto gap-4">
-            <Link to="news" className="nav-link text-white ">
+            <NavLink to="news" className={'nav-link'} activeClassName="active">
               最新消息
-            </Link>
-            <Link to="product" className="nav-link text-muted">
+            </NavLink>
+            <NavLink
+              to="product"
+              className={'nav-link'}
+              activeClassName="active"
+            >
               全部商品
-            </Link>
-            <Link to="custom" className="nav-link text-muted">
-              客製化
-            </Link>
-            <Link to="Map" className="nav-link text-muted">
+            </NavLink>
+            <NavLink to="map" className={'nav-link'} activeClassName="active">
               地圖
-            </Link>
-            <Link to="course" className="nav-link text-muted">
+            </NavLink>
+            <NavLink
+              to="course"
+              className={'nav-link'}
+              activeClassName="active"
+            >
               課程
-            </Link>
-            <Link to="activity" className="nav-link text-white">
+            </NavLink>
+            <NavLink
+              to="activity"
+              className={'nav-link'}
+              activeClassName="active"
+            >
               活動
-            </Link>
+            </NavLink>
           </ul>
         </div>
 

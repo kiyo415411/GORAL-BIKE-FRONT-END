@@ -1,10 +1,11 @@
 import { useContext } from 'react';
-import { MapDataValue } from './index';
-import MapImformationNavSort from './MapImformationNavSort';
-import MapImformationCard from './MapImformationCard';
+import { MapDataValue } from '../layout/Map/index';
+import MapImformationNavSort from '../components/MapImformationNavSort';
+import MapImformationCard from '../components/Cards/MapImformationCard';
 
-function MapImformation() {
+export default function MapImformation() {
   const Data = useContext(MapDataValue);
+
   return (
     <>
       <MapImformationNavSort />
@@ -14,4 +15,3 @@ function MapImformation() {
     </>
   );
 }
-export default MapImformation;

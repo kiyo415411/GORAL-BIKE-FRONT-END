@@ -1,5 +1,5 @@
 import proj4 from 'proj4';
-function Twd97toWsg84(lat, lng) {
+export default function Twd97toWsg84(lat, lng) {
   proj4.defs([
     [
       'EPSG:4326',
@@ -15,4 +15,3 @@ function Twd97toWsg84(lat, lng) {
   const EPSG4326 = new proj4.Proj('EPSG:4326'); //WGS84
   return proj4(EPSG3826, EPSG4326, [Number(lat), Number(lng)]);
 }
-export default Twd97toWsg84;
