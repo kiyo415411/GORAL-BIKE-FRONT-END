@@ -101,10 +101,13 @@ function App() {
                   />
                   <Route path="/shopping-cart" element={<ShoppingCart />} />
                   <Route path="/map" element={<Map />} />
-                  <Route path="/course/detail" element={<CourseDetail />} />
+                  <Route path="/course/:courseId" element={<CourseDetail />} />
                   <Route path="/course/like" element={<CourseLike />} />
                   <Route path="/course" element={<CourseList />} />
-                  <Route path="/activity/detail" element={<ActivityDetail />} />
+                  <Route
+                    path="/activity/:courseId"
+                    element={<ActivityDetail />}
+                  />
                   <Route path="/activity/like" element={<ActivityLike />} />
                   <Route path="/activity" element={<ActivityList />} />
                   <Route exact path="/" element={<Index />} />
