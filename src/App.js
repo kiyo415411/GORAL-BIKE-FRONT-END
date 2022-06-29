@@ -20,6 +20,11 @@ import { ActivityCartProvider } from './utils/useActivityCart';
 import { CartProvider } from './utils/useCart';
 // ----------------------組合用元件
 import ScrollToTop from './components/ScrollToTop';
+// ---------------------- context
+import { LoginContext } from './utils/useLogin';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { API_URL } from './utils/config';
 
 // 測試先將 checked:false 塞入陣列，正式會在 addItem 的時候加入 checked 屬性
 const products = [
@@ -80,44 +85,80 @@ const activities = [
 
 // 測試屬性 initialCartItems={products}
 function App() {
+  const [isLogin, setIsLogin] = useState(false);
+  const [userData, setUserData] = useState({ userId: '' });
+  useEffect(() => {
+    (async () => {
+      try {
+        // api/login
+        // 判斷用戶是否有登入，且是否為admin
+        const checkStatus = await axios.get(`${API_URL}/session/user`, {
+          withCredentials: true,
+        });
+        const login = checkStatus.data;
+        setIsLogin(true);
+        setUserData({
+          userId: login.user_id,
+          email: login.email,
+        });
+
+        // if (!login.status) {
+        //   localStorage.setItem('fav', '');
+        //   setFavItemsArr([]);
+        //   localStorage.setItem('cartList', '');
+        //   setCartListData([]);
+        // }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [isLogin]);
+
   return (
     <>
-      <ActivityCartProvider
-        localStorageKey="activityCart"
-        // initialCartItems={activities}
+      <LoginContext.Provider
+        value={{ isLogin, setIsLogin, userData, setUserData }}
       >
-        <CourseCartProvider
-          localStorageKey="courseCart"
-          // initialCartItems={course}
+        <ActivityCartProvider
+          localStorageKey="activityCart"
+          // initialCartItems={activities}
         >
-          <ProductCartProvider>
-            <CartProvider>
-              <Navbar />
-              <ScrollToTop>
-                <Routes>
-                  <Route
-                    path="/shopping-cart/checkout"
-                    element={<Checkout />}
-                  />
-                  <Route path="/shopping-cart" element={<ShoppingCart />} />
-                  <Route path="/map" element={<Map />} />
-                  <Route path="/course/:courseId" element={<CourseDetail />} />
-                  <Route path="/course/like" element={<CourseLike />} />
-                  <Route path="/course" element={<CourseList />} />
-                  <Route
-                    path="/activity/:courseId"
-                    element={<ActivityDetail />}
-                  />
-                  <Route path="/activity/like" element={<ActivityLike />} />
-                  <Route path="/activity" element={<ActivityList />} />
-                  <Route exact path="/" element={<Index />} />
-                </Routes>
-              </ScrollToTop>
-              <Footer />
-            </CartProvider>
-          </ProductCartProvider>
-        </CourseCartProvider>
-      </ActivityCartProvider>
+          <CourseCartProvider
+            localStorageKey="courseCart"
+            // initialCartItems={course}
+          >
+            <ProductCartProvider>
+              <CartProvider>
+                <Navbar />
+                <ScrollToTop>
+                  <Routes>
+                    <Route
+                      path="/shopping-cart/checkout"
+                      element={<Checkout />}
+                    />
+                    <Route path="/shopping-cart" element={<ShoppingCart />} />
+                    <Route path="/map" element={<Map />} />
+                    <Route
+                      path="/course/:courseId"
+                      element={<CourseDetail />}
+                    />
+                    <Route path="/course/like" element={<CourseLike />} />
+                    <Route path="/course" element={<CourseList />} />
+                    <Route
+                      path="/activity/:courseId"
+                      element={<ActivityDetail />}
+                    />
+                    <Route path="/activity/like" element={<ActivityLike />} />
+                    <Route path="/activity" element={<ActivityList />} />
+                    <Route exact path="/" element={<Index />} />
+                  </Routes>
+                </ScrollToTop>
+                <Footer />
+              </CartProvider>
+            </ProductCartProvider>
+          </CourseCartProvider>
+        </ActivityCartProvider>
+      </LoginContext.Provider>
     </>
   );
 }

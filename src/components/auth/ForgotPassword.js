@@ -1,17 +1,19 @@
-function ForgotPassword() {
+function ForgotPassword(props) {
+  const { handleChangeModal } = props;
+
   return (
     <>
-      <div className="container-fluid bg-dark">
+      <div className="container-fluid">
         <div className="row justify-content-center ">
           <div className="col-md-12 bg-white p-4 px-5 forgot-password">
             <div className="form-block mx-auto">
               <div className="text-center ">
                 <img
                   className="goral_logo object-cover"
-                  src={require(`../images/Logo-green.png`)}
+                  src={require(`../../images/Logo-green.png`)}
                   alt=""
                 ></img>
-                <h6 className="text-hightlight">忘記密碼</h6>
+                <h6 className="text-highlight">忘記密碼</h6>
               </div>
               <div className="py-3">
                 <p>
@@ -40,7 +42,14 @@ function ForgotPassword() {
                 </button>
               </form>
               <div className="text-center pt-3">
-                <a className="text-hightlight" href="#/">
+                <a
+                  className="text-highlight"
+                  href="#/"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleChangeModal('登入');
+                  }}
+                >
                   回上一頁
                 </a>
               </div>
