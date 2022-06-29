@@ -34,6 +34,26 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { API_URL } from './utils/config';
 
+const products = [
+  {
+    id: 1,
+    name: 'BIG_NINE_15',
+    image: 'BIG_NINE_15.jpg',
+    price: 22000,
+    quantity: 1,
+    checked: false,
+  },
+  {
+    id: 2,
+    name: 'BIG_NINE_200',
+    image: 'BIG_NINE_200.jpg',
+    price: 12000,
+    quantity: 1,
+    checked: false,
+  },
+];
+
+// 測試屬性 initialCartItems={products}
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userData, setUserData] = useState({ userId: '' });
@@ -71,7 +91,7 @@ function App() {
       >
         <ActivityCartProvider localStorageKey="activityCart">
           <CourseCartProvider localStorageKey="courseCart">
-            <ProductCartProvider>
+            <ProductCartProvider initialCartItems={products}>
               <CartProvider>
                 <Navbar />
                 <Routes>

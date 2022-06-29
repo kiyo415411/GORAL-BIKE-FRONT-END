@@ -25,73 +25,34 @@ function CheckoutList(props) {
         {/* tbody */}
         {checkedItems.map((item, index) => {
           const { id, name, image, price, quantity, itemTotal } = item;
+          let category = '';
           if (type === '商品') {
-            const category = 'products';
-            return (
-              <div
-                className="row text-center align-items-center mx-0 mb-2"
-                key={id}
-              >
-                <div className="col-lg-2 figure">
-                  <img
-                    src={`${IMAGE_URL}/${category}/${image}`}
-                    className="figure-img img-fluid p-2"
-                    alt="..."
-                  />
-                </div>
-                <div className="col-lg-4">{name}</div>
-                <div className="col-lg-2">$ {toThousands(price)}</div>
-                <div className="col-lg-2">{quantity}</div>
-                <div className="col-lg-2 text-secondary">
-                  $ {toThousands(itemTotal)}
-                </div>
-              </div>
-            );
+            category = 'bikes';
           } else if (type === '課程') {
-            const category = 'course';
-            return (
-              <div
-                className="row text-center align-items-center mx-0 mb-2"
-                key={id}
-              >
-                <div className="col-lg-2 figure">
-                  <img
-                    src={`${IMAGE_URL}/${category}/${image}`}
-                    className="figure-img img-fluid p-2"
-                    alt="..."
-                  />
-                </div>
-                <div className="col-lg-4">{name}</div>
-                <div className="col-lg-2">$ {toThousands(price)}</div>
-                <div className="col-lg-2">{quantity}</div>
-                <div className="col-lg-2 text-secondary">
-                  $ {toThousands(itemTotal)}
-                </div>
-              </div>
-            );
+            category = 'course';
           } else {
-            const category = 'activity';
-            return (
-              <div
-                className="row text-center align-items-center mx-0 mb-2"
-                key={id}
-              >
-                <div className="col-lg-2 figure">
-                  <img
-                    src={`${IMAGE_URL}/${category}/${image}`}
-                    className="figure-img img-fluid p-2"
-                    alt="..."
-                  />
-                </div>
-                <div className="col-lg-4">{name}</div>
-                <div className="col-lg-2">$ {toThousands(price)}</div>
-                <div className="col-lg-2">{quantity}</div>
-                <div className="col-lg-2 text-secondary">
-                  $ {toThousands(itemTotal)}
-                </div>
-              </div>
-            );
+            category = 'activity';
           }
+          return (
+            <div
+              className="row text-center align-items-center mx-0 mb-2"
+              key={id}
+            >
+              <div className="col-lg-2 figure">
+                <img
+                  src={`${IMAGE_URL}/${category}/${image}`}
+                  className="figure-img img-fluid p-2"
+                  alt="..."
+                />
+              </div>
+              <div className="col-lg-4">{name}</div>
+              <div className="col-lg-2">$ {toThousands(price)}</div>
+              <div className="col-lg-2">{quantity}</div>
+              <div className="col-lg-2 text-secondary">
+                $ {toThousands(itemTotal)}
+              </div>
+            </div>
+          );
         })}
 
         {/* tbody */}

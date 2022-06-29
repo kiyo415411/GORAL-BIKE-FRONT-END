@@ -109,7 +109,7 @@ function CartItem(props) {
             </div>
             <div className="col-lg-2 col-4 figure">
               <img
-                src={require('../../images/products/' + image)}
+                src={`${IMAGE_URL}/bikes/${image}`}
                 className="figure-img img-fluid p-2"
                 alt="..."
               />
