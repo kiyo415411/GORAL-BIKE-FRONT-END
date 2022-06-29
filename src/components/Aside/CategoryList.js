@@ -1,29 +1,14 @@
-import { useState, useEffect } from 'react';
-
-export default function CategoryList(props) {
-  const [status, setStatus] = useState(0);
-  useEffect(() => {
-    status === 0
-      ? props.setCurrentCategory()
-      : props.setCurrentCategory(status);
-  }, [status]);
+export default function CategoryList({ list, statu, setStatu }) {
   return (
-    <ul className="list-unstyled d-grid gap-2">
-      {props.list.map((v, i) => {
+    <ul className="list-unstyled d-grid gap-3 mb-5 ms-2">
+      {list.map((v, i) => {
         return (
-          <li key={i}>
+          <li key={i + 1}>
             <a
               href="#/"
-              className={status === i ? 'link-highlight ' : 'link-content'}
+              className={statu === i + 1 ? 'link-highlight' : 'link-content'}
               onClick={() => {
-                setStatus(i);
-              }}
-              onMouseEnter={(e) => {
-                console.log(e.target);
-              }}
-              onMouseLeave={(e) => {
-                console.log(e.target.height);
-                e.target.height = '100px';
+                setStatu(i + 1);
               }}
             >
               {v}
