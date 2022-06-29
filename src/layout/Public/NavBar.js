@@ -55,7 +55,13 @@ function GoralBikeNavbar() {
 
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+      <Navbar
+        collapseOnSelect
+        className={`${screenWidth < 500 ? 'fixed-top' : ''}`}
+        expand="lg"
+        bg="primary"
+        variant="dark"
+      >
         <Container>
           <Navbar.Brand>
             <Link
@@ -68,35 +74,19 @@ function GoralBikeNavbar() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <ul className="navbar-nav mx-auto gap-4">
-              <NavLink
-                to="news"
-                className={'nav-link'}
-                activeClassName="active"
-              >
+              <NavLink to="news" className={'nav-link'}>
                 最新消息
               </NavLink>
-              <NavLink
-                to="product"
-                className={'nav-link'}
-                activeClassName="active"
-              >
+              <NavLink to="product" className={'nav-link'}>
                 全部商品
               </NavLink>
-              <NavLink to="map" className={'nav-link'} activeClassName="active">
+              <NavLink to="map" className={'nav-link'}>
                 地圖
               </NavLink>
-              <NavLink
-                to="course"
-                className={'nav-link'}
-                activeClassName="active"
-              >
+              <NavLink to="course" className={'nav-link'}>
                 課程
               </NavLink>
-              <NavLink
-                to="activity"
-                className={'nav-link'}
-                activeClassName="active"
-              >
+              <NavLink to="activity" className={'nav-link'}>
                 活動
               </NavLink>
             </ul>
