@@ -10,3 +10,16 @@
   overflow: hidden;
   height: 45px;
 }
+
+.col-card-news-text {
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  height: 120px;
+}
+
+.cover {
+  object-fit: cover;
+}

@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import Twd97toWsg84 from './Twd97toWsg84';
-import { MapDataValue } from './index';
+import Twd97toWsg84 from '../../components/Twd97toWsg84';
+import { MapDataValue } from '../../layout/Map/index';
 import { Link } from 'react-router-dom';
 import { IMAGE_URL } from '../../utils/config';
 
-function MapImformation(props) {
+export default function MapImformation(props) {
   const Data = useContext(MapDataValue);
   const { value } = props;
   const picURL = `/81pic/${value['編號']}.jpg`;
@@ -17,7 +17,7 @@ function MapImformation(props) {
           <img
             src={`${IMAGE_URL}${picURL}`}
             className=""
-            style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+            style={{ height: '9rem', width: '100%', objectFit: 'cover' }}
             alt="..."
           />
         </div>
@@ -28,24 +28,28 @@ function MapImformation(props) {
             <span className="card-text">{value['林區']}</span>
           </div>
           <div className="row justify-content-between align-items-center my-2">
-            <p className="col-4 card-text mx-3">
+            <p className="col-md-4 card-text mx-3 my-auto">
               <span>總長度</span>
               {value['總長度'] + '公里'}
             </p>
-            <div className="col-6 my-2 d-flex justify-content-around">
+            <div className="col-md-6 my-2 d-flex justify-content-md-around">
               <button
-                className="btn btn-outline-primary text-primary rounded-pill border-2"
+                className="mx-2 mx-md-0 btn btn-outline-primary text-primary rounded-pill border-2"
                 onClick={(e) => {
                   const position = [dataAxis[1], dataAxis[0]];
                   Data.setPosition(position);
                   Data.setZoom(15);
                   Data.setShow(false);
+                  // console.log(e);
+                  // Data.markerRef = 2;
+                  // console.log(Data.markerRef);
+                  // if (Data.markerRef) Data.markerRef.current.openPopup();
                 }}
               >
                 前往座標
               </button>
               <Link
-                to={`MapDetail/${value['林道名稱']}`}
+                to={`mapDetail/${value['林道名稱']}`}
                 className="btn btn-primary text-white rounded-pill border-2"
               >
                 詳細資訊
@@ -53,7 +57,7 @@ function MapImformation(props) {
             </div>
           </div>
           <div>
-            <div className="card-body fs-6 gap-3 d-flex py-0">
+            <div className="card-body fs-6 gap-3 d-flex py-0 mb-3 mb-md-0">
               {Number(value['碎石面或土石鋪面']) === 0 ? (
                 ''
               ) : (
@@ -83,4 +87,3 @@ function MapImformation(props) {
     </div>
   );
 }
-export default MapImformation;
