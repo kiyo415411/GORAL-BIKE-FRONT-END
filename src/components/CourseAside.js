@@ -7,64 +7,48 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import { FiSearch } from 'react-icons/fi';
+import { useContext } from 'react';
+import { ActivityValue } from '../pages/ActivityList';
 
-function CourseAside({
-  // ------------------------------ 篩選邊欄 props
-  statu,
-  setStatu,
-  setPriceSubmit,
-  setPersonSubmit,
-  category,
-  setCategory,
-  startDate,
-  startDateSubmit,
-  setStartDateSubmit,
-  endDate,
-  endDateSubmit,
-  setEndDateSubmit,
-  state,
-  categoryLabel,
-  price,
-  setPrice,
-  person,
-  setPerson,
-  searchWord,
-  setSearchWord,
-  setSearch,
-}) {
+function CourseAside() {
+  const Data = useContext(ActivityValue);
   // ----------------------------------------------- 變化處理
 
   // 價錢
   const handlePrice = (event, newPrice) => {
-    setPrice(newPrice);
+    Data.setPrice(newPrice);
   };
   // 人數
   const handlePerson = (event, newPerson) => {
-    setPerson(newPerson);
+    Data.setPerson(newPerson);
   };
   // 最早日期
   const handleStartDate = (e) => {
     const startDateValue = e.target.value;
-    setStartDateSubmit(startDateValue);
+    Data.setPage(1);
+    Data.setStartDateSubmit(startDateValue);
   };
   // 最晚日期
   const handleEndDate = (e) => {
     const endDateValue = e.target.value;
-    setEndDateSubmit(endDateValue);
+    Data.setPage(1);
+    Data.setEndDateSubmit(endDateValue);
   };
 
   // 難度
   const handleChecked = (e) => {
     const value = Number(e.target.value);
-    if (!category.includes(value)) return setCategory([...category, value]);
-    if (category.includes(value)) {
-      const newCategory = category.filter((v) => v !== value);
-      setCategory(newCategory);
+    if (!Data.category.includes(value))
+      return Data.setCategory([...Data.category, value]);
+    if (Data.category.includes(value)) {
+      const newCategory = Data.category.filter((v) => v !== value);
+      Data.setPage(1);
+      Data.setCategory(newCategory);
     }
   };
 
   const handleSearch = (e) => {
-    setSearchWord(e.target.value);
+    Data.setSearchWord(e.target.value);
   };
 
   // ----------------------------------------------- 頁面呈現
@@ -83,7 +67,7 @@ function CourseAside({
             >
               <InputBase
                 placeholder="搜尋課程名稱"
-                value={searchWord}
+                value={Data.searchWord}
                 onChange={handleSearch}
               />
               <IconButton
@@ -92,7 +76,8 @@ function CourseAside({
                 sx={{ p: '10px' }}
                 aria-label="search"
                 onClick={() => {
-                  setSearch(searchWord);
+                  Data.setPage(1);
+                  Data.setSearch(Data.searchWord);
                 }}
               >
                 <FiSearch size={26} strokeWidth={3} />
@@ -101,7 +86,12 @@ function CourseAside({
           </div>
           {/* 報名狀態篩選 */}
           <AsideTitle text="報名狀態" />
-          <CategoryList list={state} statu={statu} setStatu={setStatu} />
+          <CategoryList
+            list={Data.state}
+            statu={Data.statu}
+            setStatu={Data.setStatu}
+            setPage={Data.setPage}
+          />
           {/* 報名費用篩選 */}
           <AsideTitle text="報名費用" />
           <Box sx={{ width: 250 }} className="mx-auto">
@@ -119,22 +109,29 @@ function CourseAside({
                   color: 'var(--bs-line)',
                 },
               }}
-              value={price}
+              value={Data.price}
               onChange={handlePrice}
-              step={1000}
-              min={0}
-              max={10000}
+              step={100}
+              min={Data.originPrice[0]}
+              max={Data.originPrice[1]}
             />
           </Box>
           {/* toLocaleString() --> 將數字千位格式化*/}
           <div className="d-flex align-items-center justify-content-between px-2 mb-5">
             <p className="m-0 fs-6">
-              $ {price[0].toLocaleString()} - $ {price[1].toLocaleString()}
+              {Data.price
+                ? '$ ' +
+                  Data.price[0].toLocaleString() +
+                  ' - ' +
+                  '$ ' +
+                  Data.price[1].toLocaleString()
+                : ''}
             </p>
             <button
               className="btn fs-6 border-2 px-4 py-1 rounded-0 btn-primary rounded-pill"
               onClick={() => {
-                setPriceSubmit(price);
+                Data.setPriceSubmit(Data.price);
+                Data.setPage(1);
               }}
             >
               篩選
@@ -157,22 +154,29 @@ function CourseAside({
                   color: 'var(--bs-line)',
                 },
               }}
-              value={person}
+              value={Data.person}
               onChange={handlePerson}
               step={5}
-              min={0}
-              max={100}
+              min={Data.originPerson[0]}
+              max={Data.originPerson[1]}
             />
           </Box>
           {/* toLocaleString() --> 將數字千位格式化*/}
           <div className="d-flex align-items-center justify-content-between px-2 mb-5">
             <p className="m-0 fs-6">
-              {person[0].toLocaleString()} 人 - {person[1].toLocaleString()} 人
+              {Data.person
+                ? Data.person[0].toLocaleString() +
+                  ' 人' +
+                  ' - ' +
+                  Data.person[1].toLocaleString() +
+                  ' 人'
+                : ''}
             </p>
             <button
               className="btn fs-6 border-2 px-4 py-1 rounded-0 btn-primary rounded-pill"
               onClick={() => {
-                setPersonSubmit(person);
+                Data.setPersonSubmit(Data.person);
+                Data.setPage(1);
               }}
             >
               篩選
@@ -181,21 +185,24 @@ function CourseAside({
           {/* 活動地點 */}
           <AsideTitle text="課程難度" />
           <div className="mb-5 ms-2 row">
-            {categoryLabel.map((v, i) => {
+            {Data.categoryLabel.map((v, i) => {
               return (
                 <div
                   className="form-check text-primary col-6"
-                  key={'category' + i}
+                  key={'Data.category' + i}
                 >
                   <input
                     className="form-check-input"
                     type="checkbox"
-                    id={'category' + i}
+                    id={'Data.category' + i}
                     value={Number(i + 1)}
-                    checked={category.includes(i + 1)}
+                    checked={Data.category.includes(i + 1)}
                     onChange={handleChecked}
                   />
-                  <label className="form-check-label" htmlFor={'category' + i}>
+                  <label
+                    className="form-check-label"
+                    htmlFor={'Data.category' + i}
+                  >
                     {v}
                   </label>
                 </div>
@@ -217,9 +224,11 @@ function CourseAside({
                 type="date"
                 name="dateStart"
                 id="dateStart"
-                value={startDateSubmit ? startDateSubmit : startDate}
-                min={startDate}
-                max={endDateSubmit ? endDateSubmit : endDate}
+                value={
+                  Data.startDateSubmit ? Data.startDateSubmit : Data.startDate
+                }
+                min={Data.startDate}
+                max={Data.endDateSubmit ? Data.endDateSubmit : Data.endDate}
                 onChange={handleStartDate}
               />
             </div>
@@ -236,9 +245,11 @@ function CourseAside({
                 type="date"
                 name="dateEnd"
                 id="dateEnd"
-                value={endDateSubmit ? endDateSubmit : endDate}
-                min={startDateSubmit ? startDateSubmit : startDate}
-                max={endDate}
+                value={Data.endDateSubmit ? Data.endDateSubmit : Data.endDate}
+                min={
+                  Data.startDateSubmit ? Data.startDateSubmit : Data.startDate
+                }
+                max={Data.endDate}
                 onChange={handleEndDate}
               />
             </div>

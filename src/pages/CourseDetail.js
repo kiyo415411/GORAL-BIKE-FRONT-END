@@ -155,13 +155,14 @@ export default function CourseDetail() {
                           </Button>
                           <ApplyForm
                             formName="課程報名表"
+                            cartMethod="course"
                             show={show}
                             handleClose={handleClose}
                             id={item.course_id}
                             name={item.course_title}
                             image={item.course_pictures}
                             price={item.course_price}
-                            quantity="1"
+                            quantity={1}
                           />
                         </>
                       )}
