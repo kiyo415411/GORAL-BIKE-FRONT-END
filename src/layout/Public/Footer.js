@@ -7,6 +7,10 @@ import {
   BsInstagram,
   BsGithub,
 } from 'react-icons/bs';
+import React from 'react';
+import { Accordion } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+
 function Footer() {
   const item_main = [
     [
@@ -35,62 +39,89 @@ function Footer() {
   return (
     <footer className="container-fluid p-0">
       <section className="bg-dark pt-5">
-        <main className="w-75 row mx-auto mt-3 mb-5">
-          <section className="col-1 text-end">
+        <main className="w-100 row p-0 m-0 mx-md-auto mt-md-3 mb-md-5">
+          <section className="d-none d-lg-block col-1 text-end">
             <img id="Logo-m" src={Logo_m} className=" rounded-top" alt="" />
           </section>
-          <section className="col-6 mx-auto row justify-content-center fs-6 lh-sm text-center font-monospace">
+          <section className="col-12 col-md-6 mx-md-auto row justify-content-md-center fs-6 lh-sm text-center font-monospace m-0 p-0">
             {item_main.map((value, index) => {
               return (
-                <ul key={'a' + index} className="col-6 col-md-3 ">
-                  {item_main[index].map((value, index) => {
-                    return (
-                      <li key={'b' + index}>
-                        <a className="nav-link text-muted" href="#/">
-                          {value}
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ul>
+                <React.Fragment key={index}>
+                  <ul
+                    key={'ul' + index}
+                    className="d-none d-md-block col-12 col-md-6 col-lg-3"
+                  >
+                    {item_main[index].map((value, index) => {
+                      return (
+                        <li key={'li' + index}>
+                          <NavLink to="#/" className={'nav-link text-muted'}>
+                            {value}
+                          </NavLink>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  <Accordion
+                    alwaysOpen={false}
+                    flush={false}
+                    className="p-0 m-0 d-md-none"
+                  >
+                    <Accordion.Item eventKey={index} className="bg-dark w-100 ">
+                      <Accordion.Header className="bg-dark">
+                        {item_main[index][0]}
+                      </Accordion.Header>
+                      <Accordion.Body>
+                        <ul key={index} className="col-12 col-md-6 col-lg-3">
+                          {item_main[index].map((value, index) => {
+                            return (
+                              <li key={'Accordion li' + index}>
+                                <NavLink
+                                  to="#/"
+                                  className={'nav-link text-muted'}
+                                >
+                                  {value}
+                                </NavLink>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </Accordion>
+                </React.Fragment>
               );
             })}
           </section>
-          <section className="col-2 text-muted fs-6">
+          <section className="col-12 text-center text-md-start col-md-2 text-muted fs-6">
             <nav>
-              <ul className="list-unstyled row row-cols-6">
-                <li>
+              <ul className="list-unstyled row justify-content-center justify-content-md-start">
+                <li className="col-1">
                   <a className="text-muted" href="#/">
                     <BsFacebook />
                   </a>
                 </li>
-                <li>
+                <li className="col-1">
                   <a className="text-muted" href="#/">
                     <BsGoogle />
                   </a>
                 </li>
-                <li>
+                <li className="col-1">
                   <a className="text-muted" href="#/">
                     <BsYoutube />
                   </a>
                 </li>
-                <li>
+                <li className="col-1">
                   <a className="text-muted" href="#/">
                     <BsTwitter />
                   </a>
                 </li>
-                <li>
+                <li className="col-1">
                   <a className="text-muted" href="#/">
                     <BsInstagram />
                   </a>
                 </li>
-                <li>
-                  <a
-                    className="text-muted"
-                    href="https://github.com/Zaynliao/GORAL-BIKE-FRONT-END"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                <li className="col-1">
+                  <a className="text-muted" href="#/">
                     <BsGithub />
                   </a>
                 </li>
@@ -106,7 +137,7 @@ function Footer() {
             </article>
           </section>
         </main>
-        <footer className="footer-footer bg-primary fs-6 lh-sm">
+        <footer className="d-none d-md-block footer-footer bg-primary fs-6 lh-sm">
           <ul className="list-unstyled d-flex mx-auto mb-0 w-50 justify-content-center p-3">
             {item_footer.map((value, index) => {
               return (

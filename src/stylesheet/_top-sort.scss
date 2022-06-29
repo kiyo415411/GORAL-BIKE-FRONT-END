@@ -1,0 +1,13 @@
+.btn-check:focus + .btn,
+.btn:focus {
+  box-shadow: none;
+}
+
+.dropdown-item {
+  color: var(--bs-content);
+  &:active {
+    background: var(--bs-line);
+
+    color: white;
+  }
+}

@@ -1,6 +1,5 @@
 import { FaThLarge, FaThList } from 'react-icons/fa';
-import { AiFillCaretDown } from 'react-icons/ai';
-
+import Dropdown from 'react-bootstrap/Dropdown';
 export default function TopSort(props) {
   return (
     <div className="d-flex justify-content-between px-3">
@@ -9,7 +8,7 @@ export default function TopSort(props) {
           <a
             href="#/"
             className={
-              props.cardStyle === 'row' ? 'link-hightlight' : 'link-content'
+              props.cardStyle === 'row' ? 'link-highlight' : 'link-content'
             }
             onClick={() => {
               props.setCardStyle('row');
@@ -22,7 +21,7 @@ export default function TopSort(props) {
           <a
             href="#/"
             className={
-              props.cardStyle === 'col' ? 'link-hightlight' : 'link-content'
+              props.cardStyle === 'col' ? 'link-highlight' : 'link-content'
             }
             onClick={() => {
               props.setCardStyle('col');
@@ -32,9 +31,49 @@ export default function TopSort(props) {
           </a>
         </li>
       </ul>
-      <a href="#/" className="text-hightlight">
-        商品排序 <AiFillCaretDown size={20} />
-      </a>
+      {/* ------------------------------------排序 */}
+      <div className="mb-2">
+        <Dropdown>
+          <Dropdown.Toggle
+            variant="white"
+            id="dropdown-basic"
+            className="text-highlight"
+          >
+            排序
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item
+              onClick={() => {
+                props.setSortMethod('hotSort');
+              }}
+            >
+              熱門程度優先
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                props.setSortMethod('newSort');
+              }}
+            >
+              最新上架優先
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                props.setSortMethod('cheapSort');
+              }}
+            >
+              價錢由低至高
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                props.setSortMethod('expensiveSort');
+              }}
+            >
+              價錢由高至低
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
     </div>
   );
 }

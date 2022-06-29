@@ -27,7 +27,7 @@ export default function ActivityDetail() {
                   </div>
                 </li>
                 <li>
-                  <div className="text-hightlight">
+                  <div className="text-highlight">
                     <BsHeart />
                   </div>
                 </li>
@@ -156,7 +156,7 @@ export default function ActivityDetail() {
             <div className="sticky-top d-grid">
               <a
                 href="#/"
-                className="text-hightlight mb-5 d-flex align-items-center justify-content-end"
+                className="text-highlight mb-5 d-flex align-items-center justify-content-end"
               >
                 返回課程列表
                 <BsFillCaretRightFill />

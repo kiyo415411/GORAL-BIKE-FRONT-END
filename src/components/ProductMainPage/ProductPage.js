@@ -138,20 +138,11 @@ function ProductPage() {
               <BsListUl size={30} color="FF7E55" />
               <BiGridSmall size={50} />
             </div>
-            <h4 className="text-hightlight w-10">
+            <h4 className="text-hightlight w-25">
               <Accordion defaultActiveKey="0">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>商品排序</Accordion.Header>
-                  <Accordion.Body>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </Accordion.Body>
+                  <Accordion.Body></Accordion.Body>
                 </Accordion.Item>
               </Accordion>
             </h4>

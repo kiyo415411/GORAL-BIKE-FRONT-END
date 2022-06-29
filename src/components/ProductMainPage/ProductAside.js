@@ -13,14 +13,6 @@ export default function ActivityAside(props) {
     '全避震登山車',
     '單避震登山車',
   ];
-  // const brand = [
-  //   'All Brands',
-  //   'XC/MARATHON',
-  //   'MARATHON/TRAIL',
-  //   'TRAIL',
-  //   'ALL MOUNTAIN',
-  //   'ENDURO',
-  // ];
   return (
     <div
       className="shadow p-sm-4 mt-3 sticky-sm-top d-flex justify-content-center flex-column"
