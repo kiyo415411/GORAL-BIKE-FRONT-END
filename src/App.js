@@ -1,5 +1,8 @@
 import './App.css';
 import Navbar from './layout/Public/NavBar';
+// import Index from './layout/Home';
+import ProductPage from './components/ProductMainPage/ProductPage';
+import BikeDetailPage from './components/ProductDetailPage/BikeDetailPage';
 import Map from './layout/Map';
 import MapDetail from './layout/MapDetail';
 import Index from './layout/Home/index';
@@ -149,6 +152,7 @@ function App() {
                     path="/map/mapDetail/:mapName"
                     element={<MapDetail />}
                   />
+                  <Route path="/product" element={<ProductPage />} />
                   <Route path="/course/detail" element={<CourseDetail />} />
                   <Route path="/course/like" element={<CourseLike />} />
                   <Route path="/course" element={<CourseList />} />
