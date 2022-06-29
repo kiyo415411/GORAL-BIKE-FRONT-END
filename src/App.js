@@ -154,6 +154,7 @@ function App() {
                     element={<MapDetail />}
                   />
                   <Route path="/product" element={<ProductPage />} />
+                  <Route path="/product/detail/:product_id" element={<BikeDetailPage />} />
                   <Route path="/course/detail" element={<CourseDetail />} />
                   <Route path="/course/like" element={<CourseLike />} />
                   <Route path="/course" element={<CourseList />} />

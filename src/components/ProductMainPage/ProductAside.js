@@ -1,9 +1,9 @@
-import AsideTitle from '../Aside/AsideTitle';
-import RangeSlider from '../Aside/RangeSlider';
-import SearchInput from '../Aside/SearchInput';
-import CategoryList from '../Aside/CategoryList';
-import BrandList from '../Aside/BrandList';
-import ColorPalette from '../Aside/ColorPalette';
+import AsideTitle from './AsideTitle';
+import RangeSlider from './RangeSlider';
+import SearchInput from './SearchInput';
+import CategoryList from './CategoryList';
+import BrandList from './BrandList';
+import ColorPalette from './ColorPalette';
 
 // 商品篩選邊攔
 export default function ActivityAside(props) {
@@ -15,7 +15,7 @@ export default function ActivityAside(props) {
   ];
   return (
     <div
-      className="shadow p-sm-4 mt-3 sticky-sm-top d-flex justify-content-center flex-column"
+      className="shadow p-sm-4 mt-3 sticky-sm-top d-flex justify-content-center flex-column "
       style={{ width: '324px', height: '100vh' }}
     >
       {/* 關鍵字篩選 */}
