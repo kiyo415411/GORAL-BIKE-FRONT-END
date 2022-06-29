@@ -19,7 +19,23 @@ function Checkout() {
   const cart = useCart();
   const { allCartTotal } = cart;
   const login = useLogin();
-  const { userData } = login;
+  const { isLogin, userData } = login;
+  if (!isLogin) {
+    Swal.fire({
+      icon: 'error',
+      html: '請先登入會員帳號',
+      confirmButtonText: 'OK',
+      focusConfirm: false,
+      allowOutsideClick: false,
+      // buttonsStyling: false,
+      // customClass: {
+      // },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        history('/');
+      }
+    });
+  }
   const productCart = useProductCart();
   const courseCart = useCourseCart();
   const activityCart = useActivityCart();
