@@ -1,6 +1,6 @@
 import VIDEO from '../../videos/index-heros.webm';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { API_URL, IMAGE_URL } from '../../utils/config';
 import DataAPI from '../../components/DataAPI';
@@ -33,10 +33,18 @@ import {
 } from 'swiper';
 
 export default function Index() {
-  let getScreenWidth = window.screen.width;
+  const [screenWidth, setScreenWidth] = useState(0);
+  const resize = () => {
+    console.log(window.screen.width);
+    setScreenWidth(window.screen.width);
+  };
+  useLayoutEffect(() => {
+    window.addEventListener('resize', resize);
+    resize();
+    window.removeEventListener('resize', resize);
+  }, [screenWidth]);
 
-  console.log(getScreenWidth);
-  const [screenWidth, setScreenWidth] = useState(768);
+  console.log(screenWidth);
   const [api, setApi] = useState([]);
   const [news, setNews] = useState([]);
   const [product, setProduct] = useState([]);
@@ -66,11 +74,6 @@ export default function Index() {
     };
     getIndexData();
   }, []);
-
-  useEffect(() => {
-    let getScreenWidth = window.screen.width;
-    setScreenWidth(getScreenWidth);
-  }, [getScreenWidth]);
 
   return (
     <>
@@ -243,7 +246,7 @@ export default function Index() {
                     />
                     <section
                       className={`bg-black position-absolute top-50 end-0 translate-middle-y h-60 ${
-                        getScreenWidth < 500 ? 'w-100' : 'w-35'
+                        screenWidth < 500 ? 'w-100' : 'w-35'
                       } bg-opacity-75`}
                     >
                       <section className="col-12 m-0 text-white p-4 row">
