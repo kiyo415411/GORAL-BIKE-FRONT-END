@@ -25,8 +25,7 @@ function PaymentInfo(props) {
                   }}
                   required
                 >
-                  <option value="">請選擇付款方式</option>
-                  <option value="credit-card">信用卡</option>
+                  <option value={1}>信用卡</option>
                 </select>
               </div>
             </div>

@@ -1,8 +1,17 @@
 import React from 'react';
 import { FaUser } from 'react-icons/fa';
 
+// const recipientInfo = {
+//   recipient: '',
+//   phone: '',
+//   email: '',
+//   address: '',
+//   delivery: 'home-delivery',
+//   note: '',
+// }
+
 function ReceiverInfo(props) {
-  const { receiverInfo, handleReceiverChange } = props;
+  const { recipientInfo, handleRecipientChange } = props;
   return (
     <>
       <section className="mb-4">
@@ -16,12 +25,12 @@ function ReceiverInfo(props) {
               <label className="form-label col-md-2 text-end">收件人姓名</label>
               <div className="col-md-4">
                 <input
-                  name="receiver_name"
+                  name="recipient"
                   type="text"
                   className="form-control"
                   placeholder="請輸入收件人姓名"
-                  value={receiverInfo.receiver_name}
-                  onChange={handleReceiverChange}
+                  value={recipientInfo.recipient}
+                  onChange={handleRecipientChange}
                   required
                 />
               </div>
@@ -32,8 +41,8 @@ function ReceiverInfo(props) {
                   type="text"
                   className="form-control "
                   placeholder="請輸入手機"
-                  value={receiverInfo.phone}
-                  onChange={handleReceiverChange}
+                  value={recipientInfo.phone}
+                  onChange={handleRecipientChange}
                   required
                 />
               </div>
@@ -46,8 +55,8 @@ function ReceiverInfo(props) {
                   type="email"
                   className="form-control "
                   placeholder="請輸入電子信箱"
-                  value={receiverInfo.email}
-                  onChange={handleReceiverChange}
+                  value={recipientInfo.email}
+                  onChange={handleRecipientChange}
                   required
                 />
               </div>
@@ -60,8 +69,8 @@ function ReceiverInfo(props) {
                   type="text"
                   className="form-control "
                   placeholder="請輸入地址"
-                  value={receiverInfo.address}
-                  onChange={handleReceiverChange}
+                  value={recipientInfo.address}
+                  onChange={handleRecipientChange}
                   required
                 />
               </div>
@@ -72,12 +81,12 @@ function ReceiverInfo(props) {
                 <select
                   className="form-select"
                   name="delivery"
-                  onChange={handleReceiverChange}
-                  value={receiverInfo.delivery}
+                  onChange={handleRecipientChange}
                   required
+                  value={recipientInfo.delivery}
                 >
-                  <option value="store-pickup">門市自取</option>
-                  <option value="home-delivery">宅配到府</option>
+                  <option value={1}>門市自取</option>
+                  <option value={2}>宅配到府</option>
                 </select>
               </div>
             </div>
@@ -88,7 +97,8 @@ function ReceiverInfo(props) {
               className="form-control"
               rows="3"
               name="note"
-              onChange={handleReceiverChange}
+              value={recipientInfo.note}
+              onChange={handleRecipientChange}
             ></textarea>
           </div>
         </div>

@@ -207,7 +207,6 @@ const generateCartState = (state, items) => {
   const checkedAll = items.every((item) => {
     return item.checked === true;
   });
-  console.log(checkedAll);
 
   return {
     ...initialState,
