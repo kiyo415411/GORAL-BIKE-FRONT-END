@@ -13,7 +13,7 @@ function BikeList(props) {
             <BikeCard
               bike={item.product_images}
               name={item.product_name}
-              like={false}
+              like={false}  
               price={item.product_price}
               text={
                 '鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano Deore 1x10零組件搭配，Suntour避震前叉。'
