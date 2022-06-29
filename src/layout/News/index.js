@@ -29,7 +29,7 @@ export default function News() {
 
   return (
     <>
-      <main className="row container mx-auto justify-content-between mb-5">
+      <main className="row container mx-auto justify-content-between mb-5 mt-5 mt-md-0">
         <NewsAside
           show={true}
           news={news}

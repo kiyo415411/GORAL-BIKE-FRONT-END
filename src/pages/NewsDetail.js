@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { API_URL, IMAGE_URL } from '../utils/config';
 import NewsAside from '../components/Aside/NewsAside';
 import { Carousel } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export default function NewsDetail() {
   const [data, setData] = useState({
@@ -44,6 +45,12 @@ export default function NewsDetail() {
       <main className="row container mx-auto justify-content-between mb-5">
         <NewsAside show={false} />
         <article className="col-md-8 g-4 row flex-column">
+          <Link
+            to={`/news`}
+            className="btn btn-primary text-white w-20 ms-auto"
+          >
+            返回
+          </Link>
           <h3 className="text-center text-md-start col-12 text-primary">
             最新新聞
           </h3>
