@@ -113,7 +113,7 @@ export default function MapNav() {
               </option>
             </select>
           </section>
-          <section className="col-md-2 d-flex justify-content-end align-items-center gap-3">
+          <section className="col-md-2 d-flex justify-content-end align-items-center gap-3 mt-5 mt-md-0">
             <label className="text-white" htmlFor="區域">
               區域
             </label>
