@@ -6,56 +6,8 @@ import { useCourseCart } from '../utils/useCourseCart';
 import { useActivityCart } from '../utils/useActivityCart';
 import { useCart } from '../utils/useCart';
 import { useNavigate } from 'react-router-dom';
-
-// const products = [
-//   {
-//     id: 1,
-//     name: 'BIG_NINE_15',
-//     image: 'BIG_NINE_15.jpg',
-//     price: 22000,
-//     quantity: 1,
-//   },
-//   {
-//     id: 2,
-//     name: 'BIG_NINE_13',
-//     image: 'BIG_NINE_15.jpg',
-//     price: 12000,
-//     quantity: 1,
-//   },
-// ];
-
-// const course = [
-//   {
-//     id: 1,
-//     name: '初階課程',
-//     image: 'BIG_NINE_15.jpg',
-//     price: '$6,000',
-//     quantity: 1,
-//   },
-//   {
-//     id: 2,
-//     name: '進階課程',
-//     image: 'BIG_NINE_15.jpg',
-//     price: '$4,000',
-//     quantity: 1,
-//   },
-// ];
-// const activities = [
-//   {
-//     id: 1,
-//     name: '小活動',
-//     image: 'BIG_NINE_15.jpg',
-//     price: '$2,000',
-//     quantity: 1,
-//   },
-//   {
-//     id: 2,
-//     name: '大活動',
-//     image: 'BIG_NINE_15.jpg',
-//     price: '$2,000',
-//     quantity: 1,
-//   },
-// ];
+import { useLogin } from '../utils/useLogin';
+import Swal from 'sweetalert2';
 
 // 傳到結帳頁面，結帳頁面只讀取 checkedItems 做呈現
 // 結完帳清除 checkItems 陣列，以及 localStorage 裡 checked = true 的產品
@@ -67,6 +19,8 @@ function ShoppingCart() {
   const productCart = useProductCart();
   const courseCart = useCourseCart();
   const activityCart = useActivityCart();
+  const login = useLogin();
+  const { isLogin } = login;
 
   return (
     <>
@@ -105,10 +59,20 @@ function ShoppingCart() {
             <button
               className="btn btn-primary rounded-0 fs-4 fw-bold"
               onClick={() => {
-                if (allCartTotal === 0) {
-                  alert('請勾選結帳商品');
+                if (isLogin) {
+                  if (allCartTotal === 0) {
+                    alert('請勾選結帳商品');
+                  } else {
+                    navigate('/shopping-cart/checkout');
+                  }
                 } else {
-                  navigate('/shopping-cart/checkout');
+                  Swal.fire({
+                    icon: 'warning',
+                    html: '請先登入帳號',
+                    confirmButtonText: 'OK',
+                    focusConfirm: false,
+                    // buttonsStyling: false,
+                  });
                 }
               }}
             >
