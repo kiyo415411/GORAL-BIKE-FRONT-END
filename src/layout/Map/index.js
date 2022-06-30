@@ -12,14 +12,14 @@ import LocationMarker from '../../components/LocationMarker';
 import { useState, useEffect, useRef, createContext } from 'react';
 import MapImformation from '../../pages/MapImformation';
 import DataAPI from '../../components/DataAPI';
+import useWindowSize from '../../components/hooks/useWindowSize';
 import MapNav from '../../components/MapNav';
 
 export const MapDataValue = createContext();
 export default function Index() {
   // 抓取螢幕寬度
-  let getScreenWidth = window.screen.width;
-  // 設定螢幕寬度
-  const [screenWidth, setScreenWidth] = useState(768);
+  const screenWidth = useWindowSize();
+  let rwd = screenWidth < 768;
   // 設定起始座標
   const [position, setPosition] = useState([24, 121]);
   // 設定地圖縮放大小
@@ -86,33 +86,12 @@ export default function Index() {
     setFilterMapData,
   };
 
-  // 檢查生命週期區域
-  useEffect(() => {
-    // console.log(position);
-    // console.log(dataApi);
-    // console.log(filterDataApi);
-    // console.log(zoom);
-    console.log(area);
-    console.log(city);
-    console.log(mapName);
-    // console.log(filterMapData);
-  }, [area, mapName, city]);
-
   useEffect(() => {
     // 切換TileLayer的current p.s.mapName更動時改變
     if (layerRef.current) {
       layerRef.current.setUrl(mapName);
     }
   }, [mapName]);
-
-  useEffect(() => {
-    console.log('filterMapDataChg', filterMapData);
-  }, [filterMapData]);
-
-  useEffect(() => {
-    let getScreenWidth = window.screen.width;
-    setScreenWidth(getScreenWidth);
-  }, [getScreenWidth]);
 
   return (
     // 世界地圖渲染
@@ -166,7 +145,7 @@ export default function Index() {
             </map>
             <article
               className="bg-primary text-dark col-md-4 m-0 p-0 overflow-auto "
-              style={{ height: screenWidth > 500 ? '960px' : '280px' }}
+              style={{ height: rwd ? '280px' : '960px' }}
             >
               {filterDataApi.length !== 0 ? (
                 <MapImformation />

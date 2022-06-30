@@ -1,6 +1,6 @@
 import VIDEO from '../../videos/index-heros.webm';
 import { Link } from 'react-router-dom';
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_URL, IMAGE_URL } from '../../utils/config';
 import DataAPI from '../../components/DataAPI';
