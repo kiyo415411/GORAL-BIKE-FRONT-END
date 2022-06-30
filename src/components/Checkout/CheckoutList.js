@@ -1,5 +1,6 @@
 import React from 'react';
 import { toThousands } from '../../utils/common';
+import { IMAGE_URL } from '../../utils/config';
 
 function CheckoutList(props) {
   const { productCart, type } = props;
@@ -7,6 +8,7 @@ function CheckoutList(props) {
   const { cart } = productCart;
   // console.log(cart);
   const { checkedItems, totalCheckItems, cartTotal } = cart;
+
   return (
     <>
       <section className="checkout-list mt-3 mb-5">
@@ -23,6 +25,14 @@ function CheckoutList(props) {
         {/* tbody */}
         {checkedItems.map((item, index) => {
           const { id, name, image, price, quantity, itemTotal } = item;
+          let category = '';
+          if (type === '商品') {
+            category = 'bikes';
+          } else if (type === '課程') {
+            category = 'course';
+          } else {
+            category = 'activity';
+          }
           return (
             <div
               className="row text-center align-items-center mx-0 mb-2"
@@ -30,7 +40,7 @@ function CheckoutList(props) {
             >
               <div className="col-lg-2 figure">
                 <img
-                  src={require('../../images/products/' + image)}
+                  src={`${IMAGE_URL}/${category}/${image}`}
                   className="figure-img img-fluid p-2"
                   alt="..."
                 />

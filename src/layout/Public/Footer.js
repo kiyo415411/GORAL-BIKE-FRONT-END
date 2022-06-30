@@ -116,12 +116,12 @@ function Footer() {
                   </a>
                 </li>
                 <li className="col-1">
-                  <a className="text-muted" href="#/">
-                    <BsInstagram />
-                  </a>
-                </li>
-                <li className="col-1">
-                  <a className="text-muted" href="#/">
+                  <a
+                    className="text-muted"
+                    href="https://github.com/Zaynliao/GORAL-BIKE-FRONT-END"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <BsGithub />
                   </a>
                 </li>
