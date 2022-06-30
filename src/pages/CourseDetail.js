@@ -1,6 +1,5 @@
 import { BsFillCaretRightFill } from 'react-icons/bs';
 import TopSection from '../components/TopSection';
-import HotSection from '../components/HotSection';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // 拿前端網址變數
@@ -9,6 +8,7 @@ import { Link } from 'react-router-dom';
 import Like from '../components/Aside/Like';
 import Button from 'react-bootstrap/esm/Button';
 import ApplyForm from '../components/ApplyForm';
+import CourseHotSwiper from '../components/Course/CourseHotSwiper';
 
 export default function CourseDetail() {
   const [data, setData] = useState([]);
@@ -176,9 +176,8 @@ export default function CourseDetail() {
           </>
         );
       })}
-
-      {/*---------------------------------- 推薦課程 */}
-      <HotSection title="推薦課程" />
+      {/*---------------------------------- 推薦 */}
+      <CourseHotSwiper />
     </>
   );
 }

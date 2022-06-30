@@ -116,7 +116,7 @@ export default function ActivityList() {
           height={15.625}
           courseId={data[i].activity_id}
           image={`${IMAGE_URL}/activity/${data[i].activity_pictures}`}
-          score={5}
+          score={data[i].activity_score}
           like={false}
           title={data[i].activity_name}
           price={data[i].activity_fee}
@@ -135,7 +135,6 @@ export default function ActivityList() {
           width={20}
           courseId={data[i].activity_id}
           image={`${IMAGE_URL}/activity/${data[i].activity_pictures}`}
-          score={5}
           like={false}
           title={data[i].activity_name}
           price={data[i].activity_fee}

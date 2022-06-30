@@ -114,7 +114,7 @@ export default function CourseList() {
           height={15.625}
           courseId={data[i].course_id}
           image={`${IMAGE_URL}/course/${data[i].course_pictures}`}
-          score={5}
+          score={data[i].course_score}
           like={false}
           title={data[i].course_title}
           price={data[i].course_price}
