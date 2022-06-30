@@ -31,7 +31,7 @@ export default function ActivityList() {
   const [startDateSubmit, setStartDateSubmit] = useState(''); // 最早日期篩選
   const [endDate, setEndDate] = useState(new Date()); // 最晚日期
   const [endDateSubmit, setEndDateSubmit] = useState(''); // 最晚日期篩選
-  const [sortMethod, setSortMethod] = useState('hotSort'); // 排序
+  const [sortMethod, setSortMethod] = useState('newSort'); // 排序
 
   // ------------------------------------------- 固定值
 
@@ -183,7 +183,7 @@ export default function ActivityList() {
     <>
       <ActivityValue.Provider value={VALUE}>
         <TopSection
-          title="課程"
+          title="活動"
           bg={require('../images/course/CourseBanner.jpg')}
         />
         <div className="container">
@@ -191,7 +191,7 @@ export default function ActivityList() {
             {/* -----------------------------左區塊 */}
             <div className="col-auto">
               {/* 邊攔 */}
-              <CourseAside />
+              <CourseAside contextValue={ActivityValue} />
             </div>
             {/* -----------------------------右區塊 */}
             <div className="col-auto">

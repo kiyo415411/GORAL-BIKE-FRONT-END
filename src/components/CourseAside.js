@@ -9,9 +9,11 @@ import IconButton from '@mui/material/IconButton';
 import { FiSearch } from 'react-icons/fi';
 import { useContext } from 'react';
 import { ActivityValue } from '../pages/ActivityList';
+import { CourseValue } from '../pages/CourseList';
 
-function CourseAside() {
-  const Data = useContext(ActivityValue);
+function CourseAside({ contextValue }) {
+  const Data = useContext(contextValue);
+
   // ----------------------------------------------- 變化處理
 
   // 價錢
@@ -66,7 +68,7 @@ function CourseAside() {
               sx={{ width: '18rem', height: '2.5rem' }}
             >
               <InputBase
-                placeholder="搜尋課程名稱"
+                placeholder="搜尋名稱"
                 value={Data.searchWord}
                 onChange={handleSearch}
               />
@@ -96,6 +98,7 @@ function CourseAside() {
           <AsideTitle text="報名費用" />
           <Box sx={{ width: 250 }} className="mx-auto">
             <Slider
+              getAriaLabel={() => 'Minimum distance'}
               sx={{
                 color: 'var(--bs-content)',
                 '& .MuiSlider-thumb': {
@@ -109,7 +112,7 @@ function CourseAside() {
                   color: 'var(--bs-line)',
                 },
               }}
-              value={Data.price}
+              value={Data.price ? Data.price : []}
               onChange={handlePrice}
               step={100}
               min={Data.originPrice[0]}
@@ -154,7 +157,7 @@ function CourseAside() {
                   color: 'var(--bs-line)',
                 },
               }}
-              value={Data.person}
+              value={Data.person ? Data.person : []}
               onChange={handlePerson}
               step={5}
               min={Data.originPerson[0]}

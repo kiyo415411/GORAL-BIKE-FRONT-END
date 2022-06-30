@@ -101,9 +101,7 @@ export default function ColCard({
           <p className="m-0">$ {price}</p>
         </div>
         {/* 人數 */}
-        <p className="badge text-dark m-0 text-start p-0">
-          剩餘報名人數 : {count}
-        </p>
+        <p className="badge text-dark m-0 text-start p-0">參加名額 : {count}</p>
         <p className="m-0 text-primary">活動簡介 ：</p>
         <p className="col-card-text card-text text-content">{text}</p>
         {/* 購買按鈕 */}

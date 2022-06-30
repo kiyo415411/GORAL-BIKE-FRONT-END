@@ -45,17 +45,17 @@ export default function TopSort(props) {
           <Dropdown.Menu>
             <Dropdown.Item
               onClick={() => {
-                props.setSortMethod('hotSort');
-              }}
-            >
-              熱門程度優先
-            </Dropdown.Item>
-            <Dropdown.Item
-              onClick={() => {
                 props.setSortMethod('newSort');
               }}
             >
               最新上架優先
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                props.setSortMethod('hotSort');
+              }}
+            >
+              人數由多至少
             </Dropdown.Item>
             <Dropdown.Item
               onClick={() => {

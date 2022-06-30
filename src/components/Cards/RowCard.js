@@ -118,7 +118,7 @@ function RowCard({
             )}
             {/* 人數 */}
             <p className="badge text-dark m-0 text-start p-0">
-              剩餘報名人數 : {count}
+              參加名額 : {count}
             </p>
           </div>
           {/* 說明 */}

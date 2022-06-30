@@ -133,7 +133,9 @@ export default function CourseDetail() {
                       <div className="text-content d-grid gap-1 my-3">
                         <p className="m-0">{newDate}</p>
                         <p className="m-0">$ {item.course_price}</p>
-                        <p className="m-0">剩餘名額：{item.course_inventory}</p>
+                        <p className="m-0">
+                          參加名額：{item.course_enrollment}
+                        </p>
                       </div>
 
                       {item.course_status_name === '報名已截止' ? (

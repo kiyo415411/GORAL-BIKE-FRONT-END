@@ -34,7 +34,7 @@ export default function CourseDetail() {
         const newStartTime = item.activity_start_date.split('T').shift();
         const newEndTime = item.activity_end_date.split('T').shift();
         return (
-          <>
+          <div key="detailMapKey">
             <TopSection
               title={item.activity_name}
               bg={`${IMAGE_URL}/activity/${item.activity_pictures}`}
@@ -46,7 +46,7 @@ export default function CourseDetail() {
                   {/*---------------------------------- 標籤 */}
                   <div className="d-flex justify-content-between align-items-center mb-5">
                     <ul className="list-unstyled d-flex gap-4 m-0">
-                      <li>
+                      <li key={item}>
                         <div className="badge bg-badge-red rounded-pill px-3">
                           {item.activity_status_name}
                         </div>
@@ -109,7 +109,7 @@ export default function CourseDetail() {
                   <div className="sticky-top d-grid">
                     <Link to={`/activity`}>
                       <p className="text-highlight mb-5 d-flex align-items-center justify-content-end">
-                        返回課程列表
+                        返回活動列表
                         <BsFillCaretRightFill />
                       </p>
                     </Link>
@@ -132,7 +132,7 @@ export default function CourseDetail() {
                       <div className="text-content d-grid gap-1 my-3">
                         <p className="m-0">{newDate}</p>
                         <p className="m-0">$ {item.activity_fee}</p>
-                        <p className="m-0">剩餘名額：{item.activity_persons}</p>
+                        <p className="m-0">參加名額：{item.activity_persons}</p>
                       </div>
 
                       {item.activity_status_name === '報名已截止' ? (
@@ -170,7 +170,7 @@ export default function CourseDetail() {
                 </div>
               </div>
             </div>
-          </>
+          </div>
         );
       })}
 
