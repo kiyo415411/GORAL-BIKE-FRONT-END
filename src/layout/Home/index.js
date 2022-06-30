@@ -104,12 +104,11 @@ export default function Index() {
               <main>
                 <Swiper
                   loop={true}
-                  centerMode={true}
                   autoplay={{
                     delay: 1500,
                     disableOnInteraction: false,
                   }}
-                  autoplaySpeed={1000}
+                  centeredSlides={true}
                   modules={[Autoplay]}
                 >
                   {news.map((value, index) => {
@@ -226,7 +225,6 @@ export default function Index() {
               ref={(slider2) => setSecondSwiper(slider2)}
               slidesToShow={rwd ? 1 : 5}
               autoplay={true}
-              autoplaySpeed={3000}
               focusOnSelect={true}
               className="w-75 mx-auto justify-content-center scroll d-flex align-items-center"
             >
@@ -251,7 +249,6 @@ export default function Index() {
                 delay: 1500,
                 disableOnInteraction: false,
               }}
-              autoplaySpeed={1000}
               navigation={true}
               modules={[Autoplay, EffectFade, Navigation]}
             >
@@ -389,9 +386,13 @@ export default function Index() {
                 spaceBetween={20}
                 mousewheel={true}
                 grabCursor={true}
+                autoplay={{
+                  delay: 2000,
+                  disableOnInteraction: false,
+                }}
                 centeredSlides={true}
                 slidesPerView={rwd ? 2 : 4}
-                modules={[EffectCoverflow, Mousewheel]}
+                modules={[Autoplay, EffectCoverflow, Mousewheel]}
                 className="mySwiper my-auto h-100"
               >
                 {course.map((value, index) => {
@@ -419,7 +420,10 @@ export default function Index() {
               你絕不能錯過的登山車活動
             </h1>
             <Swiper
-              autoplay={true}
+              autoplay={{
+                delay: 2000,
+                disableOnInteraction: false,
+              }}
               slidesPerView={rwd ? 2 : 3}
               speed={300}
               grabCursor={true}
@@ -432,7 +436,7 @@ export default function Index() {
               }}
               loop={true}
               mousewheel={true}
-              modules={[Scrollbar, Mousewheel]}
+              modules={[Autoplay, Scrollbar, Mousewheel]}
             >
               {activity.map((value, index) => {
                 return (
