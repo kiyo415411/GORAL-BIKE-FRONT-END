@@ -10,7 +10,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 //Slider
 import Slider from 'react-slick';
-
+import useWindowSize from '../../components/hooks/useWindowSize';
 // Import Swiper styles
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
@@ -33,10 +33,9 @@ import {
 } from 'swiper';
 
 export default function Index() {
-  let getScreenWidth = window.screen.width;
+  const screenWidth = useWindowSize();
+  let rwd = screenWidth < 768;
 
-  console.log(getScreenWidth);
-  const [screenWidth, setScreenWidth] = useState(768);
   const [api, setApi] = useState([]);
   const [news, setNews] = useState([]);
   const [product, setProduct] = useState([]);
@@ -66,11 +65,6 @@ export default function Index() {
     };
     getIndexData();
   }, []);
-
-  useEffect(() => {
-    let getScreenWidth = window.screen.width;
-    setScreenWidth(getScreenWidth);
-  }, [getScreenWidth]);
 
   return (
     <>
@@ -207,7 +201,7 @@ export default function Index() {
               asNavFor={firstSwiper}
               centerMode={true}
               ref={(slider2) => setSecondSwiper(slider2)}
-              slidesToShow={screenWidth > 500 ? 5 : 1}
+              slidesToShow={rwd ? 1 : 5}
               autoplay={true}
               autoplaySpeed={3000}
               focusOnSelect={true}
@@ -243,7 +237,7 @@ export default function Index() {
                     />
                     <section
                       className={`bg-black position-absolute top-50 end-0 translate-middle-y h-60 ${
-                        getScreenWidth < 500 ? 'w-100' : 'w-35'
+                        rwd ? 'w-100' : 'w-35'
                       } bg-opacity-75`}
                     >
                       <section className="col-12 m-0 text-white p-4 row">
@@ -364,7 +358,7 @@ export default function Index() {
                 mousewheel={true}
                 grabCursor={true}
                 centeredSlides={true}
-                slidesPerView={screenWidth > 500 ? 4 : 2}
+                slidesPerView={rwd ? 2 : 4}
                 modules={[EffectCoverflow, Mousewheel]}
                 className="mySwiper my-auto h-100"
               >
@@ -394,7 +388,7 @@ export default function Index() {
             </h1>
             <Swiper
               autoplay={true}
-              slidesPerView={screenWidth > 500 ? 3 : 2}
+              slidesPerView={rwd ? 2 : 3}
               speed={300}
               grabCursor={true}
               centeredSlides={true}
