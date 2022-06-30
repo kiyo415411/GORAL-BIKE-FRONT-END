@@ -8,19 +8,13 @@ import axios from 'axios';
 import { API_URL } from '../../utils/config';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Container, Navbar } from 'react-bootstrap';
+import useWindowSize from '../../components/hooks/useWindowSize';
 
 function GoralBikeNavbar() {
   // 抓取螢幕寬度
-  let getScreenWidth = window.screen.width;
-  // 設定螢幕寬度
-  const [screenWidth, setScreenWidth] = useState(768);
+  const screenWidth = useWindowSize();
 
-  useEffect(() => {
-    let getScreenWidth = window.screen.width;
-    setScreenWidth(getScreenWidth);
-  }, [getScreenWidth]);
   const { isLogin, setIsLogin, setUserData } = useLogin();
   const history = useNavigate();
 
