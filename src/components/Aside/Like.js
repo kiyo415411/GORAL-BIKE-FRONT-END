@@ -3,7 +3,7 @@ import { BsHeartFill, BsHeart } from 'react-icons/bs';
 function Like(props) {
   return props.liked ? (
     <BsHeartFill
-      color="red"
+      color="var(--bs-highlight)"
       className={props.className}
       size={props.width}
       onClick={() => {
@@ -13,7 +13,7 @@ function Like(props) {
     />
   ) : (
     <BsHeart
-      color="red"
+      color="var(--bs-highlight)"
       className={props.className}
       size={props.width}
       onClick={(e) => {
