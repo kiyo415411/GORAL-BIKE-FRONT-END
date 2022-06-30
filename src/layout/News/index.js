@@ -19,13 +19,16 @@ export default function News() {
         const result = getNewsValue.data.newsResults;
         setNews(result);
         setFilterNews(result);
-        setLastPage(Math.ceil(filterNews.length / perPage));
       } catch (e) {
         throw new Error(e);
       }
     };
     getNews();
   }, []);
+
+  useEffect(() => {
+    setLastPage(Math.ceil(filterNews.length / perPage));
+  }, [filterNews]);
 
   return (
     <>

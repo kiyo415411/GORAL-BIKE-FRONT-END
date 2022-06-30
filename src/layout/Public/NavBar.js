@@ -14,6 +14,7 @@ import useWindowSize from '../../components/hooks/useWindowSize';
 function GoralBikeNavbar() {
   // 抓取螢幕寬度
   const screenWidth = useWindowSize();
+  let rwd = screenWidth <= 768;
 
   const { isLogin, setIsLogin, setUserData } = useLogin();
   const history = useNavigate();
@@ -56,7 +57,7 @@ function GoralBikeNavbar() {
     <>
       <Navbar
         collapseOnSelect
-        className={`${screenWidth < 500 ? 'fixed-top' : ''}`}
+        className={`${rwd ? 'fixed-top' : ''}`}
         expand="lg"
         bg="primary"
         variant="dark"
@@ -90,11 +91,7 @@ function GoralBikeNavbar() {
               </NavLink>
             </ul>
           </Navbar.Collapse>
-          <div
-            className={`${
-              screenWidth < 500 ? 'fixed-bottom' : ''
-            } bg-primary col-md-2`}
-          >
+          <div className={`${rwd ? 'fixed-bottom' : ''} bg-primary col-md-2`}>
             <ul className="list-unstyled row my-auto p-3 p-0 my-md-0  justify-content-between justify-content-md-end gap-2">
               {isLogin ? (
                 <>
