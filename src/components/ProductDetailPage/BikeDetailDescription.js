@@ -34,7 +34,8 @@ function BikeDetailDescription(props) {
           />
         </div>
         <hr />
-        <Description desc="腳踏車改變了我的命運。腳踏車，發生了會如何，不發生又會如何。如果此時我們選擇忽略腳踏車，那後果可想而知。" />
+        <Description desc={props.bike[0].product_description} />
+        {/* <Description desc="腳踏車改變了我的命運。腳踏車，發生了會如何，不發生又會如何。如果此時我們選擇忽略腳踏車，那後果可想而知。" /> */}
         <hr />
         <Price price={`${price}`} />
         <hr />

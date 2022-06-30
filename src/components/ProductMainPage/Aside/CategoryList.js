@@ -18,11 +18,7 @@ export default function CategoryList(props) {
               onClick={() => {
                 setStatus(i);
               }}
-              onMouseEnter={(e) => {
-                console.log(e.target);
-              }}
               onMouseLeave={(e) => {
-                console.log(e.target.height);
                 e.target.height = '100px';
               }}
             >

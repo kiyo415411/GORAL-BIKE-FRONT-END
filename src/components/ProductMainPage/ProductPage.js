@@ -1,16 +1,17 @@
 import { BsListUl } from 'react-icons/bs';
 import { BiGridSmall } from 'react-icons/bi';
-import { AiFillCaretDown } from 'react-icons/ai';
 import BikeList from './BikeList.js';
 import ProductAside from './ProductAside.js';
 import { useState, useEffect } from 'react';
 import { API_URL } from '../../utils/config';
 import axios from 'axios';
 import Accordion from 'react-bootstrap/Accordion';
+import BikePaddy from './BikePaddy.js';
 
 function ProductPage() {
   const mostExpensive = 500000;
   const leastExpensive = 0;
+  const [bikeList, setBikeList] = useState(1);
   const [price, setPrice] = useState([leastExpensive, mostExpensive]);
   const [data, setData] = useState([]);
   const [colored, setColored] = useState([]);
@@ -36,11 +37,22 @@ function ProductPage() {
 
   useEffect(() => {
     const getLastPage = async () => {
-      const response = await axios.get(API_URL + '/product');
+      const response = await axios.get(API_URL + '/product', {
+        params: {
+          category: handleSubmit.category,
+          brand: handleSubmit.brand,
+          minPrice: handleSubmit.minPrice,
+          maxPrice: handleSubmit.maxPrice,
+          color: handleSubmit.color,
+          search: handleSubmit.search,
+          page: handleSubmit.page,
+        },
+      });
+
       setLastPage(response.data.pagination.lastPage);
     };
     getLastPage();
-  }, []);
+  }, [handleSubmit]);
 
   useEffect(() => {
     const getPage = async () => {
@@ -50,6 +62,9 @@ function ProductPage() {
     getPage();
   }, []);
 
+  useEffect(() => {
+    console.log('LP', lastPage);
+  }, [lastPage]);
   // send page to backend
 
   //----------
@@ -116,7 +131,7 @@ function ProductPage() {
   }, [handleSubmit]);
 
   return (
-    <div className="container-fluid row my-5">
+    <div className="container-fluid row my-5 justify-content-between">
       <div className="col-2 mt-2">
         <div
           className="ms-2 sticky-sm-top shadow d-flex justify-content-center p-2"
@@ -139,25 +154,56 @@ function ProductPage() {
       <div className="mx-5 col-9">
         <div className="d-flex justify-content-between">
           <div>
-            <BsListUl size={30} color="FF7E55" />
-            <BiGridSmall size={50} />
+            <BsListUl
+              size={30}
+              color={bikeList === 1 ? 'FF7E55' : ''}
+              onClick={() => {
+                setBikeList(1);
+              }}
+              style={{ cursor: 'pointer' }}
+            />
+            <BiGridSmall
+              color={bikeList === 0 ? 'FF7E55' : ''}
+              size={50}
+              onClick={() => {
+                setBikeList(0);
+              }}
+              style={{ cursor: 'pointer' }}
+            />
           </div>
           <h4 className="text-hightlight w-25 text-nowrap">
             <Accordion defaultActiveKey="0">
-              <Accordion.Item eventKey="0">
+              <Accordion.Item eventKey="1">
                 <Accordion.Header>商品排序</Accordion.Header>
-                <Accordion.Body></Accordion.Body>
+                <Accordion.Body>
+                  <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                  </ul>
+                </Accordion.Body>
               </Accordion.Item>
             </Accordion>
           </h4>
         </div>
-        {/* list of bikes */}
-        <BikeList
-          data={data}
-          page={page}
-          setPage={setPage}
-          lastPage={lastPage}
-        />
+        {bikeList === 1 ? (
+          <BikeList
+            data={data}
+            page={page}
+            setPage={setPage}
+            lastPage={lastPage}
+          />
+        ) : (
+          <BikePaddy
+            data={data}
+            page={page}
+            setPage={setPage}
+            lastPage={lastPage}
+          />
+        )}
       </div>
     </div>
   );

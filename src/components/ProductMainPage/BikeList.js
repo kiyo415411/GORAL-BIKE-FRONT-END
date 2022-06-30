@@ -15,9 +15,7 @@ function BikeList(props) {
               name={item.product_name}
               like={false}
               price={item.product_price}
-              text={
-                '鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano Deore 1x10零組件搭配，Suntour避震前叉。'
-              }
+              text={item.product_description}
               rating={item.product_rating}
               id={item.product_id}
             />
@@ -26,7 +24,6 @@ function BikeList(props) {
       })}
       <div className="d-flex justify-content-center">
         <Pagination
-          className=""
           page={props.page}
           setPage={props.setPage}
           lastPage={props.lastPage}
