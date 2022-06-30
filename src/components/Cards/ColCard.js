@@ -36,7 +36,7 @@ export default function ColCard({
       <div className="card-body d-grid gap-2 px-4">
         <div className="d-flex justify-content-between align-items-center">
           <Link to={datailLink}>
-            <h3 className="card-title m-0">{title}</h3>
+            <h4 className="card-title m-0">{title}</h4>
           </Link>
           <div className="text-highlight">
             <Like liked={liked} setLiked={setLiked} />

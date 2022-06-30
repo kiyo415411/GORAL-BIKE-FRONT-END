@@ -7,7 +7,8 @@ import TopSort from '../components/TopSort';
 import axios from 'axios';
 import { useState, useEffect, createContext } from 'react';
 import { API_URL, IMAGE_URL } from '../utils/config';
-
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
 export const ActivityValue = createContext();
 
 export default function ActivityList() {
@@ -37,7 +38,7 @@ export default function ActivityList() {
 
   const [categoryLabel, setCategoryLabel] = useState([]); // 難度分類
   const [state, setState] = useState([]); // 狀態分類
-
+  const [isLoading, setIsLoading] = useState(true); // 載入狀態
   // ------------------------------------------- 跟後端要資料
   useEffect(() => {
     let getData = async () => {
@@ -78,6 +79,7 @@ export default function ActivityList() {
     let getData = async () => {
       try {
         let response = await axios.get(`${API_URL}/activity/`);
+        setIsLoading(true);
         setPrice([
           response.data.priceRange.sqlMinPrice,
           response.data.priceRange.sqlMaxPrice,
@@ -98,6 +100,9 @@ export default function ActivityList() {
         setCategoryLabel(response.data.categoryGroup);
         setStartDate(response.data.dateRange.finalStartDate);
         setEndDate(response.data.dateRange.finalEndDate);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1300);
       } catch (e) {
         console.error(e);
       }
@@ -150,6 +155,51 @@ export default function ActivityList() {
 
     return 0;
   });
+
+  const skeletonCount = 9;
+  const skeletonGroup = [];
+  for (let i = 0; i < skeletonCount; i++) {
+    skeletonGroup.push(
+      <div
+        key={i}
+        className="project-row-card card mb-3 shadow border-0 rounded-0 px-0"
+        style={{ height: '14.75rem', width: '63rem' }}
+      >
+        <div className="d-flex">
+          <div className="col-4">
+            <Skeleton
+              animation="wave"
+              variant="rectangular"
+              width={310}
+              height={236}
+            />
+          </div>
+          <Stack className="col-7" spacing={0.5}>
+            <div className="d-grid pt-3">
+              <Skeleton
+                animation="wave"
+                variant="text"
+                width={210}
+                height={50}
+              />
+              <Skeleton
+                animation="wave"
+                variant="text"
+                width={339}
+                height={50}
+              />
+              <Skeleton
+                animation="wave"
+                variant="text"
+                width={638}
+                height={110}
+              />
+            </div>
+          </Stack>
+        </div>
+      </div>
+    );
+  }
   const VALUE = {
     statu,
     setStatu,
@@ -177,13 +227,14 @@ export default function ActivityList() {
     setPage,
     originPrice,
     originPerson,
+    isLoading,
   };
   return (
     <>
       <ActivityValue.Provider value={VALUE}>
         <TopSection
           title="活動"
-          bg={require('../images/course/CourseBanner.jpg')}
+          bg={`${IMAGE_URL}/activity/ActivityBanner.jpg`}
         />
         <div className="container">
           <div className="row gx-5 justify-content-center my-5 flex-nowrap">
@@ -202,33 +253,39 @@ export default function ActivityList() {
                 setSortMethod={setSortMethod}
               />
               {/* 卡片清單 */}
-              {data.length > 0 ? (
-                <>
-                  <div
-                    className={
-                      cardStyle === 'col'
-                        ? 'd-flex flex-wrap mt-2'
-                        : 'mt-2 mb-5'
-                    }
-                    style={{ width: '63rem' }}
-                  >
-                    {courseItems}
-                  </div>
-                  <div className="d-flex justify-content-center">
-                    <Pagination
-                      page={page}
-                      setPage={setPage}
-                      lastPage={lastPage}
-                    />
-                  </div>
-                </>
+              {isLoading ? (
+                skeletonGroup
               ) : (
-                <div
-                  className="row justify-content-center align-items-center text-content"
-                  style={{ width: '63rem', height: '75%' }}
-                >
-                  找不到課程，請調整篩選條件。
-                </div>
+                <>
+                  {data.length > 0 ? (
+                    <>
+                      <div
+                        className={
+                          cardStyle === 'col'
+                            ? 'd-flex flex-wrap mt-2'
+                            : 'mt-2 mb-5'
+                        }
+                        style={{ width: '63rem' }}
+                      >
+                        {courseItems}
+                      </div>
+                      <div className="d-flex justify-content-center">
+                        <Pagination
+                          page={page}
+                          setPage={setPage}
+                          lastPage={lastPage}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <div
+                      className="row justify-content-center align-items-center text-content"
+                      style={{ width: '63rem', height: '75%' }}
+                    >
+                      找不到課程，請調整篩選條件。
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>

@@ -7,6 +7,8 @@ import TopSort from '../components/TopSort';
 import axios from 'axios';
 import { useState, useEffect, createContext } from 'react';
 import { API_URL, IMAGE_URL } from '../utils/config';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
 export const CourseValue = createContext();
 export default function CourseList() {
   // ---------------------------------------------- 初始值
@@ -24,7 +26,7 @@ export default function CourseList() {
   const [originPerson, setOriginPerson] = useState(''); // 人數範圍
   const [person, setPerson] = useState(''); // slider 人數變動
   const [personSubmit, setPersonSubmit] = useState(''); // 人數篩選
-  const [category, setCategory] = useState([1, 2, 3, 4]); // 課程難度篩選
+  const [category, setCategory] = useState([1, 2]); // 課程難度篩選
   const [startDate, setStartDate] = useState(new Date()); // 最早日期
   const [startDateSubmit, setStartDateSubmit] = useState(''); // 最早日期篩選
   const [endDate, setEndDate] = useState(new Date()); // 最晚日期
@@ -35,8 +37,10 @@ export default function CourseList() {
 
   const [categoryLabel, setCategoryLabel] = useState([]); // 難度分類
   const [state, setState] = useState([]); // 狀態分類
+  const [isLoading, setIsLoading] = useState(true); // 載入狀態
 
   // ------------------------------------------- 跟後端要資料
+
   useEffect(() => {
     let getData = async () => {
       try {
@@ -53,6 +57,7 @@ export default function CourseList() {
             search: search,
           },
         });
+
         setData(response.data.data);
         setLastPage(response.data.pagination.lastPage);
       } catch (e) {
@@ -76,6 +81,7 @@ export default function CourseList() {
     let getData = async () => {
       try {
         let response = await axios.get(`${API_URL}/course/`);
+        setIsLoading(true);
         setPrice([
           response.data.priceRange.sqlMinPrice,
           response.data.priceRange.sqlMaxPrice,
@@ -96,6 +102,9 @@ export default function CourseList() {
         setCategoryLabel(response.data.categoryGroup);
         setStartDate(response.data.dateRange.finalStartDate);
         setEndDate(response.data.dateRange.finalEndDate);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1300);
       } catch (e) {
         console.error(e);
       }
@@ -152,6 +161,52 @@ export default function CourseList() {
 
     return 0;
   });
+
+  const skeletonCount = 9;
+  const skeletonGroup = [];
+  for (let i = 0; i < skeletonCount; i++) {
+    skeletonGroup.push(
+      <div
+        key={i}
+        className="project-row-card card mb-3 shadow border-0 rounded-0 px-0"
+        style={{ height: '14.75rem', width: '63rem' }}
+      >
+        <div className="d-flex">
+          <div className="col-4">
+            <Skeleton
+              animation="wave"
+              variant="rectangular"
+              width={310}
+              height={236}
+            />
+          </div>
+          <Stack className="col-7" spacing={0.5}>
+            <div className="d-grid pt-3">
+              <Skeleton
+                animation="wave"
+                variant="text"
+                width={210}
+                height={50}
+              />
+              <Skeleton
+                animation="wave"
+                variant="text"
+                width={339}
+                height={50}
+              />
+              <Skeleton
+                animation="wave"
+                variant="text"
+                width={638}
+                height={110}
+              />
+            </div>
+          </Stack>
+        </div>
+      </div>
+    );
+  }
+
   const VALUE = {
     statu,
     setStatu,
@@ -179,55 +234,64 @@ export default function CourseList() {
     setPage,
     originPrice,
     originPerson,
+    isLoading,
   };
   return (
     <>
       <CourseValue.Provider value={VALUE}>
         <TopSection title="課程" bg={`${IMAGE_URL}/course/CourseBanner.jpg`} />
         <div className="container">
-          <div className="row gx-5 justify-content-center my-5 flex-nowrap">
+          <div className="row gx-5 justify-content-center mt-2 mb-5 mt-lg-4 mt-xl-5 flex-nowrap">
             {/* -----------------------------左區塊 */}
-            <div className="col-auto">
+            <div className="col-auto d-none d-xl-block">
               {/* 邊攔 */}
               <CourseAside contextValue={CourseValue} />
             </div>
             {/* -----------------------------右區塊 */}
-            <div className="col-auto">
+            <div className="col-12 col-xl-9">
               {/* 排序 */}
               <TopSort
                 cardStyle={cardStyle}
                 setCardStyle={setCardStyle}
                 sortMethod={sortMethod}
                 setSortMethod={setSortMethod}
+                contextValue={CourseValue}
               />
+
               {/* 卡片清單 */}
-              {data.length > 0 ? (
-                <>
-                  <div
-                    className={
-                      cardStyle === 'col'
-                        ? 'd-flex flex-wrap mt-2'
-                        : 'mt-2 mb-5'
-                    }
-                    style={{ width: '63rem' }}
-                  >
-                    {courseItems}
-                  </div>
-                  <div className="d-flex justify-content-center">
-                    <Pagination
-                      page={page}
-                      setPage={setPage}
-                      lastPage={lastPage}
-                    />
-                  </div>
-                </>
+              {isLoading ? (
+                skeletonGroup
               ) : (
-                <div
-                  className="row justify-content-center align-items-center text-content"
-                  style={{ width: '63rem', height: '75%' }}
-                >
-                  找不到課程，請調整篩選條件。
-                </div>
+                <>
+                  {data.length > 0 ? (
+                    <>
+                      <div
+                        className={
+                          cardStyle === 'col'
+                            ? 'd-flex flex-wrap mt-2'
+                            : 'mt-2 mb-5'
+                        }
+                        // style={{ width: '63rem' }}
+                      >
+                        {courseItems}
+                      </div>
+                      <div className="d-flex justify-content-center">
+                        <Pagination
+                          page={page}
+                          setPage={setPage}
+                          lastPage={lastPage}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <div
+                      className="row justify-content-center align-items-center text-content"
+                      style={{ width: '63rem', height: '75%' }}
+                    >
+                      找不到課程，請調整篩選條件。
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>

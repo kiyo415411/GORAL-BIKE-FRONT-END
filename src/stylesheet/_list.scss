@@ -1,0 +1,29 @@
+.btn-check:focus + .btn,
+.btn:focus {
+  box-shadow: none;
+}
+
+.dropdown-item {
+  color: var(--bs-content);
+  &:active {
+    background: var(--bs-line);
+
+    color: white;
+  }
+}
+
+// TopSort
+.list-title {
+  letter-spacing: 0.3rem;
+}
+.list-title-line {
+  width: 5rem;
+}
+
+.rwd-aside-scrollbar {
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0.4rem;
+  }
+}

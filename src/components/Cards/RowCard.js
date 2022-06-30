@@ -35,12 +35,9 @@ function RowCard({
 }) {
   const [liked, setLiked] = useState(false);
   return (
-    <div
-      className="project-row-card card mb-3 shadow border-0 rounded-0 px-0"
-      style={{ height: height + 'rem' }}
-    >
+    <div className="project-row-card card mb-3 shadow border-0 rounded-0 px-0">
       <div className="overflow-hidden d-flex">
-        <div className="product-img">
+        <div className="product-img col-4 col-xl-5">
           {/* 圖片 */}
           <Link to={datailLink}>
             <img src={image} className="object-fit" alt={title} />
@@ -58,71 +55,79 @@ function RowCard({
           <div className="d-flex justify-content-between align-items-center">
             <Link to={datailLink}>
               <div className="d-flex align-items-center gap-2">
-                {/* 時間 */}
-                <p className="text-primary fs-3 fw-bold m-0">{time}</p>
                 {/* 名稱 */}
-                <h3 className="card-title text-primary m-0 p-0">{title}</h3>
+                <h5 className="card-title text-primary m-0 p-0 text-nowrap">
+                  {title}
+                </h5>
               </div>
             </Link>
             {/* 價格 */}
-            <h4 className="text-content m-0">$ {price}</h4>
+            <h5 className="text-content m-0 text-nowrap">$ {price}</h5>
           </div>
-          <div className="d-flex gap-2 align-items-center">
-            {/* ------------------------ 難度 */}
-            {category === '入門' ? (
-              <p className="bg-badge-lightblue badge rounded-pill px-3 fw-light m-0">
-                {category}
-              </p>
-            ) : category === '進階' ? (
-              <p className="bg-badge-yellow badge rounded-pill px-3 fw-light m-0">
-                {category}
-              </p>
-            ) : (
-              ''
-            )}
-            {/* ------------------------ 地點 */}
-            {venue === '北部' ? (
-              <p className="bg-badge-red badge rounded-pill px-3 fw-light m-0">
-                {location ? location : venue}
-              </p>
-            ) : venue === '中部' ? (
-              <p className="bg-badge-yellow badge rounded-pill px-3 fw-light m-0">
-                {location ? location : venue}
-              </p>
-            ) : venue === '南部' ? (
-              <p className="bg-badge-lightblue badge rounded-pill px-3 fw-light m-0">
-                {location ? location : venue}
-              </p>
-            ) : venue === '東部' ? (
-              <p className="bg-secondary badge rounded-pill px-3 fw-light m-0">
-                {location ? location : venue}
-              </p>
-            ) : (
-              ''
-            )}
-            {/* ------------------------ 狀態 */}
-            {statu === '報名未開放' ? (
-              <p className="bg-line badge rounded-pill px-3 fw-light m-0">
-                {statu}
-              </p>
-            ) : statu === '報名開放中' ? (
-              <p className="bg-badge-red badge rounded-pill px-3 fw-light m-0">
-                {statu}
-              </p>
-            ) : statu === '報名已截止' ? (
-              <p className="bg-secondary badge rounded-pill px-3 fw-light m-0">
-                {statu}
-              </p>
-            ) : (
-              ''
-            )}
+          <div className="row gap-2 align-items-center">
+            <div className="d-flex gap-2 align-items-center col-12">
+              {/* ------------------------ 難度 */}
+              {category === '入門' ? (
+                <p className="bg-badge-lightblue badge rounded-pill px-3 fw-light m-0">
+                  {category}
+                </p>
+              ) : category === '進階' ? (
+                <p className="bg-badge-yellow badge rounded-pill px-3 fw-light m-0">
+                  {category}
+                </p>
+              ) : (
+                ''
+              )}
+              {/* ------------------------ 地點 */}
+              {venue === '北部' ? (
+                <p className="bg-badge-red badge rounded-pill px-3 fw-light m-0">
+                  {location ? location : venue}
+                </p>
+              ) : venue === '中部' ? (
+                <p className="bg-badge-yellow badge rounded-pill px-3 fw-light m-0">
+                  {location ? location : venue}
+                </p>
+              ) : venue === '南部' ? (
+                <p className="bg-badge-lightblue badge rounded-pill px-3 fw-light m-0">
+                  {location ? location : venue}
+                </p>
+              ) : venue === '東部' ? (
+                <p className="bg-secondary badge rounded-pill px-3 fw-light m-0">
+                  {location ? location : venue}
+                </p>
+              ) : (
+                ''
+              )}
+              {/* ------------------------ 狀態 */}
+              {statu === '報名未開放' ? (
+                <p className="bg-line badge rounded-pill px-3 fw-light m-0">
+                  {statu}
+                </p>
+              ) : statu === '報名開放中' ? (
+                <p className="bg-badge-red badge rounded-pill px-3 fw-light m-0">
+                  {statu}
+                </p>
+              ) : statu === '報名已截止' ? (
+                <p className="bg-secondary badge rounded-pill px-3 fw-light m-0">
+                  {statu}
+                </p>
+              ) : (
+                ''
+              )}
+            </div>
             {/* 人數 */}
-            <p className="badge text-dark m-0 text-start p-0">
+            <p className="fs-7 text-dark m-0 ms-3 text-start p-0 col-5">
               參加名額 : {count}
+            </p>
+            {/* 時間 */}
+            <p className="text-primary fs-7 fw-bold m-0 p-0 text-nowrap text-end col-5 col-md-6">
+              {time}
             </p>
           </div>
           {/* 說明 */}
-          <p className="row-card-text card-text text-subcontent">{text}</p>
+          <p className="row-card-text card-text text-subcontent m-0 mb-2 col-12">
+            {text}
+          </p>
           {/* 購買按鈕 */}
           <div className="d-flex gap-2 align-items-center justify-content-end">
             <Link to={datailLink}>

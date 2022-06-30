@@ -93,6 +93,7 @@ function CourseAside({ contextValue }) {
             statu={Data.statu}
             setStatu={Data.setStatu}
             setPage={Data.setPage}
+            contextValue={contextValue}
           />
           {/* 報名費用篩選 */}
           <AsideTitle text="報名費用" />
@@ -186,7 +187,7 @@ function CourseAside({ contextValue }) {
             </button>
           </div>
           {/* 活動地點 */}
-          <AsideTitle text="課程難度" />
+          <AsideTitle text="類別篩選" />
           <div className="mb-5 ms-2 row">
             {Data.categoryLabel.map((v, i) => {
               return (

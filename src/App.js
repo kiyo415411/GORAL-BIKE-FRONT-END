@@ -10,12 +10,10 @@ import Footer from './layout/Public/Footer';
 import ShoppingCart from './pages/ShoppingCart';
 import Checkout from './pages/Checkout';
 import ActivityList from './pages/ActivityList';
-import ActivityLike from './pages/ActivityLike';
 import ActivityDetail from './pages/ActivityDetail';
 
 // ----------------------課程
 import CourseList from './pages/CourseList';
-import CourseLike from './pages/CourseLike';
 import CourseDetail from './pages/CourseDetail';
 
 import News from './layout/News';
@@ -114,13 +112,11 @@ function App() {
                     element={<BikeDetailPage />}
                   />
                   <Route path="/course/detail" element={<CourseDetail />} />
-                  <Route path="/course/like" element={<CourseLike />} />
                   <Route path="/course" element={<CourseList />} />
                   <Route
                     path="/activity/:courseId"
                     element={<ActivityDetail />}
                   />
-                  <Route path="/activity/like" element={<ActivityLike />} />
                   <Route path="/activity" element={<ActivityList />} />
                   <Route exact path="/" element={<Index />} />
                 </Routes>
