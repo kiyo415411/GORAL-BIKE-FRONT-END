@@ -67,7 +67,7 @@ export default function ApplyForm({
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      alert(JSON.stringify({ id, name, image, price, quantity }, null, 2));
+      // alert(JSON.stringify({ id, name, image, price, quantity }, null, 2));
       handleClose();
       if (cartMethod === 'course') {
         CourseCart.addItem({ id, name, image, price, quantity });
