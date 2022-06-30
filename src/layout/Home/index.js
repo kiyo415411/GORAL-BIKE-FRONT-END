@@ -119,7 +119,7 @@ export default function Index() {
                             <div className="col-12 mt-3">
                               <div
                                 className="col-6 overflow-hidden mb-2 w-100"
-                                style={{ height: '380px' }}
+                                style={{ height: rwd ? '100%' : '380px' }}
                               >
                                 <img
                                   className="cover"
