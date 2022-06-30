@@ -32,7 +32,6 @@ import {
   Scrollbar,
   Navigation,
   Autoplay,
-  Pagination,
 } from 'swiper';
 
 export default function Index() {
@@ -80,12 +79,18 @@ export default function Index() {
           >
             <video src={VIDEO} autoPlay={true} loop={true} muted></video>
 
-            <article className="position-absolute top-100 start-0 translate-middle-y w-100 h-100 lh-lg text-white mx-5">
-              <h5 className="fw-bold fs-3">TRAIL</h5>
-              <h1 className="fw-bolder display-1">ONE-TWENTY</h1>
-              <h5 className="fw-bold fs-4">樂趣</h5>
+            <article
+              className={
+                rwd
+                  ? 'position-absolute top-100 start-0 translate-middle-y w-100 h-100 lh-lg text-white mx-5'
+                  : 'position-absolute top-50 start-0 translate-middle-y px-5 lh-lg text-white mx-5'
+              }
+            >
+              <h5 className="fw-bold fs-3 my-3">TRAIL</h5>
+              <h1 className="fw-bolder display-1 my-3">ONE-TWENTY</h1>
+              <h5 className="fw-bold fs-4 my-3">樂趣</h5>
               <p
-                className="fw-bold fs-6 w-75"
+                className={`fw-bold fs-6 ${rwd ? 'w-75' : 'w-50'} my-3`}
                 style={{ whiteSpace: 'pre-line', textAlign: 'justify' }}
               >
                 BIG.NINE
