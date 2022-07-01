@@ -5,6 +5,7 @@ import Map from './layout/Map';
 import Index from './layout/Home/index';
 import Footer from './layout/Public/Footer';
 import { Routes, Route } from 'react-router-dom';
+import Member from './pages/Member';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Index />} />
-        <Route path="/map" element={<Map />} />
+        <Route path="/member" element={<Member />} />
       </Routes>
       <Footer />
     </>
