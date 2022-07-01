@@ -61,9 +61,7 @@ function RowCard({
             <Link to={datailLink}>
               <div className="d-flex align-items-center gap-2">
                 {/* 名稱 */}
-                <h5 className="card-title text-primary m-0 p-0 text-nowrap">
-                  {title}
-                </h5>
+                <h5 className="card-title text-primary m-0 p-0">{title}</h5>
               </div>
             </Link>
             {/* 價格 */}

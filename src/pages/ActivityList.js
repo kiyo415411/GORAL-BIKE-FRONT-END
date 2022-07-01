@@ -238,7 +238,7 @@ export default function ActivityList() {
           title="活動"
           bg={`${IMAGE_URL}/activity/ActivityBanner.jpg`}
         />
-        <div className="container mt-5 mt-sm-0">
+        <div className="container mt-5 mt-md-0">
           <div className="row gx-5 justify-content-center my-5 flex-nowrap">
             {/* -----------------------------左區塊 */}
             <div className="col-auto d-none d-xl-block">
@@ -265,7 +265,7 @@ export default function ActivityList() {
                       <div
                         className={
                           cardStyle === 'col'
-                            ? 'd-flex flex-wrap mt-2 mx-auto'
+                            ? 'd-flex flex-wrap mt-2 mx-auto gap-3'
                             : 'mt-2 mb-5'
                         }
                       >

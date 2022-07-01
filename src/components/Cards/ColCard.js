@@ -18,7 +18,7 @@ export default function ColCard({
   datailLink,
 }) {
   return (
-    <div className="col-card card shadow rounded-0 border-0 mb-3 mx-2 animate__animated animate__fadeIn">
+    <div className="col-card card shadow rounded-0 border-0 mb-3 animate__animated animate__fadeIn col-12">
       <div className="col-card-img-box overflow-hidden ">
         <Link to={datailLink}>
           <img

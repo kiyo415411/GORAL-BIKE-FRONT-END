@@ -30,9 +30,6 @@
 
 // ------------------------------------- ColCard
 .col-card {
-  @include media-breakpoint-down(sm) {
-    width: 13.3rem;
-  }
   @include media-breakpoint-up(sm) {
     width: 15rem;
   }
@@ -102,7 +99,7 @@
 }
 
 .row-card-img-box {
-  height: 15rem;
+  height: 18rem;
 }
 
 .card {

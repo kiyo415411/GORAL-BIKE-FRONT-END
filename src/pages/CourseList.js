@@ -242,7 +242,7 @@ export default function CourseList() {
     <div className="animate__animated animate__fadeIn">
       <CourseValue.Provider value={VALUE}>
         <TopSection title="課程" bg={`${IMAGE_URL}/course/CourseBanner.jpg`} />
-        <div className="container mt-5 mt-sm-0">
+        <div className="container mt-5 mt-lg-0">
           <div className="row gx-5 justify-content-center mt-2 mb-5 mt-lg-4 mt-xl-5 flex-nowrap">
             {/* -----------------------------左區塊 */}
             <div className="col-auto d-none d-xl-block">
@@ -270,7 +270,7 @@ export default function CourseList() {
                       <div
                         className={
                           cardStyle === 'col'
-                            ? 'd-flex flex-wrap mt-2 mx-auto'
+                            ? 'd-flex flex-wrap mt-2 mx-auto gap-3'
                             : 'mt-2 mb-4'
                         }
                       >
