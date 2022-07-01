@@ -6,13 +6,10 @@ export default function HotCard({ detailLink, image, title, price, theme }) {
   const [liked, setLiked] = useState(false);
 
   return (
-    <div
-      className="card shadow rounded-0 border-0 mb-5 mx-2"
-      style={{ width: '20rem' }}
-    >
+    <div className="card shadow rounded-0 border-0 mb-5 mx-2 col-12">
       <img
         src={image}
-        className="card-img-top rounded-0"
+        className="card-img-top rounded-0 cover"
         alt={title}
         style={{ height: '13rem' }}
       />
@@ -26,11 +23,11 @@ export default function HotCard({ detailLink, image, title, price, theme }) {
         {/* --------------------------------按鈕 */}
         {theme === '課程' || '活動' ? (
           <div className="d-flex align-items-center justify-content-end">
-            <Link to={detailLink}>
+            <a href={detailLink}>
               <button className="btn fs-6 border-2 px-4 py-1 rounded-0 btn-outline-primary rounded-pill text-nowrap">
                 {theme}詳情
               </button>
-            </Link>
+            </a>
           </div>
         ) : (
           <div className="d-flex align-items-center justify-content-between">

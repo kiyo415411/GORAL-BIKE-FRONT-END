@@ -9,6 +9,7 @@ import { useState, useEffect, createContext } from 'react';
 import { API_URL, IMAGE_URL } from '../utils/config';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+
 export const CourseValue = createContext();
 export default function CourseList() {
   // ---------------------------------------------- 初始值
@@ -55,6 +56,7 @@ export default function CourseList() {
             startDateSubmit: startDateSubmit,
             endDateSubmit: endDateSubmit,
             search: search,
+            cardStyle: cardStyle,
           },
         });
 
@@ -75,6 +77,7 @@ export default function CourseList() {
     startDateSubmit,
     endDateSubmit,
     search,
+    cardStyle,
   ]);
 
   useEffect(() => {
@@ -236,10 +239,10 @@ export default function CourseList() {
     isLoading,
   };
   return (
-    <>
+    <div className="animate__animated animate__fadeIn">
       <CourseValue.Provider value={VALUE}>
         <TopSection title="課程" bg={`${IMAGE_URL}/course/CourseBanner.jpg`} />
-        <div className="container">
+        <div className="container mt-5 mt-sm-0">
           <div className="row gx-5 justify-content-center mt-2 mb-5 mt-lg-4 mt-xl-5 flex-nowrap">
             {/* -----------------------------左區塊 */}
             <div className="col-auto d-none d-xl-block">
@@ -247,7 +250,7 @@ export default function CourseList() {
               <CourseAside contextValue={CourseValue} />
             </div>
             {/* -----------------------------右區塊 */}
-            <div className="col-12 col-xl-9">
+            <div className="col-12 col-xl-9 mt-5 mt-sm-0">
               {/* 排序 */}
               <TopSort
                 cardStyle={cardStyle}
@@ -267,8 +270,8 @@ export default function CourseList() {
                       <div
                         className={
                           cardStyle === 'col'
-                            ? 'd-flex flex-wrap mt-2 justify-content-center'
-                            : 'mt-2 mb-5'
+                            ? 'd-flex flex-wrap mt-2 mx-auto'
+                            : 'mt-2 mb-4'
                         }
                       >
                         {courseItems}
@@ -283,8 +286,8 @@ export default function CourseList() {
                     </>
                   ) : (
                     <div
-                      className="row justify-content-center align-items-center text-content"
-                      style={{ width: '63rem', height: '75%' }}
+                      className="d-flex justify-content-center align-items-center link-content"
+                      style={{ height: '20rem' }}
                     >
                       找不到課程，請調整篩選條件。
                     </div>
@@ -295,6 +298,6 @@ export default function CourseList() {
           </div>
         </div>
       </CourseValue.Provider>
-    </>
+    </div>
   );
 }

@@ -5,15 +5,15 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // 拿前端網址變數
 import { API_URL, IMAGE_URL } from '../utils/config';
 import { Link } from 'react-router-dom';
-import Like from '../components/Aside/Like';
 import Button from 'react-bootstrap/esm/Button';
 import ApplyForm from '../components/ApplyForm';
 import ActivityHotSwiper from '../components/Activity/ActivityHotSwiper';
+import Checkbox from '@mui/material/Checkbox';
+import { BsHeartFill, BsHeart } from 'react-icons/bs';
 
 export default function CourseDetail() {
   const [data, setData] = useState([]);
   const { courseId } = useParams(); // 從網址上拿變數
-  const [liked, setLiked] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -28,7 +28,7 @@ export default function CourseDetail() {
   }, [courseId]);
 
   return (
-    <>
+    <div className="animate__animated animate__fadeIn">
       {data.map((item) => {
         const newDate = item.activity_date.split('T').shift();
         const newStartTime = item.activity_start_date.split('T').shift();
@@ -42,7 +42,7 @@ export default function CourseDetail() {
             <div className="container my-5">
               <div className="row justify-content-between">
                 {/*---------------------------------- 介紹 */}
-                <div className="col-8">
+                <div className="col-12 col-lg-8">
                   {/*---------------------------------- 標籤 */}
                   <div className="d-flex justify-content-between align-items-center mb-5">
                     <ul className="list-unstyled d-flex gap-4 m-0">
@@ -57,9 +57,17 @@ export default function CourseDetail() {
                         </div>
                       </li>
                       <li>
-                        <div className="text-highlight">
-                          <Like liked={liked} setLiked={setLiked} />
-                        </div>
+                        <Checkbox
+                          icon={<BsHeart />}
+                          checkedIcon={<BsHeartFill />}
+                          size="large"
+                          sx={{
+                            color: 'var(--bs-highlight)',
+                            '&.Mui-checked': {
+                              color: 'var(--bs-highlight)',
+                            },
+                          }}
+                        />
                       </li>
                     </ul>
                   </div>
@@ -84,14 +92,14 @@ export default function CourseDetail() {
                     </pre>
                   </div>
                   <div className="d-flex my-5">
-                    <figure className="activity-detail-figure">
+                    <figure className="course-detail-figure">
                       <img
                         src={`${IMAGE_URL}/activity/${item.activity_content_image1}`}
                         className="object-fit"
                         alt="img1"
                       />
                     </figure>
-                    <figure className="activity-detail-figure">
+                    <figure className="course-detail-figure">
                       <img
                         src={`${IMAGE_URL}/activity/${item.activity_content_image2}`}
                         className="object-fit"
@@ -105,13 +113,14 @@ export default function CourseDetail() {
                   </div>
                 </div>
                 {/*---------------------------------- 報名箱 */}
-                <div className="col-3">
-                  <div className="sticky-top d-grid">
-                    <Link to={`/activity`}>
-                      <p className="text-highlight mb-5 d-flex align-items-center justify-content-end">
-                        返回活動列表
-                        <BsFillCaretRightFill />
-                      </p>
+                <div className="col-12 col-lg-3">
+                  <div className="sticky-lg-top d-grid">
+                    <Link
+                      to={`/activity`}
+                      className="link-highlight mb-5 d-flex align-items-center justify-content-end"
+                    >
+                      返回活動列表
+                      <BsFillCaretRightFill />
                     </Link>
                     <div className="card p-3 shadow border-0 rounded-0 ">
                       <p className="fs-5 m-0 text-primary">
@@ -120,7 +129,7 @@ export default function CourseDetail() {
                       <ul className="list-unstyled d-flex gap-2 m-0">
                         <li>
                           <div className="badge bg-badge-lightblue rounded-pill px-3">
-                            {item.activity_category_name}
+                            {item.venue_name}
                           </div>
                         </li>
                         <li>
@@ -175,6 +184,6 @@ export default function CourseDetail() {
       })}
       {/*---------------------------------- 推薦 */}
       <ActivityHotSwiper />
-    </>
+    </div>
   );
 }

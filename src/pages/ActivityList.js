@@ -56,6 +56,7 @@ export default function ActivityList() {
             startDateSubmit: startDateSubmit,
             endDateSubmit: endDateSubmit,
             search: search,
+            cardStyle: cardStyle,
           },
         });
         setData(response.data.data);
@@ -75,6 +76,7 @@ export default function ActivityList() {
     startDateSubmit,
     endDateSubmit,
     search,
+    cardStyle,
   ]);
 
   useEffect(() => {
@@ -230,13 +232,13 @@ export default function ActivityList() {
     isLoading,
   };
   return (
-    <>
+    <div className="animate__animated animate__fadeIn">
       <ActivityValue.Provider value={VALUE}>
         <TopSection
           title="活動"
           bg={`${IMAGE_URL}/activity/ActivityBanner.jpg`}
         />
-        <div className="container">
+        <div className="container mt-5 mt-sm-0">
           <div className="row gx-5 justify-content-center my-5 flex-nowrap">
             {/* -----------------------------左區塊 */}
             <div className="col-auto d-none d-xl-block">
@@ -244,7 +246,7 @@ export default function ActivityList() {
               <CourseAside contextValue={ActivityValue} />
             </div>
             {/* -----------------------------右區塊 */}
-            <div className="col-12 col-xl-9">
+            <div className="col-12 col-xl-9 mt-5 mt-sm-0">
               {/* 排序 */}
               <TopSort
                 cardStyle={cardStyle}
@@ -263,7 +265,7 @@ export default function ActivityList() {
                       <div
                         className={
                           cardStyle === 'col'
-                            ? 'd-flex flex-wrap mt-2'
+                            ? 'd-flex flex-wrap mt-2 mx-auto'
                             : 'mt-2 mb-5'
                         }
                       >
@@ -279,8 +281,8 @@ export default function ActivityList() {
                     </>
                   ) : (
                     <div
-                      className="row justify-content-center align-items-center text-content"
-                      style={{ width: '63rem', height: '75%' }}
+                      className="d-flex justify-content-center align-items-center link-content"
+                      style={{ height: '20rem' }}
                     >
                       找不到課程，請調整篩選條件。
                     </div>
@@ -291,6 +293,6 @@ export default function ActivityList() {
           </div>
         </div>
       </ActivityValue.Provider>
-    </>
+    </div>
   );
 }

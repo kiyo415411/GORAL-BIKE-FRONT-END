@@ -1,4 +1,5 @@
 import './App.css';
+import 'animate.css';
 import Navbar from './layout/Public/NavBar';
 // import Index from './layout/Home';
 import ProductPage from './components/ProductMainPage/ProductPage';

@@ -26,12 +26,12 @@ export default function CategoryList({
   return (
     <>
       {Data.isLoading ? (
-        <div className="d-grid gap-3 mt-3 mb-5 ms-2">{stateSkeletonGroup}</div>
+        <div className="d-grid gap-3 mt-3 mb-4 ms-2">{stateSkeletonGroup}</div>
       ) : (
-        <ul className="list-unstyled d-grid gap-xl-3 mb-5 ms-2">
+        <ul className="list-unstyled d-grid gap-xl-3 mb-4 ms-2">
           {list.map((v, i) => {
             return (
-              <li key={i + 1}>
+              <li key={i + 1} className="aside-a">
                 <a
                   href="#/"
                   className={

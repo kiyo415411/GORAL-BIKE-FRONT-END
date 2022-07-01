@@ -32,12 +32,12 @@ function RowCard({
   datailLink,
 }) {
   return (
-    <div className="project-row-card card mb-3 shadow border-0 rounded-0 px-0">
+    <div className="project-row-card card mb-3 shadow border-0 rounded-0 px-0 animate__animated animate__fadeIn">
       <div className="overflow-hidden d-flex">
         <div className="row-card-img-box product-img col-4 col-xl-5">
           {/* 圖片 */}
           <Link to={datailLink}>
-            <img src={image} className="object-fit" alt={title} />
+            <img src={image} className="cover" alt={title} />
           </Link>
         </div>
         <div className="card-body px-4 d-grid gap-1">
@@ -45,19 +45,17 @@ function RowCard({
             {/* 評分 */}
             <div className="text-icon-star d-flex gap-1">{star({ score })}</div>
             {/* 收藏 */}
-            <div className="text-highlight">
-              <Checkbox
-                icon={<BsHeart />}
-                checkedIcon={<BsHeartFill />}
-                size="large"
-                sx={{
+            <Checkbox
+              icon={<BsHeart />}
+              checkedIcon={<BsHeartFill />}
+              size="large"
+              sx={{
+                color: 'var(--bs-highlight)',
+                '&.Mui-checked': {
                   color: 'var(--bs-highlight)',
-                  '&.Mui-checked': {
-                    color: 'var(--bs-highlight)',
-                  },
-                }}
-              />
-            </div>
+                },
+              }}
+            />
           </div>
           <div className="d-flex justify-content-between align-items-center">
             <Link to={datailLink}>
@@ -72,7 +70,7 @@ function RowCard({
             <h5 className="text-content m-0 text-nowrap">$ {price}</h5>
           </div>
           <div className="row gap-2 align-items-center">
-            <div className="d-flex gap-2 align-items-center col-12">
+            <div className="d-flex gap-2 align-items-center col-12 flex-wrap">
               {/* ------------------------ 難度 */}
               {category === '入門' ? (
                 <p className="bg-badge-lightblue badge rounded-pill px-3 fw-light m-0">

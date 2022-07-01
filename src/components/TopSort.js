@@ -134,7 +134,7 @@ export default function TopSort(props) {
       <div className="mb-2 d-block d-xl-none link-content">
         <FaFilter onClick={handleShow} />
         <Offcanvas show={show} onHide={handleClose} style={{ width: '20rem' }}>
-          <div className="rwd-aside-scrollbar" style={{ height: '51rem' }}>
+          <div className="rwd-aside-scrollbar">
             <Offcanvas.Body className="pt-4">
               <Paper
                 className="border-secondary border-2 rounded-pill d-flex align-items-center ps-5 pe-3 mb-5"
@@ -166,7 +166,7 @@ export default function TopSort(props) {
                 statu={Data.statu}
                 setStatu={Data.setStatu}
                 setPage={Data.setPage}
-                contextValue={CourseValue}
+                contextValue={props.contextValue}
               />
               <div className="list-title fs-4 mb-2 text-content">報名費用</div>
               <div className="list-title-line border border-secondary mb-3 ms-1" />

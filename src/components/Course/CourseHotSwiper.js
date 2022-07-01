@@ -7,6 +7,7 @@ import HotCard from '../Cards/HotCard';
 
 export default function CourseHotSwiper() {
   const [course, setCourse] = useState([]);
+  const [width, setWidth] = useState(window.innerWidth); // 視窗寬度
 
   useEffect(() => {
     const getCourseData = async () => {
@@ -20,11 +21,35 @@ export default function CourseHotSwiper() {
     getCourseData();
   }, []);
 
+  // 偵測視窗寬度
+  useEffect(() => {
+    const updateWindowsWidth = () => {
+      const newWidth = window.innerWidth;
+      setWidth(newWidth);
+    };
+
+    window.addEventListener('resize', updateWindowsWidth);
+
+    return () => window.removeEventListener('resize', updateWindowsWidth);
+  }, []);
+
   return (
     <div className="bg-graybg pt-5 pb-4">
       <h5 className="ps-5 mb-4">課程推薦</h5>
       <Swiper
-        slidesPerView={6}
+        slidesPerView={
+          width >= 1800
+            ? 7
+            : width >= 1600
+            ? 6
+            : width >= 1400
+            ? 5
+            : width >= 984
+            ? 4
+            : width >= 823
+            ? 3
+            : 2
+        }
         grabCursor={true}
         spaceBetween={0}
         scrollbar={{
