@@ -61,7 +61,7 @@ export default function NewsDetail() {
           <Carousel fade>
             {dataPic.map((value, index) => {
               return (
-                <Carousel.Item key={index} interval={2000}>
+                <Carousel.Item key={index} interval={1000}>
                   <img
                     className="d-block w-100"
                     src={`${IMAGE_URL}/news/${value.name}`}

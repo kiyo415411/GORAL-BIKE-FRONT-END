@@ -13,6 +13,7 @@ import Slider from 'react-slick';
 import useWindowSize from '../../components/hooks/useWindowSize';
 // Import Swiper styles
 import { Swiper, SwiperSlide } from 'swiper/react';
+
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -30,6 +31,7 @@ import {
   EffectFade,
   Scrollbar,
   Navigation,
+  Autoplay,
 } from 'swiper';
 
 export default function Index() {
@@ -77,12 +79,18 @@ export default function Index() {
           >
             <video src={VIDEO} autoPlay={true} loop={true} muted></video>
 
-            <article className="position-absolute top-100 start-0 translate-middle-y w-100 h-100 lh-lg text-white mx-5">
-              <h5 className="fw-bold fs-3">TRAIL</h5>
-              <h1 className="fw-bolder display-1">ONE-TWENTY</h1>
-              <h5 className="fw-bold fs-4">樂趣</h5>
+            <article
+              className={
+                rwd
+                  ? 'position-absolute top-100 start-0 translate-middle-y w-100 h-100 lh-lg text-white mx-5'
+                  : 'position-absolute top-50 start-0 translate-middle-y px-5 lh-lg text-white mx-5'
+              }
+            >
+              <h5 className="fw-bold fs-3 my-3">TRAIL</h5>
+              <h1 className="fw-bolder display-1 my-3">ONE-TWENTY</h1>
+              <h5 className="fw-bold fs-4 my-3">樂趣</h5>
               <p
-                className="fw-bold fs-6 w-75"
+                className={`fw-bold fs-6 ${rwd ? 'w-75' : 'w-50'} my-3`}
                 style={{ whiteSpace: 'pre-line', textAlign: 'justify' }}
               >
                 BIG.NINE
@@ -93,42 +101,59 @@ export default function Index() {
           </section>
 
           {/* NEWS */}
-          <section className="bg-light row row justify-content-around p-5 m-0">
-            <article className="col-12 col-md-5 my-5">
+          <section className="bg-light row row justify-content-around px-5 m-0">
+            <article className="col-12 col-md-5 mt-5">
               <h1 className="border-5 border-start border-secondary mb-3">
                 　最新消息
               </h1>
               <main>
-                {news.slice(0, 1).map((value, index) => {
-                  return (
-                    <Link to={`/news/${value.id}`} key={'news' + value.id}>
-                      <div className="row align-items-end border-bottom pb-3">
-                        <div className="col-12 mt-3">
-                          <div className="col-6 overflow-hidden mb-2 w-100 h-100">
-                            <img
-                              className="cover "
-                              src={`${IMAGE_URL}/news/${value.name}`}
-                              // style={{ width: '100%' }}
-                              alt=""
-                            />
+                <Swiper
+                  loop={true}
+                  autoplay={{
+                    delay: 1500,
+                    disableOnInteraction: false,
+                  }}
+                  centeredSlides={true}
+                  modules={[Autoplay]}
+                >
+                  {news.map((value, index) => {
+                    return (
+                      <SwiperSlide key={'news' + value.id}>
+                        <Link to={`/news/${value.id}`}>
+                          <div className="row align-items-end border-bottom pb-3">
+                            <div className="col-12 mt-3">
+                              <div
+                                className="col-6 overflow-hidden mb-2 w-100"
+                                style={{ height: rwd ? '100%' : '380px' }}
+                              >
+                                <img
+                                  className="cover"
+                                  src={`${IMAGE_URL}/news/${value.name}`}
+                                  alt=""
+                                />
+                              </div>
+                              <span className="d-flex mt-3 align-items-center gap-2">
+                                <BsSquareFill />
+                                <span>{value.date.split('T').shift()}</span>
+                              </span>
+                            </div>
+                            <h3 className="mt-3">{value.title}</h3>
+                            <p
+                              className="mt-3 col-card-homepage-news-text"
+                              style={{ textAlign: 'justify' }}
+                            >
+                              {value.content}
+                            </p>
                           </div>
-                          <span className="d-flex mt-3 align-items-center gap-2">
-                            <BsSquareFill />
-                            <span>{value.date.split('T').shift()}</span>
-                          </span>
-                        </div>
-                        <h3 className="mt-3">{value.title}</h3>
-                        <p className="mt-3" style={{ textAlign: 'justify' }}>
-                          {value.content}
-                        </p>
-                      </div>
-                    </Link>
-                  );
-                })}
+                        </Link>
+                      </SwiperSlide>
+                    );
+                  })}
+                </Swiper>
               </main>
             </article>
 
-            <aside className="col-5 my-5 row gap-3 d-none d-md-block">
+            <aside className="col-5 mt-5 row gap-3 d-none d-md-block">
               <h3 className="border-5 border-start border-secondary mb-3">
                 　消息列表
               </h3>
@@ -176,15 +201,17 @@ export default function Index() {
                     className="w-100 row d-flex justify-content-center align-items-center m-md-auto m-0 p-0"
                   >
                     <article
-                      className="col-12 col-md-5 order-1 order-md-0"
+                      className="col-12 col-md-3 order-1 order-md-0"
                       style={{ textAlign: 'justify' }}
                     >
-                      <h3>{value.product_name}</h3>
+                      <h2>{value.product_name}</h2>
                       <p className="mt-4 fs-6">
                         鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano
                         Deore 1x10零組件搭配，Suntour避震前叉。
                       </p>
-                      <p className="text-danger fw-bold text-end">查看更多</p>
+                      <Link to={`/product/detail/${value.product_id}`}>
+                        <p className="text-danger fw-bold">查看更多</p>
+                      </Link>
                     </article>
                     <figure className="col-12 col-md-6 d-block ms-md-5 my-5 my-md-auto ">
                       <img
@@ -203,7 +230,6 @@ export default function Index() {
               ref={(slider2) => setSecondSwiper(slider2)}
               slidesToShow={rwd ? 1 : 5}
               autoplay={true}
-              autoplaySpeed={3000}
               focusOnSelect={true}
               className="w-75 mx-auto justify-content-center scroll d-flex align-items-center"
             >
@@ -224,8 +250,12 @@ export default function Index() {
           <section className="bg-light pb-5" style={{ height: '50rem' }}>
             <Swiper
               effect={'fade'}
+              autoplay={{
+                delay: 1500,
+                disableOnInteraction: false,
+              }}
               navigation={true}
-              modules={[EffectFade, Navigation]}
+              modules={[Autoplay, EffectFade, Navigation]}
             >
               {api.map((value, index) => {
                 return (
@@ -339,9 +369,13 @@ export default function Index() {
               <p className="my-3 mt-md-3" style={{ textAlign: 'justify' }}>
                 帶著這些問題，我們一起來審視登山車訓練營。需要考慮周詳登山車訓練營的影響及因應對策。如果此時我們選擇忽略登山車訓練營，那後果可想而知。當前最急迫的事，想必就是釐清疑惑了。這樣看來，對於登山車訓練營，我們不能不去想，卻也不能走火入魔。
               </p>
-              <button className="btn btn-danger fs-6 w-50 mb-3 mb-md-0 mt-md-1">
+
+              <Link
+                to={`/course`}
+                className="btn btn-danger fs-6 w-50 mb-3 mb-md-0 mt-md-1"
+              >
                 更多訓練營
-              </button>
+              </Link>
             </article>
             <section className="col-md-8 course">
               <Swiper
@@ -357,9 +391,13 @@ export default function Index() {
                 spaceBetween={20}
                 mousewheel={true}
                 grabCursor={true}
+                autoplay={{
+                  delay: 2000,
+                  disableOnInteraction: false,
+                }}
                 centeredSlides={true}
                 slidesPerView={rwd ? 2 : 4}
-                modules={[EffectCoverflow, Mousewheel]}
+                modules={[Autoplay, EffectCoverflow, Mousewheel]}
                 className="mySwiper my-auto h-100"
               >
                 {course.map((value, index) => {
@@ -387,7 +425,10 @@ export default function Index() {
               你絕不能錯過的登山車活動
             </h1>
             <Swiper
-              autoplay={true}
+              autoplay={{
+                delay: 2000,
+                disableOnInteraction: false,
+              }}
               slidesPerView={rwd ? 2 : 3}
               speed={300}
               grabCursor={true}
@@ -400,18 +441,20 @@ export default function Index() {
               }}
               loop={true}
               mousewheel={true}
-              modules={[Scrollbar, Mousewheel]}
+              modules={[Autoplay, Scrollbar, Mousewheel]}
             >
               {activity.map((value, index) => {
                 return (
                   <SwiperSlide key={index} className="my-auto overflow-hidden">
-                    <figure className="activity_img_block mx-auto">
-                      <img
-                        src={`${IMAGE_URL}/activity/${value.activity_pictures}`}
-                        className="cover"
-                        alt="..."
-                      />
-                    </figure>
+                    <Link to={`/activity/${value.activity_id}`}>
+                      <figure className="activity_img_block mx-auto">
+                        <img
+                          src={`${IMAGE_URL}/activity/${value.activity_pictures}`}
+                          className="cover"
+                          alt="..."
+                        />
+                      </figure>
+                    </Link>
                     <div className="card-body">
                       <p className="card-text fs-3 text-center">
                         {value.activity_name}
