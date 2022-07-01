@@ -5,9 +5,6 @@ import { useActivityCart } from './useActivityCart';
 
 const CartContext = createContext(null);
 
-// TODO: 計算購物車總價
-// TODO: 計算購物車總數量
-
 export const CartProvider = ({ children }) => {
   const [allCartTotalItems, setAllCartTotalItems] = useState(0);
   const [allCartTotal, setAllCartTotal] = useState(0);

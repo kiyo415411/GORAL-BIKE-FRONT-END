@@ -118,8 +118,10 @@ const checkItemRemove = (state, action) => {
 // 購物車結帳
 const checkoutCart = (state, action) => {
   const newStateItem = state.items.filter((item) => item.checked === false);
+  const isEmpty = newStateItem.length === 0;
   const newState = {
     ...state,
+    isEmpty,
     items: newStateItem,
     checkedItems: [],
     cartTotal: 0,
@@ -205,7 +207,6 @@ const generateCartState = (state, items) => {
   const checkedAll = items.every((item) => {
     return item.checked === true;
   });
-  console.log(checkedAll);
 
   return {
     ...initialState,

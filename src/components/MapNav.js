@@ -1,10 +1,8 @@
 import Area from './Area.json';
-import { useContext, useRef, useState, useEffect } from 'react';
+import { useContext, useRef } from 'react';
 import { MapDataValue } from '../layout/Map/index';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import useWindowSize from './hooks/useWindowSize';
 
 export default function MapNav() {
   const Data = useContext(MapDataValue);
@@ -14,14 +12,8 @@ export default function MapNav() {
   };
 
   // 抓取螢幕寬度
-  let getScreenWidth = window.screen.width;
-  // 設定螢幕寬度
-  const [screenWidth, setScreenWidth] = useState(768);
-
-  useEffect(() => {
-    let getScreenWidth = window.screen.width;
-    setScreenWidth(getScreenWidth);
-  }, [getScreenWidth]);
+  const screenWidth = useWindowSize();
+  let rwd = screenWidth < 500;
 
   const onChangeArea = (e) => {
     Data.setArea(e.target.value);
@@ -97,7 +89,7 @@ export default function MapNav() {
         >
           <section
             className={`row justify-content-end py-2 gap-3 ${
-              screenWidth < 500 ? 'w-100' : 'w-75'
+              rwd ? 'w-100' : 'w-75'
             }`}
           >
             <section className="col-md-3 d-flex justify-content-end align-items-center gap-3 mt-3 mt-md-0">

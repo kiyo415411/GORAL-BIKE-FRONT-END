@@ -4,7 +4,7 @@ import { RiArrowRightSLine, RiArrowLeftSLine } from 'react-icons/ri';
 
 export default function PaginationActive({ page, setPage, lastPage }) {
   return (
-    <Pagination>
+    <Pagination className="mt-1">
       {/* ---------------------------------------- 上一頁  */}
       <Pagination.Item
         disabled={page === 1 ? 'disabled' : ''}

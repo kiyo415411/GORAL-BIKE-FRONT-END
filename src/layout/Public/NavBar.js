@@ -8,19 +8,14 @@ import axios from 'axios';
 import { API_URL } from '../../utils/config';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Container, Navbar } from 'react-bootstrap';
+import useWindowSize from '../../components/hooks/useWindowSize';
 
 function GoralBikeNavbar() {
   // 抓取螢幕寬度
-  let getScreenWidth = window.screen.width;
-  // 設定螢幕寬度
-  const [screenWidth, setScreenWidth] = useState(768);
+  const screenWidth = useWindowSize();
+  let rwd = screenWidth <= 768;
 
-  useEffect(() => {
-    let getScreenWidth = window.screen.width;
-    setScreenWidth(getScreenWidth);
-  }, [getScreenWidth]);
   const { isLogin, setIsLogin, setUserData } = useLogin();
   const history = useNavigate();
 
@@ -53,11 +48,16 @@ function GoralBikeNavbar() {
     });
   };
 
+  const goCart = (e) => {
+    e.preventDefault();
+    history('/shopping-cart');
+  };
+
   return (
     <>
       <Navbar
         collapseOnSelect
-        className={`${screenWidth < 500 ? 'fixed-top' : ''}`}
+        className={`${rwd ? 'fixed-top' : ''}`}
         expand="lg"
         bg="primary"
         variant="dark"
@@ -91,11 +91,7 @@ function GoralBikeNavbar() {
               </NavLink>
             </ul>
           </Navbar.Collapse>
-          <div
-            className={`${
-              screenWidth < 500 ? 'fixed-bottom' : ''
-            } bg-primary col-md-2`}
-          >
+          <div className={`${rwd ? 'fixed-bottom' : ''} bg-primary col-md-2`}>
             <ul className="list-unstyled row my-auto p-3 p-0 my-md-0  justify-content-between justify-content-md-end gap-2">
               {isLogin ? (
                 <>
@@ -105,7 +101,7 @@ function GoralBikeNavbar() {
                     </a>
                   </li>
                   <li className="col-2 text-center">
-                    <a className="text-muted" href="#/">
+                    <a className="text-muted" href="#/" onClick={goCart}>
                       <BsCart3 />
                     </a>
                   </li>
@@ -126,7 +122,7 @@ function GoralBikeNavbar() {
                     <LoginModal />
                   </li>
                   <li className="col-2 text-center">
-                    <a className="text-muted" href="#/">
+                    <a className="text-muted" href="#/" onClick={goCart}>
                       <BsCart3 />
                     </a>
                   </li>

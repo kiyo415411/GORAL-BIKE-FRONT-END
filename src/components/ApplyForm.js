@@ -12,6 +12,8 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { MdArticle } from 'react-icons/md';
 import swal from 'sweetalert';
+import { useCourseCart } from '../utils/useCourseCart';
+import { useActivityCart } from '../utils/useActivityCart';
 
 export default function ApplyForm({
   formName,
@@ -22,6 +24,7 @@ export default function ApplyForm({
   image,
   price,
   quantity,
+  cartMethod,
 }) {
   const validationSchema = yup.object({
     firstName: yup.string().required('請輸入姓氏'),
@@ -42,6 +45,9 @@ export default function ApplyForm({
       .required('請輸入手機號碼'),
   });
 
+  const CourseCart = useCourseCart();
+  const ActivityCart = useActivityCart();
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -61,8 +67,13 @@ export default function ApplyForm({
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      alert(JSON.stringify({ id, name, image, price, quantity }, null, 2));
+      // alert(JSON.stringify({ id, name, image, price, quantity }, null, 2));
       handleClose();
+      if (cartMethod === 'course') {
+        CourseCart.addItem({ id, name, image, price, quantity });
+      } else if (cartMethod === 'activity') {
+        ActivityCart.addItem({ id, name, image, price, quantity });
+      }
       swal('加入購物車', '成功', 'success');
     },
   });
