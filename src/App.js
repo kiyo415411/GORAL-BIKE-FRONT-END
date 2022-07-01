@@ -12,6 +12,7 @@ import ShoppingCart from './pages/ShoppingCart';
 import Checkout from './pages/Checkout';
 import ActivityList from './pages/ActivityList';
 import ActivityDetail from './pages/ActivityDetail';
+import Custom from './layout/Custom';
 
 // ----------------------課程
 import CourseList from './pages/CourseList';
@@ -119,6 +120,7 @@ function App() {
                     element={<ActivityDetail />}
                   />
                   <Route path="/activity" element={<ActivityList />} />
+                  <Route path="/custom" element={<Custom />} />
                   <Route exact path="/" element={<Index />} />
                 </Routes>
 

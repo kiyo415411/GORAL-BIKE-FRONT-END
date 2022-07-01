@@ -1,0 +1,273 @@
+import React, { useRef } from 'react';
+import { useGLTF } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+import { proxy, useSnapshot } from 'valtio';
+
+export default function BikeModel({ ...props }) {
+  const group = useRef();
+  const state = proxy({
+    current: null,
+    items: {
+      Wheels_MAT: '#006400',
+      Frame_MAT: '#00BFFF',
+      Saddle_MAT: '#FF00FF',
+      Metal_MAT: '#FF00FF',
+    },
+  });
+  const snap = useSnapshot(state);
+  const { nodes, materials } = useGLTF('/bike.gltf');
+  useFrame((state, delta) => (group.current.rotation.y += 0.01));
+  return (
+    <group ref={group} {...props} dispose={null}>
+      <group scale={0.02}>
+        <mesh
+          geometry={nodes.SeatPost.geometry}
+          material={materials.Frame_MAT}
+          material-color={snap.items.Frame_MAT}
+        />
+        <mesh
+          geometry={nodes.SeatClampBottom.geometry}
+          material={materials.Frame_MAT}
+        />
+        <mesh
+          geometry={nodes.Saddle.geometry}
+          material={materials.Saddle_MAT}
+          material-color={snap.items.Saddle_MAT}
+        >
+          <mesh
+            geometry={nodes.SaddleBarL.geometry}
+            material={materials.Saddle_MAT}
+          />
+          <mesh
+            geometry={nodes.SaddleBarR.geometry}
+            material={materials.Saddle_MAT}
+          />
+        </mesh>
+        <mesh
+          geometry={nodes.SeatClampTop.geometry}
+          material={materials.Frame_MAT}
+        >
+          <mesh geometry={nodes.nut.geometry} material={materials.Metal_MAT} />
+          <mesh
+            geometry={nodes.bolt_b_.geometry}
+            material={materials.Metal_MAT}
+          />
+        </mesh>
+        <mesh
+          geometry={nodes.bolt_a_.geometry}
+          material={materials.Metal_MAT}
+          material-color={snap.items.Metal_MAT}
+        />
+        <mesh geometry={nodes.stud.geometry} material={materials.Metal_MAT} />
+        <mesh
+          geometry={nodes.Gear_p01.geometry}
+          material={materials.DerailleurRear_MAT}
+        />
+        <mesh
+          geometry={nodes.CrankGearLarge.geometry}
+          material={materials.Crankset_MAT}
+        />
+        <mesh
+          geometry={nodes.CrankLeft.geometry}
+          material={materials.Crankset_MAT}
+        >
+          <mesh
+            geometry={nodes['pedal_left-mesh'].geometry}
+            material={materials.Pedal_MAT}
+          />
+          <mesh
+            geometry={nodes['pedal_left-mesh_1'].geometry}
+            material={materials.Metal_MAT}
+          />
+        </mesh>
+        <mesh
+          geometry={nodes['DerailleurFront-mesh'].geometry}
+          material={materials.DerailleurFront_MAT}
+        />
+        <mesh
+          geometry={nodes['DerailleurFront-mesh_1'].geometry}
+          material={materials.Metal_MAT}
+        />
+        <mesh
+          geometry={nodes.CrankGearSmall.geometry}
+          material={materials.Crankset_MAT}
+        />
+        <mesh
+          geometry={nodes.CrankRight.geometry}
+          material={materials.Crankset_MAT}
+        >
+          <mesh
+            geometry={nodes['pedal_right-mesh'].geometry}
+            material={materials.Pedal_MAT}
+          />
+          <mesh
+            geometry={nodes['pedal_right-mesh_1'].geometry}
+            material={materials.Metal_MAT}
+          />
+        </mesh>
+        <mesh geometry={nodes.Chain.geometry} material={materials.Chain_MAT} />
+        <mesh
+          geometry={nodes['DerailleurRear-mesh'].geometry}
+          material={materials.DerailleurRear_MAT}
+        />
+        <mesh
+          geometry={nodes['DerailleurRear-mesh_1'].geometry}
+          material={materials.Metal_MAT}
+        />
+        <mesh
+          geometry={nodes.Gear_p02.geometry}
+          material={materials.DerailleurRear_MAT}
+        />
+        <mesh
+          geometry={nodes.CageBolt2.geometry}
+          material={materials.Metal_MAT}
+        />
+        <mesh
+          geometry={nodes.CageRear.geometry}
+          material={materials.Cage_MAT}
+        />
+        <mesh
+          geometry={nodes.CageBolt1.geometry}
+          material={materials.Metal_MAT}
+        />
+        <mesh
+          geometry={nodes.Bottle.geometry}
+          material={materials.Bottle_MAT}
+        />
+        <mesh
+          geometry={nodes.CageFront.geometry}
+          material={materials.Cage_MAT}
+        />
+        <mesh
+          geometry={nodes.CageBolt3.geometry}
+          material={materials.Metal_MAT}
+        />
+        <mesh
+          geometry={nodes.CageBolt4.geometry}
+          material={materials.Metal_MAT}
+        />
+        <mesh geometry={nodes.Frame.geometry} material={materials.Frame_MAT}>
+          <mesh
+            geometry={nodes.pCylinder1.geometry}
+            material={materials.Metal_MAT}
+          />
+          <mesh
+            geometry={nodes['Brakes_Rear-mesh'].geometry}
+            material={materials.Metal_MAT}
+          />
+          <mesh
+            geometry={nodes['Brakes_Rear-mesh_1'].geometry}
+            material={materials.Brakes_MAT}
+          />
+          <mesh
+            geometry={nodes.CableRearLower.geometry}
+            material={materials.PaintBlack_MAT}
+          />
+          <mesh
+            geometry={nodes.pCylinder2.geometry}
+            material={materials.Metal_MAT}
+          />
+          <mesh
+            geometry={nodes.SkewerRearA.geometry}
+            material={materials.PaintBlack_MAT}
+          />
+          <mesh
+            geometry={nodes.CableRearUpper.geometry}
+            material={materials.PaintBlack_MAT}
+          />
+          <mesh
+            geometry={nodes.bolt_a_04.geometry}
+            material={materials.Metal_MAT}
+          />
+          <mesh
+            geometry={nodes.Cables_Front.geometry}
+            material={materials.PaintBlack_MAT}
+          />
+          <mesh
+            geometry={nodes.SkewerRearB.geometry}
+            material={materials.PaintBlack_MAT}
+          />
+          <mesh
+            geometry={nodes.pCylinder3.geometry}
+            material={materials.Metal_MAT}
+          />
+        </mesh>
+        <mesh
+          geometry={nodes['WheelFront_hiProfile-mesh'].geometry}
+          material={materials.Wheels_MAT}
+          material-color={snap.items.Wheels_MAT}
+        />
+        <mesh
+          geometry={nodes['WheelFront_hiProfile-mesh_1'].geometry}
+          material={materials.Metal_MAT}
+        />
+        <mesh
+          geometry={nodes.magnet.geometry}
+          material={materials.Computer_MAT}
+        />
+        <mesh geometry={nodes.Fork.geometry} material={materials.Frame_MAT}>
+          <mesh
+            geometry={nodes.SkewerFrontA.geometry}
+            material={materials.PaintBlack_MAT}
+          />
+          <mesh
+            geometry={nodes.ForkInnerMetal.geometry}
+            material={materials.Metal_MAT}
+          />
+          <mesh
+            geometry={nodes.SkewerFrontB.geometry}
+            material={materials.PaintBlack_MAT}
+          />
+          <mesh
+            geometry={nodes.sensor.geometry}
+            material={materials.Computer_MAT}
+          />
+          <mesh
+            geometry={nodes['brakes_front-mesh'].geometry}
+            material={materials.Metal_MAT}
+          />
+          <mesh
+            geometry={nodes['brakes_front-mesh_1'].geometry}
+            material={materials.Brakes_MAT}
+          />
+        </mesh>
+        <mesh
+          geometry={nodes.HandleBars.geometry}
+          material={materials.Frame_MAT}
+        >
+          <mesh
+            geometry={nodes.HandleBarBolt2.geometry}
+            material={materials.Metal_MAT}
+          />
+          <mesh
+            geometry={nodes.tape.geometry}
+            material={materials.HandlebarTape_MAT}
+          />
+          <mesh
+            geometry={nodes.HandleBarBolt1.geometry}
+            material={materials.Metal_MAT}
+          />
+          <mesh
+            geometry={nodes['shifters-mesh'].geometry}
+            material={materials.Shifters_MAT}
+          />
+          <mesh
+            geometry={nodes['shifters-mesh_1'].geometry}
+            material={materials.Metal_MAT}
+          />
+        </mesh>
+        <mesh
+          geometry={nodes.WheelRear_hiProfile.geometry}
+          material={materials.Wheels_MAT}
+        >
+          <mesh
+            geometry={nodes.CasetteGears.geometry}
+            material={materials.Cassette_MAT}
+          />
+        </mesh>
+      </group>
+    </group>
+  );
+}
+
+useGLTF.preload('/bike.gltf');

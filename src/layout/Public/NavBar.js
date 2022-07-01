@@ -89,6 +89,9 @@ function GoralBikeNavbar() {
               <NavLink to="activity" className={'nav-link'}>
                 活動
               </NavLink>
+              <NavLink to="custom" className={'nav-link'}>
+                客製化
+              </NavLink>
             </ul>
           </Navbar.Collapse>
           <div className={`${rwd ? 'fixed-bottom' : ''} bg-primary col-md-2`}>
