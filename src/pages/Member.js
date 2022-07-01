@@ -6,7 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 import { FaUser } from 'react-icons/fa';
-import UserAside from '../components/UserAside';
+import Profile from '../components/Member/Profile';
 
 function Member() {
   const [active, setActive] = useState('first');
@@ -25,8 +25,7 @@ function Member() {
 
   return (
     <>
-      <div className="container member">
-        <h3 className="my-5 text-primary">{title}</h3>
+      <div className="container-fluid member">
         <Tab.Container
           id="left-tabs-example"
           activeKey={active}
@@ -34,8 +33,13 @@ function Member() {
             setActive(e);
           }}
         >
-          <Row className="gap-5">
-            <Col sm={3} className="text-center me-3">
+          <Row className="justify-content-center">
+            <Col sm={9}>
+              <h3 className="my-5 text-primary">{title}</h3>
+            </Col>
+          </Row>
+          <Row className="gap-5 justify-content-center">
+            <Col sm={2} className="text-center me-3">
               <div className="member-info mx-auto pb-4">
                 <div className="bg-primary text-white py-2 mb-3">
                   <FaUser />
@@ -70,10 +74,10 @@ function Member() {
                 </Nav>
               </div>
             </Col>
-            <Col sm={8}>
+            <Col sm={7}>
               <Tab.Content>
                 <Tab.Pane eventKey="first">
-                  <div>更新個人檔案</div>
+                  <Profile />
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
                   <div>歷史訂單</div>
