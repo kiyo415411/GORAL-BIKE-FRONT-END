@@ -35,11 +35,11 @@ import {
 export default function Index() {
   const [screenWidth, setScreenWidth] = useState(0);
   const resize = () => {
-    console.log(window.screen.width);
     setScreenWidth(window.screen.width);
   };
   useLayoutEffect(() => {
     window.addEventListener('resize', resize);
+    console.log(screenWidth);
     resize();
     window.removeEventListener('resize', resize);
   }, [screenWidth]);
