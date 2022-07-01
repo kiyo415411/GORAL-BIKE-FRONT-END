@@ -54,6 +54,8 @@ $goral-content: #535353 !default;
 $goral-line: #c4c4c4 !default;
 $goral-highlight: #ff7e55 !default;
 $goral-subcontent: #a9a9a9 !default;
+$goral-graybg: #f7f7f7 !default;
+$goral-label: #8f8f8f !default;
 // badge
 $goral-location: #f04765 !default;
 $goral-badge-yellow: #ffc107 !default;
@@ -114,7 +116,9 @@ $theme-colors: (
   'badge-yellow': $goral-badge-yellow,
   'badge-red': $goral-badge-red,
   'badge-lightblue': $goral-badge-lightblue,
-  'icon-star': $goral-icon-star
+  'icon-star': $goral-icon-star,
+  'graybg': $goral-graybg,
+  'label': $goral-label
 ) !default;
 // scss-docs-end theme-colors-map
 
@@ -377,7 +381,7 @@ $enable-cssgrid: false !default;
 $enable-button-pointers: true !default;
 $enable-rfs: true !default;
 $enable-validation-icons: true !default;
-$enable-negative-margins: false !default;
+$enable-negative-margins: true !default;
 $enable-deprecation-messages: true !default;
 $enable-important-utilities: true !default;
 
@@ -650,6 +654,7 @@ $h3-font-size: $font-size-base * 1.75; //28
 $h4-font-size: $font-size-base * 1.5; //24
 $h5-font-size: $font-size-base * 1.25; //20
 $h6-font-size: $font-size-base; //16
+$h7-font-size: $font-size-base * 0.75;
 // scss-docs-end font-variables
 
 // scss-docs-start font-sizes
@@ -660,6 +665,7 @@ $font-sizes: (
   4: $h4-font-size,
   5: $h5-font-size,
   6: $h6-font-size,
+  7: $h7-font-size,
 ) !default;
 // scss-docs-end font-sizes
 
@@ -1388,15 +1394,15 @@ $accordion-button-active-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3
 $tooltip-font-size: $font-size-sm !default;
 $tooltip-max-width: 200px !default;
 $tooltip-color: $white !default;
-$tooltip-bg: $black !default;
+$tooltip-bg: $red !default;
 $tooltip-border-radius: $border-radius !default;
-$tooltip-opacity: 0.9 !default;
-$tooltip-padding-y: $spacer * 0.25 !default;
-$tooltip-padding-x: $spacer * 0.5 !default;
+$tooltip-opacity: 0.75 !default;
+$tooltip-padding-y: $spacer * 0.5 !default;
+$tooltip-padding-x: $spacer * 1 !default;
 $tooltip-margin: 0 !default;
 
-$tooltip-arrow-width: 0.8rem !default;
-$tooltip-arrow-height: 0.4rem !default;
+$tooltip-arrow-width: 1.2rem !default;
+$tooltip-arrow-height: 0.8rem !default;
 $tooltip-arrow-color: $tooltip-bg !default;
 // scss-docs-end tooltip-variables
 
