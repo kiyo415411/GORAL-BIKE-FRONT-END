@@ -94,7 +94,7 @@ export default function TopSort(props) {
           <Dropdown.Toggle
             variant="white"
             id="dropdown-basic"
-            className="text-highlight"
+            className="link-highlight"
           >
             排序
           </Dropdown.Toggle>

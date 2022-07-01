@@ -1,27 +1,25 @@
-@import 'reset';
+@import "reset";
 
 @import "../../node_modules/bootstrap/scss/functions"; // 必要的方法
 @import "./helpers/_variables"; // 自行定義的變數路徑
-@import"./helpers//utilities";
+@import "./helpers//utilities";
 @import "../../node_modules/bootstrap/scss/mixins";
 @import "../../node_modules/bootstrap/scss/bootstrap"; // Bootstrap 完整原始碼
 
-@import 'global'; // 全域設定
+@import "global"; // 全域設定
 
-@import 'pagination'; // 分頁
+@import "pagination"; // 分頁
 
-@import 'user-aside'; // 會員邊欄
-@import 'top-section'; // banner
-@import 'row-card'; // 卡片(橫)
-@import 'col-card'; // 卡片(直)
-@import 'course-detail'; // 課程詳細頁
-@import 'course-aside'; // 課程邊欄
-@import 'list'; // 列表
+@import "user-aside"; // 會員邊欄
+@import "top-section"; // banner
+@import "course-detail"; // 課程詳細頁
+@import "course-aside"; // 課程邊欄
+@import "list"; // 列表
 
-@import 'login'; // 登入
-@import 'sign-up'; // 註冊
-@import 'forgot-password'; // 忘記密碼
-@import 'certification'; // 重寄認證信
+@import "login"; // 登入
+@import "sign-up"; // 註冊
+@import "forgot-password"; // 忘記密碼
+@import "certification"; // 重寄認證信
 
 @import "shopping-cart"; // 購物車
 @import "checkout"; // 結帳頁

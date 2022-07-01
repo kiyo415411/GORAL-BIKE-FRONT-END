@@ -1,8 +1,7 @@
 import { BsStarFill, BsStar } from 'react-icons/bs';
-import { useState } from 'react';
-import Like from '../Aside/Like';
 import { Link } from 'react-router-dom';
-
+import { BsHeartFill, BsHeart } from 'react-icons/bs';
+import Checkbox from '@mui/material/Checkbox';
 // 評分計算
 function star({ score }) {
   const starGroup = [];
@@ -18,7 +17,6 @@ function star({ score }) {
 
 // 排版
 function RowCard({
-  height,
   courseId,
   image,
   title,
@@ -33,11 +31,10 @@ function RowCard({
   venue,
   datailLink,
 }) {
-  const [liked, setLiked] = useState(false);
   return (
     <div className="project-row-card card mb-3 shadow border-0 rounded-0 px-0">
       <div className="overflow-hidden d-flex">
-        <div className="product-img col-4 col-xl-5">
+        <div className="row-card-img-box product-img col-4 col-xl-5">
           {/* 圖片 */}
           <Link to={datailLink}>
             <img src={image} className="object-fit" alt={title} />
@@ -49,7 +46,17 @@ function RowCard({
             <div className="text-icon-star d-flex gap-1">{star({ score })}</div>
             {/* 收藏 */}
             <div className="text-highlight">
-              <Like liked={liked} setLiked={setLiked} />
+              <Checkbox
+                icon={<BsHeart />}
+                checkedIcon={<BsHeartFill />}
+                size="large"
+                sx={{
+                  color: 'var(--bs-highlight)',
+                  '&.Mui-checked': {
+                    color: 'var(--bs-highlight)',
+                  },
+                }}
+              />
             </div>
           </div>
           <div className="d-flex justify-content-between align-items-center">
@@ -131,8 +138,8 @@ function RowCard({
           {/* 購買按鈕 */}
           <div className="d-flex gap-2 align-items-center justify-content-end">
             <Link to={datailLink}>
-              <p className="text-nowrap m-0 btn fs-6 border-2 px-4 py-1 rounded-0 btn-outline-primary rounded-pill">
-                課程詳情
+              <p className="card-btn text-nowrap m-0 btn fs-6 border-2 px-4 rounded-0 btn-outline-primary rounded-pill">
+                更多詳情
               </p>
             </Link>
           </div>

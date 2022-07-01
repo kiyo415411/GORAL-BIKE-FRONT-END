@@ -141,7 +141,6 @@ export default function CourseList() {
       courseItems.push(
         <ColCard
           key={i}
-          width={20}
           courseId={data[i].course_id}
           image={`${IMAGE_URL}/course/${data[i].course_pictures}`}
           like={false}
@@ -268,10 +267,9 @@ export default function CourseList() {
                       <div
                         className={
                           cardStyle === 'col'
-                            ? 'd-flex flex-wrap mt-2'
+                            ? 'd-flex flex-wrap mt-2 justify-content-center'
                             : 'mt-2 mb-5'
                         }
-                        // style={{ width: '63rem' }}
                       >
                         {courseItems}
                       </div>

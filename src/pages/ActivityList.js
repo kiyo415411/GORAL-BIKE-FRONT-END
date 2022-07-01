@@ -9,6 +9,8 @@ import { useState, useEffect, createContext } from 'react';
 import { API_URL, IMAGE_URL } from '../utils/config';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+
+// 匯出 ActivityValue 的 Context (景況)
 export const ActivityValue = createContext();
 
 export default function ActivityList() {
@@ -118,7 +120,6 @@ export default function ActivityList() {
       courseItems.push(
         <RowCard
           key={i}
-          height={15.625}
           courseId={data[i].activity_id}
           image={`${IMAGE_URL}/activity/${data[i].activity_pictures}`}
           score={data[i].activity_score}
@@ -137,7 +138,6 @@ export default function ActivityList() {
       courseItems.push(
         <ColCard
           key={i}
-          width={20}
           courseId={data[i].activity_id}
           image={`${IMAGE_URL}/activity/${data[i].activity_pictures}`}
           like={false}
@@ -239,18 +239,19 @@ export default function ActivityList() {
         <div className="container">
           <div className="row gx-5 justify-content-center my-5 flex-nowrap">
             {/* -----------------------------左區塊 */}
-            <div className="col-auto">
+            <div className="col-auto d-none d-xl-block">
               {/* 邊攔 */}
               <CourseAside contextValue={ActivityValue} />
             </div>
             {/* -----------------------------右區塊 */}
-            <div className="col-auto">
+            <div className="col-12 col-xl-9">
               {/* 排序 */}
               <TopSort
                 cardStyle={cardStyle}
                 setCardStyle={setCardStyle}
                 sortMethod={sortMethod}
                 setSortMethod={setSortMethod}
+                contextValue={ActivityValue}
               />
               {/* 卡片清單 */}
               {isLoading ? (
@@ -265,7 +266,6 @@ export default function ActivityList() {
                             ? 'd-flex flex-wrap mt-2'
                             : 'mt-2 mb-5'
                         }
-                        style={{ width: '63rem' }}
                       >
                         {courseItems}
                       </div>
