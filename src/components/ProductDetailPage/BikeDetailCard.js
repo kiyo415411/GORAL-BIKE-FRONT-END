@@ -8,6 +8,7 @@ import { IMAGE_URL } from '../../utils/config';
 
 function BikeDetailCard(props) {
   const [bike, setBike] = useState([]);
+  const [bikeImages, setBikeImages] = useState('');
   useEffect(() => {
     const getPage = async () => {
       const response = await axios.get(API_URL + '/product/product_id', {
@@ -16,6 +17,7 @@ function BikeDetailCard(props) {
         },
       });
       setBike(response.data.data);
+      setBikeImages(response.data.data[0].product_images);
     };
     getPage();
   }, [props.product_id]);
@@ -31,16 +33,6 @@ function BikeDetailCard(props) {
     'TECHNO FORMING SYSTEM',
     'F-MOUNT',
   ]);
-  const [colored, setColored] = useState();
-  useEffect(() => {
-    const getColor = async () => {
-      const response = await axios.get(
-        API_URL + '/product/product_color_picker'
-      );
-      setColored(response.data.data);
-    };
-    getColor();
-  }, []);
   const [bikeDetail] = useState([
     {
       Name: 'BIG NINE 15',
@@ -49,11 +41,15 @@ function BikeDetailCard(props) {
       LongDesc:
         'ONE-TWENTY 600，FLOAT LINK浮動連桿避震平台，車體避震行程120mm，配置130mm避震前叉，Shimano優異的傳動系統，林道必備升降座桿，心之所向，無所不馭！ &break 在2019年推出的ONE-TWENTY車體概念後，市場大受歡迎，2020年的ONE-TWENTY 8000，甚至被Enduro Mountainbike雜誌評比為「BEST IN TEST」。到了2022，現代化的中行程林道車款，適用範圍依舊最廣大，在不失太多速度感、足夠輕量的設定之下，能盡情地享受越野騎乘的暢快體驗！美利達將其中再細分兩種屬性，一為更偏向XC越野繞圈賽的RC版本，後行程僅為100mm，搭配120mm前避震，頭管與立管角度稍大，更有利於爬坡；另一為最經典的120mm後避震行程，搭配130mm的避震前叉。組合出多款成車型號，任君挑選！',
       Price: 308000,
-      Colors: colored || ['#32CE13', '#E0CF05', '#D3484F', '#6F6669'],
+      Colors: ['#32CE13', '#E0CF05', '#D3484F', '#6F6669'],
       Parts: [''],
     },
   ]);
 
+  const BikeIMG = bikeImages.split('.').shift();
+  const BikeStart = bikeImages.split('.').pop();
+
+  const [currentColor, setCurrentColor] = useState('');
   const DownDesc = bikeDetail[0].LongDesc.split('&break');
   if (bike.length === 0) return <></>;
   return (
@@ -62,26 +58,20 @@ function BikeDetailCard(props) {
         <div className="">
           <img
             height="538"
-            src={`${IMAGE_URL}/bikes/${bike[0].product_images}`}
+            src={`${IMAGE_URL}/bikes/${BikeIMG}${
+              currentColor ? '$' : ''
+            }${currentColor}.${BikeStart}`}
             alt=""
           />
-          <div height="175.71" className="d-flex justify-content-start">
-            <img
-              height="175.71"
-              className="overflow-auto mx-4"
-              src={`${IMAGE_URL}/bikes/${bike[0].product_images}`}
-              alt=""
-            />
-            <img
-              height="175.71"
-              className="overflow-auto mx-4"
-              src={`${IMAGE_URL}/bikes/${bike[0].product_images}`}
-              alt=""
-            />
-          </div>
         </div>
         <div>
-          <BikeDetailDescription className="mx-5 w-75" bike={bike} />
+          <BikeDetailDescription
+            className="mx-5 w-75"
+            bike={bike}
+            product_id={props.product_id}
+            currentColor={currentColor}
+            setCurrentColor={setCurrentColor}
+          />
         </div>
       </div>
       <div className="mt-5">
