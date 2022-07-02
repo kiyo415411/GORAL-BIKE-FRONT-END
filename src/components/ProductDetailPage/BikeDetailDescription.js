@@ -22,7 +22,6 @@ function BikeDetailDescription(props) {
         }
       );
       setColorName(response.data.color_name.split(','));
-      console.log(colorName);
       setColored(response.data.hex_value.split(','));
     };
     getColor();
