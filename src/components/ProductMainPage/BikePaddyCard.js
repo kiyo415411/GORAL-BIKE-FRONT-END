@@ -8,8 +8,7 @@ function separator(num) {
   str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   return str.join('.');
 }
-function BikeCard(props) {
-  const for5 = useState([1, 2, 3, 4, 5]);
+function BikePaddyCard(props) {
   const [liked, setLiked] = useState(false);
   const img = props.img;
   return (
@@ -58,4 +57,4 @@ function BikeCard(props) {
   );
 }
 
-export default BikeCard;
+export default BikePaddyCard;

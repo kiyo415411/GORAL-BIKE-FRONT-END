@@ -1,7 +1,7 @@
 import BikePaddyCard from './BikePaddyCard.js';
 import Pagination from './Pagination.js';
 
-function BikeList(props) {
+export default function BikePaddy(props) {
   return (
     <ul className="list-unstyled row">
       {props.data.map((item, index) => {
@@ -30,4 +30,3 @@ function BikeList(props) {
     </ul>
   );
 }
-export default BikeList;

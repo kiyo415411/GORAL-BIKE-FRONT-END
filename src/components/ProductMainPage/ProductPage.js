@@ -5,8 +5,8 @@ import ProductAside from './ProductAside.js';
 import { useState, useEffect } from 'react';
 import { API_URL } from '../../utils/config';
 import axios from 'axios';
-import Accordion from 'react-bootstrap/Accordion';
-import BikePaddy from './BikePaddy.js';
+import BikePaddy from './BikePaddy';
+import TopSort from './TopSort.js';
 
 function ProductPage() {
   const mostExpensive = 500000;
@@ -15,9 +15,11 @@ function ProductPage() {
   const [price, setPrice] = useState([leastExpensive, mostExpensive]);
   const [data, setData] = useState([]);
   const [colored, setColored] = useState([]);
-  const [brand, setBrand] = useState([
-    { brand_id: 0, brand_name: 'All Brands' },
-  ]);
+  const [category, setCategory] = useState([]);
+  const [brand, setBrand] = useState([]);
+
+  const [cardStyle, setCardStyle] = useState('row');
+  const [sortMethod, setSortMethod] = useState('product_id DESC');
 
   const [currentColor, setCurrentColor] = useState();
   const [currentCategory, setCurrentCategory] = useState();
@@ -33,6 +35,7 @@ function ProductPage() {
     color: currentColor,
     search: currentSearch,
     page: page,
+    sortMethod: sortMethod,
   });
 
   useEffect(() => {
@@ -60,6 +63,20 @@ function ProductPage() {
       setPage(response.data.pagination.page);
     };
     getPage();
+  }, []);
+
+  useEffect(() => {
+    const getCategory = async () => {
+      const response = await axios.get(API_URL + '/product/product_category');
+      // console.log(response.data);
+      setCategory(response.data);
+      setCategory((oldArray) => [
+        { product_category_id: 0, product_category_name: '全部車款' },
+        ...oldArray,
+      ]);
+    };
+    getCategory();
+    // console.log('category', category);
   }, []);
 
   useEffect(() => {
@@ -101,8 +118,17 @@ function ProductPage() {
       color: currentColor,
       search: currentSearch,
       page: page,
+      sortMethod: sortMethod,
     });
-  }, [currentColor, price, currentCategory, currentBrand, currentSearch, page]);
+  }, [
+    currentColor,
+    price,
+    currentCategory,
+    currentBrand,
+    currentSearch,
+    page,
+    sortMethod,
+  ]);
 
   useEffect(() => {
     const getBikes = async () => {
@@ -123,6 +149,7 @@ function ProductPage() {
           color: handleSubmit.color,
           search: handleSubmit.search,
           page: handleSubmit.page,
+          sortMethod: handleSubmit.sortMethod,
         },
       });
       setData(response.data.data);
@@ -148,6 +175,7 @@ function ProductPage() {
             setCurrentColor={setCurrentColor}
             setCurrentSearch={setCurrentSearch}
             color={colored}
+            category={category}
           />
         </div>
       </div>
@@ -172,21 +200,12 @@ function ProductPage() {
             />
           </div>
           <h4 className="text-hightlight w-25 text-nowrap">
-            <Accordion defaultActiveKey="0">
-              <Accordion.Item eventKey="1">
-                <Accordion.Header>商品排序</Accordion.Header>
-                <Accordion.Body>
-                  <ul>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
-                    <li>6</li>
-                  </ul>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
+            <TopSort
+              cardStyle={cardStyle}
+              setCardStyle={setCardStyle}
+              sortMethod={sortMethod}
+              setSortMethod={setSortMethod}
+            />
           </h4>
         </div>
         {bikeList === 1 ? (

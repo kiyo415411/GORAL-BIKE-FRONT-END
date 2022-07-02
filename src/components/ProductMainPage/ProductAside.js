@@ -6,13 +6,7 @@ import BrandList from './Aside/BrandList';
 import ColorPalette from './Aside/ColorPalette';
 
 // 商品篩選邊攔
-export default function ActivityAside(props) {
-  const category = [
-    '全部車款',
-    '登山車基礎車款',
-    '全避震登山車',
-    '單避震登山車',
-  ];
+export default function ProductAside(props) {
   return (
     <div className="px-4 pb-2 mt-3 d-flex flex-column overflow-auto course-list-aside">
       {/* 關鍵字篩選 */}
@@ -20,7 +14,7 @@ export default function ActivityAside(props) {
       {/* 報名狀態篩選 */}
       <AsideTitle text="車款分類" />
       <CategoryList
-        list={category}
+        list={props.category}
         setCurrentCategory={props.setCurrentCategory}
       />
       <AsideTitle text="品牌名稱" />

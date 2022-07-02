@@ -22,7 +22,7 @@ export default function CategoryList(props) {
                 e.target.height = '100px';
               }}
             >
-              {v}
+              {v.product_category_name}
             </a>
           </li>
         );
