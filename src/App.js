@@ -1,26 +1,11 @@
 import './App.css';
 import 'animate.css';
-import Navbar from './layout/Public/NavBar';
-// import Index from './layout/Home';
-import ProductPage from './components/ProductMainPage/ProductPage';
-import BikeDetailPage from './components/ProductDetailPage/BikeDetailPage';
-import Map from './layout/Map';
-import MapDetail from './layout/MapDetail';
-import Index from './layout/Home/index';
-import Footer from './layout/Public/Footer';
-import ShoppingCart from './pages/ShoppingCart';
-import Checkout from './pages/Checkout';
-import ActivityList from './pages/ActivityList';
-import ActivityDetail from './pages/ActivityDetail';
-import Custom from './layout/Custom';
-
-// ----------------------課程
-import CourseList from './pages/CourseList';
-import CourseDetail from './pages/CourseDetail';
-
-import News from './layout/News';
-import NewsDetail from './pages/NewsDetail';
+import { Outlet } from 'react-router-dom';
+import MainLayoutRoutes from './Router/MainLayuotRoutes';
+import PageWithoutHeaderOrFooter from './Router/PageWithoutHeaderOrFooter';
 import { Routes, Route } from 'react-router-dom';
+import Navbar from './layout/Public/NavBar';
+import Footer from './layout/Public/Footer';
 // ----------------------context
 import { ProductCartProvider } from './utils/useProductCart';
 import { CourseCartProvider } from './utils/useCourseCart';
@@ -52,6 +37,20 @@ const products = [
     checked: false,
   },
 ];
+
+function BasicLayout() {
+  return (
+    <>
+      <Navbar />
+      <Outlet />
+      <Footer />
+    </>
+  );
+}
+
+function CustomLayout() {
+  return <Outlet />;
+}
 
 // 測試屬性 initialCartItems={products}
 function App() {
@@ -93,38 +92,14 @@ function App() {
           <CourseCartProvider localStorageKey="courseCart">
             <ProductCartProvider initialCartItems={products}>
               <CartProvider>
-                <Navbar />
                 <Routes>
-                  <Route
-                    path="/shopping-cart/checkout"
-                    element={<Checkout />}
-                  />
-                  <Route path="/shopping-cart" element={<ShoppingCart />} />
-                  <Route path="/news" element={<News />} />
-                  <Route path="/news/:newsID" element={<NewsDetail />} />
-                  <Route path="/map" element={<Map />} />
-                  <Route
-                    path="/map/mapDetail/:mapName"
-                    element={<MapDetail />}
-                  />
-                  <Route path="/course/:courseId" element={<CourseDetail />} />
-                  <Route path="/product" element={<ProductPage />} />
-                  <Route
-                    path="/product/detail/:product_id"
-                    element={<BikeDetailPage />}
-                  />
-                  <Route path="/course/detail" element={<CourseDetail />} />
-                  <Route path="/course" element={<CourseList />} />
-                  <Route
-                    path="/activity/:courseId"
-                    element={<ActivityDetail />}
-                  />
-                  <Route path="/activity" element={<ActivityList />} />
-                  <Route path="/custom" element={<Custom />} />
-                  <Route exact path="/" element={<Index />} />
+                  <Route path="/" element={<BasicLayout />}>
+                    <Route path="*" element={<MainLayoutRoutes />} />
+                  </Route>
+                  <Route path="/CustomePages" element={<CustomLayout />}>
+                    <Route path="*" element={<PageWithoutHeaderOrFooter />} />
+                  </Route>
                 </Routes>
-
-                <Footer />
               </CartProvider>
             </ProductCartProvider>
           </CourseCartProvider>

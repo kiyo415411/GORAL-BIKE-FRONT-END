@@ -65,7 +65,7 @@ function GoralBikeNavbar() {
         <Container>
           <Navbar.Brand>
             <Link
-              to="/"
+              to="/homepage"
               className="navbar-brand col-5 col-md-2 p-0 text-center"
             >
               <img id="Logo" src={Logo} alt="Logo" />
@@ -89,7 +89,7 @@ function GoralBikeNavbar() {
               <NavLink to="activity" className={'nav-link'}>
                 活動
               </NavLink>
-              <NavLink to="custom" className={'nav-link'}>
+              <NavLink to="/CustomePages/customize" className={'nav-link'}>
                 客製化
               </NavLink>
             </ul>

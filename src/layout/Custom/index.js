@@ -36,14 +36,14 @@ function Picker() {
   const snap = useSnapshot(state);
   return (
     <section
-      className="position-absolute w-50 m-5"
+      className="fixed-top"
       style={{
         display: snap.current ? 'block' : 'none',
       }}
     >
-      <section className="d-flex justify-content-center align-items-center gap-3">
+      <section className="d-flex justify-content-start align-items-center gap-3">
         <HexColorPicker
-          className=""
+          className="m-5"
           color={snap.items[snap.current]}
           onChange={(color) => (state.items[snap.current] = color)}
         />
@@ -99,8 +99,8 @@ function BikeShow() {
 export default function Custom() {
   return (
     <Suspense fallback={null}>
+      <Picker />
       <div className="vh-100 bg-black">
-        <Picker />
         <Canvas>
           <BikeShow />
         </Canvas>
