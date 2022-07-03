@@ -3,6 +3,8 @@ import React, { useRef, useState, Suspense } from 'react';
 import BikeModel from './OBJ/Bike';
 import { HexColorPicker } from 'react-colorful';
 import { proxy, useSnapshot } from 'valtio';
+import { Link } from 'react-router-dom';
+
 import { Ground } from './Ground';
 import {
   CubeCamera,
@@ -100,7 +102,16 @@ export default function Custom() {
   return (
     <Suspense fallback={null}>
       <Picker />
-      <div className="vh-100 bg-black">
+      <div className="vh-100 bg-black row justify-content-end p-0 m-0">
+        <Link
+          to="/homepage"
+          className="btn btn-dark text-muted w-5 m-3"
+          onClick={() => {
+            document.body.style.cursor = '';
+          }}
+        >
+          返回首頁
+        </Link>
         <Canvas>
           <BikeShow />
         </Canvas>

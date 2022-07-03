@@ -28,7 +28,7 @@ export default function BikeModel({ ...props }) {
       ref={group}
       {...props}
       dispose={null}
-      position={[0, 1.05, 0]}
+      position={[0, 1.06, 0]}
       onPointerOver={(e) => (e.stopPropagation(), set(e.object.material.name))}
       onPointerOut={(e) => e.intersections.length === 0 && set(null)}
       onPointerMissed={() => (props.state.current = null)}
@@ -263,16 +263,6 @@ export default function BikeModel({ ...props }) {
           />
         </mesh>
         <mesh
-          geometry={nodes['WheelFront_hiProfile-mesh'].geometry}
-          material={materials.Wheels_MAT}
-          material-color={snap.items.Wheels_MAT}
-        />
-        <mesh
-          geometry={nodes['WheelFront_hiProfile-mesh_1'].geometry}
-          material={materials.Metal_MAT}
-          material-color={snap.items.Metal_MAT}
-        />
-        <mesh
           geometry={nodes.magnet.geometry}
           material={materials.Computer_MAT}
           material-color={snap.items.Computer_MAT}
@@ -344,6 +334,13 @@ export default function BikeModel({ ...props }) {
             material-color={snap.items.Metal_MAT}
           />
         </mesh>
+        {/* 前輪 */}
+        <mesh
+          geometry={nodes['WheelFront_hiProfile-mesh'].geometry}
+          material={materials.Wheels_MAT}
+          material-color={snap.items.Wheels_MAT}
+        />
+        {/* 後輪 */}
         <mesh
           geometry={nodes.WheelRear_hiProfile.geometry}
           material={materials.Wheels_MAT}
