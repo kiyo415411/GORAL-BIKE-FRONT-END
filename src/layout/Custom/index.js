@@ -30,41 +30,58 @@ const state = proxy({
 function Picker() {
   const snap = useSnapshot(state);
   return (
-    <div className="row w-40 me-auto m-5 justify-content-center align-items-center">
-      <HexColorPicker
-        className="picker col-6"
-        color={snap.items[snap.current]}
-        onChange={(color) => (state.items[snap.current] = color)}
-      />
-      <h1
-        className="col-6"
-        style={{
-          color: state.items[snap.current],
-        }}
-      >
-        {snap.current}
-      </h1>
-    </div>
+    <section
+      className="position-absolute w-50 m-5"
+      style={{
+        display: snap.current ? 'block' : 'none',
+      }}
+    >
+      <section className="d-flex justify-content-center align-items-center gap-3">
+        <HexColorPicker
+          className=""
+          color={snap.items[snap.current]}
+          onChange={(color) => (state.items[snap.current] = color)}
+        />
+        <h1
+          className=""
+          style={{
+            color: state.items[snap.current],
+          }}
+        >
+          {snap.current}
+        </h1>
+      </section>
+    </section>
   );
 }
 
 export default function Custom() {
   return (
-    <>
-      <nav>
-        <Picker />
-      </nav>
-      <main style={{ height: '600px' }}>
+    <div className="container-fluid m-0 p-0">
+      <Picker />
+      <main className="bg-dark" style={{ height: '768px' }}>
         <Canvas camera={{ position: [0, 0, 4], fov: 50 }}>
-          <ambientLight />
+          <ambientLight intensity={0.7} />
+          <spotLight
+            intensity={0.5}
+            angle={0.1}
+            penumbra={1}
+            position={[10, 15, 10]}
+            castShadow
+          />
           <Suspense fallback={null}>
             <BikeModel state={state} />
           </Suspense>
 
-          <pointLight position={[10, 10, 10]} />
-          <OrbitControls makeDefault />
+          <OrbitControls
+            autoRotate
+            enablePan={false}
+            enableZoom={false}
+            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 2}
+          />
         </Canvas>
       </main>
-    </>
+    </div>
   );
 }
