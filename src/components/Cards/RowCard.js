@@ -2,6 +2,10 @@ import { BsStarFill, BsStar } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
 import Checkbox from '@mui/material/Checkbox';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { API_URL } from '../../utils/config';
+
 // 評分計算
 function star({ score }) {
   const starGroup = [];
@@ -21,6 +25,7 @@ function RowCard({
   image,
   title,
   price,
+  like,
   score,
   time,
   location,
@@ -30,7 +35,39 @@ function RowCard({
   category,
   venue,
   datailLink,
+  favoriteActive,
+  setFavoriteActive,
 }) {
+  const [favorite, setFavorite] = useState({ courseId: '' });
+
+  const userId = 1;
+  function handleClick(e) {
+    console.log(e.target.value);
+    if (userId !== '') {
+      setFavorite({ courseId: e.target.value });
+    } else {
+      console.log('請登入');
+    }
+  }
+
+  useEffect(() => {
+    let postFavorite = async () => {
+      try {
+        await axios.post(`${API_URL}/member/favorite/update`, favorite);
+      } catch (e) {
+        console.error(e);
+      }
+      if (favoriteActive === 0) {
+        setFavoriteActive(1);
+      } else {
+        setFavoriteActive(0);
+      }
+    };
+    postFavorite();
+
+    // console.log('postFavorite');
+  }, [favorite]);
+
   return (
     <div className="project-row-card card mb-3 shadow border-0 rounded-0 px-0 animate__animated animate__fadeIn">
       <div className="overflow-hidden d-flex">
@@ -55,6 +92,9 @@ function RowCard({
                   color: 'var(--bs-highlight)',
                 },
               }}
+              value={courseId}
+              checked={like !== null}
+              onClick={handleClick}
             />
           </div>
           <div className="d-flex justify-content-between align-items-center">

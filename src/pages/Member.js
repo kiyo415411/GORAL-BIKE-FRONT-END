@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 import { FaUser } from 'react-icons/fa';
 import Profile from '../components/Member/Profile';
+import Favorite from '../components/Member/Favorite';
 
 function Member() {
   const [active, setActive] = useState('first');
@@ -83,7 +84,7 @@ function Member() {
                   <div>歷史訂單</div>
                 </Tab.Pane>
                 <Tab.Pane eventKey="third">
-                  <div>收藏</div>
+                  <Favorite />
                 </Tab.Pane>
                 <Tab.Pane eventKey="fourth">
                   <div>優惠卷</div>

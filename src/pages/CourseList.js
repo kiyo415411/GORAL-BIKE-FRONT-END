@@ -39,6 +39,7 @@ export default function CourseList() {
   const [categoryLabel, setCategoryLabel] = useState([]); // 難度分類
   const [state, setState] = useState([]); // 狀態分類
   const [isLoading, setIsLoading] = useState(true); // 載入狀態
+  const [favoriteActive, setFavoriteActive] = useState(0); // 收藏有變動的時候會重新渲染
 
   // ------------------------------------------- 跟後端要資料
 
@@ -78,8 +79,9 @@ export default function CourseList() {
     endDateSubmit,
     search,
     cardStyle,
+    favoriteActive,
   ]);
-
+  // console.log('CoursefavoriteActive:', favoriteActive);
   useEffect(() => {
     let getData = async () => {
       try {
@@ -127,7 +129,7 @@ export default function CourseList() {
           courseId={data[i].course_id}
           image={`${IMAGE_URL}/course/${data[i].course_pictures}`}
           score={data[i].course_score}
-          like={false}
+          like={data[i].favorite_is}
           title={data[i].course_title}
           price={data[i].course_price}
           time={newDate}
@@ -138,6 +140,8 @@ export default function CourseList() {
           category={data[i].course_category_name}
           venue={data[i].venue_name}
           datailLink={`/course/${data[i].course_id}`}
+          setFavoriteActive={setFavoriteActive}
+          favoriteActive={favoriteActive}
         />
       );
     } else {
