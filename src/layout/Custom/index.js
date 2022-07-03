@@ -3,8 +3,13 @@ import React, { useRef, useState, Suspense } from 'react';
 import BikeModel from './OBJ/Bike';
 import { HexColorPicker } from 'react-colorful';
 import { proxy, useSnapshot } from 'valtio';
-import { OrbitControls } from '@react-three/drei';
-
+import { Ground } from './Ground';
+import {
+  CubeCamera,
+  Environment,
+  OrbitControls,
+  PerspectiveCamera,
+} from '@react-three/drei';
 const state = proxy({
   current: null,
   items: {
@@ -55,33 +60,51 @@ function Picker() {
   );
 }
 
+function BikeShow() {
+  return (
+    <>
+      <OrbitControls target={[0, 0.35, 0]} maxPolarAngle={1.45} />
+      <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
+      <CubeCamera resolution={256} frames={Infinity}>
+        {(texture) => (
+          <>
+            <Environment map={texture} />
+            <BikeModel state={state} />
+          </>
+        )}
+      </CubeCamera>
+      <ambientLight intensity={0.7} />
+      <spotLight
+        color={[1, 0.25, 0.7]}
+        intensity={1.5}
+        angle={0.6}
+        penumbra={0.5}
+        position={[5, 5, 0]}
+        castShadow
+        shadow-bias={-0.0001}
+      />
+      <spotLight
+        color={[0.14, 0.5, 1]}
+        intensity={2}
+        angle={0.6}
+        penumbra={0.5}
+        position={[-5, 5, 0]}
+        castShadow
+        shadow-bias={-0.0001}
+      />
+      <Ground />
+    </>
+  );
+}
 export default function Custom() {
   return (
-    <div className="container-fluid m-0 p-0">
-      <Picker />
-      <main className="bg-dark" style={{ height: '768px' }}>
-        <Canvas camera={{ position: [0, 0, 4], fov: 50 }}>
-          <ambientLight intensity={0.7} />
-          <spotLight
-            intensity={0.5}
-            angle={0.1}
-            penumbra={1}
-            position={[10, 15, 10]}
-            castShadow
-          />
-          <Suspense fallback={null}>
-            <BikeModel state={state} />
-          </Suspense>
-
-          <OrbitControls
-            autoRotate
-            enablePan={false}
-            enableZoom={false}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 2}
-          />
+    <Suspense fallback={null}>
+      <div className="vh-100 bg-black">
+        <Picker />
+        <Canvas>
+          <BikeShow />
         </Canvas>
-      </main>
-    </div>
+      </div>
+    </Suspense>
   );
 }

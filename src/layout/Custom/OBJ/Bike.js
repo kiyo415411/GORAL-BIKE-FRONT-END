@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { proxy, useSnapshot } from 'valtio';
+import { useSnapshot } from 'valtio';
 
 export default function BikeModel({ ...props }) {
   console.log({ ...props });
@@ -28,6 +28,7 @@ export default function BikeModel({ ...props }) {
       ref={group}
       {...props}
       dispose={null}
+      position={[0, 1.05, 0]}
       onPointerOver={(e) => (e.stopPropagation(), set(e.object.material.name))}
       onPointerOut={(e) => e.intersections.length === 0 && set(null)}
       onPointerMissed={() => (props.state.current = null)}
