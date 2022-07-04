@@ -9,11 +9,14 @@ import { useState, useEffect, createContext } from 'react';
 import { API_URL, IMAGE_URL } from '../utils/config';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import { useLogin } from '../utils/useLogin';
 
 export const CourseValue = createContext();
-export default function CourseList() {
-  // ---------------------------------------------- 初始值
 
+export default function CourseList() {
+  const { userData } = useLogin();
+  // console.log(userData);
+  // ---------------------------------------------- 初始值
   const [data, setData] = useState([]); // 主資料
   const [page, setPage] = useState(1); // 當前頁數
   const [lastPage, setLastPage] = useState(1); // 總頁數
@@ -58,6 +61,7 @@ export default function CourseList() {
             endDateSubmit: endDateSubmit,
             search: search,
             cardStyle: cardStyle,
+            userId: userData.userId,
           },
         });
 
@@ -80,8 +84,11 @@ export default function CourseList() {
     search,
     cardStyle,
     favoriteActive,
+    userData.userId,
   ]);
+
   // console.log('CoursefavoriteActive:', favoriteActive);
+
   useEffect(() => {
     let getData = async () => {
       try {
@@ -107,6 +114,7 @@ export default function CourseList() {
         setCategoryLabel(response.data.categoryGroup);
         setStartDate(response.data.dateRange.finalStartDate);
         setEndDate(response.data.dateRange.finalEndDate);
+
         setTimeout(() => {
           setIsLoading(false);
         }, 1300);
@@ -125,7 +133,6 @@ export default function CourseList() {
       courseItems.push(
         <RowCard
           key={i}
-          height={15.625}
           courseId={data[i].course_id}
           image={`${IMAGE_URL}/course/${data[i].course_pictures}`}
           score={data[i].course_score}
@@ -142,6 +149,7 @@ export default function CourseList() {
           datailLink={`/course/${data[i].course_id}`}
           setFavoriteActive={setFavoriteActive}
           favoriteActive={favoriteActive}
+          favoriteMethod="course"
         />
       );
     } else {
@@ -242,6 +250,7 @@ export default function CourseList() {
     originPerson,
     isLoading,
   };
+
   return (
     <div className="animate__animated animate__fadeIn">
       <CourseValue.Provider value={VALUE}>

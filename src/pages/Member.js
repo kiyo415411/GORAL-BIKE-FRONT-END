@@ -5,13 +5,21 @@ import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
+import Collapse from '@mui/material/Collapse';
 import { FaUser } from 'react-icons/fa';
 import Profile from '../components/Member/Profile';
-import Favorite from '../components/Member/Favorite';
+import FavoriteProduct from '../components/Member/FavoriteProduct';
+import FavoriteCourse from '../components/Member/FavoriteCourse';
+import FavoriteActivity from '../components/Member/FavoriteActivity';
 
 function Member() {
   const [active, setActive] = useState('first');
   const [title, setTitle] = useState('');
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
   useEffect(() => {
     if (active === 'first') {
       setTitle('帳戶資訊');
@@ -67,7 +75,21 @@ function Member() {
                     <Nav.Link eventKey="second">訂單紀錄</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="third">最愛收藏</Nav.Link>
+                    <Nav.Link
+                      active={
+                        active === 'product' ||
+                        active === 'course' ||
+                        active === 'activity'
+                      }
+                      onClick={handleClick}
+                    >
+                      最愛收藏
+                      <Collapse in={open} timeout="auto" unmountOnExit>
+                        <Nav.Link eventKey="product">商品</Nav.Link>
+                        <Nav.Link eventKey="course">課程</Nav.Link>
+                        <Nav.Link eventKey="activity">活動</Nav.Link>
+                      </Collapse>
+                    </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
                     <Nav.Link eventKey="fourth">優惠卷</Nav.Link>
@@ -83,8 +105,14 @@ function Member() {
                 <Tab.Pane eventKey="second">
                   <div>歷史訂單</div>
                 </Tab.Pane>
-                <Tab.Pane eventKey="third">
-                  <Favorite />
+                <Tab.Pane eventKey="product">
+                  <FavoriteProduct />
+                </Tab.Pane>
+                <Tab.Pane eventKey="course">
+                  <FavoriteCourse />
+                </Tab.Pane>
+                <Tab.Pane eventKey="activity">
+                  <FavoriteActivity />
                 </Tab.Pane>
                 <Tab.Pane eventKey="fourth">
                   <div>優惠卷</div>

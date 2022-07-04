@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { API_URL, IMAGE_URL } from '../../utils/config';
 import RowCard from '../Cards/RowCard';
-export default function Favorite() {
+export default function FavoriteProduct() {
   const [data, setData] = useState([]); // 主資料
   const [favoriteActive, setFavoriteActive] = useState(0); // 收藏有變動的時候會重新渲染
 
@@ -26,7 +26,6 @@ export default function Favorite() {
     courseItems.push(
       <RowCard
         key={i}
-        height={15.625}
         courseId={data[i].course_id}
         image={`${IMAGE_URL}/course/${data[i].course_pictures}`}
         score={data[i].course_score}

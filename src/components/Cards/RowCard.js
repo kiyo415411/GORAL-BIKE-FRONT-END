@@ -5,7 +5,8 @@ import Checkbox from '@mui/material/Checkbox';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
-
+import { useLogin } from '../../utils/useLogin';
+import swal from 'sweetalert';
 // 評分計算
 function star({ score }) {
   const starGroup = [];
@@ -37,16 +38,22 @@ function RowCard({
   datailLink,
   favoriteActive,
   setFavoriteActive,
+  favoriteMethod,
 }) {
-  const [favorite, setFavorite] = useState({ courseId: '' });
+  const { userData } = useLogin();
+  const [favorite, setFavorite] = useState({
+    userId: userData.userId,
+    courseId: '',
+    favoriteMethod: favoriteMethod,
+  });
 
-  const userId = 1;
+  // console.log(userId);
   function handleClick(e) {
     console.log(e.target.value);
-    if (userId !== '') {
-      setFavorite({ courseId: e.target.value });
+    if (favorite.userId !== '') {
+      setFavorite({ ...favorite, courseId: e.target.value });
     } else {
-      console.log('請登入');
+      swal('收藏失敗', '登入會員才能進行個人收藏。', 'warning');
     }
   }
 
@@ -93,7 +100,7 @@ function RowCard({
                 },
               }}
               value={courseId}
-              checked={like !== null}
+              checked={like !== null && like !== undefined}
               onClick={handleClick}
             />
           </div>
