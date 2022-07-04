@@ -20,7 +20,6 @@ function BikeDetailDescription(props) {
   }
   const [price] = useState(separator(props.bike[0].product_price));
   const [currentColor, setCurrentColor] = useState();
-  console.log('bikedsfsdfsdfdss ', props.bike);
   return (
     <div width="478px" className={props.className}>
       <div>
