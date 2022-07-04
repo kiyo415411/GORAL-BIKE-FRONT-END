@@ -9,7 +9,7 @@
   .member-info,
   .profile {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
-    input[type='file'] {
+    input[type="file"] {
       position: absolute;
       width: 1px;
       height: 1px;
@@ -48,4 +48,12 @@
     gap: 6rem;
   }
   min-height: 100vh;
+}
+
+.select-top-item {
+  cursor: pointer;
+  color: var(--bs-content);
+  &:hover &:active {
+    color: var(--bs-highlight);
+  }
 }

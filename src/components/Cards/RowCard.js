@@ -64,11 +64,7 @@ function RowCard({
       } catch (e) {
         console.error(e);
       }
-      if (favoriteActive === 0) {
-        setFavoriteActive(1);
-      } else {
-        setFavoriteActive(0);
-      }
+      setFavoriteActive(!favoriteActive);
     };
     postFavorite();
 
@@ -76,7 +72,9 @@ function RowCard({
   }, [favorite]);
 
   return (
-    <div className="project-row-card card mb-3 shadow border-0 rounded-0 px-0 animate__animated animate__fadeIn">
+    <div
+      className={`project-row-card card mb-3 shadow border-0 rounded-0 px-0 animate__animated animate__fadeIn`}
+    >
       <div className="overflow-hidden d-flex">
         <div className="row-card-img-box product-img col-4 col-xl-5">
           {/* 圖片 */}

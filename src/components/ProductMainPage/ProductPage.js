@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import { API_URL } from '../../utils/config';
 import axios from 'axios';
 import Accordion from 'react-bootstrap/Accordion';
+import { useLogin } from '../../utils/useLogin'; // user's data
 
 function ProductPage() {
   const mostExpensive = 500000;
@@ -33,6 +34,10 @@ function ProductPage() {
     search: currentSearch,
     page: page,
   });
+
+  //------------------------------- favorite's data
+  const { userData } = useLogin(); // user's data
+  const [favoriteActive, setFavoriteActive] = useState(true); // do favorite
 
   useEffect(() => {
     const getLastPage = async () => {
@@ -108,12 +113,14 @@ function ProductPage() {
           color: handleSubmit.color,
           search: handleSubmit.search,
           page: handleSubmit.page,
+          favoriteActive: favoriteActive,
+          userId: userData.userId,
         },
       });
       setData(response.data.data);
     };
     getProducts();
-  }, [handleSubmit]);
+  }, [handleSubmit, favoriteActive, userData.userId]);
 
   return (
     <div className="container-fluid row my-5">
@@ -157,6 +164,8 @@ function ProductPage() {
           page={page}
           setPage={setPage}
           lastPage={lastPage}
+          favoriteActive={favoriteActive}
+          setFavoriteActive={setFavoriteActive}
         />
       </div>
     </div>

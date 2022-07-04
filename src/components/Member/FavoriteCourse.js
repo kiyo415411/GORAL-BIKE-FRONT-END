@@ -2,25 +2,26 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { API_URL, IMAGE_URL } from '../../utils/config';
 import RowCard from '../Cards/RowCard';
-// import { useLogin } from '../../utils/useLogin';
-export default function FavoriteCourse() {
-  // const { userData } = useLogin();
-  // console.log(userData);
-  const [data, setData] = useState([]); // 主資料
-  const [favoriteActive, setFavoriteActive] = useState(0); // 收藏有變動的時候會重新渲染
 
-  // 取得 user_id = 1 的課程收藏資料
+export default function FavoriteCourse({ userData }) {
+  const [data, setData] = useState([]); // 主資料
+  const [favoriteActive, setFavoriteActive] = useState(true); // 收藏有變動的時候會重新渲染
+
   useEffect(() => {
     let getData = async () => {
       try {
-        let response = await axios.get(`${API_URL}/member/favorite/course`);
+        let response = await axios.get(`${API_URL}/member/favorite/course`, {
+          params: {
+            userId: userData.userId,
+          },
+        });
         setData(response.data.data);
       } catch (e) {
         console.error(e);
       }
     };
     getData();
-  }, [favoriteActive]);
+  }, [favoriteActive, userData.userId]);
   const courseItems = [];
 
   data.map((v, i) => {
@@ -45,6 +46,7 @@ export default function FavoriteCourse() {
         datailLink={`/course/${data[i].course_id}`}
         setFavoriteActive={setFavoriteActive}
         favoriteActive={favoriteActive}
+        favoriteMethod="course"
       />
     );
     return 0;

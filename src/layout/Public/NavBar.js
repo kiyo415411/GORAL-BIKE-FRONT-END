@@ -96,7 +96,7 @@ function GoralBikeNavbar() {
               {isLogin ? (
                 <>
                   <li className="col-2 text-center">
-                    <a className="text-muted" href="#/" >
+                    <a className="text-muted" href="#/">
                       <BsPersonFill />
                     </a>
                   </li>

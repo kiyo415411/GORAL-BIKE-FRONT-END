@@ -1,50 +1,54 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { API_URL, IMAGE_URL } from '../../utils/config';
-import RowCard from '../Cards/RowCard';
-export default function FavoriteProduct() {
-  const [data, setData] = useState([]); // 主資料
-  const [favoriteActive, setFavoriteActive] = useState(0); // 收藏有變動的時候會重新渲染
+import { API_URL } from '../../utils/config';
+import BikeCard from '../ProductMainPage/BikeCard';
 
-  // 取得 user_id = 1 的課程收藏資料
+export default function FavoriteProduct({ userData }) {
+  const [data, setData] = useState([]); // 主資料
+  const [favoriteActive, setFavoriteActive] = useState(true); // 收藏有變動的時候會重新渲染
   useEffect(() => {
     let getData = async () => {
       try {
-        let response = await axios.get(`${API_URL}/member/favorite`);
+        let response = await axios.get(`${API_URL}/member/favorite/product`, {
+          params: {
+            userId: userData.userId,
+          },
+        });
         setData(response.data.data);
       } catch (e) {
         console.error(e);
       }
     };
     getData();
-  }, [favoriteActive]);
+  }, [favoriteActive, userData.userId]);
   const courseItems = [];
 
   data.map((v, i) => {
-    const newDate = data[i].course_date.split('T').shift();
-
     courseItems.push(
-      <RowCard
-        key={i}
-        courseId={data[i].course_id}
-        image={`${IMAGE_URL}/course/${data[i].course_pictures}`}
-        score={data[i].course_score}
-        like={data[i].favorite_is}
-        title={data[i].course_title}
-        price={data[i].course_price}
-        time={newDate}
-        count={data[i].course_enrollment}
-        location={data[i].course_location_name}
-        statu={data[i].course_status_name}
-        text={data[i].course_content_introduction}
-        category={data[i].course_category_name}
-        venue={data[i].venue_name}
-        datailLink={`/course/${data[i].course_id}`}
-        setFavoriteActive={setFavoriteActive}
-        favoriteActive={favoriteActive}
-      />
+      <li
+        key={data[i].product_id}
+        className="col-12 col-md-8 col-lg-12 mx-auto"
+      >
+        <BikeCard
+          bike={data[i].product_images}
+          name={data[i].product_name}
+          like={data[i].favorite_is}
+          price={data[i].product_price}
+          text={
+            '鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano Deore 1x10零組件搭配，Suntour避震前叉。'
+          }
+          rating={data[i].product_rating}
+          id={data[i].product_id}
+          favoriteActive={favoriteActive}
+          setFavoriteActive={setFavoriteActive}
+        />
+      </li>
     );
     return 0;
   });
-  return <>{courseItems}</>;
+  return (
+    <>
+      <ul className="list-unstyled row">{courseItems} </ul>
+    </>
+  );
 }

@@ -11,11 +11,12 @@ import Profile from '../components/Member/Profile';
 import FavoriteProduct from '../components/Member/FavoriteProduct';
 import FavoriteCourse from '../components/Member/FavoriteCourse';
 import FavoriteActivity from '../components/Member/FavoriteActivity';
-
+import { useLogin } from '../utils/useLogin';
 function Member() {
   const [active, setActive] = useState('first');
   const [title, setTitle] = useState('');
   const [open, setOpen] = React.useState(false);
+  const { userData } = useLogin();
 
   const handleClick = () => {
     setOpen(!open);
@@ -23,12 +24,20 @@ function Member() {
   useEffect(() => {
     if (active === 'first') {
       setTitle('帳戶資訊');
+      setOpen(false);
     } else if (active === 'second') {
       setTitle('訂單紀錄');
-    } else if (active === 'third') {
+      setOpen(false);
+    } else if (
+      active === 'product' ||
+      active === 'course' ||
+      active === 'activity'
+    ) {
       setTitle('最愛收藏');
+      setOpen(true);
     } else if (active === 'fourth') {
       setTitle('優惠卷');
+      setOpen(false);
     }
   }, [active]);
 
@@ -75,13 +84,9 @@ function Member() {
                     <Nav.Link eventKey="second">訂單紀錄</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link
-                      active={
-                        active === 'product' ||
-                        active === 'course' ||
-                        active === 'activity'
-                      }
+                    <Nav.Item
                       onClick={handleClick}
+                      className="select-top-item my-2"
                     >
                       最愛收藏
                       <Collapse in={open} timeout="auto" unmountOnExit>
@@ -89,7 +94,7 @@ function Member() {
                         <Nav.Link eventKey="course">課程</Nav.Link>
                         <Nav.Link eventKey="activity">活動</Nav.Link>
                       </Collapse>
-                    </Nav.Link>
+                    </Nav.Item>
                   </Nav.Item>
                   <Nav.Item>
                     <Nav.Link eventKey="fourth">優惠卷</Nav.Link>
@@ -106,13 +111,13 @@ function Member() {
                   <div>歷史訂單</div>
                 </Tab.Pane>
                 <Tab.Pane eventKey="product">
-                  <FavoriteProduct />
+                  <FavoriteProduct userData={userData} />
                 </Tab.Pane>
                 <Tab.Pane eventKey="course">
-                  <FavoriteCourse />
+                  <FavoriteCourse userData={userData} />
                 </Tab.Pane>
                 <Tab.Pane eventKey="activity">
-                  <FavoriteActivity />
+                  <FavoriteActivity userData={userData} />
                 </Tab.Pane>
                 <Tab.Pane eventKey="fourth">
                   <div>優惠卷</div>

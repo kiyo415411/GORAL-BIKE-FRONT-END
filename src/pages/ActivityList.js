@@ -43,7 +43,7 @@ export default function ActivityList() {
   const [categoryLabel, setCategoryLabel] = useState([]); // 難度分類
   const [state, setState] = useState([]); // 狀態分類
   const [isLoading, setIsLoading] = useState(true); // 載入狀態
-  const [favoriteActive, setFavoriteActive] = useState(0); // 收藏有變動的時候會重新渲染
+  const [favoriteActive, setFavoriteActive] = useState(true); // 收藏有變動的時候會重新渲染
   // ------------------------------------------- 跟後端要資料
   useEffect(() => {
     let getData = async () => {
