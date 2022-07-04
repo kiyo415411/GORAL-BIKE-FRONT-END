@@ -18,7 +18,6 @@ function BikeDetailCard(props) {
         },
       });
       setBike(response.data.data);
-      console.log('asdfasdfasdf BIKE', bike);
       setBikeImages(response.data.data[0].product_images);
       setDownDesc(
         response.data.data[0].product_detail_description.split('&break')
