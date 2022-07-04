@@ -1,16 +1,30 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import axios from 'axios';
+import { API_URL } from '../../utils/config';
 
 export default function CustomizeForm(props) {
   const [show, setShow] = useState(false);
-  // const [validated, setValidated] = useState(false);
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [state, setState] = useState(props.state.items);
+  const handleSubmit = async (values) => {
+    setState(props.state.items);
+    const formData = {
+      state: state,
+      value: values,
+    };
+    try {
+      const response = await axios.post(`${API_URL}/customize`, formData);
+      console.log(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const schema = yup.object().shape({
     name: yup.string('請輸入有效的名稱.').required('姓名欄位不可為空.'),
     email: yup
@@ -42,7 +56,9 @@ export default function CustomizeForm(props) {
         </Modal.Header>
         <Formik
           validationSchema={schema}
-          onSubmit={console.log}
+          onSubmit={(values) => {
+            handleSubmit(values);
+          }}
           initialValues={{
             name: '',
             email: '',
@@ -54,7 +70,6 @@ export default function CustomizeForm(props) {
             handleSubmit,
             handleChange,
             handleReset,
-            handleBlur,
             values,
             touched,
             isValid,
