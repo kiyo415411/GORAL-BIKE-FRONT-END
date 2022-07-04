@@ -52,6 +52,10 @@ function GoralBikeNavbar() {
     e.preventDefault();
     history('/shopping-cart');
   };
+  const goMember = (e) => {
+    e.preventDefault();
+    history('/member');
+  };
 
   return (
     <>
@@ -96,7 +100,7 @@ function GoralBikeNavbar() {
               {isLogin ? (
                 <>
                   <li className="col-2 text-center">
-                    <a className="text-muted" href="#/">
+                    <a className="text-muted" href="#/" onClick={goMember}>
                       <BsPersonFill />
                     </a>
                   </li>

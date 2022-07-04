@@ -8,10 +8,14 @@ import Tab from 'react-bootstrap/Tab';
 import { FaUser } from 'react-icons/fa';
 import Profile from '../components/Member/Profile';
 import Favorite from '../components/Member/Favorite';
+import { useLogin } from '../utils/useLogin';
+import { IMAGE_URL } from '../utils/config';
 
 function Member() {
   const [active, setActive] = useState('first');
   const [title, setTitle] = useState('');
+  const { userData, setUserData, setIsLogin } = useLogin();
+  const { name, email, phone, photo } = userData;
   useEffect(() => {
     if (active === 'first') {
       setTitle('帳戶資訊');
@@ -23,6 +27,7 @@ function Member() {
       setTitle('優惠卷');
     }
   }, [active]);
+  useEffect(() => {}, [userData]);
 
   return (
     <>
@@ -49,15 +54,19 @@ function Member() {
                 <div>
                   <figure className="circle mx-auto">
                     <img
-                      src={require('../images/dr_strange.jpg')}
+                      src={
+                        photo
+                          ? `${IMAGE_URL}/members/${photo}`
+                          : require('../images/picture.png')
+                      }
                       alt="..."
                       className="object-cover"
                     />
                   </figure>
                 </div>
-                <p className="text-primary fs-5 mb-1">潘奕辰</p>
-                <p className="text-content mb-1">0932645789</p>
-                <p className="text-content">Eason@test.com</p>
+                <p className="text-primary fs-5 mb-1">{name}</p>
+                <p className="text-content mb-1">{phone}</p>
+                <p className="text-content">{email}</p>
                 <hr className="w-75 mx-auto mb-2"></hr>
                 <Nav className="flex-column gap-3 h5">
                   <Nav.Item>
@@ -78,14 +87,16 @@ function Member() {
             <Col sm={7}>
               <Tab.Content>
                 <Tab.Pane eventKey="first">
-                  <Profile />
+                  <Profile
+                    userData={userData}
+                    setUserData={setUserData}
+                    setIsLogin={setIsLogin}
+                  />
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
                   <div>歷史訂單</div>
                 </Tab.Pane>
-                <Tab.Pane eventKey="third">
-                  <Favorite />
-                </Tab.Pane>
+                <Tab.Pane eventKey="third">{/* <Favorite /> */}</Tab.Pane>
                 <Tab.Pane eventKey="fourth">
                   <div>優惠卷</div>
                 </Tab.Pane>
