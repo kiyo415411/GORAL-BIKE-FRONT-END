@@ -6,31 +6,34 @@ import { proxy, useSnapshot } from 'valtio';
 import { Link } from 'react-router-dom';
 
 import { Ground } from './Ground';
+import { FloatingGrid } from './FloatingGrid';
 import {
   CubeCamera,
   Environment,
   OrbitControls,
   PerspectiveCamera,
+  Stars,
 } from '@react-three/drei';
+
 const state = proxy({
   current: null,
   items: {
-    Frame_MAT: '#eee',
-    Saddle_MAT: '#eee',
-    Metal_MAT: '#eee',
-    DerailleurRear_MAT: '#eee',
-    Crankset_MAT: '#eee',
-    Pedal_MAT: '#eee',
-    Chain_MAT: '#eee',
-    Cage_MAT: '#eee',
-    Bottle_MAT: '#eee',
-    Brakes_MAT: '#eee',
-    PaintBlack_MAT: '#eee',
-    Wheels_MAT: '#eee',
-    Computer_MAT: '#eee',
-    HandlebarTape_MAT: '#eee',
-    Shifters_MAT: '#eee',
-    Cassette_MAT: '#eee',
+    Frame_MAT: '#fff',
+    Saddle_MAT: '#fff',
+    Metal_MAT: '#fff',
+    DerailleurRear_MAT: '#fff',
+    Crankset_MAT: '#fff',
+    Pedal_MAT: '#fff',
+    Chain_MAT: '#fff',
+    Cage_MAT: '#fff',
+    Bottle_MAT: '#fff',
+    Brakes_MAT: '#fff',
+    PaintBlack_MAT: '#fff',
+    Wheels_MAT: '#fff',
+    Computer_MAT: '#fff',
+    HandlebarTape_MAT: '#fff',
+    Shifters_MAT: '#fff',
+    Cassette_MAT: '#fff',
   },
 });
 
@@ -94,7 +97,9 @@ function BikeShow() {
         castShadow
         shadow-bias={-0.0001}
       />
+
       <Ground />
+      <FloatingGrid />
     </>
   );
 }
@@ -102,17 +107,32 @@ export default function Custom() {
   return (
     <Suspense fallback={null}>
       <Picker />
+
       <div className="vh-100 bg-black row justify-content-end p-0 m-0">
+        {/* <button className="btn btn-dark text-muted w-5 m-3" onClick={() => {}}>
+          清空
+        </button> */}
         <Link
           to="/homepage"
-          className="btn btn-dark text-muted w-5 m-3"
+          className="fixed-top ms-auto btn btn-black text-muted w-5 m-3"
           onClick={() => {
             document.body.style.cursor = '';
           }}
         >
           返回首頁
         </Link>
+
         <Canvas>
+          <Stars
+            radius={100}
+            depth={50}
+            count={5000}
+            factor={4}
+            saturation={0}
+            fade
+            speed={1}
+          />
+
           <BikeShow />
         </Canvas>
       </div>
