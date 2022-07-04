@@ -158,7 +158,7 @@ export default function CourseList() {
           key={i}
           courseId={data[i].course_id}
           image={`${IMAGE_URL}/course/${data[i].course_pictures}`}
-          like={false}
+          like={data[i].favorite_is}
           title={data[i].course_title}
           price={data[i].course_price}
           time={newDate}
@@ -169,6 +169,9 @@ export default function CourseList() {
           category={data[i].course_category_name}
           venue={data[i].venue_name}
           datailLink={`/course/${data[i].course_id}`}
+          setFavoriteActive={setFavoriteActive}
+          favoriteActive={favoriteActive}
+          favoriteMethod="course"
         />
       );
     }

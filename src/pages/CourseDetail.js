@@ -14,7 +14,7 @@ import { useLogin } from '../utils/useLogin';
 import swal from 'sweetalert';
 
 export default function CourseDetail() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]); // 主資料
   const { courseId } = useParams(); // 從網址上拿變數
   const [show, setShow] = useState(false);
   const { userData } = useLogin();
@@ -30,13 +30,17 @@ export default function CourseDetail() {
 
   useEffect(() => {
     let getDate = async () => {
-      let response = await axios.get(`${API_URL}/course/${courseId}`);
+      let response = await axios.get(`${API_URL}/course/${courseId}`, {
+        params: {
+          userId: userData.userId,
+        },
+      });
       setData(response.data.data);
     };
     getDate();
-  }, [courseId, favoriteActive]);
+  }, [courseId, favoriteActive, userData.userId]);
 
-  // console.log(userId);
+  
   function handleClick(e) {
     console.log(e.target.value);
     if (favorite.userId !== '') {
@@ -103,8 +107,8 @@ export default function CourseDetail() {
                           }}
                           value={courseId}
                           checked={
-                            item.favorite_Is !== null &&
-                            item.favorite_Is !== undefined
+                            item.favorite_is !== null &&
+                            item.favorite_is !== undefined
                           }
                           onClick={handleClick}
                         />

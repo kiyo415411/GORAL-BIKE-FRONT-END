@@ -151,7 +151,7 @@ export default function ActivityList() {
           key={i}
           courseId={data[i].activity_id}
           image={`${IMAGE_URL}/activity/${data[i].activity_pictures}`}
-          like={false}
+          like={data[i].favorite_is}
           title={data[i].activity_name}
           price={data[i].activity_fee}
           time={newDate}
@@ -160,6 +160,9 @@ export default function ActivityList() {
           text={data[i].activity_content_introduction}
           venue={data[i].venue_name}
           datailLink={`/activity/${data[i].activity_id}`}
+          setFavoriteActive={setFavoriteActive}
+          favoriteActive={favoriteActive}
+          favoriteMethod="activity"
         />
       );
     }

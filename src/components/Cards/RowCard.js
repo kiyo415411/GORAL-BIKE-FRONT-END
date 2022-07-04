@@ -24,7 +24,6 @@ function star({ score }) {
 function RowCard({
   courseId,
   image,
-  title,
   price,
   like,
   score,
@@ -35,6 +34,7 @@ function RowCard({
   count,
   category,
   venue,
+  title,
   datailLink,
   favoriteActive,
   setFavoriteActive,
