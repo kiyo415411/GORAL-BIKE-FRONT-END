@@ -1,7 +1,12 @@
-import { useState } from 'react';
-import Like from './Like.js';
+import { useState, useEffect } from 'react';
+// import Like from './Like.js';
 import { Link } from 'react-router-dom';
-import { IMAGE_URL } from '../../utils/config.js';
+import { API_URL, IMAGE_URL } from '../../utils/config.js';
+import { useLogin } from '../../utils/useLogin'; // user's data
+import swal from 'sweetalert'; // Sweet Alert
+import axios from 'axios';
+import Checkbox from '@mui/material/Checkbox';
+import { BsHeartFill, BsHeart } from 'react-icons/bs';
 
 function separator(num) {
   let str = num.toString().split('.');
@@ -10,9 +15,39 @@ function separator(num) {
 }
 function BikeCard(props) {
   const [for5] = useState([1, 2, 3, 4, 5]);
-  const [liked, setLiked] = useState(false);
+  // const [liked, setLiked] = useState(false);
   const starPercentage = (props.rating / 5) * 100;
   const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+
+  // ---------------------------- favorite's data
+  const { userData } = useLogin();
+  const [favorite, setFavorite] = useState({
+    userId: userData.userId,
+    courseId: '',
+    favoriteMethod: 'product',
+  });
+
+  // ---------------------------- favorite's function
+  function handleClick(e) {
+    if (favorite.userId !== '') {
+      setFavorite({ ...favorite, courseId: e.target.value });
+    } else {
+      swal('收藏失敗', '登入會員才能進行個人收藏。', 'warning');
+    }
+  }
+
+  useEffect(() => {
+    let postFavorite = async () => {
+      try {
+        await axios.post(`${API_URL}/member/favorite/update`, favorite);
+      } catch (e) {
+        console.error(e);
+      }
+
+      props.setFavoriteActive(!props.favoriteActive);
+    };
+    postFavorite();
+  }, [favorite]);
 
   return (
     <>
@@ -111,7 +146,21 @@ function BikeCard(props) {
                   <Link to={`/product/detail/${props.id}`}>
                     <h5 className="card-title m-0">{props.name}</h5>
                   </Link>
-                  <Like liked={liked} setLiked={setLiked} />
+                  {/* <Like liked={liked} setLiked={setLiked} /> */}
+                  <Checkbox
+                    icon={<BsHeart />}
+                    checkedIcon={<BsHeartFill />}
+                    size="large"
+                    sx={{
+                      color: 'var(--bs-highlight)',
+                      '&.Mui-checked': {
+                        color: 'var(--bs-highlight)',
+                      },
+                    }}
+                    value={props.id}
+                    checked={props.like !== null && props.like !== undefined}
+                    onClick={handleClick}
+                  />
                 </div>
                 <h5 className="text-content">${separator(props.price)}</h5>
               </div>

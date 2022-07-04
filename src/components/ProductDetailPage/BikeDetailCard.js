@@ -5,20 +5,24 @@ import LabelCard from '../Label/LabelCard';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
 import { IMAGE_URL } from '../../utils/config';
+import { useLogin } from '../../utils/useLogin';
 
 function BikeDetailCard(props) {
   const [bike, setBike] = useState([]);
+  const { userData } = useLogin();
+  const [favoriteActive, setFavoriteActive] = useState(true); // 收藏有變動的時候會重新渲染
   useEffect(() => {
     const getPage = async () => {
       const response = await axios.get(API_URL + '/product/product_id', {
         params: {
           product_id: props.product_id,
+          userId: userData.userId,
         },
       });
       setBike(response.data.data);
     };
     getPage();
-  }, [props.product_id]);
+  }, [props.product_id, favoriteActive, userData.userId]);
 
   const [bikeLabel] = useState([
     'RACELITE 61 ALUMINIUM',
@@ -70,7 +74,12 @@ function BikeDetailCard(props) {
           </div>
         </div>
         <div>
-          <BikeDetailDescription className="mx-5 w-75" bike={bike} />
+          <BikeDetailDescription
+            className="mx-5 w-75"
+            bike={bike}
+            favoriteActive={favoriteActive}
+            setFavoriteActive={setFavoriteActive}
+          />
         </div>
       </div>
       <div className="mt-5">

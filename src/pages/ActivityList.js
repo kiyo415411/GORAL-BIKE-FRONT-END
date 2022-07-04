@@ -9,11 +9,13 @@ import { useState, useEffect, createContext } from 'react';
 import { API_URL, IMAGE_URL } from '../utils/config';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import { useLogin } from '../utils/useLogin';
 
 // 匯出 ActivityValue 的 Context (景況)
 export const ActivityValue = createContext();
 
 export default function ActivityList() {
+  const { userData } = useLogin();
   // ---------------------------------------------- 初始值
 
   const [data, setData] = useState([]); // 主資料
@@ -41,6 +43,7 @@ export default function ActivityList() {
   const [categoryLabel, setCategoryLabel] = useState([]); // 難度分類
   const [state, setState] = useState([]); // 狀態分類
   const [isLoading, setIsLoading] = useState(true); // 載入狀態
+  const [favoriteActive, setFavoriteActive] = useState(true); // 收藏有變動的時候會重新渲染
   // ------------------------------------------- 跟後端要資料
   useEffect(() => {
     let getData = async () => {
@@ -57,6 +60,7 @@ export default function ActivityList() {
             endDateSubmit: endDateSubmit,
             search: search,
             cardStyle: cardStyle,
+            userId: userData.userId,
           },
         });
         setData(response.data.data);
@@ -77,6 +81,8 @@ export default function ActivityList() {
     endDateSubmit,
     search,
     cardStyle,
+    favoriteActive,
+    userData.userId,
   ]);
 
   useEffect(() => {
@@ -125,7 +131,7 @@ export default function ActivityList() {
           courseId={data[i].activity_id}
           image={`${IMAGE_URL}/activity/${data[i].activity_pictures}`}
           score={data[i].activity_score}
-          like={false}
+          like={data[i].favorite_is}
           title={data[i].activity_name}
           price={data[i].activity_fee}
           time={newDate}
@@ -134,6 +140,9 @@ export default function ActivityList() {
           text={data[i].activity_content_introduction}
           venue={data[i].venue_name}
           datailLink={`/activity/${data[i].activity_id}`}
+          setFavoriteActive={setFavoriteActive}
+          favoriteActive={favoriteActive}
+          favoriteMethod="activity"
         />
       );
     } else {
@@ -142,7 +151,7 @@ export default function ActivityList() {
           key={i}
           courseId={data[i].activity_id}
           image={`${IMAGE_URL}/activity/${data[i].activity_pictures}`}
-          like={false}
+          like={data[i].favorite_is}
           title={data[i].activity_name}
           price={data[i].activity_fee}
           time={newDate}
@@ -151,6 +160,9 @@ export default function ActivityList() {
           text={data[i].activity_content_introduction}
           venue={data[i].venue_name}
           datailLink={`/activity/${data[i].activity_id}`}
+          setFavoriteActive={setFavoriteActive}
+          favoriteActive={favoriteActive}
+          favoriteMethod="activity"
         />
       );
     }

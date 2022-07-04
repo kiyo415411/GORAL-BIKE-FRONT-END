@@ -5,7 +5,8 @@ import Checkbox from '@mui/material/Checkbox';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
-
+import { useLogin } from '../../utils/useLogin';
+import swal from 'sweetalert';
 // 評分計算
 function star({ score }) {
   const starGroup = [];
@@ -23,7 +24,6 @@ function star({ score }) {
 function RowCard({
   courseId,
   image,
-  title,
   price,
   like,
   score,
@@ -34,19 +34,26 @@ function RowCard({
   count,
   category,
   venue,
+  title,
   datailLink,
   favoriteActive,
   setFavoriteActive,
+  favoriteMethod,
 }) {
-  const [favorite, setFavorite] = useState({ courseId: '' });
+  const { userData } = useLogin();
+  const [favorite, setFavorite] = useState({
+    userId: userData.userId,
+    courseId: '',
+    favoriteMethod: favoriteMethod,
+  });
 
-  const userId = 1;
+  // console.log(userId);
   function handleClick(e) {
     console.log(e.target.value);
-    if (userId !== '') {
-      setFavorite({ courseId: e.target.value });
+    if (favorite.userId !== '') {
+      setFavorite({ ...favorite, courseId: e.target.value });
     } else {
-      console.log('請登入');
+      swal('收藏失敗', '登入會員才能進行個人收藏。', 'warning');
     }
   }
 
@@ -57,11 +64,7 @@ function RowCard({
       } catch (e) {
         console.error(e);
       }
-      if (favoriteActive === 0) {
-        setFavoriteActive(1);
-      } else {
-        setFavoriteActive(0);
-      }
+      setFavoriteActive(!favoriteActive);
     };
     postFavorite();
 
@@ -69,7 +72,9 @@ function RowCard({
   }, [favorite]);
 
   return (
-    <div className="project-row-card card mb-3 shadow border-0 rounded-0 px-0 animate__animated animate__fadeIn">
+    <div
+      className={`project-row-card card mb-3 shadow border-0 rounded-0 px-0 animate__animated animate__fadeIn`}
+    >
       <div className="overflow-hidden d-flex">
         <div className="row-card-img-box product-img col-4 col-xl-5">
           {/* 圖片 */}
@@ -93,7 +98,7 @@ function RowCard({
                 },
               }}
               value={courseId}
-              checked={like !== null}
+              checked={like !== null && like !== undefined}
               onClick={handleClick}
             />
           </div>
