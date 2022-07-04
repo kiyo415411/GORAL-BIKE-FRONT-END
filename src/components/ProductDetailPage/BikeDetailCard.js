@@ -80,7 +80,7 @@ function BikeDetailCard(props) {
         <div className="d-flex justify-content-start my-5">
           <div className="me-5">
             <h3 className="my-5">
-              <BsFillCheckCircleFill size={30} color="grey" />
+              <BsFillCheckCircleFill size={30} color="grey" />{' '}
               採用三種不同管壁厚薄度打造的全鋁合金車體
             </h3>
             <h3 className="my-5">

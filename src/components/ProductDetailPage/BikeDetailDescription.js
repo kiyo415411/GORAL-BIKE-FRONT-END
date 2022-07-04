@@ -52,14 +52,20 @@ function BikeDetailDescription(props) {
         <Description desc="腳踏車改變了我的命運。腳踏車，發生了會如何，不發生又會如何。如果此時我們選擇忽略腳踏車，那後果可想而知。" />
         <hr />
         <Price price={`${price}`} />
-        <hr />
-        <p className="md-5">顏色</p>
-        <Color
-          color={colored}
-          colorName={colorName}
-          currentColor={props.currentColor}
-          setCurrentColor={props.setCurrentColor}
-        />
+        {colorName.length !== 0 ? (
+          <>
+            <hr />
+            <p className="md-5">顏色</p>
+            <Color
+              color={colored}
+              colorName={colorName}
+              currentColor={props.currentColor}
+              setCurrentColor={props.setCurrentColor}
+            />
+          </>
+        ) : (
+          ''
+        )}
         <hr />
         <div>
           <button className="btn border border-primary rounded-0 me-2">
