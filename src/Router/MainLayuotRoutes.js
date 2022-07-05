@@ -13,10 +13,14 @@ import BikeDetailPage from '../components/ProductDetailPage/BikeDetailPage';
 import ProductPage from '../components/ProductMainPage/ProductPage';
 import ActivityList from '../pages/ActivityList';
 import ActivityDetail from '../pages/ActivityDetail';
+import Member from '../pages/Member';
+
 export default function MainLayoutRoutes() {
   return (
     <React.Fragment>
       <Routes>
+        <Route path="/member/favorite" element={<Member />} />
+        <Route path="/member" element={<Member />} />
         <Route path="/shopping-cart/checkout" element={<Checkout />} />
         <Route path="/shopping-cart" element={<ShoppingCart />} />
         <Route path="/news" element={<News />} />

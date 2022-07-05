@@ -8,11 +8,13 @@ import Tab from 'react-bootstrap/Tab';
 import Collapse from '@mui/material/Collapse';
 import { FaUser } from 'react-icons/fa';
 import Profile from '../components/Member/Profile';
+import OrderList from '../components/Member/OrderList';
 import FavoriteProduct from '../components/Member/FavoriteProduct';
 import FavoriteCourse from '../components/Member/FavoriteCourse';
 import FavoriteActivity from '../components/Member/FavoriteActivity';
 import { useLogin } from '../utils/useLogin';
 import { IMAGE_URL } from '../utils/config';
+import { useLocation } from 'react-router';
 
 function Member() {
   const [active, setActive] = useState('first');
@@ -20,10 +22,18 @@ function Member() {
   const [open, setOpen] = React.useState(false);
   const { userData, setUserData, setIsLogin } = useLogin();
   const { name, email, phone, photo } = userData;
+  const location = useLocation();
 
   const handleClick = () => {
     setOpen(!open);
   };
+  useEffect(() => {
+    if (location.pathname.includes('favorite')) {
+      setActive('product');
+      return;
+    }
+    setActive('first');
+  }, [location]);
   useEffect(() => {
     if (active === 'first') {
       setTitle('帳戶資訊');
@@ -55,10 +65,11 @@ function Member() {
             setActive(e);
           }}
         >
-          <Row className="justify-content-center">
-            <Col sm={9}>
+          <Row className="gap-5 justify-content-center">
+            <Col sm={2}>
               <h3 className="my-5 text-primary">{title}</h3>
             </Col>
+            <Col sm={7}></Col>
           </Row>
           <Row className="gap-5 justify-content-center">
             <Col sm={2} className="text-center me-3">
@@ -120,7 +131,7 @@ function Member() {
                   />
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
-                  <div>歷史訂單</div>
+                  <OrderList />
                 </Tab.Pane>
                 <Tab.Pane eventKey="product">
                   <FavoriteProduct userData={userData} />

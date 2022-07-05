@@ -42,7 +42,7 @@ function GoralBikeNavbar() {
             email: '',
           });
           setIsLogin(false);
-          history('/');
+          history('/homepage');
         }
       }
     });
@@ -55,6 +55,11 @@ function GoralBikeNavbar() {
   const goMember = (e) => {
     e.preventDefault();
     history('/member');
+  };
+
+  const goFavorite = (e) => {
+    e.preventDefault();
+    history('/member/favorite');
   };
 
   return (
@@ -113,7 +118,7 @@ function GoralBikeNavbar() {
                     </a>
                   </li>
                   <li className="col-2 text-center">
-                    <a className="text-muted" href="#/">
+                    <a className="text-muted" href="#/" onClick={goFavorite}>
                       <BsHeart />
                     </a>
                   </li>
