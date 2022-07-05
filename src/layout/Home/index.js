@@ -52,13 +52,15 @@ export default function Index() {
         // 需要等待資料pending，不然useState會是空值
         const getDataValue = await DataAPI();
         const getNewsValue = await axios.get(`${API_URL}/news`);
-        const getProductValue = await axios.get(`${API_URL}/product`);
+        const getProductValue = await axios.get(
+          `${API_URL}/product/productHomepage`
+        );
         const getActivityValue = await axios.get(`${API_URL}/activity`);
         const getCourseValue = await axios.get(`${API_URL}/course`);
 
         setApi(getDataValue);
         setNews(getNewsValue.data.newsResults);
-        setProduct(getProductValue.data.data);
+        setProduct(getProductValue.data);
         setActivity(getActivityValue.data.activityFullDtaa);
         setCourse(getCourseValue.data.classFullDtaa);
       } catch (e) {
@@ -67,6 +69,10 @@ export default function Index() {
     };
     getIndexData();
   }, []);
+
+  useEffect(() => {
+    console.log(product);
+  }, [product]);
 
   return (
     <>
@@ -197,7 +203,7 @@ export default function Index() {
               {product.map((value) => {
                 return (
                   <section
-                    key={value.product_id}
+                    key={value.product_name}
                     className="w-100 row d-flex justify-content-center align-items-center m-md-auto m-0 p-0"
                   >
                     <article
@@ -205,10 +211,7 @@ export default function Index() {
                       style={{ textAlign: 'justify' }}
                     >
                       <h2>{value.product_name}</h2>
-                      <p className="mt-4 fs-6">
-                        鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano
-                        Deore 1x10零組件搭配，Suntour避震前叉。
-                      </p>
+                      <p className="mt-4 fs-6">{value.product_description}</p>
                       <Link to={`/product/detail/${value.product_id}`}>
                         <p className="text-danger fw-bold">查看更多</p>
                       </Link>
