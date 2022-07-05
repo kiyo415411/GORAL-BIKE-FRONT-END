@@ -4,7 +4,6 @@ import { useFrame } from '@react-three/fiber';
 import { useSnapshot } from 'valtio';
 import * as THREE from 'three';
 export default function BikeModel({ ...props }) {
-  console.log({ ...props });
   const group = useRef();
   const frontWheel = useRef();
   const backWheel = useRef();

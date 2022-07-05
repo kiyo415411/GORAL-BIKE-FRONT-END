@@ -1,10 +1,10 @@
 import { Canvas } from '@react-three/fiber';
-import React, { useRef, useState, Suspense } from 'react';
+import React, { useRef, useState, Suspense, useEffect } from 'react';
 import BikeModel from './OBJ/Bike';
 import { HexColorPicker } from 'react-colorful';
 import { proxy, useSnapshot } from 'valtio';
 import { Link } from 'react-router-dom';
-
+import CustomizeForm from './CustomizeForm';
 import { Ground } from './Ground';
 import { FloatingGrid } from './FloatingGrid';
 import {
@@ -66,6 +66,10 @@ function Picker() {
 }
 
 function BikeShow() {
+  useEffect(() => {
+    console.log('state123:', state.items);
+  }, [state.items]);
+
   return (
     <>
       <OrbitControls target={[0, 0.35, 0]} maxPolarAngle={1.45} />
@@ -108,19 +112,19 @@ export default function Custom() {
     <Suspense fallback={null}>
       <Picker />
 
-      <div className="vh-100 bg-black row justify-content-end p-0 m-0">
-        {/* <button className="btn btn-dark text-muted w-5 m-3" onClick={() => {}}>
-          清空
-        </button> */}
-        <Link
-          to="/homepage"
-          className="fixed-top ms-auto btn btn-black text-muted w-5 m-3"
-          onClick={() => {
-            document.body.style.cursor = '';
-          }}
-        >
-          返回首頁
-        </Link>
+      <div className="vh-100 bg-black  p-0 m-0">
+        <section className="fixed-top row justify-content-end">
+          <CustomizeForm state={state} />
+          <Link
+            to="/homepage"
+            className="btn btn-black text-muted w-5 m-3"
+            onClick={() => {
+              document.body.style.cursor = '';
+            }}
+          >
+            返回首頁
+          </Link>
+        </section>
 
         <Canvas>
           <Stars
