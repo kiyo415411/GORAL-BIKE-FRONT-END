@@ -24,7 +24,6 @@ function BikeCardSmall(props) {
               className="img-fluid rounded-start"
               alt="..."
             />
-            {console.log(props.img)}
           </div>
           <div className="m-auto">
             <div

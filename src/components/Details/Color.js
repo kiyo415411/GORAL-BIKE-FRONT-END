@@ -1,13 +1,13 @@
 import { useState } from 'react';
 function ColorPalette(props) {
-  const [background, setBackground] = useState('#071415');
+  const [background, setBackground] = useState('#fff');
   // const [current, setCurrent] = useState(null);props.currentColor
   return (
     <div>
       <div className="App p-1" style={{ background: background }}>
         <div className="container row p-0 justify-content-center m-0">
           {props.color.map((v, index) => {
-            const color = v.color_value;
+            const color = v;
 
             return (
               <div
@@ -36,26 +36,14 @@ function ColorPalette(props) {
                     e.target.style.margin = '4px';
                   }}
                   onClick={() => {
-                    setBackground(color);
-                    props.setCurrentColor(v.color_name);
+                    props.setCurrentColor(props.colorName[index]);
+                    console.log(props.colorName[index]);
                   }}
                 />
               </div>
             );
           })}
         </div>
-      </div>
-      <div className="d-flex justify-content-between mt-3">
-        <div></div>
-        <button
-          className="btn btn-warning"
-          onClick={() => {
-            props.setCurrentColor();
-            setBackground('#071415');
-          }}
-        >
-          Reset Colour
-        </button>
       </div>
     </div>
   );

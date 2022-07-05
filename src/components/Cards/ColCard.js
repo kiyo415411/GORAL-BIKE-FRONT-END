@@ -1,10 +1,9 @@
-import { useState } from 'react';
-import Like from '../Aside/Like';
 import { Link } from 'react-router-dom';
+import { BsHeartFill, BsHeart } from 'react-icons/bs';
+import Checkbox from '@mui/material/Checkbox';
 
 // 排版
 export default function ColCard({
-  width,
   courseId,
   image,
   title,
@@ -18,13 +17,9 @@ export default function ColCard({
   venue,
   datailLink,
 }) {
-  const [liked, setLiked] = useState(false);
   return (
-    <div
-      className="card shadow rounded-0 border-0 mb-5 mx-2"
-      style={{ width: width + 'rem' }}
-    >
-      <div className="col-card-img-box overflow-hidden">
+    <div className="col-card card shadow rounded-0 border-0 mb-3 animate__animated animate__fadeIn col-12">
+      <div className="col-card-img-box overflow-hidden ">
         <Link to={datailLink}>
           <img
             src={image}
@@ -33,17 +28,26 @@ export default function ColCard({
           />
         </Link>
       </div>
-      <div className="card-body d-grid gap-2 px-4">
-        <div className="d-flex justify-content-between align-items-center">
+      <div className="card-body d-grid px-4">
+        <div className="d-flex justify-content-between align-items-center mb-1">
           <Link to={datailLink}>
-            <h3 className="card-title m-0">{title}</h3>
+            <h5 className="card-title m-0 me-2">{title}</h5>
           </Link>
-          <div className="text-highlight">
-            <Like liked={liked} setLiked={setLiked} />
-          </div>
+
+          <Checkbox
+            icon={<BsHeart />}
+            checkedIcon={<BsHeartFill />}
+            size="large"
+            sx={{
+              color: 'var(--bs-highlight)',
+              '&.Mui-checked': {
+                color: 'var(--bs-highlight)',
+              },
+            }}
+          />
         </div>
 
-        <div className="d-flex gap-2 align-items-center">
+        <div className="align-items-center d-none d-lg-flex gap-2 mb-2">
           {/* ------------------------ 難度 */}
           {category === '入門' ? (
             <p className="bg-badge-lightblue badge rounded-pill px-3 fw-light m-0">
@@ -100,17 +104,19 @@ export default function ColCard({
           {/* 價格 */}
           <p className="m-0">$ {price}</p>
         </div>
-        {/* 人數 */}
-        <p className="badge text-dark m-0 text-start p-0">
-          剩餘報名人數 : {count}
-        </p>
-        <p className="m-0 text-primary">活動簡介 ：</p>
-        <p className="col-card-text card-text text-content">{text}</p>
-        {/* 購買按鈕 */}
-        <div className="d-flex align-items-center justify-content-end">
+        <div className="d-none d-lg-block">
+          {/* 人數 */}
+          <p className="badge text-dark m-0 text-start p-0">
+            參加名額 : {count}
+          </p>
+          <p className="m-0 text-primary">活動簡介 ：</p>
+          <p className="col-card-text card-text text-content col-12">{text}</p>
+        </div>
+        {/* --------------------------------------------------更多詳情 btn */}
+        <div className="d-flex align-items-center justify-content-end mt-2">
           <Link to={datailLink}>
-            <p className="text-nowrap m-0 btn fs-6 border-2 px-4 py-1 rounded-0 btn-outline-primary rounded-pill">
-              課程詳情
+            <p className="card-btn text-nowrap btn btn-outline-primary border-2 rounded-pill m-0 fs-6">
+              更多詳情
             </p>
           </Link>
         </div>

@@ -7,6 +7,7 @@ import { API_URL } from '../../utils/config';
 import axios from 'axios';
 import BikePaddy from './BikePaddy';
 import TopSort from './TopSort.js';
+import NoData from './NoData.js';
 
 function ProductPage() {
   const mostExpensive = 500000;
@@ -134,6 +135,7 @@ function ProductPage() {
     const getBikes = async () => {
       const response = await axios.get(API_URL + '/product');
       setData(response.data.data);
+      console.log('DATA DATA', data);
     };
     getBikes();
   }, []);
@@ -208,20 +210,24 @@ function ProductPage() {
             />
           </h4>
         </div>
-        {bikeList === 1 ? (
-          <BikeList
-            data={data}
-            page={page}
-            setPage={setPage}
-            lastPage={lastPage}
-          />
+        {data.length !== 0 ? (
+          bikeList === 1 ? (
+            <BikeList
+              data={data}
+              page={page}
+              setPage={setPage}
+              lastPage={lastPage}
+            />
+          ) : (
+            <BikePaddy
+              data={data}
+              page={page}
+              setPage={setPage}
+              lastPage={lastPage}
+            />
+          )
         ) : (
-          <BikePaddy
-            data={data}
-            page={page}
-            setPage={setPage}
-            lastPage={lastPage}
-          />
+          <NoData />
         )}
       </div>
     </div>

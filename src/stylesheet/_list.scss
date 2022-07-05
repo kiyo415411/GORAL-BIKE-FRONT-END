@@ -1,0 +1,131 @@
+.btn-check:focus + .btn,
+.btn:focus {
+  box-shadow: none;
+}
+
+.dropdown-item {
+  color: var(--bs-content);
+  &:active {
+    background: var(--bs-line);
+
+    color: white;
+  }
+}
+
+// ----------------------------- TopSort
+.list-title {
+  letter-spacing: 0.3rem;
+}
+.list-title-line {
+  width: 5rem;
+}
+
+.rwd-aside-scrollbar {
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0.4rem;
+  }
+}
+
+// ------------------------------------- ColCard
+.col-card {
+  @include media-breakpoint-up(sm) {
+    width: 15rem;
+  }
+  @include media-breakpoint-up(md) {
+    width: 13.5rem;
+  }
+  @include media-breakpoint-up(lg) {
+    width: 18.5rem;
+  }
+  @include media-breakpoint-up(xl) {
+    width: 16rem;
+  }
+  @include media-breakpoint-up(xxl) {
+    width: 19rem;
+  }
+}
+
+.col-card-img-box {
+  height: 8rem;
+  @include media-breakpoint-up(sm) {
+    height: 10rem;
+  }
+  @include media-breakpoint-up(lg) {
+    height: 10rem;
+  }
+}
+
+.col-card-text {
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  height: 45px;
+}
+
+.card-btn {
+  padding: 0 1rem;
+}
+
+.col-card-news-text {
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  height: 120px;
+}
+
+.col-card-homepage-news-text {
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  height: 120px;
+}
+
+// ---------------------------- RowCard
+
+.row-card-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  height: 45px;
+}
+
+.row-card-img-box {
+  height: 18rem;
+}
+
+.card {
+  box-shadow: 0 13px 27px -5px hsla(240, 30.1%, 28%, 0.25), 0 8px 16px -8px hsla(0, 0%, 0%, 0.3),
+    0 -6px 16px -6px hsla(0, 0%, 0%, 0.03);
+  transition: all ease 200ms;
+}
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 13px 40px -5px hsla(240, 30.1%, 28%, 0.12), 0 8px 32px -8px hsla(0, 0%, 0%, 0.14),
+    0 -6px 32px -6px hsla(0, 0%, 0%, 0.02);
+}
+
+.aside-a:hover:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  background: #2098d1;
+  height: 4px;
+  -webkit-transition-property: right;
+  transition-property: right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
