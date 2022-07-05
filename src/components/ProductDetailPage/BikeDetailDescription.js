@@ -9,7 +9,7 @@ import { API_URL } from '../../utils/config.js';
 // IMG PROBLEM ADFASDFASFL
 // $COLOR INSTEAD OF IMG NAME $COLOR
 function BikeDetailDescription(props) {
-  const [liked, setLiked] = useState([false]);
+  const [liked, setLiked] = useState(false);
   const [colored, setColored] = useState([]);
   const [colorName, setColorName] = useState([]);
   useEffect(() => {

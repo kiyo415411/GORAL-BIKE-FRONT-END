@@ -1,5 +1,13 @@
 import BikeCardSmall from './BikeCardSmall';
 import { useEffect, useState } from 'react';
+// core version + navigation, pagination modules:
+import { Swiper, SwiperSlide } from 'swiper/react';
+// import Swiper and modules styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+// init Swiper:
 function BikeScrolling(props) {
   const [bikes, setBikes] = useState(props.bikes);
   useEffect(() => {

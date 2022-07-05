@@ -3,11 +3,12 @@ import { BiGridSmall } from 'react-icons/bi';
 import BikeList from './BikeList.js';
 import ProductAside from './ProductAside.js';
 import { useState, useEffect } from 'react';
-import { API_URL } from '../../utils/config';
+import { API_URL, IMAGE_URL } from '../../utils/config';
 import axios from 'axios';
 import BikePaddy from './BikePaddy';
 import TopSort from './TopSort.js';
 import NoData from './NoData.js';
+import zIndex from '@mui/material/styles/zIndex.js';
 
 function ProductPage() {
   const mostExpensive = 500000;
@@ -160,75 +161,94 @@ function ProductPage() {
   }, [handleSubmit]);
 
   return (
-    <div className="container-fluid row my-5 justify-content-between">
-      <div className="col-2 mt-2">
-        <div
-          className="ms-2 sticky-sm-top shadow d-flex justify-content-center p-2"
-          style={{ width: '324px', height: '90vh' }}
-        >
-          <ProductAside
-            price={price}
-            setPrice={setPrice}
-            currentColor={currentColor}
-            brand={brand}
-            setBrand={setBrand}
-            setCurrentCategory={setCurrentCategory}
-            setCurrentBrand={setCurrentBrand}
-            setCurrentColor={setCurrentColor}
-            setCurrentSearch={setCurrentSearch}
-            color={colored}
-            category={category}
-          />
+    <div className="animate__animated animate__fadeIn">
+      <div className="position-relative top-banner text-white overflow-hidden rounded-0 d-none d-lg-block">
+        <img
+          src={`${IMAGE_URL}/bikes/hero.png`}
+          alt=""
+          style={{ width: '100%', height: '100%' }}
+        />
+        <div className="card-img-overlay row align-items-center m-0 p-0">
+          <div class="col-1"></div>
+          <h1
+            className="top-banner-title card-title fw-bolder col-4 text-center text-white position-absolute"
+            style={{ zIndex: '1' }}
+          >
+            登山車全車系
+          </h1>
+          <div class="bg-black w-100 h-100 position-absolute opacity-25"></div>
         </div>
       </div>
-      <div className="mx-5 col-9">
-        <div className="d-flex justify-content-between">
-          <div>
-            <BsListUl
-              size={30}
-              color={bikeList === 1 ? 'FF7E55' : ''}
-              onClick={() => {
-                setBikeList(1);
-              }}
-              style={{ cursor: 'pointer' }}
-            />
-            <BiGridSmall
-              color={bikeList === 0 ? 'FF7E55' : ''}
-              size={50}
-              onClick={() => {
-                setBikeList(0);
-              }}
-              style={{ cursor: 'pointer' }}
+      <div className="container-fluid row my-5 justify-content-between">
+        <div className="col-2 mt-2">
+          <div
+            className="ms-2 sticky-sm-top shadow d-flex justify-content-center p-2"
+            style={{ width: '324px', height: '90vh' }}
+          >
+            <ProductAside
+              price={price}
+              setPrice={setPrice}
+              currentColor={currentColor}
+              brand={brand}
+              setBrand={setBrand}
+              setCurrentCategory={setCurrentCategory}
+              setCurrentBrand={setCurrentBrand}
+              setCurrentColor={setCurrentColor}
+              setCurrentSearch={setCurrentSearch}
+              color={colored}
+              category={category}
             />
           </div>
-          <h4 className="text-hightlight w-25 text-nowrap">
-            <TopSort
-              cardStyle={cardStyle}
-              setCardStyle={setCardStyle}
-              sortMethod={sortMethod}
-              setSortMethod={setSortMethod}
-            />
-          </h4>
         </div>
-        {data.length !== 0 ? (
-          bikeList === 1 ? (
-            <BikeList
-              data={data}
-              page={page}
-              setPage={setPage}
-              lastPage={lastPage}
-            />
+        <div className="mx-5 col-9">
+          <div className="d-flex justify-content-between">
+            <div>
+              <BsListUl
+                size={30}
+                color={bikeList === 1 ? 'FF7E55' : ''}
+                onClick={() => {
+                  setBikeList(1);
+                }}
+                style={{ cursor: 'pointer' }}
+              />
+              <BiGridSmall
+                color={bikeList === 0 ? 'FF7E55' : ''}
+                size={50}
+                onClick={() => {
+                  setBikeList(0);
+                }}
+                style={{ cursor: 'pointer' }}
+              />
+            </div>
+            <h4 className="text-hightlight w-25 text-nowrap">
+              <TopSort
+                cardStyle={cardStyle}
+                setCardStyle={setCardStyle}
+                sortMethod={sortMethod}
+                setSortMethod={setSortMethod}
+              />
+            </h4>
+          </div>
+          {data.length !== 0 ? (
+            bikeList === 1 ? (
+              <BikeList
+                data={data}
+                page={page}
+                setPage={setPage}
+                lastPage={lastPage}
+              />
+            ) : (
+              <BikePaddy
+                data={data}
+                page={page}
+                setPage={setPage}
+                lastPage={lastPage}
+              />
+            )
           ) : (
-            <BikePaddy
-              data={data}
-              page={page}
-              setPage={setPage}
-              lastPage={lastPage}
-            />
-          )
-        ) : (
-          <NoData />
-        )}
+            <NoData />
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Like from './Like.js';
+import Like from '../Aside/Like.js';
 import { Link } from 'react-router-dom';
 import { IMAGE_URL } from '../../utils/config.js';
 import DecimalStar from './DecimalStar.js';
