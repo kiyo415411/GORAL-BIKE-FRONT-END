@@ -5,6 +5,7 @@ import axios from 'axios';
 import { API_URL, IMAGE_URL } from '../../utils/config';
 import DataAPI from '../../components/DataAPI';
 import { BsSquareFill } from 'react-icons/bs';
+
 // slick css
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -55,13 +56,15 @@ export default function Index() {
         const getProductValue = await axios.get(
           `${API_URL}/product/productHomepage`
         );
-        const getActivityValue = await axios.get(`${API_URL}/activity`);
+        const getActivityValue = await axios.get(
+          `${API_URL}/activity/activityHomepage`
+        );
         const getCourseValue = await axios.get(`${API_URL}/course`);
 
         setApi(getDataValue);
         setNews(getNewsValue.data.newsResults);
         setProduct(getProductValue.data);
-        setActivity(getActivityValue.data.activityFullDtaa);
+        setActivity(getActivityValue.data);
         setCourse(getCourseValue.data.classFullDtaa);
       } catch (e) {
         throw new Error(e);
@@ -71,8 +74,8 @@ export default function Index() {
   }, []);
 
   useEffect(() => {
-    console.log(product);
-  }, [product]);
+    console.log(activity);
+  }, [activity]);
 
   return (
     <>
@@ -84,7 +87,6 @@ export default function Index() {
             style={{ height: '804px' }}
           >
             <video src={VIDEO} autoPlay={true} loop={true} muted></video>
-
             <article
               className={
                 rwd
@@ -203,7 +205,7 @@ export default function Index() {
               {product.map((value) => {
                 return (
                   <section
-                    key={value.product_name}
+                    key={value.product_id}
                     className="w-100 row d-flex justify-content-center align-items-center m-md-auto m-0 p-0"
                   >
                     <article
@@ -422,7 +424,10 @@ export default function Index() {
           </section>
 
           {/* ACTIVTY */}
-          <section className="bg-light py-5 activity">
+          <section
+            className="bg-light py-5 activity"
+            style={{ height: '768px' }}
+          >
             <h1 className=" display-6 fw-bolder text-center my-5">
               2022年 <br />
               你絕不能錯過的登山車活動
@@ -437,14 +442,9 @@ export default function Index() {
               grabCursor={true}
               centeredSlides={true}
               spaceBetween={20}
-              scrollbar={{
-                draggable: true,
-                hide: false,
-                snapOnRelease: true,
-              }}
               loop={true}
               mousewheel={true}
-              modules={[Autoplay, Scrollbar, Mousewheel]}
+              modules={[Autoplay, Mousewheel]}
             >
               {activity.map((value, index) => {
                 return (
