@@ -9,6 +9,11 @@ function BikeDetailCard(props) {
   const [partsIMG, setPartsIMG] = useState([]);
   const [bike, setBike] = useState([]);
   const [productCheck, setProductCheck] = useState([]);
+  const [BikeIMG] = useState('');
+  const [BikeStart] = useState([]);
+  const [bikeImages, setBikeImages] = useState('');
+  const [currentColor, setCurrentColor] = useState('');
+  const [downDesc, setDownDesc] = useState([]);
   useEffect(() => {
     const getPage = async () => {
       const response = await axios.get(API_URL + '/product/product_id', {
@@ -18,6 +23,10 @@ function BikeDetailCard(props) {
       });
 
       setBike(response.data.data);
+      setBikeImages(response.data.data[0].product_images);
+      setDownDesc(
+        response.data.data[0].product_detail_description.split('&break')
+      );
     };
     getPage();
   }, [props.product_id]);
@@ -70,31 +79,25 @@ function BikeDetailCard(props) {
         <div className="">
           <img
             height="538"
-            src={`${IMAGE_URL}/bikes/${bike[0].product_images}`}
+            src={`${IMAGE_URL}/bikes/${BikeIMG}${
+              currentColor ? '$' : ''
+            }${currentColor}.${BikeStart}`}
             alt=""
           />
-          <div height="175.71" className="d-flex justify-content-start">
-            <img
-              height="175.71"
-              className="overflow-auto mx-4"
-              src={`${IMAGE_URL}/bikes/${bike[0].product_images}`}
-              alt=""
-            />
-            <img
-              height="175.71"
-              className="overflow-auto mx-4"
-              src={`${IMAGE_URL}/bikes/${bike[0].product_images}`}
-              alt=""
-            />
-          </div>
         </div>
         <div>
-          <BikeDetailDescription className="mx-5 w-75" bike={bike} />
+          <BikeDetailDescription
+            className="mx-5 w-75"
+            bike={bike}
+            product_id={props.product_id}
+            currentColor={currentColor}
+            setCurrentColor={setCurrentColor}
+          />
         </div>
       </div>
       <div className="mt-5">
         <div>
-          {DownDesc.map((v, i) => {
+          {downDesc.map((v, i) => {
             return (
               <p key={i} className="text-content">
                 {v}
