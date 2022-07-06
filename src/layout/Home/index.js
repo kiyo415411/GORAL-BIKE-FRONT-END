@@ -191,11 +191,13 @@ export default function Index() {
 
           {/* PRODUCT */}
           <section className="py-5 my-5">
-            {/* <h1 className="w-60 mx-auto mt-4">熱門商品</h1> */}
+            <h1 className="border-5 border-start border-secondary my-3 mx-3 mx-md-auto w-70">
+              　熱賣商品
+            </h1>
             <Slider
               asNavFor={secondSwiper}
               ref={(slider1) => setFirstSwiper(slider1)}
-              className="mx-5 px-5 center"
+              className="mx-2 px-1 mx-md-5 px-md-5 "
             >
               {product.map((value) => {
                 return (
