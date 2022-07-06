@@ -5,6 +5,7 @@ import axios from 'axios';
 import { API_URL, IMAGE_URL } from '../../utils/config';
 import DataAPI from '../../components/DataAPI';
 import { BsSquareFill } from 'react-icons/bs';
+
 // slick css
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -55,14 +56,18 @@ export default function Index() {
         // 需要等待資料pending，不然useState會是空值
         const getDataValue = await DataAPI();
         const getNewsValue = await axios.get(`${API_URL}/news`);
-        const getProductValue = await axios.get(`${API_URL}/product`);
-        const getActivityValue = await axios.get(`${API_URL}/activity`);
+        const getProductValue = await axios.get(
+          `${API_URL}/product/productHomepage`
+        );
+        const getActivityValue = await axios.get(
+          `${API_URL}/activity/activityHomepage`
+        );
         const getCourseValue = await axios.get(`${API_URL}/course`);
 
         setApi(getDataValue);
         setNews(getNewsValue.data.newsResults);
-        setProduct(getProductValue.data.data);
-        setActivity(getActivityValue.data.activityFullDtaa);
+        setProduct(getProductValue.data);
+        setActivity(getActivityValue.data);
         setCourse(getCourseValue.data.classFullDtaa);
       } catch (e) {
         throw new Error(e);
@@ -73,6 +78,10 @@ export default function Index() {
       setIsLoading(false);
     }, 7500);
   }, []);
+
+  useEffect(() => {
+    console.log(activity);
+  }, [activity]);
 
   return (
     <>

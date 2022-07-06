@@ -11,23 +11,37 @@ import { useLogin } from '../../utils/useLogin';
 import swal from 'sweetalert';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
-
+// IMG PROBLEM ADFASDFASFL
+// $COLOR INSTEAD OF IMG NAME $COLOR
 function BikeDetailDescription(props) {
   // const [liked, setLiked] = useState([false]);
-  const [color] = useState([
-    { color_value: '#32CE13' },
-    { color_value: '#E0CF05' },
-    { color_value: '#D3484F' },
-    { color_value: '#6F6669' },
-  ]);
+  const [colored, setColored] = useState([]);
+  const [colorName, setColorName] = useState([]);
+  useEffect(() => {
+    const getColor = async () => {
+      const response = await axios.get(
+        API_URL + '/product/product_color_picker',
+        {
+          params: {
+            product_id: props.product_id,
+          },
+        }
+      );
+      setColorName(response.data.color_name.split(','));
+      setColored(response.data.hex_value.split(','));
+    };
+    getColor();
+  }, []);
+  useEffect(() => {
+    // console.log(colorName);
+  }, [colorName]);
+
   function separator(num) {
     let str = num.toString().split('.');
     str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return str.join('.');
   }
   const [price] = useState(separator(props.bike[0].product_price));
-  const [currentColor, setCurrentColor] = useState();
-  console.log('bikedsfsdfsdfdss ', props.bike);
 
   // -------------------------- favorite's tool
   const { userData } = useLogin();
@@ -91,13 +105,20 @@ function BikeDetailDescription(props) {
         <Description desc="腳踏車改變了我的命運。腳踏車，發生了會如何，不發生又會如何。如果此時我們選擇忽略腳踏車，那後果可想而知。" />
         <hr />
         <Price price={`${price}`} />
-        <hr />
-        <p className="md-5">顏色</p>
-        <Color
-          color={color}
-          currentColor={currentColor}
-          setCurrentColor={setCurrentColor}
-        />
+        {colorName.length !== 0 ? (
+          <>
+            <hr />
+            <p className="md-5">顏色</p>
+            <Color
+              color={colored}
+              colorName={colorName}
+              currentColor={props.currentColor}
+              setCurrentColor={props.setCurrentColor}
+            />
+          </>
+        ) : (
+          ''
+        )}
         <hr />
         <div>
           <button className="btn border border-primary rounded-0 me-2">

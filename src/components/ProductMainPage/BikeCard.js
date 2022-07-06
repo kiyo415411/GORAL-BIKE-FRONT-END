@@ -17,7 +17,6 @@ function BikeCard(props) {
   const [for5] = useState([1, 2, 3, 4, 5]);
   // const [liked, setLiked] = useState(false);
   const starPercentage = (props.rating / 5) * 100;
-  const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
 
   // ---------------------------- favorite's data
   const { userData } = useLogin();
