@@ -18,7 +18,6 @@ function Like(props) {
       size={props.width}
       onClick={(e) => {
         props.setLiked(!props.liked);
-        console.log(e.target.viewBox.animVal.width);
         e.target.viewBox.baseVal.width = `100px`;
         e.target.viewBox.baseVal.height = `100px`;
         //useless code but leads somewhere

@@ -123,7 +123,7 @@ function ProductPage() {
   }, [handleSubmit, favoriteActive, userData.userId]);
 
   return (
-    <div className="container-fluid row my-5">
+    <div className="container-fluid row my-5 animate__animated animate__fadeIn">
       <div className="col-2 mt-2">
         <div
           className="ms-2 sticky-sm-top shadow d-flex justify-content-center p-2"
