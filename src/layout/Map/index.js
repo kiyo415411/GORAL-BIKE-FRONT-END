@@ -61,7 +61,9 @@ export default function Index() {
         setDataApi(getData);
         // 設定篩選資料
         setFilterDataApi(getData);
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2500);
       } catch (e) {
         throw new Error(e);
       }

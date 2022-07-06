@@ -12,6 +12,7 @@ import OrderList from '../components/Member/OrderList';
 import FavoriteProduct from '../components/Member/FavoriteProduct';
 import FavoriteCourse from '../components/Member/FavoriteCourse';
 import FavoriteActivity from '../components/Member/FavoriteActivity';
+import Coupon from '../components/Member/Coupon';
 import { useLogin } from '../utils/useLogin';
 import { IMAGE_URL } from '../utils/config';
 import { useLocation } from 'react-router';
@@ -143,7 +144,7 @@ function Member() {
                   <FavoriteActivity userData={userData} />
                 </Tab.Pane>
                 <Tab.Pane eventKey="fourth">
-                  <div>優惠卷</div>
+                  <Coupon userData={userData} />
                 </Tab.Pane>
               </Tab.Content>
             </Col>

@@ -49,7 +49,6 @@ export default function Index() {
   const [isLoading, setIsLoading] = useState(true); //讀取畫面
 
   useEffect(() => {
-    setIsLoading(true);
     const getIndexData = async () => {
       try {
         // 需要等待資料pending，不然useState會是空值
@@ -68,15 +67,14 @@ export default function Index() {
         setProduct(getProductValue.data);
         setActivity(getActivityValue.data);
         setCourse(getCourseValue.data.classFullDtaa);
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 3000);
       } catch (e) {
         throw new Error(e);
       }
     };
     getIndexData();
-    // setTimeout(() => {
-    //   setIsLoading(false);
-    // }, 2500);
   }, []);
 
   return (
