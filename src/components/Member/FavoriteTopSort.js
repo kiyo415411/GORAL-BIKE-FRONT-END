@@ -2,7 +2,7 @@ import { FaThLarge, FaThList, FaFilter } from 'react-icons/fa';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useState, useContext } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import CategoryList from './Aside/CategoryList';
+import CategoryList from '../Aside/CategoryList';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import Paper from '@mui/material/Paper';
@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import { FiSearch } from 'react-icons/fi';
 import { BsCalendar3 } from 'react-icons/bs';
 
-export default function TopSort(props) {
+export default function FavoriteTopSort(props) {
   const Data = useContext(props.contextValue);
   const [show, setShow] = useState(false);
 
@@ -88,52 +88,15 @@ export default function TopSort(props) {
           </a>
         </li>
       </ul>
-      {/* ------------------------------------排序 */}
-      <div className="mb-2 d-none d-xl-block">
-        <Dropdown>
-          <Dropdown.Toggle
-            variant="white"
-            id="dropdown-basic"
-            className="link-highlight"
-          >
-            排序
-          </Dropdown.Toggle>
 
-          <Dropdown.Menu>
-            <Dropdown.Item
-              onClick={() => {
-                props.setSortMethod('newSort');
-              }}
-            >
-              最新上架優先
-            </Dropdown.Item>
-            <Dropdown.Item
-              onClick={() => {
-                props.setSortMethod('hotSort');
-              }}
-            >
-              人數由多至少
-            </Dropdown.Item>
-            <Dropdown.Item
-              onClick={() => {
-                props.setSortMethod('cheapSort');
-              }}
-            >
-              價錢由低至高
-            </Dropdown.Item>
-            <Dropdown.Item
-              onClick={() => {
-                props.setSortMethod('expensiveSort');
-              }}
-            >
-              價錢由高至低
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </div>
-      <div className="mb-2 d-block d-xl-none link-content">
-        <FaFilter onClick={handleShow} />
-        <Offcanvas show={show} onHide={handleClose} style={{ width: '20rem' }}>
+      <div className="link-highlight">
+        <FaFilter onClick={handleShow} style={{ cursor: 'pointer' }} />
+        <Offcanvas
+          show={show}
+          onHide={handleClose}
+          style={{ width: '24rem' }}
+          placement="end"
+        >
           <div className="rwd-aside-scrollbar">
             <Offcanvas.Body className="pt-4">
               <div className="d-flex align-items-start">

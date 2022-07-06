@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
 import Checkbox from '@mui/material/Checkbox';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { API_URL } from '../../utils/config';
+import { useLogin } from '../../utils/useLogin';
+import swal from 'sweetalert';
 
 // 排版
 export default function ColCard({
@@ -16,7 +21,42 @@ export default function ColCard({
   category,
   venue,
   datailLink,
+  like,
+  favoriteActive,
+  setFavoriteActive,
+  favoriteMethod,
 }) {
+  const { userData } = useLogin();
+  const [favorite, setFavorite] = useState({
+    userId: userData.userId,
+    courseId: '',
+    favoriteMethod: favoriteMethod,
+  });
+
+  // console.log(userId);
+  function handleClick(e) {
+    console.log(e.target.value);
+    if (favorite.userId !== '') {
+      setFavorite({ ...favorite, courseId: e.target.value });
+    } else {
+      swal('收藏失敗', '登入會員才能進行個人收藏。', 'warning');
+    }
+  }
+
+  useEffect(() => {
+    let postFavorite = async () => {
+      try {
+        await axios.post(`${API_URL}/member/favorite/update`, favorite);
+      } catch (e) {
+        console.error(e);
+      }
+      setFavoriteActive(!favoriteActive);
+    };
+    postFavorite();
+
+    // console.log('postFavorite');
+  }, [favorite]);
+
   return (
     <div className="col-card card shadow rounded-0 border-0 mb-3 animate__animated animate__fadeIn col-12">
       <div className="col-card-img-box overflow-hidden ">
@@ -44,6 +84,9 @@ export default function ColCard({
                 color: 'var(--bs-highlight)',
               },
             }}
+            value={courseId}
+            checked={like !== null && like !== undefined}
+            onClick={handleClick}
           />
         </div>
 

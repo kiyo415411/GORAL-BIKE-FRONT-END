@@ -4,22 +4,28 @@ import { API_URL, IMAGE_URL } from '../../utils/config';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Mousewheel, Scrollbar } from 'swiper';
 import HotCard from '../Cards/HotCard';
+import { useLogin } from '../../utils/useLogin';
 
 export default function ActivityHotSwiper() {
   const [activity, setActivity] = useState([]);
   const [width, setWidth] = useState(window.innerWidth); // 視窗寬度
-
+  const { userData } = useLogin();
+  const [favoriteActive, setFavoriteActive] = useState(true); // 收藏有變動的時候會重新渲染
   useEffect(() => {
     const getActivityData = async () => {
       try {
-        const AxiosDate = await axios.get(`${API_URL}/activity`);
-        setActivity(AxiosDate.data.activityFullDtaa);
+        const AxiosDate = await axios.get(`${API_URL}/activity`, {
+          params: {
+            userId: userData.userId,
+          },
+        });
+        setActivity(AxiosDate.data.hitData);
       } catch (e) {
         throw new Error(e);
       }
     };
     getActivityData();
-  }, []);
+  }, [favoriteActive, userData.userId]);
   // 偵測視窗寬度
   useEffect(() => {
     const updateWindowsWidth = () => {
@@ -49,6 +55,7 @@ export default function ActivityHotSwiper() {
             ? 3
             : 2
         }
+        allowTouchMove={false}
         grabCursor={true}
         spaceBetween={0}
         scrollbar={{
@@ -57,6 +64,7 @@ export default function ActivityHotSwiper() {
           snapOnRelease: true,
         }}
         loop={true}
+        s
         mousewheel={true}
         modules={[Scrollbar, Mousewheel]}
       >
@@ -64,11 +72,16 @@ export default function ActivityHotSwiper() {
           return (
             <SwiperSlide key={index} className="my-auto overflow-hidden">
               <HotCard
+                courseId={value.activity_id}
                 detailLink={`/activity/${value.activity_id}`}
                 image={`${IMAGE_URL}/activity/${value.activity_pictures}`}
                 title={value.activity_name}
                 price={value.activity_fee}
                 theme="活動"
+                favoriteMethod="activity"
+                favoriteIs={value.favorite_is}
+                favoriteActive={favoriteActive}
+                setFavoriteActive={setFavoriteActive}
               />
             </SwiperSlide>
           );

@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
+import Swal from 'sweetalert2';
 
 export default function CustomizeForm(props) {
   const [show, setShow] = useState(false);
@@ -21,6 +22,17 @@ export default function CustomizeForm(props) {
     try {
       const response = await axios.post(`${API_URL}/customize`, formData);
       console.log(response.data);
+      handleClose();
+      if (response.data.ResultsFieldCount === 0) {
+        Swal.fire({
+          title:
+            '感謝您提出客製化申請，近日內將有工作人員向您確認訂單內容，請隨時查看信箱.',
+          width: 600,
+          padding: '3em',
+          color: '#716add',
+          backdrop: `rgba(0,0,123,0.4)`,
+        });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -35,8 +47,8 @@ export default function CustomizeForm(props) {
       .string()
       .required('電話欄位不可為空.')
       .matches(phoneRegExp, '請輸入有效的電話號碼.')
-      .min(10, '電話號碼太短.')
-      .max(10, '電話號碼太長.'),
+      .min(9, '電話號碼太短.')
+      .max(9, '電話號碼太長.'),
     mark: yup.string().nullable(),
   });
 

@@ -55,7 +55,13 @@ function CustomLayout() {
 // 測試屬性 initialCartItems={products}
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-  const [userData, setUserData] = useState({ userId: '' });
+  const [userData, setUserData] = useState({
+    userId: 0,
+    email: '',
+    name: '',
+    phone: '',
+    photo: '',
+  });
   useEffect(() => {
     (async () => {
       try {
@@ -69,6 +75,9 @@ function App() {
         setUserData({
           userId: login.user_id,
           email: login.email,
+          name: login.name,
+          phone: login.phone,
+          photo: login.photo,
         });
 
         // if (!login.status) {
@@ -78,7 +87,7 @@ function App() {
         //   setCartListData([]);
         // }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     })();
   }, [isLogin]);
