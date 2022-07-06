@@ -353,7 +353,7 @@ export default function Index() {
                           </section>
                           <Link
                             className="mt-5 btn btn-primary"
-                            to={`map/mapDetail/${value['林道名稱']}`}
+                            to={`/map/mapDetail/${value['林道名稱']}`}
                           >
                             前往詳細頁面
                           </Link>
