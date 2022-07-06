@@ -31,7 +31,6 @@ import {
   EffectCoverflow,
   Mousewheel,
   EffectFade,
-  Scrollbar,
   Navigation,
   Autoplay,
 } from 'swiper';
@@ -78,10 +77,6 @@ export default function Index() {
       setIsLoading(false);
     }, 7500);
   }, []);
-
-  useEffect(() => {
-    console.log(activity);
-  }, [activity]);
 
   return (
     <>
