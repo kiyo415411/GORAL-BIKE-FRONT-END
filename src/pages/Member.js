@@ -76,7 +76,7 @@ function Member() {
 
   return (
     <>
-      <div className="container-fluid member mb-5">
+      <div className="container-fluid member mb-5 mt-nav">
         <Tab.Container
           id="left-tabs-example"
           activeKey={active}
@@ -84,14 +84,14 @@ function Member() {
             setActive(e);
           }}
         >
-          <Row className="gap-5 justify-content-center">
+          <Row className="gap-3 gap-sm-5 justify-content-center">
             <Col sm={2}>
-              <h3 className="my-5 text-primary">{title}</h3>
+              <h3 className="my-1 my-sm-5 text-primary">{title}</h3>
             </Col>
             <Col sm={7}></Col>
           </Row>
           <Row className="gap-5 justify-content-center">
-            <Col sm={2} className="text-center me-3">
+            <Col sm={2} className="text-center me-3 d-none d-sm-block">
               <div className="member-info mx-auto pb-4">
                 <div className="bg-primary text-white py-2 mb-3">
                   <FaUser />
@@ -168,8 +168,8 @@ function Member() {
                 </Nav>
               </div>
             </Col>
-            <Col sm={8}>
-              <Tab.Content className="ms-5 row justify-content-center">
+            <Col xs={12} sm={8}>
+              <Tab.Content className="ms-sm-5 row justify-content-center">
                 <Tab.Pane eventKey="first">
                   <Profile
                     userData={userData}

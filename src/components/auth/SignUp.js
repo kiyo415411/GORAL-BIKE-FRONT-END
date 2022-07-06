@@ -110,7 +110,7 @@ function SignUp(props) {
         <div className="row justify-content-center">
           <div className="col-md-12 singup p-0">
             <div className="wrap d-md-flex">
-              <div className="img"></div>
+              <div className="img d-none d-sm-block"></div>
               <div className="p-4 p-md-5 bg-white">
                 <div className="text-center">
                   <img
@@ -177,7 +177,7 @@ function SignUp(props) {
                           name="rePassword"
                         />
                       </div>
-                      <div className="py-3">
+                      <div className="d-flex py-3">
                         <p>
                           按下註冊鈕的同時，表示您已詳閱我們的
                           <a href="#/" className="text-highlight">

@@ -24,7 +24,7 @@ function ShoppingCart() {
 
   return (
     <>
-      <div className="container">
+      <div className="container mt-nav">
         {/* 商品購物車 */}
         {productCart.cart.isEmpty ? (
           <div></div>

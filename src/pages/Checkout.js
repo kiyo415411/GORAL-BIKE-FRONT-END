@@ -112,7 +112,7 @@ function Checkout() {
     }
   };
   return (
-    <div className="container">
+    <div className="container mt-nav">
       <form onSubmit={handleSubmit}>
         {/* 結帳商品清單 */}
         {productCheckout ? (

@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+TC:wght@100;300;400;500;700;900&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+TC:wght@100;300;400;500;700;900&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
-  font-family: "Noto Sans TC", "Noto Sans" !important;
+  font-family: 'Noto Sans TC', 'Noto Sans' !important;
   --swiper-theme-color: #ff7e55;
   --swiper-navigation-size: 2.5rem;
 }
@@ -19,11 +19,17 @@ a {
 .modal-w {
   width: 30rem;
   max-width: none;
+  @media (max-width: 576px) {
+    width: 25rem;
+  }
 }
 
 .modal-signup-w {
   width: 62.5rem;
   max-width: none;
+  @media (max-width: 576px) {
+    width: 25rem;
+  }
 }
 
 .error-msg {
@@ -65,4 +71,15 @@ pre {
   white-space: -pre-wrap; /* Opera 4-6 */
   white-space: -o-pre-wrap; /* Opera 7 */
   word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+@media screen and (max-width: 576px) {
+  .mt-nav {
+    margin-top: 5rem;
+  }
+}
+
+.btn-close {
+  top: 10px;
+  right: 10px;
 }

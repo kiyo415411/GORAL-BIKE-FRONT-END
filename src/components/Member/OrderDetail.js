@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import CheckoutSummary from '../Checkout/CheckoutSummary';
 import OrderDetailInfo from './OrderDetailInfo';
 import OrderDetailList from './OrderDetailList';
 import { Link } from 'react-router-dom';
+import Badge from 'react-bootstrap/Badge';
+import axios from 'axios';
+import { API_URL } from '../../utils/config';
+import { useLocation } from 'react-router';
 
 function OrderDetail(props) {
+  const location = useLocation();
+  const orderId = location.pathname.split('/').pop();
+
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -55,11 +62,36 @@ function OrderDetail(props) {
     },
   ]);
 
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await axios.get(`${API_URL}/order/${orderId}`, {
+  //       withCredentials: true,
+  //     });
+  //   })();
+  // }, []);
+
   return (
     <>
       <section className="order-detail mb-3">
-        <div className="text-white bg-primary py-1 ps-4 mb-5 fs-5 fw-light">
+        <div className="text-white bg-primary py-1 ps-4 mb-3 fs-5 fw-light">
           訂單內容
+        </div>
+        <div className="d-flex px-3 justify-content-between">
+          <div className="d-flex text-primary align-items-center gap-3">
+            <h3>訂單編號: 26</h3>
+            <span>2022-05-06 01:53</span>
+          </div>
+          <div className="d-flex gap-3 align-items-start">
+            <Badge bg="primary" className="fs-6 py-2 fw-normal">
+              線上付款
+            </Badge>
+            <Badge bg="secondary" className="fs-6 py-2 fw-normal">
+              已付款
+            </Badge>
+            <Badge bg="subcontent" className="fs-6 py-2 fw-normal">
+              處理中
+            </Badge>
+          </div>
         </div>
         <OrderDetailList
           type="商品"
