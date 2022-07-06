@@ -1,22 +1,14 @@
-import TopSection from '../components/TopSection';
-import CourseAside from '../components/CourseAside';
-import Pagination from '../components/Pagination';
-import RowCard from '../components/Cards/RowCard';
-import ColCard from '../components/Cards/ColCard';
-import TopSort from '../components/TopSort';
 import axios from 'axios';
 import { useState, useEffect, createContext } from 'react';
-import { API_URL, IMAGE_URL } from '../utils/config';
-// import Skeleton from '@mui/material/Skeleton';
-// import Stack from '@mui/material/Stack';
-import { useLogin } from '../utils/useLogin';
+import { API_URL, IMAGE_URL } from '../../utils/config';
+import Pagination from '../Pagination';
+import RowCard from '../Cards/RowCard';
+import ColCard from '../Cards/ColCard';
+import FavoriteTopSort from './FavoriteTopSort';
 
 export const CourseValue = createContext();
 
-export default function CourseList() {
-  const { userData } = useLogin();
-  // console.log(userData);
-  // ---------------------------------------------- 初始值
+export default function FavoriteCourse({ userData }) {
   const [data, setData] = useState([]); // 主資料
   const [page, setPage] = useState(1); // 當前頁數
   const [lastPage, setLastPage] = useState(1); // 總頁數
@@ -24,32 +16,26 @@ export default function CourseList() {
   const [searchWord, setSearchWord] = useState(''); // 關鍵字變動
   const [search, setSearch] = useState(''); // 關鍵字篩選
   const [statu, setStatu] = useState(''); // 狀態篩選
+  const [state, setState] = useState([]); // 狀態分類
   const [originPrice, setOriginPrice] = useState(''); // 價錢範圍
   const [price, setPrice] = useState(''); // slider 價錢變動
   const [priceSubmit, setPriceSubmit] = useState(''); // 價錢篩選
   const [originPerson, setOriginPerson] = useState(''); // 人數範圍
   const [person, setPerson] = useState(''); // slider 人數變動
   const [personSubmit, setPersonSubmit] = useState(''); // 人數篩選
+  const [categoryLabel, setCategoryLabel] = useState([]); // 難度分類
   const [category, setCategory] = useState([1, 2]); // 課程難度篩選
   const [startDate, setStartDate] = useState(new Date()); // 最早日期
   const [startDateSubmit, setStartDateSubmit] = useState(''); // 最早日期篩選
   const [endDate, setEndDate] = useState(new Date()); // 最晚日期
   const [endDateSubmit, setEndDateSubmit] = useState(''); // 最晚日期篩選
   const [sortMethod, setSortMethod] = useState('newSort'); // 排序
-
-  // ------------------------------------------- 固定值
-
-  const [categoryLabel, setCategoryLabel] = useState([]); // 難度分類
-  const [state, setState] = useState([]); // 狀態分類
-  // const [isLoading, setIsLoading] = useState(true); // 載入狀態
-  const [favoriteActive, setFavoriteActive] = useState(true); // 收藏有變動的時候會重新渲染
-
-  // ------------------------------------------- 跟後端要資料
+  const [favoriteActive, setFavoriteActive] = useState(true); // 收藏變動
 
   useEffect(() => {
     let getData = async () => {
       try {
-        let response = await axios.get(`${API_URL}/course/`, {
+        let response = await axios.get(`${API_URL}/member/favorite/course`, {
           params: {
             page: page,
             statu: statu,
@@ -64,7 +50,6 @@ export default function CourseList() {
             userId: userData.userId,
           },
         });
-
         setData(response.data.data);
         setLastPage(response.data.pagination.lastPage);
       } catch (e) {
@@ -87,13 +72,11 @@ export default function CourseList() {
     userData.userId,
   ]);
 
-  // console.log('CoursefavoriteActive:', favoriteActive);
-
   useEffect(() => {
     let getData = async () => {
       try {
         let response = await axios.get(`${API_URL}/course/`);
-        // setIsLoading(true);
+
         setPrice([
           response.data.priceRange.sqlMinPrice,
           response.data.priceRange.sqlMaxPrice,
@@ -114,10 +97,6 @@ export default function CourseList() {
         setCategoryLabel(response.data.categoryGroup);
         setStartDate(response.data.dateRange.finalStartDate);
         setEndDate(response.data.dateRange.finalEndDate);
-
-        // setTimeout(() => {
-        //   setIsLoading(false);
-        // }, 1300);
       } catch (e) {
         console.error(e);
       }
@@ -179,51 +158,6 @@ export default function CourseList() {
     return 0;
   });
 
-  // const skeletonCount = 9;
-  // const skeletonGroup = [];
-  // for (let i = 0; i < skeletonCount; i++) {
-  //   skeletonGroup.push(
-  //     <div
-  //       key={i}
-  //       className="project-row-card card mb-3 shadow border-0 rounded-0 px-0"
-  //       style={{ height: '14.75rem', width: '63rem' }}
-  //     >
-  //       <div className="d-flex">
-  //         <div className="col-4">
-  //           <Skeleton
-  //             animation="wave"
-  //             variant="rectangular"
-  //             width={310}
-  //             height={236}
-  //           />
-  //         </div>
-  //         <Stack className="col-7" spacing={0.5}>
-  //           <div className="d-grid pt-3">
-  //             <Skeleton
-  //               animation="wave"
-  //               variant="text"
-  //               width={210}
-  //               height={50}
-  //             />
-  //             <Skeleton
-  //               animation="wave"
-  //               variant="text"
-  //               width={339}
-  //               height={50}
-  //             />
-  //             <Skeleton
-  //               animation="wave"
-  //               variant="text"
-  //               width={638}
-  //               height={110}
-  //             />
-  //           </div>
-  //         </Stack>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
   const VALUE = {
     statu,
     setStatu,
@@ -251,64 +185,59 @@ export default function CourseList() {
     setPage,
     originPrice,
     originPerson,
-    // isLoading,
   };
 
   return (
-    <div className="animate__animated animate__fadeIn">
+    <>
       <CourseValue.Provider value={VALUE}>
-        <TopSection title="課程" bg={`${IMAGE_URL}/course/CourseBanner.jpg`} />
-        <div className="container mt-5 mt-lg-0">
-          <div className="row gx-5 justify-content-center mt-2 mb-5 mt-lg-4 mt-xl-5 flex-nowrap">
-            {/* -----------------------------左區塊 */}
-            <div className="col-auto d-none d-xl-block">
-              {/* 邊攔 */}
-              <CourseAside contextValue={CourseValue} />
+        {data.length > 0 ? (
+          <div className={cardStyle === 'col' ? `ms-5 ps-5` : ''}>
+            <FavoriteTopSort
+              cardStyle={cardStyle}
+              setCardStyle={setCardStyle}
+              sortMethod={sortMethod}
+              setSortMethod={setSortMethod}
+              contextValue={CourseValue}
+              className={cardStyle === 'col' ? `col-11 pe-5` : ''}
+            />
+            <div
+              className={
+                cardStyle === 'col'
+                  ? 'd-flex flex-wrap mt-2 gap-3 mx-auto'
+                  : 'mt-2 mb-4'
+              }
+            >
+              {courseItems}
             </div>
-            {/* -----------------------------右區塊 */}
-            <div className="col-12 col-xl-9 mt-5 mt-sm-0">
-              {/* 排序 */}
-              <TopSort
-                cardStyle={cardStyle}
-                setCardStyle={setCardStyle}
-                sortMethod={sortMethod}
-                setSortMethod={setSortMethod}
-                contextValue={CourseValue}
-              />
-
-              {/* 卡片清單 */}
-
-              {data.length > 0 ? (
-                <>
-                  <div
-                    className={
-                      cardStyle === 'col'
-                        ? 'd-flex flex-wrap mt-2 mx-auto gap-3'
-                        : 'mt-2 mb-4'
-                    }
-                  >
-                    {courseItems}
-                  </div>
-                  <div className="d-flex justify-content-center">
-                    <Pagination
-                      page={page}
-                      setPage={setPage}
-                      lastPage={lastPage}
-                    />
-                  </div>
-                </>
-              ) : (
-                <div
-                  className="d-flex justify-content-center align-items-center link-content"
-                  style={{ height: '20rem' }}
-                >
-                  找不到課程，請調整篩選條件。
-                </div>
-              )}
+            <div
+              className={
+                cardStyle === 'col'
+                  ? `d-flex justify-content-center col-11 pe-5`
+                  : `d-flex justify-content-center col-12`
+              }
+            >
+              <Pagination page={page} setPage={setPage} lastPage={lastPage} />
             </div>
           </div>
-        </div>
+        ) : (
+          <>
+            <FavoriteTopSort
+              cardStyle={cardStyle}
+              setCardStyle={setCardStyle}
+              sortMethod={sortMethod}
+              setSortMethod={setSortMethod}
+              contextValue={CourseValue}
+            />
+
+            <div
+              className="d-flex justify-content-center align-items-center link-content"
+              style={{ height: '20rem' }}
+            >
+              找不到課程，請調整篩選條件。
+            </div>
+          </>
+        )}
       </CourseValue.Provider>
-    </div>
+    </>
   );
 }

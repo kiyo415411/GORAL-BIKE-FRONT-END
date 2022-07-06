@@ -38,7 +38,7 @@ function Certification(props) {
           // buttonsStyling: false,
         }).then((result) => {
           if (result.isConfirmed) {
-            history('/');
+            history('/homepage');
           }
         });
       }

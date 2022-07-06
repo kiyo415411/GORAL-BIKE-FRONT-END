@@ -10,7 +10,6 @@ import 'swiper/css/pagination';
 import HotCard from '../Cards/HotCard';
 import { IMAGE_URL } from '../../utils/config';
 
-
 // init Swiper:
 function BikeScrolling(props) {
   const [bikes, setBikes] = useState(props.bikes);
@@ -56,6 +55,9 @@ function BikeScrolling(props) {
                 title={value.product_name}
                 price={value.product_price}
                 theme="課程"
+                favoriteIs={value.favorite_is}
+                favoriteActive={props.favoriteActive}
+                setFavoriteActive={props.setFavoriteActive}
               />
             </SwiperSlide>
           );

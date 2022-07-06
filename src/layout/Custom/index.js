@@ -88,7 +88,7 @@ function BikeShow() {
         intensity={1.5}
         angle={0.6}
         penumbra={0.5}
-        position={[5, 5, 0]}
+        position={[10, 5, 0]}
         castShadow
         shadow-bias={-0.0001}
       />
@@ -97,7 +97,7 @@ function BikeShow() {
         intensity={2}
         angle={0.6}
         penumbra={0.5}
-        position={[-5, 5, 0]}
+        position={[-10, 5, 0]}
         castShadow
         shadow-bias={-0.0001}
       />

@@ -51,7 +51,7 @@ function ShoppingCart() {
             <button
               className="btn btn-outline-primary rounded-0 fs-4 fw-bold me-md-5 me-3"
               onClick={() => {
-                navigate('/');
+                navigate('/product');
               }}
             >
               返回購物
@@ -61,7 +61,13 @@ function ShoppingCart() {
               onClick={() => {
                 if (isLogin) {
                   if (allCartTotal === 0) {
-                    alert('請勾選結帳商品');
+                    Swal.fire({
+                      icon: 'warning',
+                      html: '請勾選結帳商品',
+                      confirmButtonText: 'OK',
+                      focusConfirm: false,
+                      // buttonsStyling: false,
+                    });
                   } else {
                     navigate('/shopping-cart/checkout');
                   }

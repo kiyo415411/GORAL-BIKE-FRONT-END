@@ -1,25 +1,54 @@
 import { useState, useEffect } from 'react';
-import Like from './Like.js';
 import { Link } from 'react-router-dom';
 import { IMAGE_URL } from '../../utils/config.js';
 import { useProductCart } from '../../utils/useProductCart.js';
-
+import { BsHeart, BsHeartFill } from 'react-icons/bs';
+import { useLogin } from '../../utils/useLogin.js';
+import swal from 'sweetalert';
+import axios from 'axios';
+import { API_URL } from '../../utils/config.js';
+import Checkbox from '@mui/material/Checkbox';
 function separator(num) {
   let str = num.toString().split('.');
   str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   return str.join('.');
 }
+
 function BikePaddyCard(props) {
   const productCart = useProductCart();
   const { addItem } = productCart;
-  const [liked, setLiked] = useState(false);
+  const { userData } = useLogin();
   const img = props.img;
+  const [favorite, setFavorite] = useState({
+    userId: userData.userId,
+    courseId: '',
+    favoriteMethod: 'product',
+  });
   const [shoppingClick, setShoppingClick] = useState(false);
   useEffect(() => {
     setTimeout(() => {
       setShoppingClick(false);
     }, [1000]);
   });
+  function handleClick(e) {
+    if (favorite.userId !== '') {
+      setFavorite({ ...favorite, courseId: e.target.value });
+    } else {
+      swal('收藏失敗', '登入會員才能進行個人收藏。', 'warning');
+    }
+  }
+  useEffect(() => {
+    let postFavorite = async () => {
+      try {
+        await axios.post(`${API_URL}/member/favorite/update`, favorite);
+      } catch (e) {
+        console.error(e);
+      }
+
+      props.setFavoriteActive(!props.favoriteActive);
+    };
+    postFavorite();
+  }, [favorite]);
   return (
     <>
       <div
@@ -44,8 +73,20 @@ function BikePaddyCard(props) {
                   <Link to="/Product/Detail">
                     <h5 className="card-title m-0">{props.name}</h5>
                   </Link>
-                  {/* <{like(liked)}> */}
-                  <Like className="my-auto" liked={liked} setLiked={setLiked} />
+                  <Checkbox
+                    icon={<BsHeart />}
+                    checkedIcon={<BsHeartFill />}
+                    size="large"
+                    sx={{
+                      color: 'var(--bs-highlight)',
+                      '&.Mui-checked': {
+                        color: 'var(--bs-highlight)',
+                      },
+                    }}
+                    value={props.id}
+                    checked={props.like !== null && props.like !== undefined}
+                    onClick={handleClick}
+                  />
                 </div>
                 <h5 className="text-content">${separator(props.price)}</h5>
               </div>
@@ -82,20 +123,4 @@ function BikePaddyCard(props) {
   );
 }
 
-function AddedToCart() {
-  return (
-    <div
-      style={{
-        background: '#CCCCCC',
-        height: '100vh',
-        width: '100vh',
-        zIndex: '100',
-      }}
-    >
-      <div style={{ background: '#fff' }} className="m-auto">
-        Added to cart
-      </div>
-    </div>
-  );
-}
 export default BikePaddyCard;

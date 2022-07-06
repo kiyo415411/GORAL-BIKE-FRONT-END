@@ -2,16 +2,20 @@ import Color from '../Details/Color.js';
 import Description from '../Details/Description.js';
 import Name from '../Details/Name.js';
 import Price from '../Details/Price.js';
-import Like from '../Aside/Like.js';
+// import Like from '../Aside/Like.js';
 import { useState, useEffect } from 'react';
+// ------------------------------------ favorite's tool
+import Checkbox from '@mui/material/Checkbox';
+import { BsHeartFill, BsHeart } from 'react-icons/bs';
+import { useLogin } from '../../utils/useLogin';
+import swal from 'sweetalert';
 import axios from 'axios';
-import { API_URL } from '../../utils/config.js';
-import { useProductCart } from '../../utils/useProductCart.js';
-
+import { API_URL } from '../../utils/config';
+import { useProductCart } from '../../utils/useProductCart';
 // IMG PROBLEM ADFASDFASFL
 // $COLOR INSTEAD OF IMG NAME $COLOR
 function BikeDetailDescription(props) {
-  const [liked, setLiked] = useState(false);
+  // const [liked, setLiked] = useState([false]);
   const [colored, setColored] = useState([]);
   const [colorName, setColorName] = useState([]);
   const [shoppingClick, setShoppingClick] = useState(false);
@@ -53,16 +57,63 @@ function BikeDetailDescription(props) {
   const productCart = useProductCart();
   const { addItem } = productCart;
   const [price] = useState(separator(props.bike[0].product_price));
+
+  // -------------------------- favorite's tool
+  const { userData } = useLogin();
+  const [favorite, setFavorite] = useState({
+    userId: userData.userId,
+    courseId: '',
+    favoriteMethod: 'product',
+  });
+
+  function handleClick(e) {
+    console.log(e.target.value);
+    if (favorite.userId !== '') {
+      setFavorite({ ...favorite, courseId: e.target.value });
+    } else {
+      swal('收藏失敗', '登入會員才能進行個人收藏。', 'warning');
+    }
+  }
+
+  useEffect(() => {
+    let postFavorite = async () => {
+      try {
+        await axios.post(`${API_URL}/member/favorite/update`, favorite);
+      } catch (e) {
+        console.error(e);
+      }
+      props.setFavoriteActive(!props.favoriteActive);
+    };
+    postFavorite();
+  }, [favorite]);
+
   return (
     <div width="478px" className={props.className}>
       <div>
         <div className="d-flex">
           <Name name={`${props.bike[0].product_name}`} />
-          <Like
+          {/* <Like
             liked={liked}
             setLiked={setLiked}
             className="my-auto ms-4"
             width="34"
+          /> */}
+          <Checkbox
+            icon={<BsHeart />}
+            checkedIcon={<BsHeartFill />}
+            size="large"
+            sx={{
+              color: 'var(--bs-highlight)',
+              '&.Mui-checked': {
+                color: 'var(--bs-highlight)',
+              },
+            }}
+            value={props.bike[0].product_id}
+            checked={
+              props.bike[0].favorite_is !== null &&
+              props.bike[0].favorite_is !== undefined
+            }
+            onClick={handleClick}
           />
         </div>
         <hr />

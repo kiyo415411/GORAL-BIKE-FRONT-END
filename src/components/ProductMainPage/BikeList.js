@@ -13,11 +13,13 @@ function BikeList(props) {
             <BikeCard
               bike={item.product_images}
               name={item.product_name}
-              like={false}
+              like={item.favorite_is}
               price={item.product_price}
               text={item.product_description}
               rating={item.product_rating}
               id={item.product_id}
+              favoriteActive={props.favoriteActive}
+              setFavoriteActive={props.setFavoriteActive}
             />
           </li>
         );

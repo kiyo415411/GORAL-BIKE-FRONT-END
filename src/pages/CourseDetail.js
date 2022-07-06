@@ -10,22 +10,59 @@ import ApplyForm from '../components/ApplyForm';
 import CourseHotSwiper from '../components/Course/CourseHotSwiper';
 import Checkbox from '@mui/material/Checkbox';
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
+import { useLogin } from '../utils/useLogin';
+import swal from 'sweetalert';
 
 export default function CourseDetail() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]); // 主資料
   const { courseId } = useParams(); // 從網址上拿變數
   const [show, setShow] = useState(false);
+  const { userData } = useLogin();
+  const [favorite, setFavorite] = useState({
+    userId: userData.userId,
+    courseId: '',
+    favoriteMethod: 'course',
+  });
+  const [favoriteActive, setFavoriteActive] = useState(true); // 收藏有變動的時候會重新渲染
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
     let getDate = async () => {
-      let response = await axios.get(`${API_URL}/course/${courseId}`);
+      let response = await axios.get(`${API_URL}/course/${courseId}`, {
+        params: {
+          userId: userData.userId,
+        },
+      });
       setData(response.data.data);
     };
     getDate();
-  }, [courseId]);
+  }, [courseId, favoriteActive, userData.userId]);
+
+  
+  function handleClick(e) {
+    console.log(e.target.value);
+    if (favorite.userId !== '') {
+      setFavorite({ ...favorite, courseId: e.target.value });
+    } else {
+      swal('收藏失敗', '登入會員才能進行個人收藏。', 'warning');
+    }
+  }
+
+  useEffect(() => {
+    let postFavorite = async () => {
+      try {
+        await axios.post(`${API_URL}/member/favorite/update`, favorite);
+      } catch (e) {
+        console.error(e);
+      }
+      setFavoriteActive(!favoriteActive);
+    };
+    postFavorite();
+
+    // console.log('postFavorite');
+  }, [favorite]);
 
   return (
     <>
@@ -68,6 +105,12 @@ export default function CourseDetail() {
                               color: 'var(--bs-highlight)',
                             },
                           }}
+                          value={courseId}
+                          checked={
+                            item.favorite_is !== null &&
+                            item.favorite_is !== undefined
+                          }
+                          onClick={handleClick}
                         />
                       </li>
                     </ul>

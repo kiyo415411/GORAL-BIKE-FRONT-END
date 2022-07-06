@@ -2,6 +2,11 @@ import { BsStarFill, BsStar } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
 import Checkbox from '@mui/material/Checkbox';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { API_URL } from '../../utils/config';
+import { useLogin } from '../../utils/useLogin';
+import swal from 'sweetalert';
 // 評分計算
 function star({ score }) {
   const starGroup = [];
@@ -19,8 +24,8 @@ function star({ score }) {
 function RowCard({
   courseId,
   image,
-  title,
   price,
+  like,
   score,
   time,
   location,
@@ -29,10 +34,47 @@ function RowCard({
   count,
   category,
   venue,
+  title,
   datailLink,
+  favoriteActive,
+  setFavoriteActive,
+  favoriteMethod,
 }) {
+  const { userData } = useLogin();
+  const [favorite, setFavorite] = useState({
+    userId: userData.userId,
+    courseId: '',
+    favoriteMethod: favoriteMethod,
+  });
+
+  // console.log(userId);
+  function handleClick(e) {
+    console.log(e.target.value);
+    if (favorite.userId !== '') {
+      setFavorite({ ...favorite, courseId: e.target.value });
+    } else {
+      swal('收藏失敗', '登入會員才能進行個人收藏。', 'warning');
+    }
+  }
+
+  useEffect(() => {
+    let postFavorite = async () => {
+      try {
+        await axios.post(`${API_URL}/member/favorite/update`, favorite);
+      } catch (e) {
+        console.error(e);
+      }
+      setFavoriteActive(!favoriteActive);
+    };
+    postFavorite();
+
+    // console.log('postFavorite');
+  }, [favorite]);
+
   return (
-    <div className="project-row-card card mb-3 shadow border-0 rounded-0 px-0 animate__animated animate__fadeIn">
+    <div
+      className={`project-row-card card mb-3 shadow border-0 rounded-0 px-0 animate__animated animate__fadeIn`}
+    >
       <div className="overflow-hidden d-flex">
         <div className="row-card-img-box product-img col-4 col-xl-5">
           {/* 圖片 */}
@@ -55,6 +97,9 @@ function RowCard({
                   color: 'var(--bs-highlight)',
                 },
               }}
+              value={courseId}
+              checked={like !== null && like !== undefined}
+              onClick={handleClick}
             />
           </div>
           <div className="d-flex justify-content-between align-items-center">

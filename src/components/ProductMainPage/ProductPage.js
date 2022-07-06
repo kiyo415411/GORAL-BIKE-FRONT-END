@@ -8,6 +8,7 @@ import axios from 'axios';
 import BikePaddy from './BikePaddy';
 import TopSort from './TopSort.js';
 import NoData from './NoData.js';
+import { useLogin } from '../../utils/useLogin'; // user's data
 
 function ProductPage() {
   const mostExpensive = 500000;
@@ -38,6 +39,10 @@ function ProductPage() {
     page: page,
     sortMethod: sortMethod,
   });
+
+  //------------------------------- favorite's data
+  const { userData } = useLogin(); // user's data
+  const [favoriteActive, setFavoriteActive] = useState(true); // do favorite
 
   useEffect(() => {
     const getLastPage = async () => {
@@ -97,12 +102,14 @@ function ProductPage() {
           search: handleSubmit.search,
           page: handleSubmit.page,
           sortMethod: handleSubmit.sortMethod,
+          favoriteActive: favoriteActive,
+          userId: userData.userId,
         },
       });
       setData(response.data.data);
     };
     getProducts();
-  }, [handleSubmit]);
+  }, [handleSubmit, favoriteActive, userData.userId]);
 
   useEffect(() => {
     const getPage = async () => {
@@ -121,6 +128,7 @@ function ProductPage() {
         { product_category_id: 0, product_category_name: '全部車款' },
         ...oldArray,
       ]);
+      console.log(category);
     };
     getCategory();
   }, []);
@@ -171,7 +179,6 @@ function ProductPage() {
           >
             登山車全車系
           </h1>
-          <div class="bg-black w-100 h-100 position-absolute opacity-25"></div>
         </div>
       </div>
       <div className="container-fluid row my-5 justify-content-between">
@@ -232,6 +239,8 @@ function ProductPage() {
                 page={page}
                 setPage={setPage}
                 lastPage={lastPage}
+                favoriteActive={favoriteActive}
+                setFavoriteActive={setFavoriteActive}
               />
             ) : (
               <BikePaddy
@@ -239,6 +248,8 @@ function ProductPage() {
                 page={page}
                 setPage={setPage}
                 lastPage={lastPage}
+                favoriteActive={favoriteActive}
+                setFavoriteActive={setFavoriteActive}
               />
             )
           ) : (
