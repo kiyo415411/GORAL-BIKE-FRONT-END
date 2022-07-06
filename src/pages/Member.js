@@ -57,7 +57,7 @@ function Member() {
 
   return (
     <>
-      <div className="container-fluid member">
+      <div className="container-fluid member mb-5">
         <Tab.Container
           id="left-tabs-example"
           activeKey={active}
@@ -121,8 +121,8 @@ function Member() {
                 </Nav>
               </div>
             </Col>
-            <Col sm={7}>
-              <Tab.Content>
+            <Col sm={8}>
+              <Tab.Content className="ms-5 row justify-content-center">
                 <Tab.Pane eventKey="first">
                   <Profile
                     userData={userData}

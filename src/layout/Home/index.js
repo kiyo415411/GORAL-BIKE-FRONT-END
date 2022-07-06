@@ -447,14 +447,9 @@ export default function Index() {
                 grabCursor={true}
                 centeredSlides={true}
                 spaceBetween={20}
-                scrollbar={{
-                  draggable: true,
-                  hide: false,
-                  snapOnRelease: true,
-                }}
                 loop={true}
                 mousewheel={true}
-                modules={[Autoplay, Scrollbar, Mousewheel]}
+                modules={[Autoplay, Mousewheel]}
               >
                 {activity.map((value, index) => {
                   return (
