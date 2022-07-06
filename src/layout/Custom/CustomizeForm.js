@@ -47,8 +47,8 @@ export default function CustomizeForm(props) {
       .string()
       .required('電話欄位不可為空.')
       .matches(phoneRegExp, '請輸入有效的電話號碼.')
-      .min(10, '電話號碼太短.')
-      .max(10, '電話號碼太長.'),
+      .min(9, '電話號碼太短.')
+      .max(9, '電話號碼太長.'),
     mark: yup.string().nullable(),
   });
 
