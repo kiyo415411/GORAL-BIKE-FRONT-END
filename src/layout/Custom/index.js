@@ -8,6 +8,9 @@ import CustomizeForm from './CustomizeForm';
 import { Ground } from './Ground';
 import { FloatingGrid } from './FloatingGrid';
 import useWindowSize from '../../components/hooks/useWindowSize';
+import LoadingPage from '../../components/Loading/LoadingPage';
+import { useState } from 'react';
+
 import {
   CubeCamera,
   Environment,
@@ -111,10 +114,15 @@ function BikeShow() {
   );
 }
 export default function Custom() {
-  return (
+  const [isLoading, setIsLoading] = useState(true); //讀取畫面
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 5000);
+  return isLoading ? (
+    <LoadingPage />
+  ) : (
     <Suspense fallback={null}>
       <Picker />
-
       <div className="vh-100 bg-black p-0 m-0">
         <section className="fixed-top d-flex justify-content-end">
           <CustomizeForm className="" state={state} />

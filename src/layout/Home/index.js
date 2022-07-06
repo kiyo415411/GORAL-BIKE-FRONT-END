@@ -68,14 +68,15 @@ export default function Index() {
         setProduct(getProductValue.data);
         setActivity(getActivityValue.data);
         setCourse(getCourseValue.data.classFullDtaa);
+        setIsLoading(false);
       } catch (e) {
         throw new Error(e);
       }
     };
     getIndexData();
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2500);
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 2500);
   }, []);
 
   return (
