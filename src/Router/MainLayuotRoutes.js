@@ -19,7 +19,12 @@ export default function MainLayoutRoutes() {
   return (
     <React.Fragment>
       <Routes>
+        <Route path="/member/favorite/activity" element={<Member />} />
+        <Route path="/member/favorite/course" element={<Member />} />
+        <Route path="/member/favorite/product" element={<Member />} />
         <Route path="/member/favorite" element={<Member />} />
+        <Route path="/member/order/detail/:orderId" element={<Member />} />
+        <Route path="/member/order" element={<Member />} />
         <Route path="/member" element={<Member />} />
         <Route path="/shopping-cart/checkout" element={<Checkout />} />
         <Route path="/shopping-cart" element={<ShoppingCart />} />

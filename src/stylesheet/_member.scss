@@ -7,8 +7,7 @@
     cursor: pointer;
   }
   .member-info,
-  .profile,
-  .order-title {
+  .profile {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
     input[type='file'] {
       position: absolute;
@@ -20,6 +19,20 @@
       clip: rect(0, 0, 0, 0);
       border: 0;
     }
+  }
+  .hr {
+    border-top: 3px solid $goral-line;
+  }
+  .order-detail,
+  .order-detail-info {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  }
+  .order-title,
+  .order-list {
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
+  }
+  .order-none {
+    padding: 2.5rem;
   }
   .circle {
     border-radius: 50%;

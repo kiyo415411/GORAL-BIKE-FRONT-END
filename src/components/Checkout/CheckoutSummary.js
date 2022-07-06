@@ -3,10 +3,16 @@ import { BsSquareFill } from 'react-icons/bs';
 import { toThousands } from '../../utils/common';
 
 function CheckoutSummary(props) {
-  const { allCartTotal } = props;
+  const { allCartTotal, className } = props;
   return (
     <>
-      <section className="checkout-summary row text-end">
+      <section
+        className={
+          className
+            ? 'checkout-summary row text-end ' + className
+            : 'checkout-summary row text-end'
+        }
+      >
         <div className="row col-md-12 col-12 justify-content-end mb-2">
           <div className="line"></div>
         </div>

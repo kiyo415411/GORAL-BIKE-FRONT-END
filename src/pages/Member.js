@@ -15,21 +15,40 @@ import FavoriteActivity from '../components/Member/FavoriteActivity';
 import { useLogin } from '../utils/useLogin';
 import { IMAGE_URL } from '../utils/config';
 import { useLocation } from 'react-router';
+import { useNavigate } from 'react-router';
+import OrderDetail from '../components/Member/OrderDetail';
 
 function Member() {
+  const history = useNavigate();
   const [active, setActive] = useState('first');
   const [title, setTitle] = useState('');
   const [open, setOpen] = React.useState(false);
   const { userData, setUserData, setIsLogin } = useLogin();
   const { name, email, phone, photo } = userData;
   const location = useLocation();
+  console.log(location);
 
   const handleClick = () => {
     setOpen(!open);
   };
   useEffect(() => {
-    if (location.pathname.includes('favorite')) {
+    if (location.pathname.includes('product')) {
       setActive('product');
+      return;
+    } else if (location.pathname.includes('course')) {
+      setActive('course');
+      return;
+    } else if (location.pathname.includes('activity')) {
+      setActive('activity');
+      return;
+    } else if (location.pathname.includes('favorite')) {
+      setActive('product');
+      return;
+    } else if (
+      location.pathname.includes('order') ||
+      location.pathname.includes('detail')
+    ) {
+      setActive('second');
       return;
     }
     setActive('first');
@@ -100,7 +119,14 @@ function Member() {
                     <Nav.Link eventKey="first">帳戶資訊</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="second">訂單紀錄</Nav.Link>
+                    <Nav.Link
+                      eventKey="second"
+                      onClick={() => {
+                        history('/member/order');
+                      }}
+                    >
+                      訂單紀錄
+                    </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
                     <Nav.Item
@@ -109,9 +135,30 @@ function Member() {
                     >
                       最愛收藏
                       <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Nav.Link eventKey="product">商品</Nav.Link>
-                        <Nav.Link eventKey="course">課程</Nav.Link>
-                        <Nav.Link eventKey="activity">活動</Nav.Link>
+                        <Nav.Link
+                          eventKey="product"
+                          onClick={() => {
+                            history('/member/favorite/product');
+                          }}
+                        >
+                          商品
+                        </Nav.Link>
+                        <Nav.Link
+                          eventKey="course"
+                          onClick={() => {
+                            history('/member/favorite/course');
+                          }}
+                        >
+                          課程
+                        </Nav.Link>
+                        <Nav.Link
+                          eventKey="activity"
+                          onClick={() => {
+                            history('/member/favorite/activity');
+                          }}
+                        >
+                          活動
+                        </Nav.Link>
                       </Collapse>
                     </Nav.Item>
                   </Nav.Item>
@@ -131,7 +178,11 @@ function Member() {
                   />
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
-                  <OrderList />
+                  {location.pathname.includes('detail') ? (
+                    <OrderDetail userData={userData} />
+                  ) : (
+                    <OrderList userData={userData} />
+                  )}
                 </Tab.Pane>
                 <Tab.Pane eventKey="product">
                   <FavoriteProduct userData={userData} />
