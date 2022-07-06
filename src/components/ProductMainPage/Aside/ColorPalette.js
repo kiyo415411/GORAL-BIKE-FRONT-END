@@ -38,6 +38,7 @@ function ColorPalette(props) {
                   onClick={() => {
                     setBackground(color);
                     props.setCurrentColor(v.color_name);
+                    props.setPage(1);
                   }}
                 />
               </div>

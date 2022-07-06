@@ -6,12 +6,20 @@ import Like from '../Aside/Like.js';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../utils/config.js';
+import { useProductCart } from '../../utils/useProductCart.js';
+
 // IMG PROBLEM ADFASDFASFL
 // $COLOR INSTEAD OF IMG NAME $COLOR
 function BikeDetailDescription(props) {
   const [liked, setLiked] = useState(false);
   const [colored, setColored] = useState([]);
   const [colorName, setColorName] = useState([]);
+  const [shoppingClick, setShoppingClick] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setShoppingClick(false);
+    }, [1000]);
+  });
   useEffect(() => {
     const getColor = async () => {
       const response = await axios.get(
@@ -41,6 +49,9 @@ function BikeDetailDescription(props) {
     str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return str.join('.');
   }
+
+  const productCart = useProductCart();
+  const { addItem } = productCart;
   const [price] = useState(separator(props.bike[0].product_price));
   return (
     <div width="478px" className={props.className}>
@@ -75,7 +86,21 @@ function BikeDetailDescription(props) {
         )}
         <hr />
         <div>
-          <button className="btn border border-primary rounded-0 me-2">
+          <button
+            className={`btn border-primary rounded-0 px-4 ${
+              shoppingClick === true ? 'bg-success text-white border-white' : ''
+            }`}
+            onClick={() => {
+              addItem({
+                id: props.id,
+                name: props.bike[0].product_name,
+                image: props.img,
+                price: props.bike[0].product_price,
+                quantity: 1,
+              });
+              setShoppingClick(shoppingClick === true ? false : true);
+            }}
+          >
             加入購物車
           </button>
           <button className="btn btn-primary rounded-0 ms-2">直接購買</button>

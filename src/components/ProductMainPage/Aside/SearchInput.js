@@ -10,6 +10,7 @@ export default function SearchInput(props) {
         name="searchWord"
         onChange={(e) => {
           props.setCurrentSearch(e.target.value);
+          props.setPage(1);
         }}
       ></input>
       <button className="btn position-absolute top-0 end-0 pe-4 pt-1 text-line">

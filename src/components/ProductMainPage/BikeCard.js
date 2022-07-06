@@ -1,11 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Like from '../Aside/Like.js';
 import { Link } from 'react-router-dom';
 import { IMAGE_URL } from '../../utils/config.js';
 import DecimalStar from './DecimalStar.js';
 import { useProductCart } from '../../utils/useProductCart.js';
-import NoData from './NoData.js';
-
 function separator(num) {
   let str = num.toString().split('.');
   str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -16,6 +14,12 @@ function BikeCard(props) {
   const { addItem } = productCart;
   const [for5] = useState([1, 2, 3, 4, 5]);
   const [liked, setLiked] = useState(false);
+  const [shoppingClick, setShoppingClick] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setShoppingClick(false);
+    }, [1000]);
+  });
 
   return (
     <>
@@ -63,8 +67,13 @@ function BikeCard(props) {
                 <button className="btn btn-primary rounded-pill px-4 me-2">
                   直接購買
                 </button>
+
                 <button
-                  className="btn border-primary rounded-pill px-4"
+                  className={`btn border-primary rounded-pill px-4 ${
+                    shoppingClick === true
+                      ? 'bg-success text-white border-white'
+                      : ''
+                  }`}
                   onClick={() => {
                     addItem({
                       id: props.id,
@@ -73,6 +82,7 @@ function BikeCard(props) {
                       price: props.price,
                       quantity: 1,
                     });
+                    setShoppingClick(shoppingClick === true ? false : true);
                   }}
                 >
                   加入購物車

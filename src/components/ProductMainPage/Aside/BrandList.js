@@ -16,6 +16,7 @@ export default function CategoryList(props) {
               className={status === i ? 'link-highlight' : 'link-content'}
               onClick={() => {
                 setStatus(i);
+                props.setPage(1);
               }}
             >
               {v.brand_name}

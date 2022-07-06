@@ -8,7 +8,6 @@ import axios from 'axios';
 import BikePaddy from './BikePaddy';
 import TopSort from './TopSort.js';
 import NoData from './NoData.js';
-import zIndex from '@mui/material/styles/zIndex.js';
 
 function ProductPage() {
   const mostExpensive = 500000;
@@ -53,10 +52,56 @@ function ProductPage() {
           page: handleSubmit.page,
         },
       });
-
       setLastPage(response.data.pagination.lastPage);
     };
     getLastPage();
+  }, [handleSubmit]);
+  useEffect(() => {
+    setHandleSubmit({
+      category: currentCategory,
+      brand: currentBrand,
+      minPrice: price[0],
+      maxPrice: price[1],
+      color: currentColor,
+      search: currentSearch,
+      page: page,
+      sortMethod: sortMethod,
+    });
+  }, [
+    currentColor,
+    price,
+    currentCategory,
+    currentBrand,
+    currentSearch,
+    page,
+    sortMethod,
+  ]);
+
+  useEffect(() => {
+    const getBikes = async () => {
+      const response = await axios.get(`${API_URL}/product`);
+      setData(response.data.data);
+    };
+    getBikes();
+  }, []);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const response = await axios.get(`${API_URL}/product`, {
+        params: {
+          category: handleSubmit.category,
+          brand: handleSubmit.brand,
+          minPrice: handleSubmit.minPrice,
+          maxPrice: handleSubmit.maxPrice,
+          color: handleSubmit.color,
+          search: handleSubmit.search,
+          page: handleSubmit.page,
+          sortMethod: handleSubmit.sortMethod,
+        },
+      });
+      setData(response.data.data);
+    };
+    getProducts();
   }, [handleSubmit]);
 
   useEffect(() => {
@@ -78,7 +123,6 @@ function ProductPage() {
       ]);
     };
     getCategory();
-    // console.log('category', category);
   }, []);
 
   useEffect(() => {
@@ -110,55 +154,6 @@ function ProductPage() {
     };
     getBrand();
   }, []);
-
-  useEffect(() => {
-    setHandleSubmit({
-      category: currentCategory,
-      brand: currentBrand,
-      minPrice: price[0],
-      maxPrice: price[1],
-      color: currentColor,
-      search: currentSearch,
-      page: page,
-      sortMethod: sortMethod,
-    });
-  }, [
-    currentColor,
-    price,
-    currentCategory,
-    currentBrand,
-    currentSearch,
-    page,
-    sortMethod,
-  ]);
-
-  useEffect(() => {
-    const getBikes = async () => {
-      const response = await axios.get(API_URL + '/product');
-      setData(response.data.data);
-      console.log('DATA DATA', data);
-    };
-    getBikes();
-  }, []);
-
-  useEffect(() => {
-    const getProducts = async () => {
-      const response = await axios.get(`${API_URL}/product`, {
-        params: {
-          category: handleSubmit.category,
-          brand: handleSubmit.brand,
-          minPrice: handleSubmit.minPrice,
-          maxPrice: handleSubmit.maxPrice,
-          color: handleSubmit.color,
-          search: handleSubmit.search,
-          page: handleSubmit.page,
-          sortMethod: handleSubmit.sortMethod,
-        },
-      });
-      setData(response.data.data);
-    };
-    getProducts();
-  }, [handleSubmit]);
 
   return (
     <div className="animate__animated animate__fadeIn">
@@ -197,6 +192,7 @@ function ProductPage() {
               setCurrentSearch={setCurrentSearch}
               color={colored}
               category={category}
+              setPage={setPage}
             />
           </div>
         </div>

@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Like from './Like.js';
 import { Link } from 'react-router-dom';
 import { IMAGE_URL } from '../../utils/config.js';
+import { useProductCart } from '../../utils/useProductCart.js';
 
 function separator(num) {
   let str = num.toString().split('.');
@@ -9,13 +10,21 @@ function separator(num) {
   return str.join('.');
 }
 function BikePaddyCard(props) {
+  const productCart = useProductCart();
+  const { addItem } = productCart;
   const [liked, setLiked] = useState(false);
   const img = props.img;
+  const [shoppingClick, setShoppingClick] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setShoppingClick(false);
+    }, [1000]);
+  });
   return (
     <>
       <div
-        className="card shadow mb-5 bg-body rounded container"
-        style={{ width: '400px', height: '450px' }}
+        className="card shadow mb-5 bg-body rounded container pt-5"
+        style={{ width: '400px', height: '500px' }}
       >
         <div className="row">
           <div className="mx-auto d-flex justify-content-center">
@@ -45,7 +54,23 @@ function BikePaddyCard(props) {
                 <button className="btn btn-primary rounded-pill px-4 me-2">
                   直接購買
                 </button>
-                <button className="btn border-primary rounded-pill px-4">
+                <button
+                  className={`btn border-primary rounded-pill px-4 ${
+                    shoppingClick === true
+                      ? 'bg-success text-white border-white'
+                      : ''
+                  }`}
+                  onClick={() => {
+                    addItem({
+                      id: props.id,
+                      name: props.name,
+                      image: props.img,
+                      price: props.price,
+                      quantity: 1,
+                    });
+                    setShoppingClick(shoppingClick === true ? false : true);
+                  }}
+                >
                   加入購物車
                 </button>
               </div>
@@ -57,4 +82,20 @@ function BikePaddyCard(props) {
   );
 }
 
+function AddedToCart() {
+  return (
+    <div
+      style={{
+        background: '#CCCCCC',
+        height: '100vh',
+        width: '100vh',
+        zIndex: '100',
+      }}
+    >
+      <div style={{ background: '#fff' }} className="m-auto">
+        Added to cart
+      </div>
+    </div>
+  );
+}
 export default BikePaddyCard;

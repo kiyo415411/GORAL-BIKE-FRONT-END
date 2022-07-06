@@ -6,7 +6,7 @@ export default function BikePaddy(props) {
     <ul className="list-unstyled row">
       {props.data.map((item, index) => {
         return (
-          <li key={item.product_id} className="col-4 col-md-4 col-lg-4 mx-auto">
+          <li key={item.product_id} className="col-4 col-md-4 col-lg-4">
             <BikePaddyCard
               img={item.product_images}
               name={item.product_name}

@@ -22,16 +22,8 @@ function BikeDetailCard(props) {
       });
 
       setBike(response.data.data);
-      console.log(
-        'bike imgggg',
-        response.data.data[0].product_images.split('.')[0].split('$').shift()
-      );
       setBikeIMG(
         response.data.data[0].product_images.split('.')[0].split('$').shift()
-      );
-      console.log(
-        'asdfasdfasdasfasdfasdfasdfasdfasdfasdf',
-        response.data.data[0].product_images
       );
       setBikeStart(
         response.data.data[0].product_images.split('.')[
@@ -86,9 +78,9 @@ function BikeDetailCard(props) {
   return (
     <div className="container mt-5">
       <div className="d-flex">
-        <div className="">
+        <div className="" maxHeight="528">
           <img
-            height="538"
+            style={{ maxWidth: '528px' }}
             src={`${IMAGE_URL}/bikes/${BikeIMG}${
               currentColor ? '$' : ''
             }${currentColor}.${BikeStart}`}
@@ -102,6 +94,9 @@ function BikeDetailCard(props) {
             product_id={props.product_id}
             currentColor={currentColor}
             setCurrentColor={setCurrentColor}
+            img={`${BikeIMG}${
+              currentColor ? '$' : ''
+            }${currentColor}.${BikeStart}`}
           />
         </div>
       </div>
