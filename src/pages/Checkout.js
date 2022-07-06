@@ -32,7 +32,7 @@ function Checkout() {
       // },
     }).then((result) => {
       if (result.isConfirmed) {
-        history('/');
+        history('/homepage');
       }
     });
   }
@@ -106,7 +106,7 @@ function Checkout() {
           productCart.checkoutCart();
           courseCart.checkoutCart();
           activityCart.checkoutCart();
-          history('/');
+          history('/homepage');
         }
       });
     }

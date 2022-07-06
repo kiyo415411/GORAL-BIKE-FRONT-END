@@ -47,7 +47,7 @@ function Login(props) {
           if (result.isConfirmed) {
             setIsLogin(true);
             handleClose();
-            history('/');
+            history('/homepage');
           }
         });
       } else {

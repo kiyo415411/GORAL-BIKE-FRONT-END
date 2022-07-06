@@ -3,11 +3,16 @@ import BikeDetailDescription from './BikeDetailDescription';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import LabelCard from '../Label/LabelCard';
 import axios from 'axios';
+
+import { useLogin } from '../../utils/useLogin';
+
 import { API_URL, IMAGE_URL } from '../../utils/config';
 function BikeDetailCard(props) {
   const [partsName, setPartsName] = useState([]);
   const [partsIMG, setPartsIMG] = useState([]);
   const [bike, setBike] = useState([]);
+  const { userData } = useLogin();
+  const [favoriteActive, setFavoriteActive] = useState(true); // 收藏有變動的時候會重新渲染
   const [productCheck, setProductCheck] = useState([]);
   const [BikeIMG] = useState('');
   const [BikeStart] = useState([]);
@@ -19,6 +24,7 @@ function BikeDetailCard(props) {
       const response = await axios.get(API_URL + '/product/product_id', {
         params: {
           product_id: props.product_id,
+          userId: userData.userId,
         },
       });
 
@@ -29,7 +35,7 @@ function BikeDetailCard(props) {
       );
     };
     getPage();
-  }, [props.product_id]);
+  }, [props.product_id, favoriteActive, userData.userId]);
 
   useEffect(() => {
     const getParts = async () => {
@@ -89,6 +95,8 @@ function BikeDetailCard(props) {
           <BikeDetailDescription
             className="mx-5 w-75"
             bike={bike}
+            favoriteActive={favoriteActive}
+            setFavoriteActive={setFavoriteActive}
             product_id={props.product_id}
             currentColor={currentColor}
             setCurrentColor={setCurrentColor}

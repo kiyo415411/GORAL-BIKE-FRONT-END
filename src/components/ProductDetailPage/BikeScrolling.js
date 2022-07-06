@@ -14,12 +14,16 @@ function BikeScrolling(props) {
           return (
             <li key={index} className="me-5 mt-4">
               <BikeCardSmall
+                courseId={item.product_id}
                 img={item.product_images}
                 rating={item.product_rating}
                 name={item.product_name}
                 // like={item.Like}
                 price={item.product_price}
                 // text={item.Text}
+                favoriteIs={item.favorite_is}
+                favoriteActive={props.favoriteActive}
+                setFavoriteActive={props.setFavoriteActive}
               />
             </li>
           );

@@ -85,7 +85,7 @@ function SignUp(props) {
         }).then((result) => {
           if (result.isConfirmed) {
             handleClose();
-            history('/');
+            history('/homepage');
           }
         });
       } else {
