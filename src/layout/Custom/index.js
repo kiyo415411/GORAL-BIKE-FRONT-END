@@ -119,7 +119,7 @@ export default function Custom() {
         <section className="fixed-top d-flex justify-content-end">
           <CustomizeForm className="" state={state} />
           <Link
-            to="/homepage"
+            to="/"
             className="btn btn-black text-muted m-3"
             onClick={() => {
               document.body.style.cursor = '';
