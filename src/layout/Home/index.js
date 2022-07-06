@@ -104,7 +104,7 @@ export default function Index() {
           </section>
 
           {/* NEWS */}
-          <section className="bg-light row row justify-content-around px-5 m-0">
+          <section className="bg-light row row justify-content-around px-md-5 m-0">
             <article className="col-12 col-md-5 mt-5">
               <h1 className="border-5 border-start border-secondary mb-3">
                 　最新消息
@@ -266,9 +266,11 @@ export default function Index() {
                       alt=""
                     />
                     <section
-                      className={`bg-black position-absolute top-50 end-0 translate-middle-y h-60 ${
-                        rwd ? 'w-100' : 'w-35'
-                      } bg-opacity-75`}
+                      className={`bg-black position-absolute  ${
+                        rwd
+                          ? 'w-100 h-100 bg-opacity-50 top-50 start-50 translate-middle pt-5'
+                          : 'w-35 h-60 bg-opacity-75 top-50 end-0 translate-middle-y '
+                      } `}
                     >
                       <section className="col-12 m-0 text-white p-4 row">
                         <section className="col-12 m-3">
@@ -361,9 +363,9 @@ export default function Index() {
               })}
             </Swiper>
           </section>
-          <section className="bg-light row m-1 m-md-0 p-md-5 justify-content-md-center align-items-md-center">
-            <article className="col-md-3 my-auto me-md-5 row justify-content-center ">
-              <h3 className="my-3 fw-bold text-center text-md-start">
+          <section className="bg-light row mx-1 py-5 m-md-0 p-md-5 justify-content-md-center align-items-md-center">
+            <article className="col-md-3 my-md-auto me-md-5 row justify-content-center ">
+              <h3 className="my-md-3 fw-bold text-center text-md-start">
                 登山車訓練營
               </h3>
               <p className="my-3 mt-md-3" style={{ textAlign: 'justify' }}>
@@ -396,7 +398,7 @@ export default function Index() {
                   disableOnInteraction: false,
                 }}
                 centeredSlides={true}
-                slidesPerView={rwd ? 2 : 4}
+                slidesPerView={rwd ? 1 : 4}
                 modules={[Autoplay, EffectCoverflow, Mousewheel]}
                 className="mySwiper my-auto h-100"
               >
@@ -460,7 +462,7 @@ export default function Index() {
           </section>
           {/* ACTIVTY */}
           <section
-            className="bg-light py-5 activity"
+            className="bg-light py-5 activity px-1"
             style={{ height: '768px' }}
           >
             <h1 className=" display-6 fw-bolder text-center my-5">
@@ -472,7 +474,7 @@ export default function Index() {
                 delay: 2000,
                 disableOnInteraction: false,
               }}
-              slidesPerView={rwd ? 2 : 3}
+              slidesPerView={rwd ? 1 : 3}
               speed={300}
               grabCursor={true}
               centeredSlides={true}
