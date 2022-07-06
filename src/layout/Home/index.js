@@ -5,7 +5,7 @@ import axios from 'axios';
 import { API_URL, IMAGE_URL } from '../../utils/config';
 import DataAPI from '../../components/DataAPI';
 import { BsSquareFill } from 'react-icons/bs';
-
+import CutomizePic from '../../images/bicycle-g403b4c3c3_1920.jpg';
 // slick css
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -417,7 +417,47 @@ export default function Index() {
               </Swiper>
             </section>
           </section>
-
+          {/* Cutomzie */}
+          <section
+            className="bg-light overflow-hidden position-relative py-5"
+            style={{
+              height: 672,
+            }}
+          >
+            <figure
+              className={`position-absolute  ${
+                rwd ? 'top-50 start-50 translate-middle' : ''
+              }`}
+            >
+              <img className="" src={CutomizePic} alt="" />
+            </figure>
+            <section
+              className={`w-100 h-100 position-absolute top-50 start-50 translate-middle  ${
+                rwd ? 'bg-black bg-opacity-50' : 'bg-light bg-opacity-10'
+              }  `}
+            />
+            <section
+              className={`position-absolute ${
+                rwd ? 'top-50 start-50 translate-middle' : ''
+              } text-center mt-5 w-100`}
+            >
+              <h2
+                className={`${
+                  rwd ? 'text-white display-1' : 'text-dark display-3'
+                }  fw-bolder mb-5 my-3`}
+              >
+                引爆你的創意魂打造專屬登山車
+              </h2>
+              <Link
+                to={`/CustomePages/customize`}
+                className={`btn ${
+                  rwd ? 'btn-danger' : 'btn-primary'
+                } text-white fw-bold px-5 py-2`}
+              >
+                開始客製
+              </Link>
+            </section>
+          </section>
           {/* ACTIVTY */}
           <section
             className="bg-light py-5 activity"
