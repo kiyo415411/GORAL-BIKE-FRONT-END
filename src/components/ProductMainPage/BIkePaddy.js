@@ -1,12 +1,19 @@
 import BikePaddyCard from './BikePaddyCard.js';
 import Pagination from './Pagination.js';
+import useWindowSize from '../hooks/useWindowSize.js';
 
 export default function BikePaddy(props) {
+  let WindowSize = useWindowSize();
   return (
     <ul className="list-unstyled row">
       {props.data.map((item, index) => {
         return (
-          <li key={item.product_id} className="col-4 col-md-4 col-lg-4">
+          <li
+            key={item.product_id}
+            className={`col-${
+              WindowSize < 1730 ? (WindowSize < 1150 ? '12' : '6') : '4'
+            }`}
+          >
             <BikePaddyCard
               img={item.product_images}
               name={item.product_name}

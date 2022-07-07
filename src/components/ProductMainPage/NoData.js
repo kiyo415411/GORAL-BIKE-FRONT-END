@@ -1,5 +1,3 @@
-import { IMAGE_URL } from '../../utils/config';
-
 export default function NoData() {
   return (
     <div className="d-flex justify-content-center flex-column">

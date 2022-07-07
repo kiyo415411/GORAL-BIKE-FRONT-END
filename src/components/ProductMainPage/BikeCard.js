@@ -8,6 +8,7 @@ import swal from 'sweetalert'; // Sweet Alert
 import axios from 'axios';
 import Checkbox from '@mui/material/Checkbox';
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
+import useWindowSize from '../hooks/useWindowSize.js';
 
 function separator(num) {
   let str = num.toString().split('.');
@@ -24,6 +25,7 @@ function BikeCard(props) {
       setShoppingClick(false);
     }, [1000]);
   });
+  let WindowSize = useWindowSize();
 
   // ---------------------------- favorite's data
   const { userData } = useLogin();
@@ -57,10 +59,7 @@ function BikeCard(props) {
 
   return (
     <>
-      <div
-        className="card shadow p-2 mb-5 bg-body rounded"
-        style={{ Width: '1049px', minHeight: '256px' }}
-      >
+      <div className={`card shadow p-2 mb-5 bg-body rounded mx-auto mx-md-0`}>
         <div className="row g-0 justify-content-center my-auto align-items-center">
           <div
             className="col-4 h-75 my-auto overflow-hidden"
@@ -76,7 +75,7 @@ function BikeCard(props) {
             </Link>
           </div>
           <div className="col-md-8 m-auto">
-            <div className=" ms-3 d-flex gap-2">
+            <div className="ms-3 d-flex gap-2 mt-3">
               <div className="text-warning d-flex align-items-center">
                 {for5.map((x, i) => {
                   return <DecimalStar x={x} rating={props.rating} key={i} />;
@@ -84,10 +83,10 @@ function BikeCard(props) {
               </div>
               <p className="m-0">{props.rating}</p>
             </div>
-            <div className="card-body">
-              <div className="d-flex justify-content-between">
-                <div className="d-flex align-items-center gap-1 mb-3">
-                  <Link to={`/product/detail/${props.id}`}>
+            <div className="card-body container-fluid pt-md-0">
+              <div className="row justify-content-between">
+                <div className="d-flex align-items-center gap-1 mb-3 mb-md-1 justify-content-between justify-content-md-start">
+                  <Link className="" to={`/product/detail/${props.id}`}>
                     <h5 className="card-title m-0">{props.name}</h5>
                   </Link>
                   {/* <Like liked={liked} setLiked={setLiked} /> */}
@@ -108,16 +107,28 @@ function BikeCard(props) {
                 </div>
                 <h5 className="text-content">${separator(props.price)}</h5>
               </div>
-              <p className="card-text text-subcontent">
+              <p className="card-text text-subcontent d-none d-md-block">
                 <small>{props.text}</small>
               </p>
-              <div className="flex">
-                <button className="btn btn-primary rounded-pill px-4 me-2">
+              <div className="row gap-3 mt-3">
+                <Link
+                  to="/shopping-cart"
+                  className="col-md-2 btn btn-primary rounded-pill"
+                  onClick={() => {
+                    addItem({
+                      id: props.id,
+                      name: props.name,
+                      image: props.bike,
+                      price: props.price,
+                      quantity: 1,
+                    });
+                  }}
+                >
                   直接購買
-                </button>
+                </Link>
 
                 <button
-                  className={`btn border-primary rounded-pill px-4 ${
+                  className={`col-md-2 btn border-primary rounded-pill ${
                     shoppingClick === true
                       ? 'bg-success text-white border-white'
                       : ''

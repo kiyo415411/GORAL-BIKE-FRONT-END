@@ -9,6 +9,7 @@ import BikePaddy from './BikePaddy';
 import TopSort from './TopSort.js';
 import NoData from './NoData.js';
 import { useLogin } from '../../utils/useLogin'; // user's data
+import useWindowSize from '../hooks/useWindowSize.js';
 
 function ProductPage() {
   const mostExpensive = 500000;
@@ -39,6 +40,8 @@ function ProductPage() {
     page: page,
     sortMethod: sortMethod,
   });
+
+  let WindowSize = useWindowSize();
 
   //------------------------------- favorite's data
   const { userData } = useLogin(); // user's data
@@ -174,36 +177,49 @@ function ProductPage() {
         <div className="card-img-overlay row align-items-center m-0 p-0">
           <div class="col-1"></div>
           <h1
-            className="top-banner-title card-title fw-bolder col-4 text-center text-white position-absolute"
+            className="top-banner-title card-title fw-bolder col-sm-4 text-center text-white position-absolute"
             style={{ zIndex: '1' }}
           >
             登山車全車系
           </h1>
         </div>
       </div>
-      <div className="container-fluid row my-5 justify-content-between">
-        <div className="col-2 mt-2">
-          <div
-            className="ms-2 sticky-sm-top shadow d-flex justify-content-center p-2"
-            style={{ width: '324px', height: '90vh' }}
-          >
-            <ProductAside
-              price={price}
-              setPrice={setPrice}
-              currentColor={currentColor}
-              brand={brand}
-              setBrand={setBrand}
-              setCurrentCategory={setCurrentCategory}
-              setCurrentBrand={setCurrentBrand}
-              setCurrentColor={setCurrentColor}
-              setCurrentSearch={setCurrentSearch}
-              color={colored}
-              category={category}
-              setPage={setPage}
-            />
+      <div
+        className={`px-0 mx-0 mt-5 pt-5 container-fluid row justify-content-md-center `}
+      >
+        {useWindowSize() < 1625 ? (
+          <></>
+        ) : (
+          <div className="col-1 mt-2">
+            <div
+              className="ms-2 sticky-sm-top shadow d-flex justify-content-center p-2"
+              style={{ width: '324px', height: '90vh' }}
+            >
+              <ProductAside
+                price={price}
+                setPrice={setPrice}
+                currentColor={currentColor}
+                brand={brand}
+                setBrand={setBrand}
+                setCurrentCategory={setCurrentCategory}
+                setCurrentBrand={setCurrentBrand}
+                setCurrentColor={setCurrentColor}
+                setCurrentSearch={setCurrentSearch}
+                color={colored}
+                category={category}
+                setPage={setPage}
+              />
+            </div>
           </div>
-        </div>
-        <div className="mx-5 col-9">
+        )}
+        <div
+          className={`mx-md-auto col-12 col-md-8`}
+          // style={
+          //   WindowSize < 650
+          //     ? { margin: '-50%', minHeight: '256px', minWidth: '290px' }
+          //     : { minHeight: '256px', minWidth: '290px' }
+          // }
+        >
           <div className="d-flex justify-content-between">
             <div>
               <BsListUl
@@ -232,8 +248,18 @@ function ProductPage() {
               />
             </h4>
           </div>
+
           {data.length !== 0 ? (
             bikeList === 1 ? (
+              <BikeList
+                data={data}
+                page={page}
+                setPage={setPage}
+                lastPage={lastPage}
+                favoriteActive={favoriteActive}
+                setFavoriteActive={setFavoriteActive}
+              />
+            ) : WindowSize < 768 ? (
               <BikeList
                 data={data}
                 page={page}

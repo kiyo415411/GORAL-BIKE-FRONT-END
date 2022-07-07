@@ -12,6 +12,7 @@ import swal from 'sweetalert';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
 import { useProductCart } from '../../utils/useProductCart';
+import { Link } from 'react-router-dom';
 // IMG PROBLEM ADFASDFASFL
 // $COLOR INSTEAD OF IMG NAME $COLOR
 function BikeDetailDescription(props) {
@@ -154,7 +155,22 @@ function BikeDetailDescription(props) {
           >
             加入購物車
           </button>
-          <button className="btn btn-primary rounded-0 ms-2">直接購買</button>
+          <Link to="/shopping-cart">
+            <button
+              className="btn btn-primary rounded-0 ms-2"
+              onClick={() => {
+                addItem({
+                  id: props.id,
+                  name: props.bike[0].product_name,
+                  image: props.img,
+                  price: props.bike[0].product_price,
+                  quantity: 1,
+                });
+              }}
+            >
+              直接購買
+            </button>
+          </Link>
         </div>
       </div>
       {/* <p className="m-2 text-content">{bikeDetail[0].LongDesc}</p> */}

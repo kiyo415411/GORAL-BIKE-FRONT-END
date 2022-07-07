@@ -92,9 +92,22 @@ function BikePaddyCard(props) {
               </div>
               <p className="card-text text-subcontent"></p>
               <div>
-                <button className="btn btn-primary rounded-pill px-4 me-2">
-                  直接購買
-                </button>
+                <Link to="/shopping-cart">
+                  <button
+                    className="btn btn-primary rounded-pill px-4 me-2"
+                    onClick={() => {
+                      addItem({
+                        id: props.id,
+                        name: props.name,
+                        image: props.img,
+                        price: props.price,
+                        quantity: 1,
+                      });
+                    }}
+                  >
+                    直接購買
+                  </button>
+                </Link>
                 <button
                   className={`btn border-primary rounded-pill px-4 ${
                     shoppingClick === true

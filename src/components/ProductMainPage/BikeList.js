@@ -1,14 +1,16 @@
 import BikeCard from './BikeCard.js';
 import Pagination from './Pagination.js';
+import setWindowSize from '../hooks/useWindowSize';
 
 function BikeList(props) {
+  let WindowSize = setWindowSize();
   return (
-    <ul className="list-unstyled row">
+    <ul className="list-unstyled row mx-auto">
       {props.data.map((item, index) => {
         return (
           <li
             key={item.product_id}
-            className="col-12 col-md-8 col-lg-12 mx-auto"
+            className="col-6 col-md-8 p-1 col-lg-12 mx-md-auto mt-md-5"
           >
             <BikeCard
               bike={item.product_images}

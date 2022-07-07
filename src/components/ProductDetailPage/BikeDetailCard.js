@@ -83,10 +83,10 @@ function BikeDetailCard(props) {
   if (bike.length === 0) return <></>;
   return (
     <div className="container mt-5">
-      <div className="d-flex">
-        <div className="" maxHeight="528">
+      <div className="d-md-flex pt-5 mt-5 mt-md-0">
+        <div className="" style={{ maxWidth: '528px' }}>
           <img
-            style={{ maxWidth: '528px' }}
+            className=" img-fluid"
             src={`${IMAGE_URL}/bikes/${BikeIMG}${
               currentColor ? '$' : ''
             }${currentColor}.${BikeStart}`}
