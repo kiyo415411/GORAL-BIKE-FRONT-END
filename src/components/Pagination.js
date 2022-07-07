@@ -2,9 +2,14 @@
 import Pagination from 'react-bootstrap/Pagination';
 import { RiArrowRightSLine, RiArrowLeftSLine } from 'react-icons/ri';
 
-export default function PaginationActive({ page, setPage, lastPage }) {
+export default function PaginationActive({
+  page,
+  setPage,
+  lastPage,
+  className,
+}) {
   return (
-    <Pagination className="mt-1">
+    <Pagination className={`mt-1 ${className}`}>
       {/* ---------------------------------------- 上一頁  */}
       <Pagination.Item
         disabled={page === 1 ? 'disabled' : ''}
