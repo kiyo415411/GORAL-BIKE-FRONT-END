@@ -30,7 +30,6 @@ export default function CustomizeForm(props) {
       );
       console.log(response.data);
       handleClose();
-      props.setReRender(!props.reRender);
       if (response.data.ResultsFieldCount === 0) {
         Swal.fire({
           title:
@@ -40,6 +39,7 @@ export default function CustomizeForm(props) {
           color: '#716add',
           backdrop: `rgba(0,0,123,0.4)`,
         });
+        props.setReRender(!props.reRender);
       }
     } catch (err) {
       console.log(err);

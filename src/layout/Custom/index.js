@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { LoginContext } from '../../utils/useLogin';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
+import CustomizeUpdate from './CustomizeUpdate';
 
 import {
   CubeCamera,
@@ -28,6 +29,7 @@ export default function Custom() {
   const [isData, setIsData] = useState([]); //讀取畫面
   const [show, setShow] = useState(false); //讀取畫面
   const [number, setNumber] = useState(0); //讀取畫面
+  const [orderID, setOrderID] = useState(0); //讀取畫面
   const [reRender, setReRender] = useState(false); //讀取畫面
   console.log(Data.isLogin);
   console.log(Data.userData.userId);
@@ -184,6 +186,13 @@ export default function Custom() {
       <Picker />
       <div className="vh-100 bg-black p-0 m-0">
         <section className="fixed-top d-flex justify-content-end">
+          <CustomizeUpdate
+            state={state}
+            Data={Data}
+            orderID={orderID}
+            reRender={reRender}
+            setReRender={setReRender}
+          />
           <CustomizeForm
             state={state}
             Data={Data}
@@ -219,7 +228,10 @@ export default function Custom() {
               return (
                 <li
                   className="col-2 text-muted w-10 btn fw-bold"
-                  onClick={() => setNumber(index)}
+                  onClick={() => {
+                    setNumber(index);
+                    setOrderID(value.orderId);
+                  }}
                 >
                   方案{index + 1}
                 </li>
