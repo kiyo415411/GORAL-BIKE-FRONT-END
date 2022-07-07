@@ -55,7 +55,7 @@ export default function CustomizeForm(props) {
   return (
     <>
       <Button
-        className=" btn text-muted w-5 m-3"
+        className="btn text-muted m-3"
         variant="black"
         onClick={handleShow}
       >

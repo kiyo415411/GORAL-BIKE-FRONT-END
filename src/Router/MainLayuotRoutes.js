@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Index from '../layout/Home';
 import Checkout from '../pages/Checkout';
 import News from '../layout/News';
 import ShoppingCart from '../pages/ShoppingCart';
@@ -42,7 +41,6 @@ export default function MainLayoutRoutes() {
         <Route path="/course" element={<CourseList />} />
         <Route path="/activity/:courseId" element={<ActivityDetail />} />
         <Route path="/activity" element={<ActivityList />} />
-        <Route path="/homepage" element={<Index />} />
       </Routes>
     </React.Fragment>
   );

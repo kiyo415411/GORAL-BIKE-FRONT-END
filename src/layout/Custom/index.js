@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber';
-import React, { useRef, useState, Suspense, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import BikeModel from './OBJ/Bike';
 import { HexColorPicker } from 'react-colorful';
 import { proxy, useSnapshot } from 'valtio';
@@ -7,6 +7,10 @@ import { Link } from 'react-router-dom';
 import CustomizeForm from './CustomizeForm';
 import { Ground } from './Ground';
 import { FloatingGrid } from './FloatingGrid';
+import useWindowSize from '../../components/hooks/useWindowSize';
+import LoadingPage from '../../components/Loading/LoadingPage';
+import { useState } from 'react';
+
 import {
   CubeCamera,
   Environment,
@@ -38,17 +42,23 @@ const state = proxy({
 });
 
 function Picker() {
+  const screenWidth = useWindowSize();
+  let rwd = screenWidth < 768;
   const snap = useSnapshot(state);
   return (
     <section
-      className="fixed-top"
+      className={
+        rwd
+          ? `fixed-bottom position-absolute bottom-0 start-50 translate-middle-x`
+          : 'fixed-top'
+      }
       style={{
         display: snap.current ? 'block' : 'none',
       }}
     >
-      <section className="d-flex justify-content-start align-items-center gap-3">
+      <section className="d-md-flex justify-content-start align-items-center">
         <HexColorPicker
-          className="m-5"
+          className="m-md-5"
           color={snap.items[snap.current]}
           onChange={(color) => (state.items[snap.current] = color)}
         />
@@ -66,10 +76,6 @@ function Picker() {
 }
 
 function BikeShow() {
-  useEffect(() => {
-    console.log('state123:', state.items);
-  }, [state.items]);
-
   return (
     <>
       <OrbitControls target={[0, 0.35, 0]} maxPolarAngle={1.45} />
@@ -108,16 +114,21 @@ function BikeShow() {
   );
 }
 export default function Custom() {
-  return (
+  const [isLoading, setIsLoading] = useState(true); //讀取畫面
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 5000);
+  return isLoading ? (
+    <LoadingPage />
+  ) : (
     <Suspense fallback={null}>
       <Picker />
-
-      <div className="vh-100 bg-black  p-0 m-0">
-        <section className="fixed-top row justify-content-end">
-          <CustomizeForm state={state} />
+      <div className="vh-100 bg-black p-0 m-0">
+        <section className="fixed-top d-flex justify-content-end">
+          <CustomizeForm className="" state={state} />
           <Link
-            to="/homepage"
-            className="btn btn-black text-muted w-5 m-3"
+            to="/"
+            className="btn btn-black text-muted m-3"
             onClick={() => {
               document.body.style.cursor = '';
             }}

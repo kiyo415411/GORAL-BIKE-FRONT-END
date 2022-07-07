@@ -74,7 +74,7 @@ function GoralBikeNavbar() {
         <Container>
           <Navbar.Brand>
             <Link
-              to="/homepage"
+              to="/"
               className="navbar-brand col-5 col-md-2 p-0 text-center"
             >
               <img id="Logo" src={Logo} alt="Logo" />

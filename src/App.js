@@ -19,6 +19,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { API_URL } from './utils/config';
 
+import Index from './layout/Home';
+
 const products = [
   {
     id: 1,
@@ -103,6 +105,7 @@ function App() {
               <CartProvider>
                 <Routes>
                   <Route path="/" element={<BasicLayout />}>
+                    <Route index path="/" element={<Index />} />
                     <Route path="*" element={<MainLayoutRoutes />} />
                   </Route>
                   <Route path="/CustomePages" element={<CustomLayout />}>

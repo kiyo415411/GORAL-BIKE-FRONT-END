@@ -5,7 +5,7 @@ import axios from 'axios';
 import { API_URL, IMAGE_URL } from '../../utils/config';
 import DataAPI from '../../components/DataAPI';
 import { BsSquareFill } from 'react-icons/bs';
-
+import CutomizePic from '../../images/bicycle-g403b4c3c3_1920.jpg';
 // slick css
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -49,7 +49,6 @@ export default function Index() {
   const [isLoading, setIsLoading] = useState(true); //讀取畫面
 
   useEffect(() => {
-    setIsLoading(true);
     const getIndexData = async () => {
       try {
         // 需要等待資料pending，不然useState會是空值
@@ -68,30 +67,29 @@ export default function Index() {
         setProduct(getProductValue.data);
         setActivity(getActivityValue.data);
         setCourse(getCourseValue.data.classFullDtaa);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 3000);
       } catch (e) {
         throw new Error(e);
       }
     };
     getIndexData();
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 7500);
   }, []);
 
   return (
     <>
-      <main>
-        {isLoading ? (
-          <LoadingPage />
-        ) : (
-          <div className="container-fluid m-0 p-0 animate__animated animate__fadeIn">
+      {isLoading ? (
+        <LoadingPage />
+      ) : (
+        <main>
+          <div className="container-fluid m-0 p-0">
             {/* HERO */}
             <section
               className="bg-info overflow-hidden position-relative"
               style={{ height: '804px' }}
             >
               <video src={VIDEO} autoPlay={true} loop={true} muted></video>
-
               <article
                 className={
                   rwd
@@ -114,7 +112,7 @@ export default function Index() {
             </section>
 
             {/* NEWS */}
-            <section className="bg-light row row justify-content-around px-5 m-0">
+            <section className="bg-light row row justify-content-around px-md-5 m-0">
               <article className="col-12 col-md-5 mt-5">
                 <h1 className="border-5 border-start border-secondary mb-3">
                   　最新消息
@@ -201,11 +199,13 @@ export default function Index() {
 
             {/* PRODUCT */}
             <section className="py-5 my-5">
-              {/* <h1 className="w-60 mx-auto mt-4">熱門商品</h1> */}
+              <h1 className="border-5 border-start border-secondary my-3 mx-3 mx-md-auto w-70">
+                　熱賣商品
+              </h1>
               <Slider
                 asNavFor={secondSwiper}
                 ref={(slider1) => setFirstSwiper(slider1)}
-                className="mx-5 px-5 center"
+                className="mx-2 px-1 mx-md-5 px-md-5 "
               >
                 {product.map((value) => {
                   return (
@@ -218,10 +218,7 @@ export default function Index() {
                         style={{ textAlign: 'justify' }}
                       >
                         <h2>{value.product_name}</h2>
-                        <p className="mt-4 fs-6">
-                          鋁合金單避震登山車，採用較為直挺的騎乘幾何設定，Shimano
-                          Deore 1x10零組件搭配，Suntour避震前叉。
-                        </p>
+                        <p className="mt-4 fs-6">{value.product_description}</p>
                         <Link to={`/product/detail/${value.product_id}`}>
                           <p className="text-danger fw-bold">查看更多</p>
                         </Link>
@@ -279,9 +276,11 @@ export default function Index() {
                         alt=""
                       />
                       <section
-                        className={`bg-black position-absolute top-50 end-0 translate-middle-y h-60 ${
-                          rwd ? 'w-100' : 'w-35'
-                        } bg-opacity-75`}
+                        className={`bg-black position-absolute  ${
+                          rwd
+                            ? 'w-100 h-100 bg-opacity-50 top-50 start-50 translate-middle pt-5'
+                            : 'w-35 h-60 bg-opacity-75 top-50 end-0 translate-middle-y '
+                        } `}
                       >
                         <section className="col-12 m-0 text-white p-4 row">
                           <section className="col-12 m-3">
@@ -362,7 +361,7 @@ export default function Index() {
                             </section>
                             <Link
                               className="mt-5 btn btn-primary"
-                              to={`map/mapDetail/${value['林道名稱']}`}
+                              to={`/map/mapDetail/${value['林道名稱']}`}
                             >
                               前往詳細頁面
                             </Link>
@@ -374,9 +373,9 @@ export default function Index() {
                 })}
               </Swiper>
             </section>
-            <section className="bg-light row m-1 m-md-0 p-md-5 justify-content-md-center align-items-md-center">
-              <article className="col-md-3 my-auto me-md-5 row justify-content-center ">
-                <h3 className="my-3 fw-bold text-center text-md-start">
+            <section className="bg-light row mx-1 py-5 m-md-0 p-md-5 justify-content-md-center align-items-md-center">
+              <article className="col-md-3 my-md-auto me-md-5 row justify-content-center ">
+                <h3 className="my-md-3 fw-bold text-center text-md-start">
                   登山車訓練營
                 </h3>
                 <p className="my-3 mt-md-3" style={{ textAlign: 'justify' }}>
@@ -409,7 +408,7 @@ export default function Index() {
                     disableOnInteraction: false,
                   }}
                   centeredSlides={true}
-                  slidesPerView={rwd ? 2 : 4}
+                  slidesPerView={rwd ? 1 : 4}
                   modules={[Autoplay, EffectCoverflow, Mousewheel]}
                   className="mySwiper my-auto h-100"
                 >
@@ -430,9 +429,52 @@ export default function Index() {
                 </Swiper>
               </section>
             </section>
-
+            {/* Cutomzie */}
+            <section
+              className="bg-light overflow-hidden position-relative py-5"
+              style={{
+                height: 672,
+              }}
+            >
+              <figure
+                className={`position-absolute  ${
+                  rwd ? 'top-50 start-50 translate-middle' : ''
+                }`}
+              >
+                <img className="" src={CutomizePic} alt="" />
+              </figure>
+              <section
+                className={`w-100 h-100 position-absolute top-50 start-50 translate-middle  ${
+                  rwd ? 'bg-black bg-opacity-50' : 'bg-light bg-opacity-10'
+                }  `}
+              />
+              <section
+                className={`position-absolute ${
+                  rwd ? 'top-50 start-50 translate-middle' : ''
+                } text-center mt-5 w-100`}
+              >
+                <h2
+                  className={`${
+                    rwd ? 'text-white display-1' : 'text-dark display-3'
+                  }  fw-bolder mb-5 my-3`}
+                >
+                  引爆你的創意魂打造專屬登山車
+                </h2>
+                <Link
+                  to={`/CustomePages/customize`}
+                  className={`btn ${
+                    rwd ? 'btn-danger' : 'btn-primary'
+                  } text-white fw-bold px-5 py-2`}
+                >
+                  開始客製
+                </Link>
+              </section>
+            </section>
             {/* ACTIVTY */}
-            <section className="bg-light py-5 activity">
+            <section
+              className="bg-light py-5 activity px-1"
+              style={{ height: '768px' }}
+            >
               <h1 className=" display-6 fw-bolder text-center my-5">
                 2022年 <br />
                 你絕不能錯過的登山車活動
@@ -442,7 +484,7 @@ export default function Index() {
                   delay: 2000,
                   disableOnInteraction: false,
                 }}
-                slidesPerView={rwd ? 2 : 3}
+                slidesPerView={rwd ? 1 : 3}
                 speed={300}
                 grabCursor={true}
                 centeredSlides={true}
@@ -477,8 +519,8 @@ export default function Index() {
               </Swiper>
             </section>
           </div>
-        )}
-      </main>
+        </main>
+      )}
     </>
   );
 }
