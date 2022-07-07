@@ -26,7 +26,7 @@ function Member() {
   const { userData, setUserData, setIsLogin } = useLogin();
   const { name, email, phone, photo } = userData;
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
 
   const handleClick = () => {
     setOpen(!open);

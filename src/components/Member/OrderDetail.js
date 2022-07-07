@@ -8,67 +8,71 @@ import Badge from 'react-bootstrap/Badge';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
 import { useLocation } from 'react-router';
+import moment from 'moment';
+import { act } from 'react-dom/test-utils';
 
 function OrderDetail(props) {
   const location = useLocation();
   const orderId = location.pathname.split('/').pop();
 
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: 'BIG_NINE_15',
-      image: 'BIG_NINE_15.jpg',
-      price: 22000,
-      quantity: 2,
-    },
-    {
-      id: 2,
-      name: 'BIG_NINE_200',
-      image: 'BIG_NINE_200.jpg',
-      price: 12000,
-      quantity: 1,
-    },
-  ]);
-  const [course, setCourse] = useState([
-    {
-      id: 1,
-      name: '墾丁一日遊',
-      image: 'Kenting001.jpg',
-      price: 22000,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      name: '墾丁一日遊',
-      image: 'Kenting001.jpg',
-      price: 12000,
-      quantity: 1,
-    },
-  ]);
-  const [activities, setActivities] = useState([
-    {
-      id: 1,
-      name: '台東自由行',
-      image: '臺東縣_海瑞鄉_錦屏林道.jpg',
-      price: 22000,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      name: '台東自由行',
-      image: '臺東縣_海瑞鄉_錦屏林道.jpg',
-      price: 12000,
-      quantity: 1,
-    },
-  ]);
+  const [order, setOrder] = useState({
+    order_id: 0,
+    order_create_time: '',
+    order_status: '',
+    payment_method_name: '',
+    payment_status: '',
+    total: 0,
+    recipient: '',
+    phone: '',
+    order_address: '',
+    remark: '',
+  });
+  const [products, setProducts] = useState([]);
+  const [course, setCourse] = useState([]);
+  const [activities, setActivities] = useState([]);
+  const calculateItemTotals = (items) =>
+    items.map((item) => ({
+      ...item,
+      itemTotal: item.price * item.quantity,
+    }));
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await axios.get(`${API_URL}/order/${orderId}`, {
-  //       withCredentials: true,
-  //     });
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const response = await axios.get(`${API_URL}/order/detail/${orderId}`, {
+        withCredentials: true,
+      });
+      const orderDetail = response.data.data;
+      setOrder(orderDetail[0]);
+      const productData = response.data.productData;
+      setProducts(calculateItemTotals(productData));
+      const courseData = response.data.courseData;
+      setCourse(calculateItemTotals(courseData));
+      const activityData = response.data.activityData;
+      setActivities(calculateItemTotals(activityData));
+    })();
+  }, []);
+
+  const {
+    order_id,
+    order_create_time,
+    order_status,
+    payment_method_name,
+    payment_status,
+    total,
+    recipient,
+    phone,
+    order_address,
+    remark,
+  } = order;
+
+  const orderTime = moment(order_create_time).format('YYYY-MM-DD HH:mm');
+
+  const recipientInfo = {
+    recipient: recipient,
+    phone: phone,
+    address: order_address,
+    note: remark,
+  };
 
   return (
     <>
@@ -78,39 +82,49 @@ function OrderDetail(props) {
         </div>
         <div className="d-flex px-3 justify-content-between">
           <div className="d-flex text-primary align-items-center gap-3">
-            <h3>訂單編號: 26</h3>
-            <span>2022-05-06 01:53</span>
+            <h3>訂單編號: {order_id}</h3>
+            <span>{orderTime}</span>
           </div>
           <div className="d-flex gap-3 align-items-start">
             <Badge bg="primary" className="fs-6 py-2 fw-normal">
-              線上付款
+              {payment_method_name}
             </Badge>
             <Badge bg="secondary" className="fs-6 py-2 fw-normal">
-              已付款
+              {payment_status}
             </Badge>
             <Badge bg="subcontent" className="fs-6 py-2 fw-normal">
-              處理中
+              {order_status}
             </Badge>
           </div>
         </div>
-        <OrderDetailList
-          type="商品"
-          products={products}
-          setProducts={setProducts}
-        />
-        <OrderDetailList
-          type="課程"
-          products={course}
-          setProducts={setCourse}
-        />
-        <OrderDetailList
-          type="活動"
-          products={activities}
-          setProducts={setActivities}
-        />
-        <CheckoutSummary allCartTotal={200000} className="px-5 my-0" />
+        {products !== [] ? (
+          <OrderDetailList
+            type="商品"
+            products={products}
+            setProducts={setProducts}
+            category="bikes"
+          />
+        ) : null}
+        {course.length !== 0 ? (
+          <OrderDetailList
+            type="課程"
+            products={course}
+            setProducts={setCourse}
+            category="course"
+          />
+        ) : null}
+        {activities.length !== 0 ? (
+          <OrderDetailList
+            type="活動"
+            products={activities}
+            setProducts={setActivities}
+            category="activity"
+          />
+        ) : null}
+
+        <CheckoutSummary allCartTotal={total} className="px-5 my-0" />
       </section>
-      <OrderDetailInfo />
+      <OrderDetailInfo recipientInfo={recipientInfo} />
       <div className="text-end my-4">
         <Link to="/member/order" className="btn btn-primary fs-3 rounded-0">
           返回列表

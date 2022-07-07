@@ -21,7 +21,7 @@ function OrderList(props) {
         withCredentials: true,
       });
       const newOrderList = orderListRes.data.data;
-      console.log('orderList', newOrderList);
+      // console.log('orderList', newOrderList);
       setOrderList(newOrderList);
     })();
   }, []);

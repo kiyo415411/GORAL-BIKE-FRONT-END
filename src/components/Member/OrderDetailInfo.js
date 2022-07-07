@@ -2,6 +2,7 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { FaUser } from 'react-icons/fa';
+import { useLogin } from '../../utils/useLogin';
 
 // const recipientInfo = {
 //   recipient: '',
@@ -13,6 +14,8 @@ import { FaUser } from 'react-icons/fa';
 
 function OrderDetailInfo(props) {
   const { recipientInfo } = props;
+  const { recipient, phone, address, note } = recipientInfo;
+  const { userData } = useLogin();
 
   return (
     <>
@@ -24,15 +27,15 @@ function OrderDetailInfo(props) {
               <span className="ms-2 fs-5">收件人資訊</span>
             </div>
             <div className="ps-5">
-              <p>收件人姓名</p>
-              <p>電話</p>
-              <p>EMAIL</p>
-              <p>地址</p>
+              <p>{recipient}</p>
+              <p>{phone}</p>
+              <p>{userData.email}</p>
+              <p>{address}</p>
             </div>
           </Col>
           <Col sm={6}>
             <p className="fs-5 mb-4">備註欄</p>
-            <p>備註</p>
+            <p>{note}</p>
           </Col>
         </Row>
       </section>

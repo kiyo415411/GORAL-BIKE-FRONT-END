@@ -5,23 +5,7 @@ import { IMAGE_URL } from '../../utils/config';
 import React from 'react';
 
 function OrderDetailList(props) {
-  const { products, setProducts, type } = props;
-  const [totalItems, setTotalItems] = useState(0);
-  const [itemsTotal, setItemsTotal] = useState(0);
-
-  let category = '';
-  if (type === '商品') {
-    category = 'bikes';
-  } else if (type === '課程') {
-    category = 'course';
-  } else {
-    category = 'activity';
-  }
-  const calculateItemTotals = (items) =>
-    items.map((item) => ({
-      ...item,
-      itemTotal: item.price * item.quantity,
-    }));
+  const { products, type, category } = props;
 
   const calculateTotalItems = (items) => {
     return items.reduce((sum, item) => sum + item.quantity, 0);
@@ -29,12 +13,6 @@ function OrderDetailList(props) {
   const calculateItemsTotal = (items) => {
     return items.reduce((total, item) => total + item.quantity * item.price, 0);
   };
-  useEffect(() => {
-    const newProducts = calculateItemTotals(products);
-    setProducts(newProducts);
-    setTotalItems(calculateTotalItems(newProducts));
-    setItemsTotal(calculateItemsTotal(newProducts));
-  }, []);
   return (
     <>
       <section className="mt-3 mb-5 px-5">
@@ -77,11 +55,13 @@ function OrderDetailList(props) {
         {/* listSummary */}
         <div className="row fs-4 text-content text-center justify-content-between pt-3 mx-0 hr">
           <div className="col-lg-3">
-            總共 {totalItems} 項{type}
+            總共 {calculateTotalItems(products)} 項{type}
           </div>
           <div className="row col-lg-4">
             <div className="col">{type}金額</div>
-            <div className="col">$ {toThousands(itemsTotal)}</div>
+            <div className="col">
+              $ {toThousands(calculateItemsTotal(products))}
+            </div>
           </div>
         </div>
         {/* listSummary */}
