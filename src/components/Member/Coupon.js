@@ -7,7 +7,6 @@ import Col from 'react-bootstrap/Col';
 
 export default function Coupon({ userData }) {
   const [data, setData] = useState([]);
-
   useEffect(() => {
     let getData = async () => {
       try {
