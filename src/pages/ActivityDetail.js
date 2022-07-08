@@ -210,7 +210,7 @@ export default function ActivityDetail() {
                             name={item.activity_name}
                             image={item.activity_pictures}
                             price={item.activity_fee}
-                            quantity="1"
+                            quantity={1}
                           />
                         </>
                       )}

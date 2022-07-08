@@ -106,7 +106,7 @@ function OrderList(props) {
                 payment_method_name={v.payment_method_name}
                 payment_status={v.payment_status}
                 order_status={v.order_status}
-                total={v.total}
+                total={v.discount_total}
               />
             );
           })}

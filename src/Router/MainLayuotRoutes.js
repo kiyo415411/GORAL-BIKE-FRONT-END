@@ -25,6 +25,8 @@ export default function MainLayoutRoutes() {
         <Route path="/member/favorite" element={<Member />} />
         <Route path="/member/order/detail/:orderId" element={<Member />} />
         <Route path="/member/order" element={<Member />} />
+        <Route path="/member/coupon" element={<Member />} />
+        <Route path="/member/profile" element={<Member />} />
         <Route path="/member" element={<Member />} />
         <Route path="/shopping-cart/checkout" element={<Checkout />} />
         <Route path="/shopping-cart" element={<ShoppingCart />} />

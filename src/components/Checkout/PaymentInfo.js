@@ -13,7 +13,9 @@ function PaymentInfo(props) {
               <span className="ms-2 fs-5">付款資訊</span>
             </div>
             <div className="mb-3 row">
-              <label className="form-label col-md-2 text-end">付款方式</label>
+              <label className="form-label col-md-2 text-sm-end">
+                付款方式
+              </label>
               <div className="col-md-4">
                 <select
                   className="form-select"

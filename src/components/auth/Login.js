@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -6,6 +6,7 @@ import { API_URL } from '../../utils/config';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../../utils/useLogin';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 // const handleChangeModal = (modal) => {
 //   setActiveModal(modal);
@@ -15,6 +16,13 @@ function Login(props) {
   const { handleChangeModal, handleClose } = props;
   const history = useNavigate();
   const { setIsLogin } = useLogin();
+  const [passwordField, setPasswordField] = useState(false);
+  const handleSwitchEyes = (e) => {
+    console.log(e.target.id);
+    if (e.target.id === 'password') {
+      setPasswordField(!passwordField);
+    }
+  };
 
   const Toast = Swal.mixin({
     toast: true,
@@ -47,7 +55,6 @@ function Login(props) {
           if (result.isConfirmed) {
             setIsLogin(true);
             handleClose();
-            history('/member');
           }
         });
       } else {
@@ -58,12 +65,13 @@ function Login(props) {
         });
       }
     } catch (err) {
-      Toast.fire({
+      Swal.fire({
         icon: 'error',
         html: err.response.data.error,
-        // customClass: {},
+        confirmButtonText: 'OK',
+        focusConfirm: false,
+        // buttonsStyling: false,
       });
-      console.log(err.response.data);
     }
   };
   // 登入模板
@@ -75,7 +83,7 @@ function Login(props) {
       .required('此欄位必填')
       .matches(
         /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
-        '只可包含英文字母，數字'
+        '需包含至少一個英文、數字，且不可含有符號'
       ),
   });
   // 自製受 Formik 管理的 component
@@ -85,7 +93,20 @@ function Login(props) {
     const [field, meta] = useField(props);
     return (
       <>
-        <input {...field} {...props} />
+        {field.name === 'password' ? (
+          <div className="input-group">
+            <input {...field} {...props} />
+            <div
+              className="btn btn-outline-subcontent rounded-0"
+              id="password"
+              onClick={handleSwitchEyes}
+            >
+              {passwordField ? <FaEye /> : <FaEyeSlash />}
+            </div>
+          </div>
+        ) : (
+          <input {...field} {...props} />
+        )}
         {meta.touched && meta.error ? (
           <div className="error-msg">{meta.error}</div>
         ) : null}
@@ -129,7 +150,7 @@ function Login(props) {
                       <div className="form-group last mb-3">
                         <MyTextField
                           name="password"
-                          type="text"
+                          type={passwordField ? 'text' : 'password'}
                           className="form-control"
                           placeholder="使用者密碼"
                         />
