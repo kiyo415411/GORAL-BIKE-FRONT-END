@@ -38,8 +38,11 @@ function GoralBikeNavbar() {
         });
         if (logoutRes.status === 200 && logoutRes.data.code === 0) {
           setUserData({
-            userId: '',
+            userId: 0,
             email: '',
+            name: '',
+            phone: '',
+            photo: '',
           });
           setIsLogin(false);
           history('/');
