@@ -21,6 +21,8 @@ export default function LocationMarker() {
       // 依照地圖click觸發事件飛往指定地點
       Data.setZoom(8);
       Data.setShow(true);
+      Data.setGetName('');
+
       map.flyTo(Data.position, Data.zoom);
     },
   });

@@ -31,6 +31,7 @@ export default function Mark() {
               eventHandlers={{
                 click(e) {
                   // 轉換座標值賦予
+                  Data.setGetName(value['林道名稱']);
                   const position = [dataAxis[1], dataAxis[0]];
                   // 父層回傳值設定
                   Data.setPosition(position);
