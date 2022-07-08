@@ -9,7 +9,7 @@
   .member-info,
   .profile {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
-    input[type="file"] {
+    input[type='file'] {
       position: absolute;
       width: 1px;
       height: 1px;
@@ -30,9 +30,6 @@
   .order-title,
   .order-list {
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
-  }
-  .order-none {
-    padding: 2.5rem;
   }
   .circle {
     border-radius: 50%;

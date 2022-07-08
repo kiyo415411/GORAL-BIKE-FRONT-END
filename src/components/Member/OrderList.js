@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { API_URL, IMAGE_URL } from '../../utils/config';
+import { API_URL } from '../../utils/config';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
@@ -17,14 +17,16 @@ function OrderList(props) {
   const history = useNavigate();
   useEffect(() => {
     (async () => {
-      const orderListRes = await axios.get(`${API_URL}/order/${userId}`, {
-        withCredentials: true,
-      });
-      const newOrderList = orderListRes.data.data;
-      // console.log('orderList', newOrderList);
-      setOrderList(newOrderList);
+      if (userId !== 0) {
+        const orderListRes = await axios.get(`${API_URL}/order/${userId}`, {
+          withCredentials: true,
+        });
+        const newOrderList = orderListRes.data.data;
+        // console.log('orderList', newOrderList);
+        setOrderList(newOrderList);
+      }
     })();
-  }, []);
+  }, [userId]);
 
   const goDetail = (orderId) => {
     history(`/member/order/detail/${orderId}`);
@@ -110,15 +112,19 @@ function OrderList(props) {
           })}
         </section>
       ) : (
-        <section className="text-center order-none text-subcontent">
-          <p className="mb-3">
-            尚未有訂單紀錄，前往
-            <Link to="/products" className="text-highlight mx-1">
-              商品頁
+        <div className="d-grid justify-content-center align-items-center link-content h-auto pt-5">
+          <div className="d-flex justify-content-center mt-5">
+            <p>尚未有訂單紀錄，前往</p>
+            <Link to="/product" className="link-highlight mx-1">
+              商品頁面
             </Link>
-            逛逛！
-          </p>
-        </section>
+            <p>逛逛！</p>
+          </div>
+          <img
+            src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/a60759ad1dabe909c46a817ecbf71878.png"
+            alt=""
+          />
+        </div>
       )}
     </>
   );

@@ -42,7 +42,7 @@ function GoralBikeNavbar() {
             email: '',
           });
           setIsLogin(false);
-          history('/homepage');
+          history('/');
         }
       }
     });

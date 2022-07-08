@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
 import { toThousands } from '../../utils/common';
 import { IMAGE_URL } from '../../utils/config';
 import React from 'react';

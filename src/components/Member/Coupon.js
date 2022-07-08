@@ -11,7 +11,7 @@ export default function Coupon({ userData }) {
   useEffect(() => {
     let getData = async () => {
       try {
-        let response = await axios.get(`${API_URL}/member/favorite/coupon`, {
+        let response = await axios.get(`${API_URL}/member/coupon`, {
           params: {
             userId: userData.userId,
           },
