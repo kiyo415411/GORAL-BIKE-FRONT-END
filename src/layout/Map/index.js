@@ -27,6 +27,8 @@ export default function Index() {
   const [position, setPosition] = useState([24, 121]);
   // 設定地圖縮放大小
   const [zoom, setZoom] = useState(8);
+  // 取得地圖名稱
+  const [getName, setGetName] = useState('');
   // 是否顯示
   const [show, setShow] = useState(true);
   // 地區區域 ex.北部
@@ -73,6 +75,8 @@ export default function Index() {
   const VALUE = {
     markerRef,
     position,
+    getName,
+    setGetName,
     setPosition,
     zoom,
     setZoom,
