@@ -4,27 +4,50 @@ import Summary from '../components/Cart/Summary';
 import { useProductCart } from '../utils/useProductCart';
 import { useCourseCart } from '../utils/useCourseCart';
 import { useActivityCart } from '../utils/useActivityCart';
-import { useCart } from '../utils/useCart';
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../utils/useLogin';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
+import { useCart } from '../utils/useCart';
+import { IMAGE_URL } from '../utils/config';
 
 // 傳到結帳頁面，結帳頁面只讀取 checkedItems 做呈現
 // 結完帳清除 checkItems 陣列，以及 localStorage 裡 checked = true 的產品
 
 function ShoppingCart() {
-  const navigate = useNavigate();
   const cart = useCart();
   const { allCartTotal } = cart;
+  const navigate = useNavigate();
   const productCart = useProductCart();
   const courseCart = useCourseCart();
   const activityCart = useActivityCart();
   const login = useLogin();
   const { isLogin } = login;
 
+  if (
+    productCart.cart.isEmpty &&
+    courseCart.cart.isEmpty &&
+    activityCart.cart.isEmpty
+  ) {
+    return (
+      <>
+        <div className="d-flex justify-content-center flex-column align-items-center link-content min-height-100 pt-5">
+          <div className="d-flex justify-content-center mt-5">
+            <p>你的購物車還是空的，前往</p>
+            <Link to="/product" className="link-highlight mx-1">
+              商品頁面
+            </Link>
+            <p>逛逛！</p>
+          </div>
+          <img src={`${IMAGE_URL}/no-data/green.svg`} alt="" />
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
-      <div className="container">
+      <div className="container mt-nav">
         {/* 商品購物車 */}
         {productCart.cart.isEmpty ? (
           <div></div>
@@ -44,7 +67,7 @@ function ShoppingCart() {
           <CartList productCart={activityCart} type="活動" />
         )}
         {/* 三個購物車加總 */}
-        <Summary allCartTotal={allCartTotal} />
+        <Summary cart={cart} />
         {/* 按鈕群組 */}
         <section className="d-flex justify-content-end text-end mb-5">
           <div>

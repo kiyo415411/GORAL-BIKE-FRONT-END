@@ -38,11 +38,14 @@ function GoralBikeNavbar() {
         });
         if (logoutRes.status === 200 && logoutRes.data.code === 0) {
           setUserData({
-            userId: '',
+            userId: 0,
             email: '',
+            name: '',
+            phone: '',
+            photo: '',
           });
           setIsLogin(false);
-          history('/homepage');
+          history('/');
         }
       }
     });
@@ -74,7 +77,7 @@ function GoralBikeNavbar() {
         <Container>
           <Navbar.Brand>
             <Link
-              to="/homepage"
+              to="/"
               className="navbar-brand col-5 col-md-2 p-0 text-center"
             >
               <img id="Logo" src={Logo} alt="Logo" />
@@ -90,7 +93,7 @@ function GoralBikeNavbar() {
                 全部商品
               </NavLink>
               <NavLink to="map" className={'nav-link'}>
-                地圖
+                場地資訊
               </NavLink>
               <NavLink to="course" className={'nav-link'}>
                 課程

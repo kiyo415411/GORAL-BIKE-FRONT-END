@@ -4,9 +4,19 @@ import axios from 'axios';
 import { API_URL } from '../../utils/config';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useState } from 'react';
 
 function SignUp(props) {
   const { handleChangeModal, handleClose } = props;
+  const [passwordField, setPasswordField] = useState(false);
+  const [rePasswordField, setRePasswordField] = useState(false);
+
+  const handleSwitchEyes = (e) => {
+    if (e.target.id === 'password') {
+      setPasswordField(!passwordField);
+    } else setRePasswordField(!rePasswordField);
+  };
   const history = useNavigate();
 
   const signupValidationSchema = Yup.object({
@@ -44,7 +54,31 @@ function SignUp(props) {
         <label className="label" htmlFor={props.name}>
           {label}
         </label>
-        <input {...field} {...props} />
+        {field.name === 'password' ? (
+          <div className="input-group">
+            <input {...field} {...props} />
+            <div
+              className="btn btn-white rounded-0"
+              id="password"
+              onClick={handleSwitchEyes}
+            >
+              {passwordField ? <FaEye /> : <FaEyeSlash />}
+            </div>
+          </div>
+        ) : field.name === 'rePassword' ? (
+          <div className="input-group">
+            <input {...field} {...props} />
+            <div
+              className="btn btn-white rounded-0"
+              id="rePassword"
+              onClick={handleSwitchEyes}
+            >
+              {rePasswordField ? <FaEye /> : <FaEyeSlash />}
+            </div>
+          </div>
+        ) : (
+          <input {...field} {...props} />
+        )}
         {meta.touched && meta.error ? (
           <div className="error-msg">{meta.error}</div>
         ) : (
@@ -85,7 +119,7 @@ function SignUp(props) {
         }).then((result) => {
           if (result.isConfirmed) {
             handleClose();
-            history('/homepage');
+            history('/');
           }
         });
       } else {
@@ -96,12 +130,15 @@ function SignUp(props) {
         });
       }
     } catch (err) {
-      Toast.fire({
+      Swal.fire({
         icon: 'error',
         html: err.response.data.error,
-        // customClass: {},
+        confirmButtonText: 'OK',
+        focusConfirm: false,
+        // buttonsStyling: false,
+        // customClass: {
+        // },
       });
-      console.log(err);
     }
   };
   return (
@@ -110,7 +147,7 @@ function SignUp(props) {
         <div className="row justify-content-center">
           <div className="col-md-12 singup p-0">
             <div className="wrap d-md-flex">
-              <div className="img"></div>
+              <div className="img d-none d-sm-block"></div>
               <div className="p-4 p-md-5 bg-white">
                 <div className="text-center">
                   <img
@@ -165,19 +202,19 @@ function SignUp(props) {
                       <div className="d-flex">
                         <MySignUpField
                           label="密碼"
-                          type="text"
+                          type={passwordField ? 'text' : 'password'}
                           className="form-control"
                           name="password"
                           example="限輸入英文、數字"
                         />
                         <MySignUpField
                           label="再次輸入密碼"
-                          type="text"
+                          type={rePasswordField ? 'text' : 'password'}
                           className="form-control"
                           name="rePassword"
                         />
                       </div>
-                      <div className="py-3">
+                      <div className="d-flex py-3">
                         <p>
                           按下註冊鈕的同時，表示您已詳閱我們的
                           <a href="#/" className="text-highlight">

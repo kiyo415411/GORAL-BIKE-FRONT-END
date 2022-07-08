@@ -1,5 +1,5 @@
 import Area from './Area.json';
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useEffect } from 'react';
 import { MapDataValue } from '../layout/Map/index';
 import Navbar from 'react-bootstrap/Navbar';
 import useWindowSize from './hooks/useWindowSize';
@@ -72,6 +72,15 @@ export default function MapNav() {
     );
     Data.setFilterDataApi(newdataApi);
   };
+
+  useEffect(() => {
+    inputRef.current.value = Data.getName;
+    const getvalue = new RegExp(Data.getName, 'gi');
+    const newdataApi = [...Data.dataApi].filter((value) =>
+      getvalue.exec(value['林道名稱'])
+    );
+    Data.setFilterDataApi(newdataApi);
+  }, [Data.getName]);
 
   return (
     <>

@@ -30,4 +30,7 @@
   .link-right {
     border-right: solid #2b4948 0.15rem;
   }
+  svg {
+    pointer-events: none;
+  }
 }
