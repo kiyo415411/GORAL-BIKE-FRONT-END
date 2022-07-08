@@ -13,6 +13,7 @@ import ProductPage from '../components/ProductMainPage/ProductPage';
 import ActivityList from '../pages/ActivityList';
 import ActivityDetail from '../pages/ActivityDetail';
 import Member from '../pages/Member';
+import PasswordReset from '../pages/PasswordReset';
 
 export default function MainLayoutRoutes() {
   return (
@@ -41,6 +42,7 @@ export default function MainLayoutRoutes() {
         <Route path="/course" element={<CourseList />} />
         <Route path="/activity/:courseId" element={<ActivityDetail />} />
         <Route path="/activity" element={<ActivityList />} />
+        <Route path="/passwordReset" element={<PasswordReset />} />
       </Routes>
     </React.Fragment>
   );
