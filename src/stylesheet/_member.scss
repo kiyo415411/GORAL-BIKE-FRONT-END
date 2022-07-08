@@ -84,3 +84,16 @@
 .coupon-list:last-child {
   border-bottom: none;
 }
+
+.coupon-list-tab .nav-item button {
+  background: white;
+  color: var(--bs-primary);
+  border: 1px solid var(--bs-primary);
+  border-bottom: none;
+}
+
+.member .coupon-list-tab .nav-link:hover,
+.member .coupon-list-tab .nav-link.active {
+  color: white;
+  background: var(--bs-primary);
+}
