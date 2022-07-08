@@ -50,7 +50,7 @@ function BikeCardSmall(props) {
   return (
     <>
       <div
-        className="card shadow p-2 mb-5 bg-body rounded container"
+        className="card shadow p-2 mb-5 bg-body rounded container mx-0 px-0"
         style={{ width: '400px', height: '450px' }}
       >
         <div className="row">
@@ -71,8 +71,6 @@ function BikeCardSmall(props) {
                   <Link to="/Product/Detail" className="">
                     <h5 className="card-title m-0">{props.name}</h5>
                   </Link>
-                  {/* <{like(liked)}> */}
-                  {/* <Like className="my-auto" liked={liked} setLiked={setLiked} /> */}
                   <Checkbox
                     icon={<BsHeart />}
                     checkedIcon={<BsHeartFill />}

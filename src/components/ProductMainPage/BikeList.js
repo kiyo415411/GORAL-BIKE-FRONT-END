@@ -10,7 +10,7 @@ function BikeList(props) {
         return (
           <li
             key={item.product_id}
-            className="col-6 col-md-8 p-1 col-lg-12 mx-md-auto mt-md-5"
+            className="col-12 p-1 col-lg-12 mx-md-auto mt-md-5"
           >
             <BikeCard
               bike={item.product_images}

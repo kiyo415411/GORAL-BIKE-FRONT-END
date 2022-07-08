@@ -17,6 +17,7 @@ export default function HotCard({
   favoriteIs,
   favoriteActive,
   setFavoriteActive,
+  className,
 }) {
   const { userData } = useLogin();
   const [favorite, setFavorite] = useState({
@@ -27,7 +28,7 @@ export default function HotCard({
 
   function handleClick(e) {
     console.log(e.target.value);
-    if (favorite.userId !== '') {
+    if (favorite.userId > 0) {
       setFavorite({ ...favorite, courseId: e.target.value });
     } else {
       swal('收藏失敗', '登入會員才能進行個人收藏。', 'warning');
@@ -52,10 +53,15 @@ export default function HotCard({
     <div className="card shadow rounded-0 border-0 mb-5 mx-2 col-12">
       <img
         src={image}
-        className="card-img-top rounded-0 cover"
+        className={`card-img-top rounded-0 cover`}
         alt={title}
-        style={{ height: '13rem' }}
+        style={
+          className
+            ? { height: '13rem', width: '95%', objectFit: 'contain' }
+            : { height: '13rem' }
+        }
       />
+
       <div className="card-body mx-3">
         <div className="d-flex justify-content-between align-items-center">
           <h6 className="card-title m-0">{title}</h6>

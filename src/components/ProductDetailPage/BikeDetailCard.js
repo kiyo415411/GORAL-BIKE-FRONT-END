@@ -3,11 +3,12 @@ import BikeDetailDescription from './BikeDetailDescription';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import LabelCard from '../Label/LabelCard';
 import axios from 'axios';
-
 import { useLogin } from '../../utils/useLogin';
 
 import { API_URL, IMAGE_URL } from '../../utils/config';
+import useWindowSize from '../hooks/useWindowSize';
 function BikeDetailCard(props) {
+  const WindowSize = useWindowSize()
   const [partsName, setPartsName] = useState([]);
   const [partsIMG, setPartsIMG] = useState([]);
   const [bike, setBike] = useState([]);
@@ -76,62 +77,60 @@ function BikeDetailCard(props) {
       setProductCheck(result);
     };
     getChecks();
-    console.log('productCheck', productCheck);
-
-    // console.log('adfasdffa', productCheck);
   }, [props.product_id]);
   if (bike.length === 0) return <></>;
   return (
-    <div className="container mt-5">
-      <div className="d-md-flex pt-5 mt-5 mt-md-0">
-        <div className="" style={{ maxWidth: '528px' }}>
+    <div className="container mt-5 mx-0 px-0 mx-md-auto">
+      <div className="d-md-flex pt-5 mt-5 mt-md-0 justify-content-md-between">
+        <div className="col-md-8" style={{ maxWidth: '528px' }}>
           <img
-            className=" img-fluid"
+            className="img-fluid"
             src={`${IMAGE_URL}/bikes/${BikeIMG}${
               currentColor ? '$' : ''
             }${currentColor}.${BikeStart}`}
             alt=""
           />
         </div>
-        <div>
-          <BikeDetailDescription
-            className="mx-5 w-75"
-            bike={bike}
-            favoriteActive={favoriteActive}
-            setFavoriteActive={setFavoriteActive}
-            product_id={props.product_id}
-            currentColor={currentColor}
-            setCurrentColor={setCurrentColor}
-            img={`${BikeIMG}${
-              currentColor ? '$' : ''
-            }${currentColor}.${BikeStart}`}
-          />
-        </div>
+
+        <BikeDetailDescription
+          className={`mx-sm-5 mx-auto ${
+            WindowSize < 768 ? 'w-90' : ''
+          } col-md-5`}
+          bike={bike}
+          favoriteActive={favoriteActive}
+          setFavoriteActive={setFavoriteActive}
+          product_id={props.product_id}
+          currentColor={currentColor}
+          setCurrentColor={setCurrentColor}
+          img={`${BikeIMG}${
+            currentColor ? '$' : ''
+          }${currentColor}.${BikeStart}`}
+        />
       </div>
       <div className="mt-5">
         <div>
           {downDesc.map((v, i) => {
             return (
-              <p key={i} className="text-content">
+              <p key={i} className="text-content px-3">
                 {v}
               </p>
             );
           })}
         </div>
 
-        <div className="row my-5 justify-content-between">
+        <div className="row my-3 justify-content-between px-2 m-0">
           {productCheck.map((v, i) => {
             return (
-              <h3 className="my-4 col-5" key={i}>
+              <h3 className="my-4 col-12 col-md-5 p-0" key={i}>
                 <BsFillCheckCircleFill size={30} color="grey" /> {v}
               </h3>
             );
           })}
         </div>
       </div>
-      <div className="ms-n5">
-        <h1>技術</h1>
-        <ul className="row">
+      <div className="ms-md-n5">
+        <h1 className="ms-5">技術</h1>
+        <ul className="row gap-2 gap-md-5 mx-auto">
           {partsName.map((v, i) => {
             return <LabelCard partsName={v} partsIMG={partsIMG[i]} key={i} />;
           })}

@@ -10,6 +10,9 @@ import TopSort from './TopSort.js';
 import NoData from './NoData.js';
 import { useLogin } from '../../utils/useLogin'; // user's data
 import useWindowSize from '../hooks/useWindowSize.js';
+import { FiFilter } from 'react-icons/fi';
+import Button from 'react-bootstrap/Button';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
 function ProductPage() {
   const mostExpensive = 500000;
@@ -21,8 +24,14 @@ function ProductPage() {
   const [category, setCategory] = useState([]);
   const [brand, setBrand] = useState([]);
 
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const [cardStyle, setCardStyle] = useState('row');
   const [sortMethod, setSortMethod] = useState('product_id DESC');
+
+  const [sortRWD, setSortRWD] = useState(false);
 
   const [currentColor, setCurrentColor] = useState();
   const [currentCategory, setCurrentCategory] = useState();
@@ -41,7 +50,7 @@ function ProductPage() {
     sortMethod: sortMethod,
   });
 
-  let WindowSize = useWindowSize();
+  const WindowSize = useWindowSize();
 
   //------------------------------- favorite's data
   const { userData } = useLogin(); // user's data
@@ -184,44 +193,54 @@ function ProductPage() {
           </h1>
         </div>
       </div>
+      {/* <div
+        style={{ background: 'rgba(0,0,0,0.7)' }}
+        className="w-100 h-100 position-fixed"
+      >
+        <ProductAside
+          price={price}
+          setPrice={setPrice}
+          currentColor={currentColor}
+          brand={brand}
+          setBrand={setBrand}
+          setCurrentCategory={setCurrentCategory}
+          setCurrentBrand={setCurrentBrand}
+          setCurrentColor={setCurrentColor}
+          setCurrentSearch={setCurrentSearch}
+          color={colored}
+          category={category}
+          setPage={setPage}
+          className=""
+        />
+      </div> */}
       <div
         className={`px-0 mx-0 mt-5 pt-5 container-fluid row justify-content-md-center `}
       >
-        {useWindowSize() < 1625 ? (
-          <></>
-        ) : (
-          <div className="col-1 mt-2">
-            <div
-              className="ms-2 sticky-sm-top shadow d-flex justify-content-center p-2"
-              style={{ width: '324px', height: '90vh' }}
-            >
-              <ProductAside
-                price={price}
-                setPrice={setPrice}
-                currentColor={currentColor}
-                brand={brand}
-                setBrand={setBrand}
-                setCurrentCategory={setCurrentCategory}
-                setCurrentBrand={setCurrentBrand}
-                setCurrentColor={setCurrentColor}
-                setCurrentSearch={setCurrentSearch}
-                color={colored}
-                category={category}
-                setPage={setPage}
-              />
-            </div>
+        <div className="col-2 mt-2 mx-auto">
+          <div
+            className="ms-2 sticky-sm-top d-none d-md-block shadow d-flex justify-content-center p-2"
+            style={{ width: '324px', height: '90vh' }}
+          >
+            <ProductAside
+              price={price}
+              setPrice={setPrice}
+              currentColor={currentColor}
+              brand={brand}
+              setBrand={setBrand}
+              setCurrentCategory={setCurrentCategory}
+              setCurrentBrand={setCurrentBrand}
+              setCurrentColor={setCurrentColor}
+              setCurrentSearch={setCurrentSearch}
+              color={colored}
+              category={category}
+              setPage={setPage}
+              className="px-4 pb-2 mt-3 d-flex flex-column overflow-auto course-list-aside"
+            />
           </div>
-        )}
-        <div
-          className={`mx-md-auto col-12 col-md-8`}
-          // style={
-          //   WindowSize < 650
-          //     ? { margin: '-50%', minHeight: '256px', minWidth: '290px' }
-          //     : { minHeight: '256px', minWidth: '290px' }
-          // }
-        >
+        </div>
+        <div className={`mx-md-auto col-12 col-md-8 p-lg-0`}>
           <div className="d-flex justify-content-between">
-            <div>
+            <div className="d-md-block d-none">
               <BsListUl
                 size={30}
                 color={bikeList === 1 ? 'FF7E55' : ''}
@@ -239,6 +258,20 @@ function ProductPage() {
                 style={{ cursor: 'pointer' }}
               />
             </div>
+            <Button
+              variant="primary"
+              onClick={handleShow}
+              className="d-block d-md-none"
+            >
+              <FiFilter
+                color={bikeList === 0 ? 'FF7E55' : ''}
+                size={50}
+                onClick={() => {
+                  setSortRWD(!sortRWD);
+                }}
+                style={{ cursor: 'pointer' }}
+              />
+            </Button>
             <h4 className="text-hightlight w-25 text-nowrap">
               <TopSort
                 cardStyle={cardStyle}
@@ -248,6 +281,34 @@ function ProductPage() {
               />
             </h4>
           </div>
+
+          <Offcanvas show={show} onHide={handleClose}>
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title></Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <div
+                className="ms-2 sticky-sm-top d-flex justify-content-center p-2"
+                style={{ width: '324px', height: '90vh' }}
+              >
+                <ProductAside
+                  price={price}
+                  setPrice={setPrice}
+                  currentColor={currentColor}
+                  brand={brand}
+                  setBrand={setBrand}
+                  setCurrentCategory={setCurrentCategory}
+                  setCurrentBrand={setCurrentBrand}
+                  setCurrentColor={setCurrentColor}
+                  setCurrentSearch={setCurrentSearch}
+                  color={colored}
+                  category={category}
+                  setPage={setPage}
+                  className="px-4 pb-2 mt-3 d-flex flex-column overflow-auto course-list-aside"
+                />
+              </div>
+            </Offcanvas.Body>
+          </Offcanvas>
 
           {data.length !== 0 ? (
             bikeList === 1 ? (

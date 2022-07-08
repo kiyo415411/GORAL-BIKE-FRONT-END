@@ -1,4 +1,3 @@
-import BikeCardSmall from './BikeCardSmall';
 import { useEffect, useState } from 'react';
 // core version + navigation, pagination modules:
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -10,13 +9,26 @@ import 'swiper/css/pagination';
 import HotCard from '../Cards/HotCard';
 import { IMAGE_URL } from '../../utils/config';
 
+import { useLogin } from '../../utils/useLogin';
+
 // init Swiper:
 function BikeScrolling(props) {
   const [bikes, setBikes] = useState(props.bikes);
   const [width, setWidth] = useState(window.innerWidth);
+
   useEffect(() => {
     setBikes(props.bikes);
-  }, [props.bikes, bikes]);
+  }, [props.bikes]);
+  useEffect(() => {
+    const updateWindowsWidth = () => {
+      const newWidth = window.innerWidth;
+      setWidth(newWidth);
+    };
+
+    window.addEventListener('resize', updateWindowsWidth);
+
+    return () => window.removeEventListener('resize', updateWindowsWidth);
+  }, []);
   if (bikes.length === 0) return <></>;
   return (
     <div className="bg-graybg pt-5 pb-4">
@@ -50,14 +62,17 @@ function BikeScrolling(props) {
           return (
             <SwiperSlide key={index} className="my-auto overflow-hidden">
               <HotCard
+                courseId={value.product_id}
                 detailLink={`/product/detail/${value.product_id}`}
                 image={`${IMAGE_URL}/bikes/${value.product_images}`}
                 title={value.product_name}
                 price={value.product_price}
-                theme="課程"
+                theme="商品"
                 favoriteIs={value.favorite_is}
                 favoriteActive={props.favoriteActive}
                 setFavoriteActive={props.setFavoriteActive}
+                favoriteMethod="product"
+                className={true}
               />
             </SwiperSlide>
           );

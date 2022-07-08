@@ -8,7 +8,7 @@ import ColorPalette from './Aside/ColorPalette';
 // 商品篩選邊攔
 export default function ProductAside(props) {
   return (
-    <div className="px-4 pb-2 mt-3 d-flex flex-column overflow-auto course-list-aside">
+    <div className={props.className}>
       {/* 關鍵字篩選 */}
       <SearchInput
         setCurrentSearch={props.setCurrentSearch}

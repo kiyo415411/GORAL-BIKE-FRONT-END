@@ -62,8 +62,8 @@ function BikeCard(props) {
       <div className={`card shadow p-2 mb-5 bg-body rounded mx-auto mx-md-0`}>
         <div className="row g-0 justify-content-center my-auto align-items-center">
           <div
-            className="col-4 h-75 my-auto overflow-hidden"
-            style={{ width: 328, height: 220 }}
+            className="col-4 h-75 my-auto overflow-hidden d-flex align-items-center"
+            style={{ width: 328, minHeight: 120 }}
           >
             <Link to={`/product/detail/${props.id}`}>
               <img
@@ -84,12 +84,15 @@ function BikeCard(props) {
               <p className="m-0">{props.rating}</p>
             </div>
             <div className="card-body container-fluid pt-md-0">
-              <div className="row justify-content-between">
+              <div className="row justify-content-between p-0">
                 <div className="d-flex align-items-center gap-1 mb-3 mb-md-1 justify-content-between justify-content-md-start">
-                  <Link className="" to={`/product/detail/${props.id}`}>
-                    <h5 className="card-title m-0">{props.name}</h5>
+                  <Link
+                    className={`d-flex align-items-center card-title m-0 text-wrap text-break ${WindowSize < 768 ? 'h1' : 'h5'}`}
+                    to={`/product/detail/${props.id}`}
+                    style={{ height: '24px' }}
+                  >
+                    {props.name}
                   </Link>
-                  {/* <Like liked={liked} setLiked={setLiked} /> */}
                   <Checkbox
                     icon={<BsHeart />}
                     checkedIcon={<BsHeartFill />}

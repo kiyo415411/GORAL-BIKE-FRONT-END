@@ -89,59 +89,68 @@ function BikeDetailDescription(props) {
   }, [favorite]);
 
   return (
-    <div width="478px" className={props.className}>
-      <div>
-        <div className="d-flex">
-          <Name name={`${props.bike[0].product_name}`} />
-          {/* <Like
-            liked={liked}
-            setLiked={setLiked}
-            className="my-auto ms-4"
-            width="34"
-          /> */}
-          <Checkbox
-            icon={<BsHeart />}
-            checkedIcon={<BsHeartFill />}
-            size="large"
-            sx={{
+    <div className={props.className}>
+      <div className="d-flex justify-content-between justify-content-md-start">
+        <Name name={`${props.bike[0].product_name}`} />
+        <Checkbox
+          icon={<BsHeart />}
+          checkedIcon={<BsHeartFill />}
+          size="large"
+          sx={{
+            color: 'var(--bs-highlight)',
+            '&.Mui-checked': {
               color: 'var(--bs-highlight)',
-              '&.Mui-checked': {
-                color: 'var(--bs-highlight)',
-              },
-            }}
-            value={props.bike[0].product_id}
-            checked={
-              props.bike[0].favorite_is !== null &&
-              props.bike[0].favorite_is !== undefined
-            }
-            onClick={handleClick}
+            },
+          }}
+          value={props.bike[0].product_id}
+          checked={
+            props.bike[0].favorite_is !== null &&
+            props.bike[0].favorite_is !== undefined
+          }
+          onClick={handleClick}
+        />
+      </div>
+      <hr />
+      <Description desc={props.bike[0].product_description} />
+      {/* <Description desc="腳踏車改變了我的命運。腳踏車，發生了會如何，不發生又會如何。如果此時我們選擇忽略腳踏車，那後果可想而知。" /> */}
+      <hr />
+      <Price price={`${price}`} />
+      {colorName.length !== 0 ? (
+        <>
+          <hr />
+          <p className="md-5">顏色</p>
+          <Color
+            color={colored}
+            colorName={colorName}
+            currentColor={props.currentColor}
+            setCurrentColor={props.setCurrentColor}
           />
-        </div>
-        <hr />
-        <Description desc={props.bike[0].product_description} />
-        {/* <Description desc="腳踏車改變了我的命運。腳踏車，發生了會如何，不發生又會如何。如果此時我們選擇忽略腳踏車，那後果可想而知。" /> */}
-        <hr />
-        <Price price={`${price}`} />
-        {colorName.length !== 0 ? (
-          <>
-            <hr />
-            <p className="md-5">顏色</p>
-            <Color
-              color={colored}
-              colorName={colorName}
-              currentColor={props.currentColor}
-              setCurrentColor={props.setCurrentColor}
-            />
-          </>
-        ) : (
-          ''
-        )}
-        <hr />
-        <div>
+        </>
+      ) : (
+        ''
+      )}
+      <hr />
+      <div className="d-flex justify-content-between justify-content-md-start">
+        <button
+          className={`btn border-primary rounded-0 px-4 ${
+            shoppingClick === true ? 'bg-success text-white border-white' : ''
+          }`}
+          onClick={() => {
+            addItem({
+              id: props.id,
+              name: props.bike[0].product_name,
+              image: props.img,
+              price: props.bike[0].product_price,
+              quantity: 1,
+            });
+            setShoppingClick(shoppingClick === true ? false : true);
+          }}
+        >
+          加入購物車
+        </button>
+        <Link to="/shopping-cart">
           <button
-            className={`btn border-primary rounded-0 px-4 ${
-              shoppingClick === true ? 'bg-success text-white border-white' : ''
-            }`}
+            className="btn btn-primary rounded-0 ms-md-2"
             onClick={() => {
               addItem({
                 id: props.id,
@@ -150,30 +159,12 @@ function BikeDetailDescription(props) {
                 price: props.bike[0].product_price,
                 quantity: 1,
               });
-              setShoppingClick(shoppingClick === true ? false : true);
             }}
           >
-            加入購物車
+            直接購買
           </button>
-          <Link to="/shopping-cart">
-            <button
-              className="btn btn-primary rounded-0 ms-2"
-              onClick={() => {
-                addItem({
-                  id: props.id,
-                  name: props.bike[0].product_name,
-                  image: props.img,
-                  price: props.bike[0].product_price,
-                  quantity: 1,
-                });
-              }}
-            >
-              直接購買
-            </button>
-          </Link>
-        </div>
+        </Link>
       </div>
-      {/* <p className="m-2 text-content">{bikeDetail[0].LongDesc}</p> */}
     </div>
   );
 }

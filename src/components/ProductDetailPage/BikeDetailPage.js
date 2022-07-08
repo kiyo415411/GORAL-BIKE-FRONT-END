@@ -31,7 +31,7 @@ function BikeDetailPage() {
           alt=""
           style={{ width: '100%', height: '100%' }}
         />
-        <div className="card-img-overlay row align-items-center m-0 p-0">
+        <div className="card-img-overlay row align-items-center m-0 p-0 m-auto">
           <div class="col-1"></div>
           <h1
             className="top-banner-title card-title fw-bolder col-4 text-center text-white position-absolute"
