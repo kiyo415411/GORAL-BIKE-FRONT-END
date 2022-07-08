@@ -30,6 +30,14 @@ function OrderDetail(props) {
   const [products, setProducts] = useState([]);
   const [course, setCourse] = useState([]);
   const [activities, setActivities] = useState([]);
+  const [couponData, setCouponData] = useState({
+    id: 0,
+    coupon_name: '',
+    coupon_content: '',
+    coupon_expiry_date: '',
+    coupon_discount: 0,
+    valid: 0,
+  });
   const calculateItemTotals = (items) =>
     items.map((item) => ({
       ...item,
@@ -49,6 +57,9 @@ function OrderDetail(props) {
       setCourse(calculateItemTotals(courseData));
       const activityData = response.data.activityData;
       setActivities(calculateItemTotals(activityData));
+      const newCouponData = response.data.couponData;
+      console.log(newCouponData);
+      setCouponData(newCouponData);
     })();
   }, []);
 
@@ -59,6 +70,8 @@ function OrderDetail(props) {
     payment_method_name,
     payment_status,
     total,
+    discount_price,
+    discount_total,
     recipient,
     phone,
     order_address,
@@ -122,7 +135,13 @@ function OrderDetail(props) {
           />
         ) : null}
 
-        <CheckoutSummary allCartTotal={total} className="px-5 my-0" />
+        <CheckoutSummary
+          allCartTotal={total}
+          discountTotal={discount_total}
+          discountPrice={discount_price}
+          coupon={couponData}
+          className="px-5 my-0"
+        />
       </section>
       <OrderDetailInfo recipientInfo={recipientInfo} />
       <div className="text-end my-4">

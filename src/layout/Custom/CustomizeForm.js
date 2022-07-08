@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -7,31 +7,39 @@ import { API_URL } from '../../utils/config';
 import Swal from 'sweetalert2';
 
 export default function CustomizeForm(props) {
+  const { isLogin, userData } = props.Data;
+  console.log('props-<', userData);
+  console.log('isLogin-<', isLogin);
+  console.log('props.state.items-<', props.state.items);
+
   const [show, setShow] = useState(false);
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [state, setState] = useState(props.state.items);
   const handleSubmit = async (values) => {
-    setState(props.state.items);
     const formData = {
-      state: state,
+      state: props.state.items,
       value: values,
+      userID: userData.userId,
     };
     try {
-      const response = await axios.post(`${API_URL}/customize`, formData);
+      const response = await axios.post(
+        `${API_URL}/customize/InsertCustomer`,
+        formData
+      );
       console.log(response.data);
       handleClose();
       if (response.data.ResultsFieldCount === 0) {
         Swal.fire({
           title:
-            '感謝您提出客製化申請，近日內將有工作人員向您確認訂單內容，請隨時查看信箱.',
+            '感謝您提出客製化申請，近日內將有工作人員向您確認訂單內容，請隨時查看信箱等候來信通知.',
           width: 600,
           padding: '3em',
           color: '#716add',
           backdrop: `rgba(0,0,123,0.4)`,
         });
+        props.setReRender(!props.reRender);
       }
     } catch (err) {
       console.log(err);
@@ -59,7 +67,7 @@ export default function CustomizeForm(props) {
         variant="black"
         onClick={handleShow}
       >
-        送出申請
+        {isLogin ? '會員送出申請' : '非會員送出申請'}
       </Button>
 
       <Modal show={show}>
@@ -72,9 +80,9 @@ export default function CustomizeForm(props) {
             handleSubmit(values);
           }}
           initialValues={{
-            name: '',
-            email: '',
-            phone: '',
+            name: isLogin ? userData.name : '',
+            email: isLogin ? userData.email : '',
+            phone: isLogin ? userData.phone : '',
             mark: '',
           }}
         >
