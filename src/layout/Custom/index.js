@@ -227,7 +227,9 @@ export default function Custom() {
             {isData.map((value, index) => {
               return (
                 <li
-                  className="col-2 text-muted w-10 btn fw-bold"
+                  className={`col-2 ${
+                    index === number ? 'text-white' : 'text-muted'
+                  } w-10 btn fw-bold`}
                   onClick={() => {
                     setNumber(index);
                     setOrderID(value.orderId);
