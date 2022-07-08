@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { API_URL } from '../../utils/config';
+import { API_URL, IMAGE_URL } from '../../utils/config';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
@@ -120,10 +120,7 @@ function OrderList(props) {
             </Link>
             <p>逛逛！</p>
           </div>
-          <img
-            src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/a60759ad1dabe909c46a817ecbf71878.png"
-            alt=""
-          />
+          <img src={`${IMAGE_URL}/no-data/green.svg`} alt="" />
         </div>
       )}
     </>

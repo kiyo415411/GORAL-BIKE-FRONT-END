@@ -9,6 +9,7 @@ import { useLogin } from '../utils/useLogin';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import { useCart } from '../utils/useCart';
+import { IMAGE_URL } from '../utils/config';
 
 // 傳到結帳頁面，結帳頁面只讀取 checkedItems 做呈現
 // 結完帳清除 checkItems 陣列，以及 localStorage 裡 checked = true 的產品
@@ -38,10 +39,7 @@ function ShoppingCart() {
             </Link>
             <p>逛逛！</p>
           </div>
-          <img
-            src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/a60759ad1dabe909c46a817ecbf71878.png"
-            alt=""
-          />
+          <img src={`${IMAGE_URL}/no-data/green.svg`} alt="" />
         </div>
       </>
     );
