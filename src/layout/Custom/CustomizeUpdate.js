@@ -39,7 +39,7 @@ export default function CustomizeUpdate(props) {
   return (
     <>
       <Button
-        className="btn text-muted m-3"
+        className="btn text-muted m-md-3"
         variant="black"
         onClick={handleSubmit}
       >
