@@ -90,7 +90,7 @@ function GoralBikeNavbar() {
                 全部商品
               </NavLink>
               <NavLink to="map" className={'nav-link'}>
-                地圖
+                場地資訊
               </NavLink>
               <NavLink to="course" className={'nav-link'}>
                 課程
