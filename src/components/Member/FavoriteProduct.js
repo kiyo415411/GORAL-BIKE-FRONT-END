@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { API_URL } from '../../utils/config';
+import { API_URL, IMAGE_URL } from '../../utils/config';
 
 import BikeCard from '../ProductMainPage/BikeCard';
 import Pagination from '../ProductMainPage/Pagination';
@@ -123,15 +123,12 @@ export default function FavoriteProduct({ userData }) {
         >
           <div className="d-flex justify-content-center mt-5">
             <p>到</p>
-            <Link to="/product" className="link-highlight mx-1">
+            <Link to="/activity" className="link-highlight mx-1">
               商品頁面
             </Link>
             <p>逛逛，開始進行收藏！</p>
           </div>
-          <img
-            src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/a60759ad1dabe909c46a817ecbf71878.png"
-            alt=""
-          />
+          <img src={`${IMAGE_URL}/no-data/green.svg`} alt="" />
         </div>
       )}
     </>

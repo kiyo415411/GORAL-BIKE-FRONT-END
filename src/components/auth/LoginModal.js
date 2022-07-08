@@ -23,16 +23,16 @@ function LoginModal(props) {
 
   switch (activeModal) {
     case '登入':
-      modalDialogClass = 'modal-w';
+      modalDialogClass = 'modal-w position-relative';
       break;
     case '註冊':
-      modalDialogClass = 'modal-signup-w';
+      modalDialogClass = 'modal-signup-w position-relative';
       break;
     case '忘記密碼':
-      modalDialogClass = 'modal-w';
+      modalDialogClass = 'modal-w position-relative';
       break;
     case '重寄認證信':
-      modalDialogClass = 'modal-w';
+      modalDialogClass = 'modal-w position-relative';
       break;
     default:
       modalDialogClass = '';
@@ -51,6 +51,10 @@ function LoginModal(props) {
         centered
         dialogClassName={modalDialogClass}
       >
+        <button
+          className="btn-close position-absolute"
+          onClick={handleClose}
+        ></button>
         {activeModal === '登入' ? (
           <Login
             handleChangeModal={handleChangeModal}

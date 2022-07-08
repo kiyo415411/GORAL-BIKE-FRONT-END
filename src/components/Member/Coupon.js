@@ -4,15 +4,20 @@ import { useState, useEffect } from 'react';
 import { API_URL } from '../../utils/config';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
 
 export default function Coupon({ userData }) {
   const [data, setData] = useState([]);
+  const [key, setKey] = useState(1);
+
   useEffect(() => {
     let getData = async () => {
       try {
-        let response = await axios.get(`${API_URL}/member/favorite/coupon`, {
+        let response = await axios.get(`${API_URL}/member/coupon`, {
           params: {
             userId: userData.userId,
+            couponsIs: key,
           },
         });
         setData(response.data.data);
@@ -21,7 +26,7 @@ export default function Coupon({ userData }) {
       }
     };
     getData();
-  }, [userData.userId]);
+  }, [userData.userId, key]);
 
   const courseItems = [];
 
@@ -50,15 +55,35 @@ export default function Coupon({ userData }) {
 
   return (
     <div className="mb-5">
-      <Row className="bg-primary text-white text-center py-2 order-title px-5">
-        <Col sm={3}>優惠券名稱</Col>
-        <Col sm={4}>使用說明</Col>
-        <Col sm={3}>使用期限</Col>
-        <Col sm={1}>使用狀態</Col>
-      </Row>
-      <Row className="bg-white text-primary text-center py-2 order-title px-5">
-        {courseItems}
-      </Row>
+      <Tabs
+        id="controlled-tab-example"
+        activeKey={key}
+        onSelect={(k) => setKey(k)}
+        className="coupon-list-tab mb-3"
+      >
+        <Tab eventKey="1" title="未使用">
+          <Row className="bg-primary text-white text-center py-2 order-title px-5">
+            <Col sm={3}>優惠券名稱</Col>
+            <Col sm={4}>使用說明</Col>
+            <Col sm={3}>使用期限</Col>
+            <Col sm={1}>使用狀態</Col>
+          </Row>
+          <Row className="bg-white text-primary text-center py-2 order-title px-5">
+            {courseItems}
+          </Row>
+        </Tab>
+        <Tab eventKey="0" title="已使用">
+          <Row className="bg-primary text-white text-center py-2 order-title px-5">
+            <Col sm={3}>優惠券名稱</Col>
+            <Col sm={4}>使用說明</Col>
+            <Col sm={3}>使用期限</Col>
+            <Col sm={1}>使用狀態</Col>
+          </Row>
+          <Row className="bg-white text-primary text-center py-2 order-title px-5">
+            {courseItems}
+          </Row>
+        </Tab>
+      </Tabs>
     </div>
   );
 }

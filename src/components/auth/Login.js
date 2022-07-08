@@ -47,7 +47,7 @@ function Login(props) {
           if (result.isConfirmed) {
             setIsLogin(true);
             handleClose();
-            history('/homepage');
+            history('/member');
           }
         });
       } else {
@@ -96,7 +96,7 @@ function Login(props) {
     <>
       <div className="container-fluid">
         <div className="row justify-content-center ">
-          <div className="col-md-12 bg-white p-4 px-5 login">
+          <div className="col-md-12 bg-white p-4 px-3 px-sm-5 login">
             <div className="form-block mx-auto">
               <div className="text-center ">
                 <img

@@ -101,7 +101,7 @@ function App() {
       >
         <ActivityCartProvider localStorageKey="activityCart">
           <CourseCartProvider localStorageKey="courseCart">
-            <ProductCartProvider initialCartItems={products}>
+            <ProductCartProvider>
               <CartProvider>
                 <Routes>
                   <Route path="/" element={<BasicLayout />}>

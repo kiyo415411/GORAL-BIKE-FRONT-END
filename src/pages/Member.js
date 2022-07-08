@@ -16,21 +16,40 @@ import Coupon from '../components/Member/Coupon';
 import { useLogin } from '../utils/useLogin';
 import { IMAGE_URL } from '../utils/config';
 import { useLocation } from 'react-router';
+import { useNavigate } from 'react-router';
+import OrderDetail from '../components/Member/OrderDetail';
 
 function Member() {
+  const history = useNavigate();
   const [active, setActive] = useState('first');
   const [title, setTitle] = useState('');
   const [open, setOpen] = React.useState(false);
   const { userData, setUserData, setIsLogin } = useLogin();
   const { name, email, phone, photo } = userData;
   const location = useLocation();
+  // console.log(location);
 
   const handleClick = () => {
     setOpen(!open);
   };
   useEffect(() => {
-    if (location.pathname.includes('favorite')) {
+    if (location.pathname.includes('product')) {
       setActive('product');
+      return;
+    } else if (location.pathname.includes('course')) {
+      setActive('course');
+      return;
+    } else if (location.pathname.includes('activity')) {
+      setActive('activity');
+      return;
+    } else if (location.pathname.includes('favorite')) {
+      setActive('product');
+      return;
+    } else if (
+      location.pathname.includes('order') ||
+      location.pathname.includes('detail')
+    ) {
+      setActive('second');
       return;
     }
     setActive('first');
@@ -58,7 +77,7 @@ function Member() {
 
   return (
     <>
-      <div className="container-fluid member mb-5">
+      <div className="container-fluid member mb-5 mt-nav">
         <Tab.Container
           id="left-tabs-example"
           activeKey={active}
@@ -66,14 +85,14 @@ function Member() {
             setActive(e);
           }}
         >
-          <Row className="gap-5 justify-content-center">
+          <Row className="gap-3 gap-sm-5 justify-content-center">
             <Col sm={2}>
-              <h3 className="my-5 text-primary">{title}</h3>
+              <h3 className="my-1 my-sm-5 text-primary">{title}</h3>
             </Col>
             <Col sm={7}></Col>
           </Row>
           <Row className="gap-5 justify-content-center">
-            <Col sm={2} className="text-center me-3">
+            <Col sm={2} className="text-center me-3 d-none d-sm-block">
               <div className="member-info mx-auto pb-4">
                 <div className="bg-primary text-white py-2 mb-3">
                   <FaUser />
@@ -101,7 +120,14 @@ function Member() {
                     <Nav.Link eventKey="first">帳戶資訊</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="second">訂單紀錄</Nav.Link>
+                    <Nav.Link
+                      eventKey="second"
+                      onClick={() => {
+                        history('/member/order');
+                      }}
+                    >
+                      訂單紀錄
+                    </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
                     <Nav.Item
@@ -110,9 +136,30 @@ function Member() {
                     >
                       最愛收藏
                       <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Nav.Link eventKey="product">商品</Nav.Link>
-                        <Nav.Link eventKey="course">課程</Nav.Link>
-                        <Nav.Link eventKey="activity">活動</Nav.Link>
+                        <Nav.Link
+                          eventKey="product"
+                          onClick={() => {
+                            history('/member/favorite/product');
+                          }}
+                        >
+                          商品
+                        </Nav.Link>
+                        <Nav.Link
+                          eventKey="course"
+                          onClick={() => {
+                            history('/member/favorite/course');
+                          }}
+                        >
+                          課程
+                        </Nav.Link>
+                        <Nav.Link
+                          eventKey="activity"
+                          onClick={() => {
+                            history('/member/favorite/activity');
+                          }}
+                        >
+                          活動
+                        </Nav.Link>
                       </Collapse>
                     </Nav.Item>
                   </Nav.Item>
@@ -122,8 +169,8 @@ function Member() {
                 </Nav>
               </div>
             </Col>
-            <Col sm={8}>
-              <Tab.Content className="ms-5 row justify-content-center">
+            <Col xs={12} sm={8}>
+              <Tab.Content className="ms-sm-5 row justify-content-center">
                 <Tab.Pane eventKey="first">
                   <Profile
                     userData={userData}
@@ -132,7 +179,11 @@ function Member() {
                   />
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
-                  <OrderList />
+                  {location.pathname.includes('detail') ? (
+                    <OrderDetail userData={userData} />
+                  ) : (
+                    <OrderList userData={userData} />
+                  )}
                 </Tab.Pane>
                 <Tab.Pane eventKey="product">
                   <FavoriteProduct userData={userData} />
