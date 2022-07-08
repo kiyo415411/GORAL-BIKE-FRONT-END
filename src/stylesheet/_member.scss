@@ -7,8 +7,7 @@
     cursor: pointer;
   }
   .member-info,
-  .profile,
-  .order-title {
+  .profile {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
     input[type='file'] {
       position: absolute;
@@ -21,6 +20,17 @@
       border: 0;
     }
   }
+  .hr {
+    border-top: 3px solid $goral-line;
+  }
+  .order-detail,
+  .order-detail-info {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  }
+  .order-title,
+  .order-list {
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
+  }
   .circle {
     border-radius: 50%;
     overflow: hidden;
@@ -30,7 +40,7 @@
   .profile-img {
     width: 9.5rem;
     height: 9.5rem;
-    @media (max-width: 767px) {
+    @media (max-width: 576px) {
       width: 8rem;
       height: 8rem;
     }
@@ -57,4 +67,30 @@
   &:hover &:active {
     color: var(--bs-highlight);
   }
+}
+
+.coupon-list {
+  border-bottom: 1.5px solid var(--bs-line);
+  background: white;
+  &:hover {
+    background: rgb(230, 230, 230);
+    transition: 300ms;
+  }
+}
+
+.coupon-list:last-child {
+  border-bottom: none;
+}
+
+.coupon-list-tab .nav-item button {
+  background: white;
+  color: var(--bs-primary);
+  border: 1px solid var(--bs-primary);
+  border-bottom: none;
+}
+
+.member .coupon-list-tab .nav-link:hover,
+.member .coupon-list-tab .nav-link.active {
+  color: white;
+  background: var(--bs-primary);
 }

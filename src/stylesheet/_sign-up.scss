@@ -1,5 +1,8 @@
 .singup {
   max-width: 62.5rem;
+  @media (max-width: 576px) {
+    max-width: 25rem;
+  }
   .object-cover {
     width: 100%;
     height: 100%;
@@ -46,5 +49,8 @@
     display: inline-block;
     background: white;
     padding: 10px;
+  }
+  svg {
+    pointer-events: none;
   }
 }

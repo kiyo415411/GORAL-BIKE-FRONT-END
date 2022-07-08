@@ -71,28 +71,40 @@ function Profile(props) {
   const { userId, name, email, phone, photo } = userData;
 
   const fetchUpdateProfile = async (formData) => {
-    let response = await axios.post(
-      `${API_URL}/member/profile/update`,
-      formData,
-      {
-        withCredentials: true,
-      }
-    );
-    const profileUpdateRes = response.data;
-    Swal.fire({
-      icon: 'success',
-      html: profileUpdateRes.msg,
-      confirmButtonText: 'OK',
-      focusConfirm: false,
-      // buttonsStyling: false,
-      // customClass: {
-      // },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetchProfile();
-      }
-    });
-    // console.log(response);
+    try {
+      let response = await axios.post(
+        `${API_URL}/member/profile/update`,
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
+      const profileUpdateRes = response.data;
+      Swal.fire({
+        icon: 'success',
+        html: profileUpdateRes.msg,
+        confirmButtonText: 'OK',
+        focusConfirm: false,
+        // buttonsStyling: false,
+        // customClass: {
+        // },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetchProfile();
+        }
+      });
+    } catch (error) {
+      const errMsg = error.response.data.message;
+      Swal.fire({
+        icon: 'warning',
+        html: errMsg,
+        confirmButtonText: 'OK',
+        focusConfirm: false,
+        // buttonsStyling: false,
+        // customClass: {
+        // },
+      });
+    }
   };
 
   const fetchProfile = async () => {
@@ -212,7 +224,7 @@ function Profile(props) {
                 <p className="text-content">請從電腦選擇檔案</p>
                 <label
                   htmlFor="file-upload"
-                  className="btn btn-primary rounded-0"
+                  className="btn btn-primary rounded-0 mb-2"
                 >
                   選擇照片
                 </label>
@@ -221,6 +233,10 @@ function Profile(props) {
                   id="file-upload"
                   onChange={handleUploadFile}
                 />
+                <span className="error-msg mt-0">(檔案大小限制為 200KB)</span>
+                <span className="error-msg mt-0">
+                  (檔案類型限 jpg,jpeg,png )
+                </span>
               </div>
             </div>
           </div>

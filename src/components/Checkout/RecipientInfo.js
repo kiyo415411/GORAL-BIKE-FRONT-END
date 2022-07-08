@@ -22,7 +22,9 @@ function ReceiverInfo(props) {
               <span className="ms-2 fs-5">收件人資訊</span>
             </div>
             <div className="mb-3 row">
-              <label className="form-label col-md-2 text-end">收件人姓名</label>
+              <label className="form-label col-md-2 text-sm-end">
+                收件人姓名
+              </label>
               <div className="col-md-4">
                 <input
                   name="recipient"
@@ -34,7 +36,7 @@ function ReceiverInfo(props) {
                   required
                 />
               </div>
-              <label className="form-label col-md-2 text-end">手機</label>
+              <label className="form-label col-md-2 text-sm-end">手機</label>
               <div className="col-md-4">
                 <input
                   name="phone"
@@ -48,7 +50,7 @@ function ReceiverInfo(props) {
               </div>
             </div>
             <div className="mb-3 row">
-              <label className="form-label col-md-2 text-end">Email</label>
+              <label className="form-label col-md-2 text-sm-end">Email</label>
               <div className="col-md-10">
                 <input
                   name="email"
@@ -62,7 +64,7 @@ function ReceiverInfo(props) {
               </div>
             </div>
             <div className="mb-3 row">
-              <label className="form-label col-md-2 text-end">地址</label>
+              <label className="form-label col-md-2 text-sm-end">地址</label>
               <div className="col-md-10">
                 <input
                   name="address"
@@ -76,7 +78,9 @@ function ReceiverInfo(props) {
               </div>
             </div>
             <div className="mb-3 row">
-              <label className="form-label text-end col-md-2">運送方式</label>
+              <label className="form-label text-sm-end col-md-2">
+                運送方式
+              </label>
               <div className="col-md-4">
                 <select
                   className="form-select"

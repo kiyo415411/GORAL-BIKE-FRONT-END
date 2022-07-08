@@ -69,7 +69,7 @@ function BikeDetailDescription(props) {
 
   function handleClick(e) {
     console.log(e.target.value);
-    if (favorite.userId !== '') {
+    if (favorite.userId > 0) {
       setFavorite({ ...favorite, courseId: e.target.value });
     } else {
       swal('收藏失敗', '登入會員才能進行個人收藏。', 'warning');

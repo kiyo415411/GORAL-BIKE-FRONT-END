@@ -1,20 +1,22 @@
-import React from 'react';
 import { toThousands } from '../../utils/common';
 import { IMAGE_URL } from '../../utils/config';
+import React from 'react';
 
-function CheckoutList(props) {
-  const { productCart, type } = props;
-  // console.log(productCart);
-  const { cart } = productCart;
-  // console.log(cart);
-  const { checkedItems, totalCheckItems, cartTotal } = cart;
+function OrderDetailList(props) {
+  const { products, type, category } = props;
 
+  const calculateTotalItems = (items) => {
+    return items.reduce((sum, item) => sum + item.quantity, 0);
+  };
+  const calculateItemsTotal = (items) => {
+    return items.reduce((total, item) => total + item.quantity * item.price, 0);
+  };
   return (
     <>
-      <section className="checkout-list mt-3 mb-5">
+      <section className="mt-3 mb-5 px-5">
         <h3 className="text-primary mb-4">訂單{type}明細</h3>
         {/* thead */}
-        <div className="d-sm-flex row text-center fs-5 mb-2 mx-0 d-none ">
+        <div className="row text-center fs-5 mb-2 mx-0">
           <div className="col-lg-2">圖片</div>
           <div className="col-lg-4">名稱</div>
           <div className="col-lg-2">單價</div>
@@ -23,16 +25,8 @@ function CheckoutList(props) {
         </div>
         {/* thead */}
         {/* tbody */}
-        {checkedItems.map((item, index) => {
+        {products.map((item, index) => {
           const { id, name, image, price, quantity, itemTotal } = item;
-          let category = '';
-          if (type === '商品') {
-            category = 'bikes';
-          } else if (type === '課程') {
-            category = 'course';
-          } else {
-            category = 'activity';
-          }
           return (
             <div
               className="row text-center align-items-center mx-0 mb-2"
@@ -57,11 +51,15 @@ function CheckoutList(props) {
 
         {/* tbody */}
         {/* listSummary */}
-        <div className="row fs-4 text-content text-md-center text-end justify-content-between flex-column flex-sm-row pt-3 mx-0 hr">
-          <div className="col-lg-2 col">總共 {totalCheckItems} 項商品</div>
-          <div className="row col-lg-4 col mb-2 px-0">
-            <div className="col">商品金額</div>
-            <div className="col px-0">$ {toThousands(cartTotal)}</div>
+        <div className="row fs-4 text-content text-center justify-content-between pt-3 mx-0 hr">
+          <div className="col-lg-3">
+            總共 {calculateTotalItems(products)} 項{type}
+          </div>
+          <div className="row col-lg-4">
+            <div className="col">{type}金額</div>
+            <div className="col">
+              $ {toThousands(calculateItemsTotal(products))}
+            </div>
           </div>
         </div>
         {/* listSummary */}
@@ -70,4 +68,4 @@ function CheckoutList(props) {
   );
 }
 
-export default CheckoutList;
+export default OrderDetailList;

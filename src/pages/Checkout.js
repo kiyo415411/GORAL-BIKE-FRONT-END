@@ -17,7 +17,7 @@ function Checkout() {
   const history = useNavigate();
 
   const cart = useCart();
-  const { allCartTotal } = cart;
+  const { allCartTotal, discountPrice, discountTotal, initCart, coupon } = cart;
   const login = useLogin();
   const { isLogin, userData } = login;
   if (!isLogin) {
@@ -32,7 +32,7 @@ function Checkout() {
       // },
     }).then((result) => {
       if (result.isConfirmed) {
-        history('/homepage');
+        history('/');
       }
     });
   }
@@ -71,12 +71,15 @@ function Checkout() {
         course_total: courseCart.cart.cartTotal,
         activity_total: activityCart.cart.cartTotal,
         total: allCartTotal,
+        discount_price: discountPrice,
+        discount_total: discountTotal,
         order_status_id: 1,
         payment_status_id: 2,
         payment_method_id: payment,
         product_item: productCart.checkedItems,
         course_item: courseCart.checkedItems,
         activity_item: activityCart.checkedItems,
+        coupon_id: coupon.coupons_id,
       },
       {
         withCredentials: true,
@@ -106,13 +109,14 @@ function Checkout() {
           productCart.checkoutCart();
           courseCart.checkoutCart();
           activityCart.checkoutCart();
-          history('/homepage');
+          initCart();
+          history('/');
         }
       });
     }
   };
   return (
-    <div className="container">
+    <div className="container mt-nav">
       <form onSubmit={handleSubmit}>
         {/* 結帳商品清單 */}
         {productCheckout ? (
@@ -136,7 +140,12 @@ function Checkout() {
         {/* 付款資訊 */}
         <PaymentInfo payment={payment} setPayment={setPayment} />
         {/* 結帳金額計算 */}
-        <CheckoutSummary allCartTotal={allCartTotal} />
+        <CheckoutSummary
+          allCartTotal={allCartTotal}
+          coupon={coupon}
+          discountTotal={discountTotal}
+          discountPrice={discountPrice}
+        />
         <div className="text-end mb-5">
           <button
             className="btn btn-primary rounded-0 fs-4 fw-bold"
