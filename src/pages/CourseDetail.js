@@ -40,7 +40,6 @@ export default function CourseDetail() {
     getDate();
   }, [courseId, favoriteActive, userData.userId]);
 
-  
   function handleClick(e) {
     console.log(e.target.value);
     if (favorite.userId !== '') {
@@ -207,7 +206,7 @@ export default function CourseDetail() {
                             onClick={handleShow}
                             className="rounded-0"
                           >
-                            填寫報名表
+                            加入購物車
                           </Button>
                           <ApplyForm
                             formName="課程報名表"

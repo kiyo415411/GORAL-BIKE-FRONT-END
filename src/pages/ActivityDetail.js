@@ -199,7 +199,7 @@ export default function ActivityDetail() {
                             onClick={handleShow}
                             className="rounded-0"
                           >
-                            填寫報名表
+                            加入購物車
                           </Button>
                           <ApplyForm
                             formName="活動報名表"

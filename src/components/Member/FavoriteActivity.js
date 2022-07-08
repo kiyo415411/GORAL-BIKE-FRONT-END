@@ -120,10 +120,7 @@ export default function FavoriteActivity({ userData }) {
           </div>
         </>
       ) : (
-        <div
-          className="d-grid justify-content-center align-items-center link-content h-auto pt-5"
-          // style={{ height: '30rem' }}
-        >
+        <div className="d-grid justify-content-center align-items-center link-content h-auto pt-5">
           <div className="d-flex justify-content-center mt-5">
             <p>到</p>
             <Link to="/activity" className="link-highlight mx-1">
