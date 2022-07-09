@@ -1,0 +1,30 @@
+.chatbody {
+  overflow-y: scroll;
+  border: 1px solid #999;
+  background-color: #ffffff;
+  scroll-behavior: smooth;
+  margin-right: 0.5rem;
+  &::-webkit-scrollbar {
+    width: 0.4rem;
+  }
+  //  scrollbar 滑動塊
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--bs-graybg);
+    border-radius: 1rem;
+  }
+}
+
+.chat-select {
+  overflow-x: scroll;
+  overflow: auto;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    height: 0.2rem;
+  }
+  //  scrollbar 滑動塊
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--bs-primary);
+    border-radius: 1rem;
+  }
+}

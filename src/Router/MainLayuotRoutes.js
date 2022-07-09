@@ -14,6 +14,7 @@ import ActivityList from '../pages/ActivityList';
 import ActivityDetail from '../pages/ActivityDetail';
 import Member from '../pages/Member';
 import PasswordReset from '../pages/PasswordReset';
+import ChatBot from '../pages/ChatBot';
 
 export default function MainLayoutRoutes() {
   return (
@@ -43,6 +44,7 @@ export default function MainLayoutRoutes() {
         <Route path="/activity/:courseId" element={<ActivityDetail />} />
         <Route path="/activity" element={<ActivityList />} />
         <Route path="/passwordReset" element={<PasswordReset />} />
+        <Route path="/chatbot" element={<ChatBot />} />
       </Routes>
     </React.Fragment>
   );

@@ -16,7 +16,7 @@ import swal from 'sweetalert';
 export default function ActivityDetail() {
   const [data, setData] = useState([]); // 主資料
   const { courseId } = useParams(); // 從網址上拿變數
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const { userData } = useLogin();
   const [favorite, setFavorite] = useState({
     userId: userData.userId,
