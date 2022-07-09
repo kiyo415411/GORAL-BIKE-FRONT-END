@@ -16,26 +16,6 @@ import CartSummary from './CartSummary';
 //   },
 // ];
 
-// const course = [
-//   {
-//     id: 1,
-//     name: '初階課程',
-//     image: 'BIG_NINE_15.jpg',
-//     price: '$6,000',
-//     quantity: 1,
-//   },
-// ]
-
-// const activities = [
-//   {
-//     id: 1,
-//     name: '小活動',
-//     image: 'BIG_NINE_15.jpg',
-//     price: '$2,000',
-//     quantity: 1,
-//   },
-// ]
-
 function CartList(props) {
   const [open, setOpen] = useState(true);
   const { type } = props;
