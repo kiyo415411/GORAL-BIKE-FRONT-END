@@ -4,7 +4,6 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../../utils/useLogin';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
@@ -14,7 +13,6 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function Login(props) {
   const { handleChangeModal, handleClose } = props;
-  const history = useNavigate();
   const { setIsLogin } = useLogin();
   const [passwordField, setPasswordField] = useState(false);
   const handleSwitchEyes = (e) => {

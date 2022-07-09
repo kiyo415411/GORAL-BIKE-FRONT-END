@@ -18,8 +18,6 @@ import Swal from 'sweetalert2';
 //   },
 //
 
-//TODO: 收藏功能實作
-
 function CartItem(props) {
   const {
     id,
@@ -99,7 +97,7 @@ function CartItem(props) {
                 courseId: id,
               }
             );
-            console.log('like', response.data.data.length);
+            // console.log('like', response.data.data.length);
             setLike(response.data.data.length);
           } catch (error) {
             console.log(error);
@@ -118,7 +116,7 @@ function CartItem(props) {
             `${API_URL}/member/favorite/check`,
             favorite
           );
-          console.log('like', response.data.data.length);
+          // console.log('like', response.data.data.length);
           setLike(response.data.data.length);
         } catch (error) {
           console.log(error);

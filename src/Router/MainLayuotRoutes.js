@@ -44,7 +44,7 @@ export default function MainLayoutRoutes() {
         <Route path="/course" element={<CourseList />} />
         <Route path="/activity/:courseId" element={<ActivityDetail />} />
         <Route path="/activity" element={<ActivityList />} />
-        <Route path="/passwordReset" element={<PasswordReset />} />
+        <Route path="/reset/:resetString" element={<PasswordReset />} />
       </Routes>
     </React.Fragment>
   );
