@@ -235,7 +235,7 @@ function Profile(props) {
                 />
                 <span className="error-msg mt-0">(檔案大小限制為 200KB)</span>
                 <span className="error-msg mt-0">
-                  (檔案類型限 jpg,jpeg,png )
+                  (檔案類型限 jpg,jpeg,png)
                 </span>
               </div>
             </div>
