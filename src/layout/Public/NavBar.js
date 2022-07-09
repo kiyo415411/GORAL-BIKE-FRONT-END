@@ -10,6 +10,9 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { Container, Navbar } from 'react-bootstrap';
 import useWindowSize from '../../components/hooks/useWindowSize';
+import { useCourseCart } from '../../utils/useCourseCart';
+import { useProductCart } from '../../utils/useProductCart';
+import { useActivityCart } from '../../utils/useActivityCart';
 
 function GoralBikeNavbar() {
   // 抓取螢幕寬度
@@ -17,6 +20,9 @@ function GoralBikeNavbar() {
   let rwd = screenWidth <= 768;
 
   const { isLogin, setIsLogin, setUserData } = useLogin();
+  const courseCart = useCourseCart();
+  const productCart = useProductCart();
+  const activityCart = useActivityCart();
   const history = useNavigate();
 
   const handleLogout = (e) => {
@@ -45,6 +51,9 @@ function GoralBikeNavbar() {
             photo: '',
           });
           setIsLogin(false);
+          productCart.clearCart();
+          courseCart.clearCart();
+          activityCart.clearCart();
           history('/');
         }
       }

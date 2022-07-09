@@ -64,20 +64,6 @@ function CartItem(props) {
   useEffect(() => {
     // 讀到 userData 時,做頁面初始判斷 Item 是否在收藏表中
     setFavorite({ ...favorite, userId: userData.userId });
-    (async () => {
-      if (userData.userId > 0) {
-        try {
-          let response = await axios.post(`${API_URL}/member/favorite/check`, {
-            ...favorite,
-            courseId: id,
-          });
-          console.log('like', response.data.data.length);
-          setLike(response.data.data.length);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    })();
   }, [userData]);
 
   useEffect(() => {
@@ -102,6 +88,24 @@ function CartItem(props) {
     };
     if (favorite.courseId && favorite.userId > 0) {
       postFavorite();
+    } else if (favorite.userId > 0) {
+      (async () => {
+        if (favorite.userId > 0) {
+          try {
+            let response = await axios.post(
+              `${API_URL}/member/favorite/check`,
+              {
+                ...favorite,
+                courseId: id,
+              }
+            );
+            console.log('like', response.data.data.length);
+            setLike(response.data.data.length);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      })();
     }
   }, [favorite]);
 
@@ -239,7 +243,20 @@ function CartItem(props) {
             </div>
             <div className="col-1 col-lg-1">
               <button className="shopping-cart__btn first-btn">
-                <BsHeart />
+                <Checkbox
+                  icon={<BsHeart />}
+                  checkedIcon={<BsHeartFill />}
+                  size="large"
+                  sx={{
+                    color: 'var(--bs-highlight)',
+                    '&.Mui-checked': {
+                      color: 'var(--bs-highlight)',
+                    },
+                  }}
+                  value={id}
+                  checked={like > 0 ? true : false}
+                  onClick={handleClick}
+                />
               </button>
             </div>
             <div className="col-1 col-lg-1">
