@@ -37,13 +37,6 @@
   backdrop-filter: blur(5rem);
 }
 
-.text-input-box input::placeholder {
-  color: var(--bs-content);
-}
-.text-input-box input:hover::placeholder {
-  color: gray;
-}
-
 .chatbox {
   z-index: 1040;
   position: fixed;

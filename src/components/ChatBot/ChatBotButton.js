@@ -14,6 +14,7 @@ export default function ChatBotButton({
   width,
   chatIn,
   method,
+  useTheme,
 }) {
   const { activeEventKey } = useContext(AccordionContext);
 
@@ -67,7 +68,7 @@ export default function ChatBotButton({
         </div>
       ) : (
         <div
-          className="link-content text-end me-3 pt-1"
+          className={`${useTheme.subText}  text-end me-3 pt-1`}
           onClick={decoreatedAndConnect}
           style={{ cursor: 'pointer' }}
         >

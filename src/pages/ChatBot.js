@@ -17,9 +17,57 @@ export default function ChatBot() {
   const [width, setWidth] = useState(window.innerWidth); // 視窗寬度
   const [chatIn, setChatIn] = useState(false); // 是否在視窗內
 
+  const themes = {
+    light: {
+      background: 'bg-white',
+      subText: 'link-content',
+      subBorder: 'border-content',
+      btn: 'btn-outline-content',
+      border: 'border-subcontent',
+      userTextColor: 'text-content',
+      userTextBackground: 'bg-subcontent',
+      goralTextColor: 'text-line',
+      goralTextBackground: 'bg-content',
+    },
+    secondary: {
+      background: 'bg-secondary',
+      subText: 'link-content',
+      subBorder: 'border-content',
+      btn: 'btn-outline-content',
+      border: 'border-subcontent',
+      userTextColor: 'text-content',
+      userTextBackground: 'bg-subcontent',
+      goralTextColor: 'text-line',
+      goralTextBackground: 'bg-content',
+    },
+    dark: {
+      background: 'bg-dark',
+      subText: 'link-line',
+      subBorder: 'border-line',
+      btn: 'btn-outline-line',
+      border: 'border-line',
+      userTextColor: 'text-content',
+      userTextBackground: 'bg-graybg',
+      goralTextColor: 'text-content',
+      goralTextBackground: 'bg-line',
+    },
+    primary: {
+      background: 'bg-primary',
+      subText: 'link-line',
+      subBorder: 'border-line',
+      btn: 'btn-outline-line',
+      border: 'border-line',
+      userTextColor: 'text-content',
+      userTextBackground: 'bg-graybg',
+      goralTextColor: 'text-content',
+      goralTextBackground: 'bg-line',
+    },
+  };
+  const [opacity, setOpacity] = useState(true);
+  const [useTheme, setUseCurrentTheme] = useState(themes.light);
   const chatSelect = document.getElementById('chat-select'); // 抓選單的範圍
   const sendInput = document.getElementById('sendInput'); // 抓input
-  const sendBtn = document.getElementById('sendBtn'); // 抓按鍵
+
   const chatSelectGroup = [
     '想選購登山車',
     '想學習登山車',
@@ -61,7 +109,9 @@ export default function ChatBot() {
       setMsgPop([
         ...msgPop,
         <div className="d-flex gap-3 justify-content-end">
-          <div className="chat-text bg-subcontent text-content w-auto h-auto rounded px-3 mb-4 my-2">
+          <div
+            className={`chat-text ${useTheme.userTextBackground} ${useTheme.userTextColor} w-auto h-auto rounded px-3 mb-4 my-2`}
+          >
             <p className="m-0 py-2" style={{ wordBreak: 'break-all' }}>
               {msg}
             </p>
@@ -184,7 +234,9 @@ export default function ChatBot() {
                 alt=""
               />
             </div>
-            <div className="chat-text bg-content text-line w-auto h-auto rounded px-3 mb-4 mt-2">
+            <div
+              className={`chat-text ${useTheme.goralTextBackground} ${useTheme.goralTextColor} w-auto h-auto rounded px-3 mb-4 mt-2`}
+            >
               <p className="m-0 py-2" style={{ wordBreak: 'break-all' }}>
                 {bot}
               </p>
@@ -266,26 +318,78 @@ export default function ChatBot() {
         <div className="position-relative pb-3">
           {/* ---------------------------- 透明背景 */}
           <div
-            className="chat-background w-100 h-100 position-absolute opacity-75 bg-white rounded"
+            className={`chat-background w-100 h-100 position-absolute ${
+              opacity ? 'opacity-75' : ''
+            } ${useTheme.background} rounded`}
             style={{ zIndex: '-1' }}
           />
           {/* ---------------------------- 關閉鈕 */}
-          <ChatBotButton
-            eventKey="0"
-            setChatClose={setChatClose}
-            chatClose={chatClose}
-            width={width}
-            chatIn={chatIn}
-            method="close"
-          />
+          <div className="d-flex justify-content-between">
+            <div className="d-flex gap-2 ms-3 mt-3">
+              <div
+                className="rounded-circle shadow bg-dark border"
+                style={{ width: '1rem', height: '1rem', cursor: 'pointer' }}
+                onClick={() => {
+                  setUseCurrentTheme(themes.dark);
+                }}
+              ></div>
+              <div
+                className="rounded-circle shadow bg-primary border"
+                style={{ width: '1rem', height: '1rem', cursor: 'pointer' }}
+                onClick={() => {
+                  setUseCurrentTheme(themes.primary);
+                }}
+              ></div>
+              <div
+                className="rounded-circle shadow bg-secondary border"
+                style={{ width: '1rem', height: '1rem', cursor: 'pointer' }}
+                onClick={() => {
+                  setUseCurrentTheme(themes.secondary);
+                }}
+              ></div>
+              <div
+                className="rounded-circle shadow bg-white border"
+                style={{ width: '1rem', height: '1rem', cursor: 'pointer' }}
+                onClick={() => {
+                  setUseCurrentTheme(themes.light);
+                }}
+              ></div>
+              <div
+                className="rounded-circle shadow border overflow-hidden d-flex justify-content-center align-content-center"
+                style={{ width: '1rem', height: '1rem', cursor: 'pointer' }}
+                onClick={() => {
+                  setOpacity(!opacity);
+                }}
+              >
+                <img
+                  className="cover"
+                  src={`${IMAGE_URL}/no-data/opacity.png`}
+                  alt=""
+                />
+              </div>
+            </div>
+
+            <ChatBotButton
+              eventKey="0"
+              setChatClose={setChatClose}
+              chatClose={chatClose}
+              width={width}
+              chatIn={chatIn}
+              method="close"
+              useTheme={useTheme}
+            />
+          </div>
+
           {/* ---------------------------- 全頁滾動停止區域 */}
           <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
             {/* ---------------------------- 標題 */}
-            <div className="title text-nowrap link-content text-center px-5 pb-1 rounded-top">
+            <div
+              className={`title text-nowrap ${useTheme.subText} text-center px-5 pb-1 rounded-top`}
+            >
               <p className="m-0" style={{ cursor: 'default' }}>
                 小羊導覽系統
               </p>
-              <div className="border-bottom border-content" />
+              <div className={`border-bottom ${useTheme.subBorder}`} />
               <p style={{ cursor: 'default' }}>Goral Guider System</p>
             </div>
             {/* ---------------------------- 訊息區 */}
@@ -301,7 +405,7 @@ export default function ChatBot() {
             {/* ---------------------------- 訊息選單 */}
             <div className="select-box">
               <p
-                className="fs-7 link-content m-0 ms-3 mb-1"
+                className={`fs-7 ${useTheme.subText} m-0 ms-3 mb-1`}
                 style={{ cursor: 'default' }}
               >
                 可透過下方選擇問題或是輸入關鍵字詢問
@@ -316,7 +420,7 @@ export default function ChatBot() {
                     return (
                       <button
                         key={i}
-                        className="btn btn-outline-content rounded-pill py-0 mx-1"
+                        className={`btn ${useTheme.btn} rounded-pill py-0 mx-1`}
                         onClick={botSelect}
                       >
                         {v}
@@ -330,7 +434,7 @@ export default function ChatBot() {
             <div className="text-input-box d-flex flex-nowrap">
               <input
                 id="sendInput"
-                className="w-80 bg-transparent py-0 ps-3 rounded-pill ms-3 mt-2 link-content border-sub-content"
+                className={`w-80 bg-transparent py-0 ps-3 rounded-pill ms-3 mt-2 ${useTheme.subText} ${useTheme.border}`}
                 type="text"
                 placeholder="請輸入關鍵字"
                 value={msg}
@@ -340,7 +444,7 @@ export default function ChatBot() {
               <Tooltip title={msg === '' ? '請輸入訊息' : ''}>
                 <div
                   id="sendBtn"
-                  className="link-content m-2"
+                  className={`${useTheme.subText} m-2`}
                   onClick={sendMessage}
                   style={{ cursor: 'pointer' }}
                 >
