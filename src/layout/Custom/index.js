@@ -64,7 +64,7 @@ export default function Custom() {
       <section
         className={
           rwd
-            ? `fixed-bottom position-absolute bottom-0 start-50 translate-middle-x`
+            ? `fixed-bottom position-absolute bottom-20 start-35 translate-middle-x`
             : 'fixed-top'
         }
         style={{

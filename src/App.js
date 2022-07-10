@@ -56,7 +56,6 @@ function CustomLayout() {
   return (
     <>
       <Outlet />
-      <ChatBot />
     </>
   );
 }
