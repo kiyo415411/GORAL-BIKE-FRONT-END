@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 export default function useWindowSize() {
   const [screenWidth, setScreenWidth] = useState(0);
   const resize = () => {
-    console.log(window.screen.width);
+    // console.log(window.screen.width);
     setScreenWidth(window.screen.width);
   };
 

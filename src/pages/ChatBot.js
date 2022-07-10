@@ -1,51 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import webSocket from 'socket.io-client';
+// import webSocket from 'socket.io-client';
 import { IMAGE_URL } from '../utils/config';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { RiSendPlaneFill } from 'react-icons/ri';
-import Fab from '@mui/material/Fab';
+import Accordion from 'react-bootstrap/Accordion';
+import ChatBotButton from '../components/ChatBot/ChatBotButton';
+import Tooltip from '@mui/material/Tooltip';
+
 export default function ChatBot() {
-  const [ws, setWs] = useState(null);
-  const [msg, setMsg] = useState('');
-  const [msgPop, setMsgPop] = useState([]);
-  const [sendBack, setSendBack] = useState(true);
-  const [bot, setBot] = useState('請問有什麼需求？');
-  const chatSelect = document.getElementById('chat-select');
+  // const [ws, setWs] = useState(null); // socket.io
+  const [msg, setMsg] = useState(''); // user's message
+  const [msgPop, setMsgPop] = useState([]); // user's MessageDivStyle
+  const [sendBack, setSendBack] = useState(true); // 送出請求
+  const [bot, setBot] = useState('請問有什麼需求？'); // bot's message
+  const [chatClose, setChatClose] = useState(false); // 關閉請求
+  const [width, setWidth] = useState(window.innerWidth); // 視窗寬度
+  const [chatIn, setChatIn] = useState(false); // 是否在視窗內
+
+  const chatSelect = document.getElementById('chat-select'); // 抓選單的範圍
+  const sendInput = document.getElementById('sendInput'); // 抓input
+  const sendBtn = document.getElementById('sendBtn'); // 抓按鍵
   const chatSelectGroup = [
     '想選購登山車',
     '想學習登山車',
     '想參加約騎活動',
     '想查詢林道資訊',
     '想看登山車近期消息',
-  ];
-  const connectWebSocket = () => {
-    //開啟
-    setWs(webSocket('http://localhost:3001'));
-  };
+    '想製作一台屬於我的登山車',
+  ]; // 選單內的項目
 
-  useEffect(() => {
-    if (ws) {
-      //連線成功在 console 中打印訊息
-      console.log('success connect!');
-      //設定監聽
-      initWebSocket();
-    }
-  }, [ws]);
+  // -------------------------------------------- socket
+  // const connectWebSocket = () => {
+  //   //開啟
+  //   setWs(webSocket('http://localhost:3001'));
+  // };
 
-  const initWebSocket = () => {
-    //對 getMessage 設定監聽，如果 server 有透過 getMessage 傳送訊息，將會在此被捕捉
-    ws.on('getMessage', (message) => {
-      console.log(message);
-    });
-  };
+  // useEffect(() => {
+  //   if (ws) {
+  //     //連線成功在 console 中打印訊息
+  //     // console.log('success connect!');
+  //     //設定監聽
+  //     initWebSocket();
+  //   }
+  // }, [ws]);
 
+  // const initWebSocket = () => {
+  //   //對 getMessage 設定監聽，如果 server 有透過 getMessage 傳送訊息，將會在此被捕捉
+  //   ws.on('getMessage', (message) => {
+  //     // console.log(message);
+  //   });
+  // };
+
+  // -------------------------- user send message
   function sendMessage(e) {
-    setMsg(''); // 把input清空
+    // --------------- 如果 user 有輸入訊息 > 送訊息 | 沒有 > 不送
     if (msg !== '') {
+      // -----------往訊息列表中加入新的訊息(含樣式)
+      // 英文字母換行問題用 css 的 wordBreak:'break-all' 解決
+      // msg 為 user 輸入並送出的訊息
       setMsgPop([
         ...msgPop,
-        <div className="d-flex gap-2 justify-content-end">
-          <div className="chat-text bg-light text-content w-auto h-auto rounded py-2 px-3 my-3">
-            <p className="m-0 ">{msg}</p>
+        <div className="d-flex gap-3 justify-content-end">
+          <div className="chat-text bg-subcontent text-content w-auto h-auto rounded px-3 mb-4 my-2">
+            <p className="m-0 py-2" style={{ wordBreak: 'break-all' }}>
+              {msg}
+            </p>
           </div>
           <div
             className="rounded-circle overflow-hidden border flex-shrink-0"
@@ -59,157 +78,279 @@ export default function ChatBot() {
           </div>
         </div>,
       ]);
-      //以 emit 送訊息，並以 getMessage 為名稱送給 server 捕捉
-      ws.emit('getMessage', '你好');
+
+      // ---------------------- 使用者有送出訊息，就做回應
       setSendBack(!sendBack);
-      if (msg.includes('車')) {
+
+      // --------------------------------- 判斷回應文本
+      if (msg.includes('想選購登山車')) {
         setBot(
-          '請問要什麼樣的車呢請問要什麼樣的車呢請問要什麼樣的車呢請問要什麼樣的車呢請問要什麼樣的車呢請問要什麼樣的車呢請問要什麼樣的車呢'
+          <>
+            可以到
+            <Link to="/product" className="link-highlight mx-1">
+              商品頁
+            </Link>
+            逛逛哦
+          </>
         );
+      } else if (msg.includes('想學習登山車')) {
+        setBot(
+          <>
+            可以到
+            <Link to="/course" className="link-highlight mx-1">
+              課程頁
+            </Link>
+            逛逛哦
+          </>
+        );
+      } else if (msg.includes('想參加約騎活動')) {
+        setBot(
+          <>
+            可以到
+            <Link to="/activity" className="link-highlight mx-1">
+              活動頁
+            </Link>
+            逛逛哦
+          </>
+        );
+      } else if (msg.includes('想查詢林道資訊')) {
+        setBot(
+          <>
+            可以到
+            <Link to="/map" className="link-highlight mx-1">
+              場地資訊
+            </Link>
+            看看哦
+          </>
+        );
+      } else if (msg.includes('想看登山車近期消息')) {
+        setBot(
+          <>
+            可以到
+            <Link to="/news" className="link-highlight mx-1">
+              消息頁
+            </Link>
+            看看哦
+          </>
+        );
+      } else if (msg.includes('想製作一台屬於我的登山車')) {
+        setBot(
+          <>
+            可以到
+            <Link to="/CustomePages/customize" className="link-highlight mx-1">
+              客製化區域
+            </Link>
+            試試哦
+          </>
+        );
+      } else if (msg.includes('hi')) {
+        setBot('你好，我是一隻羊');
+      } else if (msg.includes('聊天')) {
+        setBot('只要你願意，隨時都可以找小羊聊天');
+      } else if (msg.includes('bye')) {
+        setBot('再見，希望你有開心的一天');
+        setChatClose(true);
       } else {
-        setBot('也許您需要以下這些服務');
+        setBot('對不起，小羊不太懂');
       }
-    } else {
-      setMsgPop([
-        ...msgPop,
-        <div
-          className="chat-text bg-secondary text-content rounded"
-          style={{ width: '1rem', height: '1rem' }}
-        ></div>,
-      ]);
-      ws.emit('getMessage', '你好');
-      setBot('也許您需要以下這些服務');
-      setSendBack(!sendBack);
     }
+    setMsg(''); // 送完訊息把 input 清空
+    // ----------------------------------------------------- socket
+    //以 emit 送訊息，並以 getMessage 為名稱送給 server 捕捉
+    // ws.emit('getMessage', '你好');
   }
 
+  // ------------------------- 訊息輸入 > 即時改變 input 的 value
   function handleChange(e) {
     setMsg(e.target.value);
   }
 
+  // --------------------- 是否有訊息需要回應
   useEffect(() => {
-    setTimeout(() => {
-      setMsgPop([
-        ...msgPop,
-        <div className="d-flex gap-2">
-          <div
-            className="rounded-circle overflow-hidden border flex-shrink-0"
-            style={{ width: '3.2rem', height: '3.2rem' }}
-          >
-            <img
-              className="cover"
-              src={`${IMAGE_URL}/avatar/Goral_Avatar.png`}
-              alt=""
-            />
-          </div>
-          <div className="chat-text bg-light text-content w-auto h-auto rounded py-2 px-3 my-3">
-            <p className="m-0 p-0">{bot}</p>
-          </div>
-        </div>,
-      ]);
-    }, 1000);
-    setBot('');
+    // 因為某些狀態下 bot 的值會變空字串，所以要判斷有值才送出
+    if (bot !== '') {
+      // 等 user 訊息出現 1 秒後再出現 bot 回應訊息
+      setTimeout(() => {
+        setMsgPop([
+          ...msgPop,
+          <div className="d-flex gap-3 mt-2">
+            <div
+              className="rounded-circle overflow-hidden border flex-shrink-0"
+              style={{ width: '3.2rem', height: '3.2rem' }}
+            >
+              <img
+                className="cover"
+                src={`${IMAGE_URL}/avatar/Goral_Avatar.png`}
+                alt=""
+              />
+            </div>
+            <div className="chat-text bg-content text-line w-auto h-auto rounded px-3 mb-4 mt-2">
+              <p className="m-0 py-2" style={{ wordBreak: 'break-all' }}>
+                {bot}
+              </p>
+            </div>
+          </div>,
+        ]);
+      }, 1000);
+      setBot('');
+    }
   }, [sendBack]);
 
+  // ------------------------- 如果新訊息顯示，卷軸置底
   useEffect(() => {
     let div = document.getElementById('chatbody');
     div.scrollTop = div.scrollHeight;
   }, [msgPop]);
 
+  // -------------------------- 滑鼠進入選單
   function handleMouseOver() {
+    // 加入滾輪事件
     chatSelect.addEventListener('mousewheel', (e) => {
+      // 左右卷軸滾動
       chatSelect.scrollLeft += e.deltaY;
     });
+    // 防止全頁卷軸跟著滾動
     document.body.style.overflow = 'hidden';
-  }
-  function handleMouseOut() {
-    chatSelect.removeEventListener('mousewheel', chatSelect, false);
-    document.body.style.overflow = '';
+    // 按 enter 發送
+    sendInput.addEventListener('keypress', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        document.getElementById('sendBtn').click();
+      }
+    });
+    // RWD | 導覽開啟的時候，隱藏 button
+    setChatIn(true);
   }
 
+  // -------------------------- 滑鼠離開選單
+  function handleMouseOut() {
+    // 移除滾輪事件
+    chatSelect.removeEventListener('mousewheel', chatSelect, false);
+    // 恢復全頁卷軸滾動
+    document.body.style.overflow = '';
+    // RWD | 導覽關閉的時候，顯示 button
+    setChatIn(false);
+  }
+
+  // --------------------- 選單項目被選擇 > 導入到 user 的 input
   function botSelect(e) {
     setMsg(e.target.innerText);
   }
 
-  return (
-    <>
-      <div
-        className="position-fixed link-subcontent"
-        style={{ zIndex: '99', bottom: '3rem', right: '3rem' }}
-      >
-        <Fab>
-          <div
-            className="rounded-circle overflow-hidden border flex-shrink-0"
-            style={{ width: '3.2rem', height: '3.2rem' }}
-          >
-            <img
-              className="cover"
-              src={`${IMAGE_URL}/avatar/Goral_Avatar.png`}
-              alt=""
-            />
-          </div>
-        </Fab>
-        <p className="mt-1 text-center" style={{ cursor: 'pointer' }}>
-          導覽羊
-        </p>
-      </div>
-      <div
-        className="chatbox m-5 h-auto position-relative shadow pb-3"
-        style={{ width: '24rem' }}
-      >
-        <div className="title text-nowrap text-white text-center py-2 bg-primary">
-          小羊導覽系統
-        </div>
-        <div
-          id="chatbody"
-          className="chatbody d-grid gap-2 px-3 bg-transparent border-0"
-          style={{ height: '15rem' }}
-        >
-          {msgPop.map((v, i) => {
-            return <div key={i}>{v}</div>;
-          })}
-        </div>
-        <div className="select-box">
-          <p
-            className="fs-7 link-subcontent m-0 ms-3 mb-1"
-            style={{ cursor: 'default' }}
-          >
-            可透過下方選擇問題或是輸入關鍵字詢問
-          </p>
-          <div
-            id="chat-select"
-            className="chat-select d-flex flex-nowrap text-nowrap h-auto pb-2"
-            onMouseOver={handleMouseOver}
-            onMouseOut={handleMouseOut}
-          >
-            {chatSelectGroup.map((v, i) => {
-              return (
-                <button
-                  key={i}
-                  className="btn btn-outline-primary rounded-pill py-0 mx-1"
-                  onClick={botSelect}
-                >
-                  {v}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-        <div className="text-input-box d-flex flex-nowrap">
-          <input
-            className="w-100 bg-transparent py-0 ps-3 rounded-pill ms-3 mt-2"
-            type="text"
-            placeholder="請輸入關鍵字"
-            value={msg}
-            onChange={handleChange}
-          />
-          <div className="link-primary m-2" onClick={sendMessage}>
-            <RiSendPlaneFill size={26} />
-          </div>
-        </div>
-      </div>
+  // ----------------- 偵測視窗寬度
+  useEffect(() => {
+    const updateWindowsWidth = () => {
+      const newWidth = window.innerWidth;
+      setWidth(newWidth);
+    };
 
-      <input type="button" value="連線" onClick={connectWebSocket} />
-    </>
+    window.addEventListener('resize', updateWindowsWidth);
+
+    return () => window.removeEventListener('resize', updateWindowsWidth);
+  }, []);
+
+  return (
+    <Accordion>
+      {/* ---------------------------- 導覽開關 */}
+      <ChatBotButton
+        eventKey="0"
+        // connectWebSocket={connectWebSocket}
+        setChatClose={setChatClose}
+        chatClose={chatClose}
+        width={width}
+        chatIn={chatIn}
+        method="button"
+      />
+      {/* ---------------------------- 導覽本體 */}
+      <Accordion.Collapse eventKey="0" className="chatbox">
+        <div className="position-relative pb-3">
+          {/* ---------------------------- 透明背景 */}
+          <div
+            className="chat-background w-100 h-100 position-absolute opacity-75 bg-white rounded"
+            style={{ zIndex: '-1' }}
+          />
+          {/* ---------------------------- 關閉鈕 */}
+          <ChatBotButton
+            eventKey="0"
+            setChatClose={setChatClose}
+            chatClose={chatClose}
+            width={width}
+            chatIn={chatIn}
+            method="close"
+          />
+          {/* ---------------------------- 全頁滾動停止區域 */}
+          <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+            {/* ---------------------------- 標題 */}
+            <div className="title text-nowrap link-content text-center px-5 pb-1 rounded-top">
+              <p className="m-0" style={{ cursor: 'default' }}>
+                小羊導覽系統
+              </p>
+              <div className="border-bottom border-content" />
+              <p style={{ cursor: 'default' }}>Goral Guider System</p>
+            </div>
+            {/* ---------------------------- 訊息區 */}
+            <div
+              id="chatbody"
+              className="chatbody d-grid gap-2 px-3 bg-transparent border-0"
+            >
+              {/* ---------------------------- 訊息 */}
+              {msgPop.map((v, i) => {
+                return <div key={i}>{v}</div>;
+              })}
+            </div>
+            {/* ---------------------------- 訊息選單 */}
+            <div className="select-box">
+              <p
+                className="fs-7 link-content m-0 ms-3 mb-1"
+                style={{ cursor: 'default' }}
+              >
+                可透過下方選擇問題或是輸入關鍵字詢問
+              </p>
+              <div
+                id="chat-select"
+                className="chat-select d-flex flex-nowrap text-nowrap h-auto pb-2"
+              >
+                <div className="chat-select-px mx-2">
+                  {/* ---------------------------- 訊息選單項目 */}
+                  {chatSelectGroup.map((v, i) => {
+                    return (
+                      <button
+                        key={i}
+                        className="btn btn-outline-content rounded-pill py-0 mx-1"
+                        onClick={botSelect}
+                      >
+                        {v}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+            {/* ---------------------------- 訊息輸入欄位 */}
+            <div className="text-input-box d-flex flex-nowrap">
+              <input
+                id="sendInput"
+                className="w-80 bg-transparent py-0 ps-3 rounded-pill ms-3 mt-2 link-content border-sub-content"
+                type="text"
+                placeholder="請輸入關鍵字"
+                value={msg}
+                onChange={handleChange}
+              />
+              {/* ---------------------------- 送出 */}
+              <Tooltip title={msg === '' ? '請輸入訊息' : ''}>
+                <div
+                  id="sendBtn"
+                  className="link-content m-2"
+                  onClick={sendMessage}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <RiSendPlaneFill size={26} />
+                </div>
+              </Tooltip>
+            </div>
+          </div>
+        </div>
+      </Accordion.Collapse>
+    </Accordion>
   );
 }
