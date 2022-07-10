@@ -5,13 +5,17 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { IMAGE_URL } from '../../utils/config';
 
 function Index() {
+  // 取的網址傳值
   const getName = decodeURI(window.location.pathname.split('/').pop());
+  // 設定地圖資料變數
   const [mapDetailData, setMapDetailData] = useState([]);
+  // 設定圖片號碼變數取得圖片編號
   const [num, setNum] = useState(1);
+  // 設定背景圖片
   const backImage = new URL(`${IMAGE_URL}/81pic/${num}.jpg`, import.meta.url);
-
+  // 設定三張圖片
   const [pics] = useState([1, 2, 3]);
-
+  // 組合三張圖片
   const imgGroup = pics.map((value) => {
     const numMOD = (num % 81) + value;
     console.log(numMOD);
@@ -46,6 +50,7 @@ function Index() {
     })();
   }, [getName]);
 
+  // 設定Toolip提示
   const renderStartTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       {mapDetailData['起點']}
@@ -119,14 +124,7 @@ function Index() {
                   trigger="click"
                   overlay={renderStartTooltip}
                 >
-                  <circle
-                    cx="3%"
-                    cy="50%"
-                    r="5"
-                    // stroke="black"
-                    // stroke-width="3"
-                    fill="white"
-                  />
+                  <circle cx="3%" cy="50%" r="5" fill="white" />
                 </OverlayTrigger>
 
                 <line
@@ -144,14 +142,7 @@ function Index() {
                   placement="bottom"
                   overlay={renderEndTooltip}
                 >
-                  <circle
-                    cx="97%"
-                    cy="50%"
-                    r="5"
-                    // stroke="black"
-                    // stroke-width="3"
-                    fill="white"
-                  />
+                  <circle cx="97%" cy="50%" r="5" fill="white" />
                 </OverlayTrigger>
               </svg>
             </section>

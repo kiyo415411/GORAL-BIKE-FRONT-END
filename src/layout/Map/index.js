@@ -65,7 +65,7 @@ export default function Index() {
         setFilterDataApi(getData);
         setTimeout(() => {
           setIsLoading(false);
-        }, 2500);
+        }, 0);
       } catch (e) {
         throw new Error(e);
       }
