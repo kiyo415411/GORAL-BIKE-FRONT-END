@@ -54,3 +54,16 @@
   transform: scale(1.05);
   transition: 200ms;
 }
+
+.color-button {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.8;
+  border: 0.1rem solid white;
+  cursor: "pointer";
+  &:hover {
+    transform: scale(1.1);
+    opacity: 1;
+    transition: 200ms;
+  }
+}

@@ -327,36 +327,31 @@ export default function ChatBot() {
           <div className="d-flex justify-content-between">
             <div className="d-flex gap-2 ms-3 mt-3">
               <div
-                className="rounded-circle shadow bg-dark border"
-                style={{ width: '1rem', height: '1rem', cursor: 'pointer' }}
+                className="color-button rounded-circle shadow bg-dark"
                 onClick={() => {
                   setUseCurrentTheme(themes.dark);
                 }}
               ></div>
               <div
-                className="rounded-circle shadow bg-primary border"
-                style={{ width: '1rem', height: '1rem', cursor: 'pointer' }}
+                className="color-button rounded-circle shadow bg-primary "
                 onClick={() => {
                   setUseCurrentTheme(themes.primary);
                 }}
               ></div>
               <div
-                className="rounded-circle shadow bg-secondary border"
-                style={{ width: '1rem', height: '1rem', cursor: 'pointer' }}
+                className="color-button rounded-circle shadow bg-secondary "
                 onClick={() => {
                   setUseCurrentTheme(themes.secondary);
                 }}
               ></div>
               <div
-                className="rounded-circle shadow bg-white border"
-                style={{ width: '1rem', height: '1rem', cursor: 'pointer' }}
+                className="color-button rounded-circle shadow bg-white"
                 onClick={() => {
                   setUseCurrentTheme(themes.light);
                 }}
               ></div>
               <div
-                className="rounded-circle shadow border overflow-hidden d-flex justify-content-center align-content-center"
-                style={{ width: '1rem', height: '1rem', cursor: 'pointer' }}
+                className="color-button rounded-circle shadow overflow-hidden d-flex align-content-center justify-content-center"
                 onClick={() => {
                   setOpacity(!opacity);
                 }}
