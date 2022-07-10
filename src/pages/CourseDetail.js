@@ -65,12 +65,12 @@ export default function CourseDetail() {
 
   return (
     <>
-      {data.map((item) => {
+      {data.map((item, index) => {
         const newDate = item.course_date.split('T').shift();
         const newStartTime = item.course_start_time.split('T').shift();
         const newEndTime = item.course_end_time.split('T').shift();
         return (
-          <div className="animate__animated animate__fadeIn">
+          <div key={index} className="animate__animated animate__fadeIn">
             <TopSection
               title={item.course_title}
               bg={`${IMAGE_URL}/course/${item.course_pictures}`}
@@ -206,7 +206,7 @@ export default function CourseDetail() {
                             onClick={handleShow}
                             className="rounded-0"
                           >
-                            填寫報名表
+                            加入購物車
                           </Button>
                           <ApplyForm
                             formName="課程報名表"

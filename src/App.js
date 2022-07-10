@@ -20,6 +20,7 @@ import axios from 'axios';
 import { API_URL } from './utils/config';
 
 import Index from './layout/Home';
+import ChatBot from './pages/ChatBot';
 
 // const products = [
 //   {
@@ -45,13 +46,19 @@ function BasicLayout() {
     <>
       <Navbar />
       <Outlet />
+      <ChatBot />
       <Footer />
     </>
   );
 }
 
 function CustomLayout() {
-  return <Outlet />;
+  return (
+    <>
+      <Outlet />
+      <ChatBot />
+    </>
+  );
 }
 
 // 測試屬性 initialCartItems={products}

@@ -298,11 +298,15 @@ export default function CourseList() {
                   </div>
                 </>
               ) : (
-                <div
-                  className="d-flex justify-content-center align-items-center link-content"
-                  style={{ height: '20rem' }}
-                >
-                  找不到課程，請調整篩選條件。
+                <div className="d-grid justify-content-center align-items-center link-content h-auto pt-5">
+                  <div className="d-flex justify-content-center mt-5">
+                    <p>找不到課程，請調整篩選條件。</p>
+                  </div>
+                  <img
+                    src={`${IMAGE_URL}/no-data/green.svg`}
+                    alt=""
+                    className="mb-5"
+                  />
                 </div>
               )}
             </div>

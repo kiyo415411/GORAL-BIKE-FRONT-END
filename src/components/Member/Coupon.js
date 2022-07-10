@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { API_URL } from '../../utils/config';
+import { API_URL, IMAGE_URL } from '../../utils/config';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Tabs from 'react-bootstrap/Tabs';
@@ -69,7 +69,20 @@ export default function Coupon({ userData }) {
             <Col sm={1}>使用狀態</Col>
           </Row>
           <Row className="bg-white text-primary text-center py-2 order-title px-5">
-            {courseItems}
+            {courseItems.length > 0 ? (
+              courseItems
+            ) : (
+              <div className="d-grid justify-content-center align-items-center link-content h-auto pt-5">
+                <div className="d-flex justify-content-center mt-3">
+                  <p>尚未到發放優惠券的時期，敬請期待！</p>
+                </div>
+                <img
+                  src={`${IMAGE_URL}/no-data/green.svg`}
+                  alt=""
+                  className="mb-5"
+                />
+              </div>
+            )}
           </Row>
         </Tab>
         <Tab eventKey="0" title="已使用">
@@ -80,7 +93,30 @@ export default function Coupon({ userData }) {
             <Col sm={1}>使用狀態</Col>
           </Row>
           <Row className="bg-white text-primary text-center py-2 order-title px-5">
-            {courseItems}
+            {courseItems.length > 0 ? (
+              courseItems
+            ) : (
+              <div className="d-grid justify-content-center align-items-center link-content h-auto pt-5">
+                <div className="d-flex justify-content-center mt-3">
+                  <p>尚未使用過優惠券，到</p>
+                  <p
+                    className="mx-1 link-highlight"
+                    onClick={() => {
+                      setKey(1);
+                    }}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    未使用頁
+                  </p>
+                  <p>看看有什麼優惠券！</p>
+                </div>
+                <img
+                  src={`${IMAGE_URL}/no-data/green.svg`}
+                  alt=""
+                  className="mb-5"
+                />
+              </div>
+            )}
           </Row>
         </Tab>
       </Tabs>

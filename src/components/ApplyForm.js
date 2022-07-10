@@ -92,7 +92,7 @@ export default function ApplyForm({
           </h4>
         </div>
         <form
-          className="row gy-3 px-5"
+          className="row gy-3 px-3 px-sm-5"
           onReset={formik.handleReset}
           onSubmit={formik.handleSubmit}
         >
@@ -424,13 +424,13 @@ export default function ApplyForm({
           </div>
           <div className="d-flex justify-content-between mt-4 mb-2">
             <button
-              className="text-nowrap m-0 btn fs-6 border-2 px-5 py-1 rounded-0 btn-primary rounded-pill"
+              className="text-nowrap m-0 btn fs-6 border-2 px-4 px-sm-5 py-1 rounded-0 btn-primary rounded-pill"
               type="reset"
             >
               清除
             </button>
             <button
-              className="text-nowrap m-0 btn fs-6 border-2 px-5 py-1 rounded-0 btn-outline-primary rounded-pill"
+              className="text-nowrap m-0 btn fs-6 border-2 px-4 px-sm-5 py-1 rounded-0 btn-outline-primary rounded-pill"
               type="submit"
             >
               加入購物車
