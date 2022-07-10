@@ -37,8 +37,8 @@ function Summary(props) {
       setCoupon(newCoupon);
     } else {
       const newCoupon = {
-        coupon_name: '',
-        coupon_content: '',
+        coupon_name: '不使用優惠卷',
+        coupon_content: '不使用優惠卷',
         coupon_discount: 100,
         coupons_id: 0,
       };
@@ -68,7 +68,7 @@ function Summary(props) {
               value={coupon.coupons_id}
               onChange={handleCouponChange}
             >
-              <option value={0}>不使用優惠卷</option>
+              {data.length > 0 && <option value={0}>不使用優惠卷</option>}
               {data.length > 0 ? (
                 data.map((item) => {
                   return (
@@ -78,7 +78,7 @@ function Summary(props) {
                   );
                 })
               ) : (
-                <option value="0">目前沒有可用的折價卷</option>
+                <option value={0}>目前沒有可用的折價卷</option>
               )}
             </select>
             {coupon.coupons_id > 0 ? (

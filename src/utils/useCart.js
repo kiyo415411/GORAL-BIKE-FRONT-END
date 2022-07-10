@@ -10,7 +10,8 @@ export const CartProvider = ({ children }) => {
   const [allCartTotal, setAllCartTotal] = useState(0);
   const [discountTotal, setDiscountTotal] = useState(0);
   const [coupon, setCoupon] = useState({
-    coupon_content: '',
+    coupon_name: '不使用優惠卷',
+    coupon_content: '不使用優惠卷',
     coupon_discount: 100,
     coupons_id: 0,
   });
@@ -53,7 +54,8 @@ export const CartProvider = ({ children }) => {
     setAllCartTotalItems(0);
     setAllCartTotal(0);
     setCoupon({
-      coupon_content: '',
+      coupon_name: '不使用優惠卷',
+      coupon_content: '不使用優惠卷',
       coupon_discount: 100,
       coupons_id: 0,
     });
