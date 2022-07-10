@@ -40,7 +40,7 @@ export default function ActivityDetail() {
   }, [courseId, favoriteActive, userData.userId]);
   function handleClick(e) {
     console.log(e.target.value);
-    if (favorite.userId !== '') {
+    if (favorite.userId > 0) {
       setFavorite({ ...favorite, courseId: e.target.value });
     } else {
       swal('收藏失敗', '登入會員才能進行個人收藏。', 'warning');
@@ -210,7 +210,7 @@ export default function ActivityDetail() {
                             name={item.activity_name}
                             image={item.activity_pictures}
                             price={item.activity_fee}
-                            quantity="1"
+                            quantity={1}
                           />
                         </>
                       )}

@@ -9,7 +9,6 @@ import axios from 'axios';
 import { API_URL } from '../../utils/config';
 import { useLocation } from 'react-router';
 import moment from 'moment';
-import { act } from 'react-dom/test-utils';
 
 function OrderDetail(props) {
   const location = useLocation();
@@ -58,7 +57,7 @@ function OrderDetail(props) {
       const activityData = response.data.activityData;
       setActivities(calculateItemTotals(activityData));
       const newCouponData = response.data.couponData;
-      console.log(newCouponData);
+      // console.log(newCouponData);
       setCouponData(newCouponData);
     })();
   }, []);

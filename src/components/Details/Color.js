@@ -1,6 +1,6 @@
 import { useState } from 'react';
 function ColorPalette(props) {
-  const [background, setBackground] = useState(props.currentColor);
+  const [background, setBackground] = useState('#fff');
   // const [current, setCurrent] = useState(null);props.currentColor
   return (
     <div>

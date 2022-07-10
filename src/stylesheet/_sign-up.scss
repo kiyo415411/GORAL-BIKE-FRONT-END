@@ -50,4 +50,7 @@
     background: white;
     padding: 10px;
   }
+  svg {
+    pointer-events: none;
+  }
 }

@@ -51,6 +51,9 @@ function Member() {
     ) {
       setActive('second');
       return;
+    } else if (location.pathname.includes('coupon')) {
+      setActive('fourth');
+      return;
     }
     setActive('first');
   }, [location]);
@@ -117,7 +120,14 @@ function Member() {
                 <hr className="w-75 mx-auto mb-2"></hr>
                 <Nav className="flex-column gap-3 h5">
                   <Nav.Item>
-                    <Nav.Link eventKey="first">帳戶資訊</Nav.Link>
+                    <Nav.Link
+                      eventKey="first"
+                      onClick={() => {
+                        history('/member/profile');
+                      }}
+                    >
+                      帳戶資訊
+                    </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
                     <Nav.Link
@@ -164,7 +174,14 @@ function Member() {
                     </Nav.Item>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="fourth">優惠卷</Nav.Link>
+                    <Nav.Link
+                      eventKey="fourth"
+                      onClick={() => {
+                        history('/member/coupon');
+                      }}
+                    >
+                      優惠卷
+                    </Nav.Link>
                   </Nav.Item>
                 </Nav>
               </div>

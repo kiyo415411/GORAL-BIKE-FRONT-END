@@ -22,24 +22,24 @@ import { API_URL } from './utils/config';
 import Index from './layout/Home';
 import ChatBot from './pages/ChatBot';
 
-const products = [
-  {
-    id: 1,
-    name: 'BIG_NINE_15',
-    image: 'BIG_NINE_15.jpg',
-    price: 22000,
-    quantity: 1,
-    checked: false,
-  },
-  {
-    id: 2,
-    name: 'BIG_NINE_200',
-    image: 'BIG_NINE_200.jpg',
-    price: 12000,
-    quantity: 1,
-    checked: false,
-  },
-];
+// const products = [
+//   {
+//     id: 1,
+//     name: 'BIG_NINE_15',
+//     image: 'BIG_NINE_15.jpg',
+//     price: 22000,
+//     quantity: 1,
+//     checked: false,
+//   },
+//   {
+//     id: 2,
+//     name: 'BIG_NINE_200',
+//     image: 'BIG_NINE_200.jpg',
+//     price: 12000,
+//     quantity: 1,
+//     checked: false,
+//   },
+// ];
 
 function BasicLayout() {
   return (
@@ -88,13 +88,6 @@ function App() {
           phone: login.phone,
           photo: login.photo,
         });
-
-        // if (!login.status) {
-        //   localStorage.setItem('fav', '');
-        //   setFavItemsArr([]);
-        //   localStorage.setItem('cartList', '');
-        //   setCartListData([]);
-        // }
       } catch (error) {
         console.error(error);
       }

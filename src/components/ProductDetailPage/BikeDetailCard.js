@@ -3,20 +3,20 @@ import BikeDetailDescription from './BikeDetailDescription';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import LabelCard from '../Label/LabelCard';
 import axios from 'axios';
-
 import { useLogin } from '../../utils/useLogin';
 
 import { API_URL, IMAGE_URL } from '../../utils/config';
+import useWindowSize from '../hooks/useWindowSize';
 function BikeDetailCard(props) {
+  const WindowSize = useWindowSize()
   const [partsName, setPartsName] = useState([]);
   const [partsIMG, setPartsIMG] = useState([]);
   const [bike, setBike] = useState([]);
   const { userData } = useLogin();
   const [favoriteActive, setFavoriteActive] = useState(true); // 收藏有變動的時候會重新渲染
   const [productCheck, setProductCheck] = useState([]);
-  const [BikeIMG] = useState('');
-  const [BikeStart] = useState([]);
-  const [bikeImages, setBikeImages] = useState('');
+  const [BikeIMG, setBikeIMG] = useState('');
+  const [BikeStart, setBikeStart] = useState([]);
   const [currentColor, setCurrentColor] = useState('');
   const [downDesc, setDownDesc] = useState([]);
   useEffect(() => {
@@ -29,7 +29,23 @@ function BikeDetailCard(props) {
       });
 
       setBike(response.data.data);
-      setBikeImages(response.data.data[0].product_images);
+      setBikeIMG(
+        response.data.data[0].product_images.split('.')[0].split('$').shift()
+      );
+      setBikeStart(
+        response.data.data[0].product_images.split('.')[
+          response.data.data[0].product_images.split('.').length - 1
+        ]
+      );
+
+      console.log(response.data.data[0].product_images.indexOf('$') !== -1);
+      const color =
+        response.data.data[0].product_images.indexOf('$') !== -1
+          ? response.data.data[0].product_images.split('.')[0].split('$').pop()
+          : '';
+
+      setCurrentColor(color);
+
       setDownDesc(
         response.data.data[0].product_detail_description.split('&break')
       );
@@ -61,72 +77,60 @@ function BikeDetailCard(props) {
       setProductCheck(result);
     };
     getChecks();
-    console.log('productCheck', productCheck);
-
-    // console.log('adfasdffa', productCheck);
   }, [props.product_id]);
-
-  const [bikeDetail] = useState([
-    {
-      Name: 'BIG NINE 15',
-      ShortDesc:
-        '腳踏車改變了我的命運。腳踏車，發生了會如何，不發生又會如何。如果此時我們選擇忽略腳踏車，那後果可想而知。',
-      LongDesc:
-        'ONE-TWENTY 600，FLOAT LINK浮動連桿避震平台，車體避震行程120mm，配置130mm避震前叉，Shimano優異的傳動系統，林道必備升降座桿，心之所向，無所不馭！ &break 在2019年推出的ONE-TWENTY車體概念後，市場大受歡迎，2020年的ONE-TWENTY 8000，甚至被Enduro Mountainbike雜誌評比為「BEST IN TEST」。到了2022，現代化的中行程林道車款，適用範圍依舊最廣大，在不失太多速度感、足夠輕量的設定之下，能盡情地享受越野騎乘的暢快體驗！美利達將其中再細分兩種屬性，一為更偏向XC越野繞圈賽的RC版本，後行程僅為100mm，搭配120mm前避震，頭管與立管角度稍大，更有利於爬坡；另一為最經典的120mm後避震行程，搭配130mm的避震前叉。組合出多款成車型號，任君挑選！',
-      Price: 308000,
-      Colors: ['#32CE13', '#E0CF05', '#D3484F', '#6F6669'],
-    },
-  ]);
-  const DownDesc = bikeDetail[0].LongDesc.split('&break');
   if (bike.length === 0) return <></>;
   return (
-    <div className="container mt-5">
-      <div className="d-flex">
-        <div className="">
+    <div className="container mt-5 mx-0 px-0 mx-md-auto">
+      <div className="d-md-flex pt-5 mt-5 mt-md-0 justify-content-md-between">
+        <div className="col-md-8" style={{ maxWidth: '528px' }}>
           <img
-            height="538"
+            className="img-fluid"
             src={`${IMAGE_URL}/bikes/${BikeIMG}${
               currentColor ? '$' : ''
             }${currentColor}.${BikeStart}`}
             alt=""
           />
         </div>
-        <div>
-          <BikeDetailDescription
-            className="mx-5 w-75"
-            bike={bike}
-            favoriteActive={favoriteActive}
-            setFavoriteActive={setFavoriteActive}
-            product_id={props.product_id}
-            currentColor={currentColor}
-            setCurrentColor={setCurrentColor}
-          />
-        </div>
+
+        <BikeDetailDescription
+          className={`mx-sm-5 mx-auto ${
+            WindowSize < 768 ? 'w-90' : ''
+          } col-md-5`}
+          bike={bike}
+          favoriteActive={favoriteActive}
+          setFavoriteActive={setFavoriteActive}
+          product_id={props.product_id}
+          currentColor={currentColor}
+          setCurrentColor={setCurrentColor}
+          img={`${BikeIMG}${
+            currentColor ? '$' : ''
+          }${currentColor}.${BikeStart}`}
+        />
       </div>
       <div className="mt-5">
         <div>
           {downDesc.map((v, i) => {
             return (
-              <p key={i} className="text-content">
+              <p key={i} className="text-content px-3">
                 {v}
               </p>
             );
           })}
         </div>
 
-        <div className="row my-5 justify-content-between">
+        <div className="row my-3 justify-content-between px-2 m-0">
           {productCheck.map((v, i) => {
             return (
-              <h3 className="my-4 col-5">
+              <h3 className="my-4 col-12 col-md-5 p-0" key={i}>
                 <BsFillCheckCircleFill size={30} color="grey" /> {v}
               </h3>
             );
           })}
         </div>
       </div>
-      <div className="ms-n5">
-        <h1>技術</h1>
-        <ul className="row">
+      <div className="ms-md-n5">
+        <h1 className="ms-5">技術</h1>
+        <ul className="row gap-2 gap-md-5 mx-auto">
           {partsName.map((v, i) => {
             return <LabelCard partsName={v} partsIMG={partsIMG[i]} key={i} />;
           })}

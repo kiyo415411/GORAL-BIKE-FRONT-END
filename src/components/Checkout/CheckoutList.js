@@ -14,7 +14,7 @@ function CheckoutList(props) {
       <section className="checkout-list mt-3 mb-5">
         <h3 className="text-primary mb-4">訂單{type}明細</h3>
         {/* thead */}
-        <div className="row text-center fs-5 mb-2 mx-0">
+        <div className="d-sm-flex row text-center fs-5 mb-2 mx-0 d-none ">
           <div className="col-lg-2">圖片</div>
           <div className="col-lg-4">名稱</div>
           <div className="col-lg-2">單價</div>
@@ -57,11 +57,11 @@ function CheckoutList(props) {
 
         {/* tbody */}
         {/* listSummary */}
-        <div className="row fs-4 text-content text-center justify-content-between pt-3 mx-0 hr">
-          <div className="col-lg-2">總共 {totalCheckItems} 項商品</div>
-          <div className="row col-lg-4">
+        <div className="row fs-4 text-content text-md-center text-end justify-content-between flex-column flex-sm-row pt-3 mx-0 hr">
+          <div className="col-lg-2 col">總共 {totalCheckItems} 項商品</div>
+          <div className="row col-lg-4 col mb-2 px-0">
             <div className="col">商品金額</div>
-            <div className="col">$ {toThousands(cartTotal)}</div>
+            <div className="col px-0">$ {toThousands(cartTotal)}</div>
           </div>
         </div>
         {/* listSummary */}

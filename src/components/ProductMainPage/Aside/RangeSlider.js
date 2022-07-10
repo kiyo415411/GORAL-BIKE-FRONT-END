@@ -25,6 +25,7 @@ export default function RangeSlider(setPriceSubmit) {
           step={step}
           onChange={(e) => {
             setPriceSubmit.setPrice(e.target.value);
+            setPriceSubmit.setPage(1);
           }}
           min={0}
           max={500000}

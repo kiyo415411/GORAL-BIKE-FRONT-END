@@ -59,7 +59,7 @@ function LoginModal(props) {
           <Login
             handleChangeModal={handleChangeModal}
             handleClose={handleClose}
-          ></Login>
+          />
         ) : (
           <></>
         )}
@@ -67,19 +67,23 @@ function LoginModal(props) {
           <SignUp
             handleChangeModal={handleChangeModal}
             handleClose={handleClose}
-          ></SignUp>
+          />
         ) : (
           <></>
         )}
         {activeModal === '忘記密碼' ? (
           <ForgotPassword
             handleChangeModal={handleChangeModal}
-          ></ForgotPassword>
+            handleClose={handleClose}
+          />
         ) : (
           <></>
         )}
         {activeModal === '重寄認證信' ? (
-          <Certification handleChangeModal={handleChangeModal}></Certification>
+          <Certification
+            handleChangeModal={handleChangeModal}
+            handleClose={handleClose}
+          />
         ) : (
           <></>
         )}

@@ -1,19 +1,21 @@
-import BikeCard from './BikeCard.js';
+import BikePaddyCard from './BikePaddyCard.js';
 import Pagination from './Pagination.js';
-import setWindowSize from '../hooks/useWindowSize';
+import useWindowSize from '../hooks/useWindowSize.js';
 
-function BikeList(props) {
-  let WindowSize = setWindowSize();
+export default function BikePaddy(props) {
+  let WindowSize = useWindowSize();
   return (
-    <ul className="list-unstyled row mx-auto">
+    <ul className="list-unstyled row">
       {props.data.map((item, index) => {
         return (
           <li
             key={item.product_id}
-            className="col-12 p-1 col-lg-12 mx-md-auto mt-md-5"
+            className={`col-${
+              WindowSize < 1730 ? (WindowSize < 1150 ? '12' : '6') : '4'
+            }`}
           >
-            <BikeCard
-              bike={item.product_images}
+            <BikePaddyCard
+              img={item.product_images}
               name={item.product_name}
               like={item.favorite_is}
               price={item.product_price}
@@ -28,6 +30,7 @@ function BikeList(props) {
       })}
       <div className="d-flex justify-content-center">
         <Pagination
+          className=""
           page={props.page}
           setPage={props.setPage}
           lastPage={props.lastPage}
@@ -36,4 +39,3 @@ function BikeList(props) {
     </ul>
   );
 }
-export default BikeList;

@@ -223,11 +223,13 @@ export default function Custom() {
           <BikeShow />
         </Canvas>
         {show && (
-          <ul className="fixed-bottom bg-black list-unstyled row p-3 m-0 gap-3 align-items-center text-center bg-opacity-25 justify-content-around text-muted">
+          <ul className="fixed-bottom bg-black list-unstyled row p-0 p-md-3 m-0 gap-md-3 align-items-center text-center bg-opacity-25 justify-content-around text-muted">
             {isData.map((value, index) => {
               return (
                 <li
-                  className="col-2 text-muted w-10 btn fw-bold"
+                  className={`col-6 col-md-2 ${
+                    index === number ? 'text-white' : 'text-muted'
+                  } btn fw-bold`}
                   onClick={() => {
                     setNumber(index);
                     setOrderID(value.orderId);

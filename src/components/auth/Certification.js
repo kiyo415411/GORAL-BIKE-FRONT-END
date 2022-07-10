@@ -7,19 +7,8 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
 function Certification(props) {
-  const { handleChangeModal } = props;
+  const { handleChangeModal, handleClose } = props;
   const history = useNavigate();
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer);
-      toast.addEventListener('mouseleave', Swal.resumeTimer);
-    },
-  });
 
   const handleSubmit = async (values) => {
     try {
@@ -38,14 +27,17 @@ function Certification(props) {
           // buttonsStyling: false,
         }).then((result) => {
           if (result.isConfirmed) {
-            history('/homepage');
+            history('/');
+            handleClose();
           }
         });
       }
     } catch (err) {
-      Toast.fire({
+      Swal.fire({
         icon: 'error',
         html: err.response.data.error,
+        confirmButtonText: 'OK',
+        focusConfirm: false,
         // customClass: {},
       });
       console.log(err.response.data);

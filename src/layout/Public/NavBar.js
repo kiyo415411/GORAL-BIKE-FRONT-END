@@ -10,6 +10,9 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { Container, Navbar } from 'react-bootstrap';
 import useWindowSize from '../../components/hooks/useWindowSize';
+import { useCourseCart } from '../../utils/useCourseCart';
+import { useProductCart } from '../../utils/useProductCart';
+import { useActivityCart } from '../../utils/useActivityCart';
 
 function GoralBikeNavbar() {
   // 抓取螢幕寬度
@@ -17,6 +20,9 @@ function GoralBikeNavbar() {
   let rwd = screenWidth <= 768;
 
   const { isLogin, setIsLogin, setUserData } = useLogin();
+  const courseCart = useCourseCart();
+  const productCart = useProductCart();
+  const activityCart = useActivityCart();
   const history = useNavigate();
 
   const handleLogout = (e) => {
@@ -38,10 +44,16 @@ function GoralBikeNavbar() {
         });
         if (logoutRes.status === 200 && logoutRes.data.code === 0) {
           setUserData({
-            userId: '',
+            userId: 0,
             email: '',
+            name: '',
+            phone: '',
+            photo: '',
           });
           setIsLogin(false);
+          productCart.clearCart();
+          courseCart.clearCart();
+          activityCart.clearCart();
           history('/');
         }
       }
@@ -90,7 +102,7 @@ function GoralBikeNavbar() {
                 全部商品
               </NavLink>
               <NavLink to="map" className={'nav-link'}>
-                地圖
+                場地資訊
               </NavLink>
               <NavLink to="course" className={'nav-link'}>
                 課程
