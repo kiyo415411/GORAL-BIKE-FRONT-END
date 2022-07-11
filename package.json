@@ -31,6 +31,7 @@
     "react-bootstrap": "^2.4.0",
     "react-colorful": "^5.5.1",
     "react-dom": "^18.2.0",
+    "react-draggable": "^4.4.5",
     "react-icons": "^4.4.0",
     "react-leaflet": "^4.0.0",
     "react-rating": "^2.0.5",
