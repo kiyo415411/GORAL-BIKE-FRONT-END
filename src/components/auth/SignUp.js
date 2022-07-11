@@ -256,20 +256,20 @@ function SignUp(props) {
                 <div className="text-with-hr">
                   <span>或</span>
                 </div>
-                <div className="d-flex justify-content-center py-3">
-                  <div>
-                    <img
-                      className="google_logo"
-                      src={require(`../../images/Google_Logo.png`)}
-                      alt=""
-                    />
+                <a className="btn" href={API_URL + '/social/google'}>
+                  <div className="d-flex justify-content-center py-3">
+                    <div>
+                      <img
+                        className="google_logo"
+                        src={require(`../../images/Google_Logo.png`)}
+                        alt=""
+                      />
+                    </div>
+                    <div className="px-2 py-3">
+                      <p className="h5">使用Google帳號登入</p>
+                    </div>
                   </div>
-                  <div className="px-2 py-3">
-                    <a className="h5" href="#/">
-                      使用Google帳號快速註冊
-                    </a>
-                  </div>
-                </div>
+                </a>
               </div>
             </div>
           </div>
