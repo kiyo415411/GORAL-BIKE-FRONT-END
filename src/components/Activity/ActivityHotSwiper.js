@@ -64,7 +64,6 @@ export default function ActivityHotSwiper() {
           snapOnRelease: true,
         }}
         loop={true}
-        s
         mousewheel={true}
         modules={[Scrollbar, Mousewheel]}
       >

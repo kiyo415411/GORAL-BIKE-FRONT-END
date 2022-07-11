@@ -74,7 +74,7 @@ export default function ChatBotButton({
                 ? 'd-none'
                 : 'position-fixed link-subcontent chat-bot-button'
             }
-            style={{ zIndex: '98', bottom: '3rem', right: '3rem' }}
+            style={{ zIndex: '9999', bottom: '3rem', right: '3rem' }}
             onClick={decoreatedAndConnect}
           >
             <Fab className="">
