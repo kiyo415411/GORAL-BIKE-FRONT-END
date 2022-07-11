@@ -26,14 +26,13 @@ import {
 export default function Custom() {
   const Data = useContext(LoginContext);
   const [isLoading, setIsLoading] = useState(true); //讀取畫面
-  const [isData, setIsData] = useState([]); //讀取畫面
-  const [show, setShow] = useState(false); //讀取畫面
-  const [number, setNumber] = useState(0); //讀取畫面
-  const [orderID, setOrderID] = useState(0); //讀取畫面
-  const [reRender, setReRender] = useState(false); //讀取畫面
-  console.log(Data.isLogin);
-  console.log(Data.userData.userId);
+  const [isData, setIsData] = useState([]); //資料取得變數
+  const [show, setShow] = useState(false); //顯示變數
+  const [number, setNumber] = useState(0); //號碼變數
+  const [orderID, setOrderID] = useState(0); //客製化ID變數
+  const [reRender, setReRender] = useState(false); //重新渲染設定
 
+  // 設定16種材質球
   const state = proxy({
     current: null,
     items: {
@@ -56,6 +55,7 @@ export default function Custom() {
     },
   });
 
+  // 設定取得顏色選取器
   function Picker() {
     const screenWidth = useWindowSize();
     let rwd = screenWidth < 768;
@@ -64,7 +64,7 @@ export default function Custom() {
       <section
         className={
           rwd
-            ? `fixed-bottom position-absolute bottom-0 start-50 translate-middle-x`
+            ? `fixed-bottom position-absolute bottom-20 start-35 translate-middle-x`
             : 'fixed-top'
         }
         style={{
@@ -90,11 +90,15 @@ export default function Custom() {
     );
   }
 
+  // 設定3D場景
   function BikeShow() {
     return (
       <>
+        {/* 視角控制 */}
         <OrbitControls target={[0, 0.35, 0]} maxPolarAngle={1.45} />
+        {/* 主攝影機(起始) */}
         <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
+        {/* 副攝影機(追蹤) */}
         <CubeCamera resolution={256} frames={Infinity}>
           {(texture) => (
             <>
@@ -103,6 +107,7 @@ export default function Custom() {
             </>
           )}
         </CubeCamera>
+        {/* 燈光 */}
         <ambientLight intensity={0.7} />
         <spotLight
           color={[1, 0.25, 0.7]}
@@ -122,10 +127,33 @@ export default function Custom() {
           castShadow
           shadow-bias={-0.0001}
         />
-
+        {/* 地板 */}
         <Ground />
+        {/* 磁磚 */}
         <FloatingGrid />
       </>
+    );
+  }
+
+  function CustomizeData() {
+    return (
+      <ul className="fixed-bottom bg-black list-unstyled row p-0 p-md-3 m-0 gap-md-3 align-items-center text-center bg-opacity-25 justify-content-around text-muted">
+        {isData.map((value, index) => {
+          return (
+            <li
+              className={`col-6 col-md-2 ${
+                index === number ? 'text-white' : 'text-muted'
+              } btn fw-bold`}
+              onClick={() => {
+                setNumber(index);
+                setOrderID(value.orderId);
+              }}
+            >
+              方案{index + 1}
+            </li>
+          );
+        })}
+      </ul>
     );
   }
 
@@ -136,20 +164,18 @@ export default function Custom() {
         const response = await axios.post(API_URL + '/customize', {
           userID: Data.userData.userId,
         });
-
         setIsData(response.data.result);
       } catch (e) {
         throw new Error(e);
       }
     };
+    // 判斷是否登入否則不執行
     Data.isLogin && getChecks();
   }, [Data.isLogin, Data.userData.userId, reRender]);
 
   useEffect(() => {
-    // state.items.Frame_MAT = isData[0].Frame_MAT;
-    console.log('number', number);
-    // state.items.Frame_MAT = '#123456';
     if (isData.length > 0) {
+      // 個別材質預設值
       state.items.Frame_MAT = isData[number].Frame_MAT;
       state.items.Bottle_MAT = isData[number].Bottle_MAT;
       state.items.Brakes_MAT = isData[number].Brakes_MAT;
@@ -167,25 +193,25 @@ export default function Custom() {
       state.items.Shifters_MAT = isData[number].Shifters_MAT;
       state.items.Wheels_MAT = isData[number].Wheels_MAT;
     }
-
-    console.log('state.items', state.items);
   }, [state.items, isData, number]);
 
   useEffect(() => {
+    // 判斷會員是否有資料
     isData.length > 0 ? setShow(true) : setShow(false);
   }, [isData]);
 
-  console.log(isData);
   setTimeout(() => {
     setIsLoading(false);
-  }, 0);
+  }, 2500);
   return isLoading ? (
     <LoadingPage />
   ) : (
     <Suspense fallback={null}>
+      {/* 顏色選取器 */}
       <Picker />
       <div className="vh-100 bg-black p-0 m-0">
         <section className="fixed-top d-flex justify-content-end">
+          {/* 更新資料 */}
           <CustomizeUpdate
             state={state}
             Data={Data}
@@ -193,6 +219,7 @@ export default function Custom() {
             reRender={reRender}
             setReRender={setReRender}
           />
+          {/* 客製化資料表 */}
           <CustomizeForm
             state={state}
             Data={Data}
@@ -222,25 +249,7 @@ export default function Custom() {
           />
           <BikeShow />
         </Canvas>
-        {show && (
-          <ul className="fixed-bottom bg-black list-unstyled row p-0 p-md-3 m-0 gap-md-3 align-items-center text-center bg-opacity-25 justify-content-around text-muted">
-            {isData.map((value, index) => {
-              return (
-                <li
-                  className={`col-6 col-md-2 ${
-                    index === number ? 'text-white' : 'text-muted'
-                  } btn fw-bold`}
-                  onClick={() => {
-                    setNumber(index);
-                    setOrderID(value.orderId);
-                  }}
-                >
-                  方案{index + 1}
-                </li>
-              );
-            })}
-          </ul>
-        )}
+        {show && <CustomizeData />}
       </div>
     </Suspense>
   );

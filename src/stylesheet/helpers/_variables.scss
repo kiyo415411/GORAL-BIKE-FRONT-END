@@ -432,6 +432,10 @@ $negative-spacers: if(
 // scss-docs-start position-map
 $position-values: (
   0: 0,
+  15: 15%,
+  20: 20%,
+  25: 25%,
+  35: 35%,
   50: 50%,
   100: 100%,
 ) !default;

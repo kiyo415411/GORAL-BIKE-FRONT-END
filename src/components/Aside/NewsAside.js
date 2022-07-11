@@ -21,11 +21,13 @@ export default function NewsAside(props) {
   }, []);
 
   const serchValue = (e) => {
+    // 搜尋資料正則化
     const getvalue = new RegExp(e.target.value, 'gi');
-    console.log(getvalue);
+    // 判斷標題和內文
     const newFilter = [...props.news].filter(
       (value) => getvalue.exec(value.title) || getvalue.exec(value.content)
     );
+    // 分頁設定
     props.setPage(1);
     props.setLastPage(Math.ceil(newFilter.length / props.perPage));
     props.setFilterNews(newFilter);

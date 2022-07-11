@@ -36,40 +36,60 @@ import {
 } from 'swiper';
 
 export default function Index() {
+  // 取得螢幕當前大小
   const screenWidth = useWindowSize();
   let rwd = screenWidth < 768;
 
+  // 取得政府81條林道API的資料變數設定
   const [api, setApi] = useState([]);
+  // 取得消息的資料變數設定
   const [news, setNews] = useState([]);
+  // 取得產品的資料變數設定
   const [product, setProduct] = useState([]);
+  // 取得活動的資料變數設定
   const [activity, setActivity] = useState([]);
+  // 取得課程的資料變數設定
   const [course, setCourse] = useState([]);
+  // 取得第一個Swiper滾動的資料變數設定
   const [firstSwiper, setFirstSwiper] = useState(null);
+  // 取得第二個Swiper滾動的資料變數設定
   const [secondSwiper, setSecondSwiper] = useState(null);
-  const [isLoading, setIsLoading] = useState(true); //讀取畫面
+  // 讀取畫面變數設定
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getIndexData = async () => {
       try {
         // 需要等待資料pending，不然useState會是空值
+        // 取得政府81條林道API資料
         const getDataValue = await DataAPI();
+        // 取得消息的資料
         const getNewsValue = await axios.get(`${API_URL}/news`);
+        // 取得產品的資料
         const getProductValue = await axios.get(
           `${API_URL}/product/productHomepage`
         );
+        // 取得活動的資料
         const getActivityValue = await axios.get(
           `${API_URL}/activity/activityHomepage`
         );
+        // 取得課程的資料
         const getCourseValue = await axios.get(`${API_URL}/course`);
 
+        // 設定林道資料
         setApi(getDataValue);
+        // 設定消息資料
         setNews(getNewsValue.data.newsResults);
+        // 設定產品資料
         setProduct(getProductValue.data);
+        // 設定活動資料
         setActivity(getActivityValue.data);
+        // 設定課程資料
         setCourse(getCourseValue.data.classFullDtaa);
+        // 暫停1秒
         setTimeout(() => {
           setIsLoading(false);
-        }, 3000);
+        }, 500);
       } catch (e) {
         throw new Error(e);
       }
@@ -79,11 +99,12 @@ export default function Index() {
 
   return (
     <>
+      {/* 判斷資料是否載入中 */}
       {isLoading ? (
         <LoadingPage />
       ) : (
         <main>
-          <div className="container-fluid m-0 p-0">
+          <wrap className="container-fluid m-0 p-0">
             {/* HERO */}
             <section
               className="bg-info overflow-hidden position-relative"
@@ -518,7 +539,7 @@ export default function Index() {
                 })}
               </Swiper>
             </section>
-          </div>
+          </wrap>
         </main>
       )}
     </>
