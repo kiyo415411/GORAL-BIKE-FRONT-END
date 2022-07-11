@@ -88,7 +88,7 @@ function App() {
           photo: login.photo,
         });
       } catch (error) {
-        console.error(error);
+        console.log(error.response.data.error);
       }
     })();
   }, [isLogin]);
