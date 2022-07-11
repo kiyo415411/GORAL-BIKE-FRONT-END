@@ -66,7 +66,7 @@ export default function Index() {
         setFilterDataApi(getData);
         setTimeout(() => {
           setIsLoading(false);
-        }, 0);
+        }, 1000);
       } catch (e) {
         throw new Error(e);
       }
@@ -164,14 +164,17 @@ export default function Index() {
                 {filterDataApi.length !== 0 ? (
                   <MapImformation />
                 ) : (
-                  <figure className="p-5">
+                  <figure className="p-5 my-auto">
+                    <p className="text-white text-center">
+                      似乎...沒有林道資料...
+                    </p>
+
                     <img
                       src={`${IMAGE_URL}/no-data/green.svg`}
                       alt=""
                       srcset=""
                       className="w-100"
                     />
-                    <h1 className="text-white">似乎...沒有林道資料...</h1>
                   </figure>
                 )}
               </article>

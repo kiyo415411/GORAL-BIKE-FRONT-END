@@ -86,10 +86,10 @@ export default function Index() {
         setActivity(getActivityValue.data);
         // 設定課程資料
         setCourse(getCourseValue.data.classFullDtaa);
-        // 暫停1秒
+        // 暫停3秒
         setTimeout(() => {
           setIsLoading(false);
-        }, 500);
+        }, 3000);
       } catch (e) {
         throw new Error(e);
       }
