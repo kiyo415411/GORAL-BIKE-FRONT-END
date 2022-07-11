@@ -5,7 +5,7 @@ import ProductAside from './ProductAside.js';
 import { useState, useEffect } from 'react';
 import { API_URL, IMAGE_URL } from '../../utils/config';
 import axios from 'axios';
-import BikePaddy from './BikePaddy.js';
+import BikePaddy from './BIkePaddy';
 import TopSort from './TopSort.js';
 import NoData from './NoData.js';
 import { useLogin } from '../../utils/useLogin'; // user's data

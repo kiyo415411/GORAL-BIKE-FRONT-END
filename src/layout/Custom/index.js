@@ -202,7 +202,7 @@ export default function Custom() {
 
   setTimeout(() => {
     setIsLoading(false);
-  }, 0);
+  }, 2500);
   return isLoading ? (
     <LoadingPage />
   ) : (

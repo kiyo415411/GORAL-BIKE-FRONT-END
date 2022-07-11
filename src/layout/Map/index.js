@@ -15,6 +15,7 @@ import DataAPI from '../../components/DataAPI';
 import useWindowSize from '../../components/hooks/useWindowSize';
 import MapNav from '../../components/MapNav';
 import LoadingPage from '../../components/Loading/LoadingPage';
+import { IMAGE_URL } from '../../utils/config';
 
 export const MapDataValue = createContext();
 export default function Index() {
@@ -163,7 +164,15 @@ export default function Index() {
                 {filterDataApi.length !== 0 ? (
                   <MapImformation />
                 ) : (
-                  <h1 className="text-center text-white">沒有林道資料</h1>
+                  <figure className="p-5">
+                    <img
+                      src={`${IMAGE_URL}/no-data/green.svg`}
+                      alt=""
+                      srcset=""
+                      className="w-100"
+                    />
+                    <h1 className="text-white">似乎...沒有林道資料...</h1>
+                  </figure>
                 )}
               </article>
             </section>

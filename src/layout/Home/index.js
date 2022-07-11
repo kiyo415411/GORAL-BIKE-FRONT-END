@@ -89,7 +89,7 @@ export default function Index() {
         // 暫停1秒
         setTimeout(() => {
           setIsLoading(false);
-        }, 1000);
+        }, 500);
       } catch (e) {
         throw new Error(e);
       }
