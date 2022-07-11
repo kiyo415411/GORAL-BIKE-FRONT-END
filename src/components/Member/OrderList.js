@@ -82,7 +82,7 @@ function OrderList(props) {
 
   return (
     <>
-      {orderList !== [] ? (
+      {orderList.length > 0 ? (
         <section>
           <Row className="bg-primary text-white text-center py-2 order-title px-3">
             <Col sm={1}>訂單編號</Col>
