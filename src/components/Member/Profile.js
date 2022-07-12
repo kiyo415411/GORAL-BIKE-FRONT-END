@@ -112,7 +112,7 @@ function Profile(props) {
       return;
     }
     let response = await axios.get(`${API_URL}/member/profile/${userId}`);
-    console.log('newfetch', response.data.data);
+    // console.log('newfetch', response.data.data);
     const newUserData = response.data.data;
     setUserData({ ...userData, ...newUserData });
   };
