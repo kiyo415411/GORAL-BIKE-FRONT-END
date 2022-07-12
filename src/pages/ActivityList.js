@@ -251,7 +251,7 @@ export default function ActivityList() {
           bg={`${IMAGE_URL}/activity/ActivityBanner.jpg`}
         />
         <div className="container mt-5 mt-md-0">
-          <div className="row gx-5 justify-content-center my-5 flex-nowrap">
+          <div className="row gx-md-5 justify-content-center my-5 flex-nowrap">
             {/* -----------------------------左區塊 */}
             <div className="col-auto d-none d-xl-block">
               {/* 邊攔 */}
