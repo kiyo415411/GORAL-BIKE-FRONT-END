@@ -131,12 +131,12 @@ function Checkout() {
           <CheckoutList productCart={activityCart} type="活動" />
         ) : null}
         {/* 收件人資訊 */}
-        {productCheckout ? (
-          <RecipientInfo
-            handleRecipientChange={handleRecipientChange}
-            recipientInfo={recipientInfo}
-          />
-        ) : null}
+        {/* {productCheckout ? ( */}
+        <RecipientInfo
+          handleRecipientChange={handleRecipientChange}
+          recipientInfo={recipientInfo}
+        />
+        {/* ) : null} */}
         {/* 付款資訊 */}
         <PaymentInfo payment={payment} setPayment={setPayment} />
         {/* 結帳金額計算 */}

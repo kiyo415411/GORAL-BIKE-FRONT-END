@@ -150,13 +150,13 @@ function CartItem(props) {
                 alt="..."
               />
             </div>
-            <div className="col-lg-7 col-5 row mx-0 ">
+            <div className="col-lg-7 col-4 row mx-0 ">
               <div className="col-12 col-lg text-highlight fw-bold">{name}</div>
               <div className="col-12 col-lg mb-3 mb-lg-0">
                 $ {toThousands(price)}
               </div>
             </div>
-            <div className="col-1 col-lg-1">
+            <div className="col-1 col-lg-1 flex-grow-1">
               <button className="shopping-cart__btn first-btn">
                 <Checkbox
                   icon={<BsHeart />}
@@ -174,14 +174,14 @@ function CartItem(props) {
                 />
               </button>
             </div>
-            <div className="col-1 col-lg-1">
+            <div className="col-1 col-lg-1 flex-grow-1">
               <button
-                className="shopping-cart__btn"
+                className="shopping-cart__btn btn"
                 onClick={() => {
                   removeItem(id);
                 }}
               >
-                <MdDelete />
+                <MdDelete size={20} />
               </button>
             </div>
           </div>
@@ -209,7 +209,7 @@ function CartItem(props) {
                 alt="..."
               />
             </div>
-            <div className="col-lg-7 col-5 row mx-0 gap-2 gap-lg-0">
+            <div className="col-lg-7 col-4 row mx-0 gap-2 gap-lg-0">
               <div className="col-12 col-lg text-highlight fw-bold">{name}</div>
               <div className="col-12 col-lg">$ {toThousands(price)}</div>
               <div className="col-12 col-lg">
@@ -239,32 +239,30 @@ function CartItem(props) {
                 ${toThousands(itemTotal)}
               </div>
             </div>
-            <div className="col-1 col-lg-1">
-              <button className="shopping-cart__btn first-btn">
-                <Checkbox
-                  icon={<BsHeart />}
-                  checkedIcon={<BsHeartFill />}
-                  size="large"
-                  sx={{
+            <div className="col-1 col-lg-1 flex-grow-1">
+              <Checkbox
+                icon={<BsHeart />}
+                checkedIcon={<BsHeartFill />}
+                size="large"
+                sx={{
+                  color: 'var(--bs-highlight)',
+                  '&.Mui-checked': {
                     color: 'var(--bs-highlight)',
-                    '&.Mui-checked': {
-                      color: 'var(--bs-highlight)',
-                    },
-                  }}
-                  value={id}
-                  checked={like > 0 ? true : false}
-                  onClick={handleClick}
-                />
-              </button>
+                  },
+                }}
+                value={id}
+                checked={like > 0 ? true : false}
+                onClick={handleClick}
+              />
             </div>
-            <div className="col-1 col-lg-1">
+            <div className="col-1 col-lg-1 flex-grow-1">
               <button
-                className="shopping-cart__btn"
+                className="shopping-cart__btn btn"
                 onClick={() => {
                   removeItem(id);
                 }}
               >
-                <MdDelete />
+                <MdDelete size={20} />
               </button>
             </div>
           </div>
