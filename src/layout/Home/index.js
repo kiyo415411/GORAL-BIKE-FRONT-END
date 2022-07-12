@@ -493,8 +493,8 @@ export default function Index() {
             </section>
             {/* ACTIVTY */}
             <section
-              className="bg-light py-5 activity px-1"
-              style={{ height: '768px' }}
+              className="bg-light py-5 activity px-1 overflow-hidden"
+              style={{ height: '728px' }}
             >
               <h1 className=" display-6 fw-bolder text-center my-5">
                 2022年 <br />
@@ -511,8 +511,7 @@ export default function Index() {
                 centeredSlides={true}
                 spaceBetween={20}
                 loop={true}
-                mousewheel={true}
-                modules={[Autoplay, Mousewheel]}
+                modules={[Autoplay]}
               >
                 {activity.map((value, index) => {
                   return (
