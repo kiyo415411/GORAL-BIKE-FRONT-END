@@ -23,10 +23,16 @@ export default function CourseDetail() {
     courseId: '',
     favoriteMethod: 'course',
   });
+  console.log('courseuserid', userData.userId);
   const [favoriteActive, setFavoriteActive] = useState(true); // 收藏有變動的時候會重新渲染
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    // 讀到 userData 時,做頁面初始判斷 Item 是否在收藏表中
+    setFavorite({ ...favorite, userId: userData.userId });
+  }, [userData]);
 
   useEffect(() => {
     let getDate = async () => {

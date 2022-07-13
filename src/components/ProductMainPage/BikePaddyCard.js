@@ -24,6 +24,7 @@ function BikePaddyCard(props) {
     courseId: '',
     favoriteMethod: 'product',
   });
+
   const [shoppingClick, setShoppingClick] = useState(false);
   useEffect(() => {
     setTimeout(() => {
@@ -57,11 +58,13 @@ function BikePaddyCard(props) {
       >
         <div className="row">
           <div className="mx-auto d-flex justify-content-center">
-            <img
-              src={`${IMAGE_URL}/bikes/${img.replace(/ /g, '%20')}`}
-              className="img-fluid rounded-start"
-              alt="..."
-            />
+            <Link to={`/product/detail/${props.id}`}>
+              <img
+                src={`${IMAGE_URL}/bikes/${img.replace(/ /g, '%20')}`}
+                className="img-fluid rounded-start"
+                alt="..."
+              />
+            </Link>
           </div>
           <div className="m-auto">
             <div
@@ -70,7 +73,7 @@ function BikePaddyCard(props) {
             >
               <div>
                 <div className="mb-3 d-flex gap-2">
-                  <Link to="/Product/Detail">
+                  <Link to={`/product/detail/${props.id}`}>
                     <h5 className="card-title m-0">{props.name}</h5>
                   </Link>
                   <Checkbox

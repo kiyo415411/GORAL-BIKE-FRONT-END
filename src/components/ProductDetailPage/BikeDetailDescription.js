@@ -66,7 +66,7 @@ function BikeDetailDescription(props) {
     courseId: '',
     favoriteMethod: 'product',
   });
-
+  console.log('userid', userData.userId);
   function handleClick(e) {
     console.log(e.target.value);
     if (favorite.userId > 0) {
@@ -75,6 +75,11 @@ function BikeDetailDescription(props) {
       swal('收藏失敗', '登入會員才能進行個人收藏。', 'warning');
     }
   }
+
+  useEffect(() => {
+    // 讀到 userData 時,做頁面初始判斷 Item 是否在收藏表中
+    setFavorite({ ...favorite, userId: userData.userId });
+  }, [userData]);
 
   useEffect(() => {
     let postFavorite = async () => {

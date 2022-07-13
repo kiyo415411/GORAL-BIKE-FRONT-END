@@ -8,10 +8,7 @@ function BikeList(props) {
     <ul className="list-unstyled row mx-auto">
       {props.data.map((item, index) => {
         return (
-          <li
-            key={item.product_id}
-            className="col-12 p-1 col-lg-12 mx-md-auto mt-md-5"
-          >
+          <li key={item.product_id} className="col-12 p-1 col-lg-12 mx-md-auto">
             <BikeCard
               bike={item.product_images}
               name={item.product_name}

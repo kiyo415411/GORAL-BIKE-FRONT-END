@@ -184,7 +184,7 @@ function ProductPage() {
           style={{ width: '100%', height: '100%' }}
         />
         <div className="card-img-overlay row align-items-center m-0 p-0">
-          <div class="col-1"></div>
+          <div className="col-1"></div>
           <h1
             className="top-banner-title card-title fw-bolder col-sm-4 text-center text-white position-absolute"
             style={{ zIndex: '1' }}
@@ -242,7 +242,7 @@ function ProductPage() {
           <div className="d-flex justify-content-between mb-md-0 mb-3">
             <div className="d-md-block d-none">
               <BsListUl
-                size={30}
+                size={40}
                 color={bikeList === 1 ? 'FF7E55' : ''}
                 onClick={() => {
                   setBikeList(1);
@@ -251,7 +251,7 @@ function ProductPage() {
               />
               <BiGridSmall
                 color={bikeList === 0 ? 'FF7E55' : ''}
-                size={50}
+                size={65}
                 onClick={() => {
                   setBikeList(0);
                 }}

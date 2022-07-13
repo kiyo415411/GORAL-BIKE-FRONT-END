@@ -7,7 +7,7 @@ export default function TopSort(props) {
           <Dropdown.Toggle
             variant="white"
             id="dropdown-basic"
-            className="text-highlight fs-md-6 fs-4 my-auto"
+            className="text-highlight fs-4 my-auto"
           >
             商品排序
           </Dropdown.Toggle>

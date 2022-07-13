@@ -28,6 +28,11 @@ export default function ActivityDetail() {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
+    // 讀到 userData 時,做頁面初始判斷 Item 是否在收藏表中
+    setFavorite({ ...favorite, userId: userData.userId });
+  }, [userData]);
+
+  useEffect(() => {
     let getDate = async () => {
       let response = await axios.get(`${API_URL}/activity/${courseId}`, {
         params: {
