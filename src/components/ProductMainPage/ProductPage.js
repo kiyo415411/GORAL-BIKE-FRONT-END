@@ -239,7 +239,7 @@ function ProductPage() {
           </div>
         </div>
         <div className={`mx-md-auto col-12 col-md-8 p-lg-0`}>
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-between mb-md-0 mb-3">
             <div className="d-md-block d-none">
               <BsListUl
                 size={30}
@@ -259,20 +259,20 @@ function ProductPage() {
               />
             </div>
             <Button
-              variant="primary"
+              variant="white"
               onClick={handleShow}
-              className="d-block d-md-none"
+              className="d-block d-md-none ms-1"
             >
               <FiFilter
                 color={bikeList === 0 ? 'FF7E55' : ''}
-                size={50}
+                size={30}
                 onClick={() => {
                   setSortRWD(!sortRWD);
                 }}
                 style={{ cursor: 'pointer' }}
               />
             </Button>
-            <h4 className="text-hightlight w-25 text-nowrap">
+            <h4 className="text-hightlight w-50 text-nowrap m-0">
               <TopSort
                 cardStyle={cardStyle}
                 setCardStyle={setCardStyle}

@@ -40,6 +40,9 @@ export const CartProvider = ({ children }) => {
 
       const newDiscountPrice = Number(allCartTotal) - newDiscountTotal;
       setDiscountPrice(newDiscountPrice);
+    } else {
+      setDiscountTotal(0);
+      setDiscountPrice(0);
     }
   }, [coupon, allCartTotal]);
 

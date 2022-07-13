@@ -104,7 +104,7 @@ export default function Index() {
         <LoadingPage />
       ) : (
         <main>
-          <wrap className="container-fluid m-0 p-0">
+          <div className="container-fluid m-0 p-0">
             {/* HERO */}
             <section
               className="bg-info overflow-hidden position-relative"
@@ -538,7 +538,7 @@ export default function Index() {
                 })}
               </Swiper>
             </section>
-          </wrap>
+          </div>
         </main>
       )}
     </>

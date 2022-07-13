@@ -96,7 +96,13 @@ export default function TopSort(props) {
             id="dropdown-basic"
             className="link-highlight"
           >
-            排序
+            {props.sortMethod === 'newSort'
+              ? '最新上架優先'
+              : props.sortMethod === 'hotSort'
+              ? '人數由多至少'
+              : props.sortMethod === 'cheapSort'
+              ? '價錢由低至高'
+              : '價錢由高至低'}
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
