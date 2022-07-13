@@ -214,7 +214,7 @@ const generateCartState = (state, items) => {
     // 將 itemTotal 塞入 items 陣列
     items: calculateItemTotals(items),
     totalItems: calculateTotalItems(items),
-    checkedItems: checkedItemsArray(items),
+    checkedItems: checkedItemsArray(calculateItemTotals(items)),
     totalCheckItems: calculateTotalCheckedItems(items),
     cartTotal: calculateItemsTotal(items),
     checkedAll,
