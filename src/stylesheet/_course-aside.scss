@@ -14,6 +14,22 @@
     margin: 1rem 0;
   }
 }
+.product-list-aside {
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0.4rem;
+  }
+  //  scrollbar 滑動塊
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--bs-content);
+    border-radius: 1rem;
+  }
+  //  scrollbar 底塊
+  &::-webkit-scrollbar-track {
+    margin: 1rem 0;
+  }
+}
 
 .date-input {
   border-radius: 0.3rem;

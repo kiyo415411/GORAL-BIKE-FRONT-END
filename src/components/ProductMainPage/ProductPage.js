@@ -218,7 +218,7 @@ function ProductPage() {
       >
         <div className="col-2 mt-2 mx-auto">
           <div
-            className="ms-2 sticky-sm-top d-none d-md-block shadow d-flex justify-content-center p-2"
+            className="ms-2 sticky-sm-top d-none d-md-block shadow d-flex justify-content-center p-2 overflow-auto product-list-aside"
             style={{ width: '324px', height: '90vh' }}
           >
             <ProductAside
@@ -234,7 +234,7 @@ function ProductPage() {
               color={colored}
               category={category}
               setPage={setPage}
-              className="px-4 pb-2 mt-3 d-flex flex-column overflow-auto course-list-aside"
+              className="px-4 pb-2 mt-3 d-flex flex-column product-list-aside"
             />
           </div>
         </div>
